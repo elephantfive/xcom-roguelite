@@ -24,3 +24,8 @@ func _on_move_pressed():
 
 func _on_attack_pressed():
 	pass # Replace with function body.
+
+
+func _on_game_manager_turn_end():
+	for button in actions.get_children():
+		button.hide()

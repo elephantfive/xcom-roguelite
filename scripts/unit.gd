@@ -11,6 +11,7 @@ var moving: bool = false
 @onready var distance_label = $"Distance Label"
 @onready var warning_label = $"Warning Label"
 @onready var distance_line = $"Distance Line"
+@onready var health_label = $"Health Label"
 
 func _process(_delta):
 	if moving:
@@ -40,7 +41,7 @@ func _on_input_event(_viewport, event, _shape_idx):
 					if moving:
 						if not too_far:
 							moving = false
-							game_manager.selected_unit = null
+							game_manager.emit_signal("turn_end")
 							get_tree().call_group("Unit Distance Info", "hide")
 			#if event.is_action_pressed("right_click"):
 				#position = init_pos
