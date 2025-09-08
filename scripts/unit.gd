@@ -2,16 +2,23 @@ extends Area2D
 var highlighted: bool = false
 var attack_damage: int = 1
 var max_move_distance: int = 20
+var max_attack_distance: int = 20
 var init_pos: Vector2
-var too_far: bool = false
+var distance_too_far: bool = false
+var attack_too_far: bool = false
 var unit_actions = ["Move", "Attack"]
 var moving: bool = false
+var attacking: bool = false
+var health: int = 10
 @onready var hud = %HUD
 @onready var game_manager = %"Game Manager"
 @onready var distance_label = $"Distance Label"
 @onready var warning_label = $"Warning Label"
 @onready var distance_line = $"Distance Line"
 @onready var health_label = $"Health Label"
+
+func _ready():
+	health_update()
 
 func _process(_delta):
 	if moving:
@@ -20,14 +27,16 @@ func _process(_delta):
 		var current_distance = sqrt(((init_pos.x - position.x) ** 2) + ((init_pos.y - position.y) ** 2)) / 10
 		distance_label.text = str(snapped(current_distance, 0.01))
 		if current_distance >= max_move_distance:
-			too_far = true
+			distance_too_far = true
 			warning_label.show()
 			distance_label.self_modulate = Color(1, 0, 0)
 		else:
-			too_far = false
+			distance_too_far = false
 			warning_label.hide()
 			distance_label.self_modulate = Color(1, 1, 1)
 		position = get_viewport().get_mouse_position()
+	if attacking:
+		pass
 
 
 func _on_input_event(_viewport, event, _shape_idx):
@@ -39,7 +48,7 @@ func _on_input_event(_viewport, event, _shape_idx):
 					hud.emit_signal("new_unit")
 				else:
 					if moving:
-						if not too_far:
+						if not distance_too_far:
 							moving = false
 							game_manager.emit_signal("turn_end")
 							get_tree().call_group("Unit Distance Info", "hide")
@@ -55,3 +64,13 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	highlighted = false
+
+
+func _on_enemy_damage_dealt(target, damage):
+	if target == self:
+		health -= 1
+		health_update()
+
+func health_update():
+	health_label.text = 'Current Health: ' + str(health)
+		

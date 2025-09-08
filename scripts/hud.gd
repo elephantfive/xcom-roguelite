@@ -23,7 +23,7 @@ func _on_move_pressed():
 
 
 func _on_attack_pressed():
-	pass # Replace with function body.
+	selected_unit.attacking = true
 
 
 func _on_game_manager_turn_end():
