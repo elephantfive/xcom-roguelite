@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://nutwb7ivdl7e"]
+
+[ext_resource type="Script" uid="uid://bu6iddnt2t3hk" path="res://scripts/unit.gd" id="1_btf8p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_btf8p"]
+size = Vector2(40, 40)
+
+[node name="Unit" type="Area2D"]
+script = ExtResource("1_btf8p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_btf8p")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Distance Label" type="Label" parent="." groups=["Unit Distance Info"]]
+visible = false
+offset_top = 41.0
+offset_right = 40.0
+offset_bottom = 64.0
+horizontal_alignment = 1
+
+[node name="Warning Label" type="Label" parent="." groups=["Unit Distance Info"]]
+visible = false
+self_modulate = Color(1, 0, 0, 1)
+offset_top = 61.0
+offset_right = 40.0
+offset_bottom = 84.0
+text = "Too far!"
+horizontal_alignment = 1
+
+[node name="Distance Line" type="Line2D" parent="." groups=["Unit Distance Info"]]
+visible = false
+width = 5.0
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

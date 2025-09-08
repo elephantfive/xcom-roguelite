@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://ygb05qawriwh"]
+
+[ext_resource type="PackedScene" uid="uid://nutwb7ivdl7e" path="res://entities/unit.tscn" id="1_1kc1q"]
+[ext_resource type="Script" uid="uid://c1o8tsdvtkydf" path="res://scripts/game_manager.gd" id="1_4msxo"]
+[ext_resource type="Script" uid="uid://dcjx2smlok5hb" path="res://scripts/game.gd" id="1_gjmho"]
+[ext_resource type="PackedScene" uid="uid://dwnho3dck57gp" path="res://entities/enemy.tscn" id="2_4msxo"]
+[ext_resource type="Script" uid="uid://vwqdce8l4gp0" path="res://scripts/hud.gd" id="2_5fb3c"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_gjmho")
+
+[node name="Game Manager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_4msxo")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_5fb3c")
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD"]
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Actions" type="HBoxContainer" parent="HUD/CenterContainer"]
+layout_mode = 2
+
+[node name="Move" type="Button" parent="HUD/CenterContainer/Actions"]
+visible = false
+layout_mode = 2
+
+[node name="Attack" type="Button" parent="HUD/CenterContainer/Actions"]
+visible = false
+layout_mode = 2
+
+[node name="Unit" parent="." instance=ExtResource("1_1kc1q")]
+position = Vector2(300, 152)
+
+[node name="Enemy" parent="." instance=ExtResource("2_4msxo")]
+position = Vector2(650, 165)
+
+[connection signal="turn_end" from="Game Manager" to="Game Manager" method="_on_turn_end"]
+[connection signal="turn_start" from="Game Manager" to="Game Manager" method="_on_turn_start"]
+[connection signal="new_unit" from="HUD" to="HUD" method="_on_new_unit"]
+[connection signal="pressed" from="HUD/CenterContainer/Actions/Move" to="HUD" method="_on_move_pressed"]
+[connection signal="pressed" from="HUD/CenterContainer/Actions/Attack" to="HUD" method="_on_attack_pressed"]
