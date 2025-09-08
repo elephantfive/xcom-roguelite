@@ -22,9 +22,9 @@ func _ready():
 
 func _process(_delta):
 	if moving:
-		distance_line.points = PackedVector2Array([init_pos - global_position, position - global_position])
 		get_tree().call_group("Unit Distance Info", "show")
-		var current_distance = sqrt(((init_pos.x - position.x) ** 2) + ((init_pos.y - position.y) ** 2)) / 10
+		distance_line.points = PackedVector2Array([init_pos - global_position, get_viewport().get_mouse_position() - global_position])
+		var current_distance = sqrt(((distance_line.points[0].x - distance_line.points[1].x) ** 2) + ((distance_line.points[0].y - distance_line.points[1].y) ** 2)) / 10
 		distance_label.text = str(snapped(current_distance, 0.01))
 		if current_distance >= max_move_distance:
 			distance_too_far = true
@@ -36,6 +36,8 @@ func _process(_delta):
 			distance_label.self_modulate = Color(1, 1, 1)
 		position = get_viewport().get_mouse_position()
 	if attacking:
+		get_tree().call_group("Unit Attack Info", "show")
+		distance_line.points = PackedVector2Array([init_pos - global_position, get_viewport().get_mouse_position() - global_position])
 		pass
 
 
@@ -49,12 +51,15 @@ func _on_input_event(_viewport, event, _shape_idx):
 				else:
 					if moving:
 						if not distance_too_far:
+							position = get_viewport().get_mouse_position()
 							moving = false
 							game_manager.emit_signal("turn_end")
 							get_tree().call_group("Unit Distance Info", "hide")
 			if event.is_action_pressed("right_click"):
 				position = init_pos
 				moving = false
+				attacking = false
+				get_tree().call_group("Unit Attack Info", "hide")
 				get_tree().call_group("Unit Distance Info", "hide")
 
 

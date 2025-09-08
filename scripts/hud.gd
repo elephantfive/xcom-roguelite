@@ -23,6 +23,7 @@ func _on_move_pressed():
 
 
 func _on_attack_pressed():
+	selected_unit.init_pos = selected_unit.position
 	selected_unit.attacking = true
 
 

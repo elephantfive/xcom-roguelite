@@ -33,7 +33,7 @@ offset_bottom = 84.0
 text = "Too far!"
 horizontal_alignment = 1
 
-[node name="Distance Line" type="Line2D" parent="." groups=["Unit Distance Info"]]
+[node name="Distance Line" type="Line2D" parent="." groups=["Unit Attack Info", "Unit Distance Info"]]
 visible = false
 width = 5.0
 
