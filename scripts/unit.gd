@@ -43,10 +43,10 @@ func _on_input_event(_viewport, event, _shape_idx):
 							moving = false
 							game_manager.emit_signal("turn_end")
 							get_tree().call_group("Unit Distance Info", "hide")
-			#if event.is_action_pressed("right_click"):
-				#position = init_pos
-				#selected = false
-				#get_tree().call_group("Unit Distance Info", "hide")
+			if event.is_action_pressed("right_click"):
+				position = init_pos
+				moving = false
+				get_tree().call_group("Unit Distance Info", "hide")
 
 
 func _on_mouse_entered():
