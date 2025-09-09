@@ -1,13 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://ygb05qawriwh"]
+[gd_scene load_steps=7 format=3 uid="uid://ygb05qawriwh"]
 
 [ext_resource type="PackedScene" uid="uid://nutwb7ivdl7e" path="res://entities/unit.tscn" id="1_1kc1q"]
 [ext_resource type="Script" uid="uid://c1o8tsdvtkydf" path="res://scripts/game_manager.gd" id="1_4msxo"]
 [ext_resource type="Script" uid="uid://dcjx2smlok5hb" path="res://scripts/game.gd" id="1_gjmho"]
 [ext_resource type="PackedScene" uid="uid://dwnho3dck57gp" path="res://entities/enemy.tscn" id="2_4msxo"]
 [ext_resource type="Script" uid="uid://vwqdce8l4gp0" path="res://scripts/hud.gd" id="2_5fb3c"]
+[ext_resource type="PackedScene" uid="uid://d3m2brvwxikfc" path="res://environment/wall.tscn" id="6_t7and"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_gjmho")
+
+[node name="Entities" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="Unit" parent="Entities" instance=ExtResource("1_1kc1q")]
+position = Vector2(458, 253)
+
+[node name="Enemy" parent="Entities" instance=ExtResource("2_4msxo")]
+position = Vector2(821, 238)
 
 [node name="Game Manager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -36,15 +46,13 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="Unit" parent="." instance=ExtResource("1_1kc1q")]
-position = Vector2(169, 133)
+[node name="Wall" parent="." instance=ExtResource("6_t7and")]
+position = Vector2(599, 280)
+rotation = 1.57079
+scale = Vector2(2.2, 1)
 
-[node name="Enemy" parent="." instance=ExtResource("2_4msxo")]
-position = Vector2(821, 238)
-
-[connection signal="turn_start" from="Game Manager" to="Enemy" method="_on_game_manager_turn_start"]
+[connection signal="turn_start" from="Game Manager" to="Entities/Enemy" method="_on_game_manager_turn_start"]
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="new_unit" from="HUD" to="HUD" method="_on_new_unit"]
 [connection signal="pressed" from="HUD/CenterContainer/Actions/Move" to="HUD" method="_on_move_pressed"]
 [connection signal="pressed" from="HUD/CenterContainer/Actions/Attack" to="HUD" method="_on_attack_pressed"]
-[connection signal="damage_dealt" from="Enemy" to="Unit" method="_on_enemy_damage_dealt"]

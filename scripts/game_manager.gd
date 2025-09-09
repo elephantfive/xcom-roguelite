@@ -4,10 +4,13 @@ signal turn_start
 var selected_unit: Area2D
 var current_turn: int = 0
 #EXTREMELY TEMPORARY
-var turns = ["player", "enemy"]
+var turns:Array = []
 @onready var hud = %HUD
+@onready var entities = %Entities
 
 func _ready():
+	for entity in entities.get_children():
+		turns.append(entity.name)
 	turn = turns[current_turn]
 
 
