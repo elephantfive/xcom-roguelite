@@ -12,7 +12,7 @@ var too_far: bool = false
 var moving: bool = false
 var attacking: bool = false
 
-
+const projectile = preload("res://projectiles/player_projectile.tscn")
 @onready var hud = %HUD
 @onready var game_manager = %"Game Manager"
 @onready var distance_label = $"Distance Label"
@@ -50,6 +50,9 @@ func _input(event):
 						game_manager.turn_end()
 						get_tree().call_group("Unit Distance Info", "hide")
 					elif attacking:
+						var new_proj = projectile.instantiate()
+						new_proj.target = distance_line.points[1]
+						add_child(new_proj)
 						attacking = false
 						game_manager.turn_end()
 						get_tree().call_group("Unit Distance Info", "hide")

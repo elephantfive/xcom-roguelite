@@ -15,12 +15,15 @@ func turn_end():
 	for button in hud.actions.get_children():
 		button.hide()
 	selected_unit = null
+	turn_adv()
+	$TurnTimer.start()
+
+func _on_turn_timer_timeout():
+	emit_signal("turn_start")
+
+func turn_adv():
 	if current_turn + 1 <= len(turns) - 1:
 		current_turn += 1
 	else:
 		current_turn = 0
 	turn = turns[current_turn]
-	$TurnTimer.start()
-
-func _on_turn_timer_timeout():
-	emit_signal("turn_start")
