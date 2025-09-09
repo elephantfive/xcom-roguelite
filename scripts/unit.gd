@@ -3,10 +3,10 @@ extends Area2D
 var attack_damage: int = 1
 var health: int = 10
 var max_move_distance: int = 20
+var current_move_points: float = max_move_distance
 var max_attack_distance: int = 20
 
-var unit_actions = ["Move", "Attack"]
-
+var unit_actions = ["Move", "Attack", "End"]
 
 var init_pos: Vector2
 var too_far: bool = false
@@ -14,6 +14,7 @@ var moving: bool = false
 var attacking: bool = false
 var type: String = 'ally'
 var thru_wall: bool = false
+var current_distance: float
 
 const projectile = preload("res://projectiles/projectile.tscn")
 @onready var hud = %HUD
@@ -31,7 +32,7 @@ func _ready():
 func _process(_delta):
 	if moving:
 		position = get_viewport().get_mouse_position()
-		distance_check(max_move_distance)
+		distance_check(current_move_points)
 	elif attacking:
 		distance_check(max_attack_distance)
 
@@ -74,7 +75,7 @@ func health_update():
 func distance_check(max_distance):
 	get_tree().call_group("Unit Distance Info", "show")
 	distance_line.points = PackedVector2Array([init_pos - global_position, get_viewport().get_mouse_position() - global_position])
-	var current_distance = sqrt(((distance_line.points[0].x - distance_line.points[1].x) ** 2) + ((distance_line.points[0].y - distance_line.points[1].y) ** 2)) / 10
+	current_distance = sqrt(((distance_line.points[0].x - distance_line.points[1].x) ** 2) + ((distance_line.points[0].y - distance_line.points[1].y) ** 2)) / 10
 	distance_label.text = str(snapped(current_distance, 0.01))
 	
 	if current_distance >= max_distance:
@@ -101,8 +102,9 @@ func distance_check(max_distance):
 
 func move():
 	position = get_viewport().get_mouse_position()
+	init_pos = position
 	moving = false
-	game_manager.turn_end()
+	current_move_points -= current_distance
 	get_tree().call_group("Unit Distance Info", "hide")
 
 
@@ -130,3 +132,7 @@ func _on_distance_line_collision_area_entered(area):
 func _on_distance_line_collision_area_exited(area):
 	if area.type == 'wall':
 		thru_wall = false
+
+
+func _on_game_manager_turn_start():
+	current_move_points = max_move_distance

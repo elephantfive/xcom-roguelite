@@ -46,13 +46,20 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="End" type="Button" parent="HUD/CenterContainer/Actions"]
+visible = false
+layout_mode = 2
+text = "End Turn"
+
 [node name="Wall" parent="." instance=ExtResource("6_t7and")]
 position = Vector2(599, 280)
 rotation = 1.57079
 scale = Vector2(2.2, 1)
 
+[connection signal="turn_start" from="Game Manager" to="Entities/Unit" method="_on_game_manager_turn_start"]
 [connection signal="turn_start" from="Game Manager" to="Entities/Enemy" method="_on_game_manager_turn_start"]
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="new_unit" from="HUD" to="HUD" method="_on_new_unit"]
 [connection signal="pressed" from="HUD/CenterContainer/Actions/Move" to="HUD" method="_on_move_pressed"]
 [connection signal="pressed" from="HUD/CenterContainer/Actions/Attack" to="HUD" method="_on_attack_pressed"]
+[connection signal="pressed" from="HUD/CenterContainer/Actions/End" to="HUD" method="_on_end_pressed"]
