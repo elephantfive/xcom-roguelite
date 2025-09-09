@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cklvl5jkm42wo"]
+
+[ext_resource type="PackedScene" uid="uid://d3m2brvwxikfc" path="res://environment/wall.tscn" id="1_hn12h"]
+[ext_resource type="PackedScene" uid="uid://nutwb7ivdl7e" path="res://entities/unit.tscn" id="2_ihfcg"]
+[ext_resource type="PackedScene" uid="uid://dwnho3dck57gp" path="res://entities/enemy.tscn" id="3_rka8t"]
+
+[node name="Level 1" type="Node2D"]
+
+[node name="Environment" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="Wall" parent="Environment" instance=ExtResource("1_hn12h")]
+position = Vector2(659, 172)
+rotation = 1.57079
+scale = Vector2(2.2, 1)
+
+[node name="Wall2" parent="Environment" instance=ExtResource("1_hn12h")]
+position = Vector2(322, 475)
+rotation = 1.57079
+scale = Vector2(2.2, 1)
+
+[node name="Entities" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="Unit" parent="Entities" instance=ExtResource("2_ihfcg")]
+position = Vector2(217, 361)
+
+[node name="Enemy" parent="Entities" instance=ExtResource("3_rka8t")]
+position = Vector2(802, 388)

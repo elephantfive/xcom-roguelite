@@ -1,12 +1,13 @@
 extends Area2D
-@onready var game_manager = %"Game Manager"
+@onready var game_manager: Node
+@onready var hud: CanvasLayer
 var targets:Array = []
 var damage: int = 1
 var type: String = 'enemy'
 const projectile = preload("res://projectiles/projectile.tscn")
 
 func _ready():
-	targets.append($"../Unit")
+	targets = game_manager.targets
 
 func _on_game_manager_turn_start():
 	if game_manager.turn == name:

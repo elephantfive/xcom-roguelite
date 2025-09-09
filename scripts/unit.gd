@@ -17,8 +17,8 @@ var thru_wall: bool = false
 var current_distance: float
 
 const projectile = preload("res://projectiles/projectile.tscn")
-@onready var hud = %HUD
-@onready var game_manager = %"Game Manager"
+@onready var hud: CanvasLayer
+@onready var game_manager: Node
 @onready var distance_label = $"Distance Label"
 @onready var warning_label = $"Warning Label"
 @onready var distance_line = $"Distance Line"
