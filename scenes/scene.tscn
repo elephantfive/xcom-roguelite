@@ -13,6 +13,10 @@ script = ExtResource("1_gjmho")
 unique_name_in_owner = true
 script = ExtResource("1_4msxo")
 
+[node name="TurnTimer" type="Timer" parent="Game Manager"]
+wait_time = 0.25
+one_shot = true
+
 [node name="HUD" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_5fb3c")
@@ -33,14 +37,13 @@ visible = false
 layout_mode = 2
 
 [node name="Unit" parent="." instance=ExtResource("1_1kc1q")]
-position = Vector2(300, 152)
+position = Vector2(169, 133)
 
 [node name="Enemy" parent="." instance=ExtResource("2_4msxo")]
-position = Vector2(650, 165)
+position = Vector2(821, 238)
 
-[connection signal="turn_end" from="Game Manager" to="Game Manager" method="_on_turn_end"]
-[connection signal="turn_end" from="Game Manager" to="HUD" method="_on_game_manager_turn_end"]
 [connection signal="turn_start" from="Game Manager" to="Enemy" method="_on_game_manager_turn_start"]
+[connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="new_unit" from="HUD" to="HUD" method="_on_new_unit"]
 [connection signal="pressed" from="HUD/CenterContainer/Actions/Move" to="HUD" method="_on_move_pressed"]
 [connection signal="pressed" from="HUD/CenterContainer/Actions/Attack" to="HUD" method="_on_attack_pressed"]

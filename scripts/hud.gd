@@ -18,15 +18,8 @@ func _on_new_unit():
 
 
 func _on_move_pressed():
-	selected_unit.init_pos = selected_unit.position
 	selected_unit.moving = true
 
 
 func _on_attack_pressed():
-	selected_unit.init_pos = selected_unit.position
 	selected_unit.attacking = true
-
-
-func _on_game_manager_turn_end():
-	for button in actions.get_children():
-		button.hide()
