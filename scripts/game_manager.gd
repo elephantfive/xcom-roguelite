@@ -5,20 +5,18 @@ var selected_unit: Area2D
 var current_turn: int = 0
 var turns: Array = []
 var targets: Array = []
+var active_level
 @onready var hud = %HUD
-@onready var active_level = $"../Active Level"
+@onready var game = $".."
+
+
+var levels = {
+	'Level1': "res://scenes/level_1.tscn",
+	}
+
 
 func _ready():
-	for child in active_level.get_children():
-		if child.name == 'Entities':
-			for entity in child.get_children():
-				if entity.type == 'ally':
-					targets.append(entity)
-				connect('turn_start', entity._on_game_manager_turn_start)
-				entity.game_manager = self
-				entity.hud = hud
-				turns.append(entity.name)
-	turn = turns[current_turn]
+	level_adv("res://scenes/level_1.tscn")
 
 
 func turn_end():
@@ -32,8 +30,8 @@ func _on_turn_timer_timeout():
 	if 'Enemy' in turns:
 		emit_signal("turn_start")
 	else:
+		level_adv("res://scenes/level_2.tscn")
 		turn = 'win'
-		print("You win!")
 
 func turn_adv():
 	if current_turn + 1 <= len(turns) - 1:
@@ -41,3 +39,25 @@ func turn_adv():
 	else:
 		current_turn = 0
 	turn = turns[current_turn]
+
+func reset():
+	targets = []
+	for child in active_level.get_children():
+		if child.name == 'Entities':
+			for entity in child.get_children():
+				if entity.type == 'ally':
+					targets.append(entity)
+				connect('turn_start', entity._on_game_manager_turn_start)
+				entity.game_manager = self
+				entity.hud = hud
+				turns.append(entity.name)
+	current_turn = 0
+	turn = turns[current_turn]
+
+
+func level_adv(level):
+	if active_level != null:
+		active_level.queue_free()
+	active_level = load(level).instantiate()
+	game.add_child.call_deferred(active_level)
+	reset()
