@@ -75,7 +75,7 @@ func health_update():
 func distance_check(max_distance):
 	get_tree().call_group("Unit Distance Info", "show")
 	distance_line.points = PackedVector2Array([init_pos - global_position, get_viewport().get_mouse_position() - global_position])
-	current_distance = sqrt(((distance_line.points[0].x - distance_line.points[1].x) ** 2) + ((distance_line.points[0].y - distance_line.points[1].y) ** 2)) / 10
+	current_distance = distance_line.points[0].distance_to(distance_line.points[1]) / 10
 	distance_label.text = str(snapped(current_distance, 0.01))
 	
 	if current_distance >= max_distance:

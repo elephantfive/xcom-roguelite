@@ -7,6 +7,7 @@ var type: String = 'location'
 @onready var desc = $Popup/Desc
 @onready var game_manager = %"Game Manager"
 @onready var player_marker = %"Player Marker"
+@export var min_distance: int = 100
 
 func _ready():
 	desc.text = desc_text
@@ -15,8 +16,12 @@ func _ready():
 func _on_input_event(_viewport, event, _shape_idx):
 	if event.is_action_pressed('left_click'):
 		if player_marker.moving == false:
-			desc.hide()
-			popup.show()
+			if  player_marker.position.distance_to(self.position) <= min_distance:
+				desc.hide()
+				popup.show()
+			else:
+				print("too far")
+				
 
 
 func _on_exit_pressed():
