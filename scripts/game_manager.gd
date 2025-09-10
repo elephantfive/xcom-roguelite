@@ -10,13 +10,8 @@ var active_level
 @onready var game = $".."
 
 
-var levels = {
-	'Level1': "res://scenes/level_1.tscn",
-	}
-
-
 func _ready():
-	level_adv("res://scenes/level_1.tscn")
+	level_adv("res://scenes/levels/level_1.tscn")
 
 
 func turn_end():
@@ -30,8 +25,7 @@ func _on_turn_timer_timeout():
 	if 'Enemy' in turns:
 		emit_signal("turn_start")
 	else:
-		level_adv("res://scenes/level_2.tscn")
-		turn = 'win'
+		level_adv("res://scenes/levels/level_2.tscn")
 
 func turn_adv():
 	if current_turn + 1 <= len(turns) - 1:
