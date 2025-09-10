@@ -1,12 +1,35 @@
-[gd_scene load_steps=6 format=3 uid="uid://ygb05qawriwh"]
+[gd_scene load_steps=18 format=3 uid="uid://ygb05qawriwh"]
 
 [ext_resource type="Script" uid="uid://c1o8tsdvtkydf" path="res://scripts/game_manager.gd" id="1_4msxo"]
 [ext_resource type="Script" uid="uid://vwqdce8l4gp0" path="res://scripts/hud.gd" id="2_5fb3c"]
 [ext_resource type="PackedScene" uid="uid://ccj00txght02n" path="res://scenes/campaign map/location.tscn" id="3_4msxo"]
 [ext_resource type="Script" uid="uid://dokd1icoe8c62" path="res://scripts/player_marker.gd" id="3_5fb3c"]
+[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="5_gjmho"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4msxo"]
 size = Vector2(40, 40)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t7and"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ruw3y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7182s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tpwpp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ftgl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dqloj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5yiy0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0f71q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1id6j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dv0eb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gjmho"]
 
 [node name="Game" type="Node2D"]
 
@@ -93,6 +116,47 @@ level = "res://scenes/levels/level_1.tscn"
 [node name="Location3" parent="Campaign Map" instance=ExtResource("3_4msxo")]
 position = Vector2(519, 386)
 level = "res://scenes/levels/level_1.tscn"
+
+[node name="Shop" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Rewards" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Level Up" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Loadout" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Campaign Unit Select" type="CanvasLayer" parent="."]
+
+[node name="Unit Holder" type="VBoxContainer" parent="Campaign Unit Select"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Unit" type="Button" parent="Campaign Unit Select/Unit Holder"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_t7and")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ruw3y")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7182s")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_tpwpp")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_7ftgl")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_dqloj")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5yiy0")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_0f71q")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_1id6j")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_dv0eb")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gjmho")
+icon = ExtResource("5_gjmho")
 
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="new_unit" from="HUD" to="HUD" method="_on_new_unit"]
