@@ -6,6 +6,7 @@ var type: String = 'location'
 @onready var popup = $Popup
 @onready var desc = $Popup/Desc
 @onready var game_manager = %"Game Manager"
+@onready var player_marker = %"Player Marker"
 
 func _ready():
 	desc.text = desc_text
@@ -13,8 +14,9 @@ func _ready():
 
 func _on_input_event(_viewport, event, _shape_idx):
 	if event.is_action_pressed('left_click'):
-		desc.hide()
-		popup.show()
+		if player_marker.moving == false:
+			desc.hide()
+			popup.show()
 
 
 func _on_exit_pressed():

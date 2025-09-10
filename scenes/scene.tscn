@@ -47,16 +47,40 @@ text = "End Turn"
 unique_name_in_owner = true
 
 [node name="Player Marker" type="Area2D" parent="Campaign Map"]
+unique_name_in_owner = true
 position = Vector2(702, 577)
 script = ExtResource("3_5fb3c")
 
 [node name="ColorRect" type="ColorRect" parent="Campaign Map/Player Marker"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Campaign Map/Player Marker"]
-position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_4msxo")
+
+[node name="Distance Label" type="Label" parent="Campaign Map/Player Marker" groups=["Unit Distance Info"]]
+visible = false
+offset_left = -20.0
+offset_top = 22.0
+offset_right = 20.0
+offset_bottom = 45.0
+
+[node name="Warning Label" type="Label" parent="Campaign Map/Player Marker" groups=["Unit Distance Info"]]
+visible = false
+offset_left = -19.0
+offset_top = 46.0
+offset_right = 21.0
+offset_bottom = 69.0
+
+[node name="Cooldown" type="Timer" parent="Campaign Map/Player Marker"]
+wait_time = 0.25
+one_shot = true
+
+[node name="Map Movement Line" type="Line2D" parent="Campaign Map" groups=["Unit Distance Info"]]
+visible = false
+points = PackedVector2Array(0, 0, 0, 0)
 
 [node name="Location" parent="Campaign Map" instance=ExtResource("3_4msxo")]
 position = Vector2(644, 570)
@@ -70,10 +94,9 @@ level = "res://scenes/levels/level_1.tscn"
 position = Vector2(519, 386)
 level = "res://scenes/levels/level_1.tscn"
 
-[node name="Map Movement Line" type="Line2D" parent="Campaign Map"]
-
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="new_unit" from="HUD" to="HUD" method="_on_new_unit"]
 [connection signal="pressed" from="HUD/ActionBox/Actions/Move" to="HUD" method="_on_move_pressed"]
 [connection signal="pressed" from="HUD/ActionBox/Actions/Attack" to="HUD" method="_on_attack_pressed"]
 [connection signal="pressed" from="HUD/ActionBox/Actions/End" to="HUD" method="_on_end_pressed"]
+[connection signal="input_event" from="Campaign Map/Player Marker" to="Campaign Map/Player Marker" method="_on_input_event"]
