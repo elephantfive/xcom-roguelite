@@ -13,11 +13,12 @@ func _ready():
 
 func _on_input_event(_viewport, event, _shape_idx):
 	if event.is_action_pressed('left_click'):
+		desc.hide()
 		popup.show()
 
 
 func _on_exit_pressed():
-	info_hide()
+	popup.hide()
 
 
 func _on_info_pressed():
@@ -28,10 +29,5 @@ func _on_info_pressed():
 
 
 func _on_begin_level_pressed():
-	info_hide()
-	game_manager.level_adv(level)
-
-
-func info_hide():
 	popup.hide()
-	desc.hide()
+	game_manager.level_adv(level)
