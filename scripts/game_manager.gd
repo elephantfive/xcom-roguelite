@@ -7,11 +7,12 @@ var turns: Array = []
 var targets: Array = []
 var active_level
 @onready var hud = %HUD
-@onready var game = $".."
+@onready var campaign_map = %"Campaign Map"
 
 
 func _ready():
-	level_adv("res://scenes/levels/level_1.tscn")
+	#level_adv("res://scenes/levels/level_1.tscn")
+	pass
 
 
 func turn_end():
@@ -53,5 +54,6 @@ func level_adv(level):
 	if active_level != null:
 		active_level.queue_free()
 	active_level = load(level).instantiate()
-	game.add_child.call_deferred(active_level)
+	get_parent().add_child.call_deferred(active_level)
+	campaign_map.hide()
 	reset()

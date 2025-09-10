@@ -1,11 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://ygb05qawriwh"]
 
 [ext_resource type="Script" uid="uid://c1o8tsdvtkydf" path="res://scripts/game_manager.gd" id="1_4msxo"]
-[ext_resource type="Script" uid="uid://dcjx2smlok5hb" path="res://scripts/game.gd" id="1_gjmho"]
 [ext_resource type="Script" uid="uid://vwqdce8l4gp0" path="res://scripts/hud.gd" id="2_5fb3c"]
+[ext_resource type="PackedScene" uid="uid://ccj00txght02n" path="res://scenes/campaign map/location.tscn" id="3_4msxo"]
 
 [node name="Game" type="Node2D"]
-script = ExtResource("1_gjmho")
 
 [node name="Game Manager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -19,28 +18,37 @@ one_shot = true
 unique_name_in_owner = true
 script = ExtResource("2_5fb3c")
 
-[node name="CenterContainer" type="CenterContainer" parent="HUD"]
+[node name="ActionBox" type="GridContainer" parent="HUD"]
 offset_right = 1152.0
 offset_bottom = 648.0
+columns = 5
 
-[node name="Actions" type="HBoxContainer" parent="HUD/CenterContainer"]
+[node name="Actions" type="HBoxContainer" parent="HUD/ActionBox"]
 layout_mode = 2
 
-[node name="Move" type="Button" parent="HUD/CenterContainer/Actions"]
+[node name="Move" type="Button" parent="HUD/ActionBox/Actions"]
 visible = false
 layout_mode = 2
 
-[node name="Attack" type="Button" parent="HUD/CenterContainer/Actions"]
+[node name="Attack" type="Button" parent="HUD/ActionBox/Actions"]
 visible = false
 layout_mode = 2
 
-[node name="End" type="Button" parent="HUD/CenterContainer/Actions"]
+[node name="End" type="Button" parent="HUD/ActionBox/Actions"]
 visible = false
 layout_mode = 2
 text = "End Turn"
 
+[node name="Campaign Map" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Player Marker" type="Node2D" parent="Campaign Map"]
+
+[node name="Location" parent="Campaign Map" instance=ExtResource("3_4msxo")]
+level = "res://scenes/levels/level_1.tscn"
+
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="new_unit" from="HUD" to="HUD" method="_on_new_unit"]
-[connection signal="pressed" from="HUD/CenterContainer/Actions/Move" to="HUD" method="_on_move_pressed"]
-[connection signal="pressed" from="HUD/CenterContainer/Actions/Attack" to="HUD" method="_on_attack_pressed"]
-[connection signal="pressed" from="HUD/CenterContainer/Actions/End" to="HUD" method="_on_end_pressed"]
+[connection signal="pressed" from="HUD/ActionBox/Actions/Move" to="HUD" method="_on_move_pressed"]
+[connection signal="pressed" from="HUD/ActionBox/Actions/Attack" to="HUD" method="_on_attack_pressed"]
+[connection signal="pressed" from="HUD/ActionBox/Actions/End" to="HUD" method="_on_end_pressed"]

@@ -3,7 +3,7 @@ extends CanvasLayer
 var selected_unit: Area2D
 @warning_ignore("unused_signal")
 signal new_unit
-@onready var actions = $CenterContainer/Actions
+@onready var actions = $ActionBox/Actions
 
 
 func _on_new_unit():
