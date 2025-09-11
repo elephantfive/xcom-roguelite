@@ -13,6 +13,7 @@ var active_level
 @onready var unit_holder = %"Unit Holder"
 const UNIT = preload("res://entities/units/unit.tscn")
 @onready var level_end_timer = $LevelEndTimer
+@onready var rewards = %Rewards
 
 func _ready():
 	#level_adv("res://scenes/levels/level_1.tscn")
@@ -22,6 +23,7 @@ func _ready():
 func turn_end():
 	for button in hud.actions.get_children():
 		button.hide()
+		
 	selected_unit = null
 	turn_adv()
 	$TurnTimer.start()
@@ -46,6 +48,7 @@ func level_adv(level):
 	active_level = load(level).instantiate()
 	get_parent().add_child(active_level)
 	targets = []
+	
 	for unit in unit_holder.get_children():
 		if unit.has_method("_ready"):
 			var new_unit = UNIT.instantiate()
@@ -59,17 +62,20 @@ func level_adv(level):
 					new_unit.position = child.position
 					child.queue_free()
 					break
+					
 	for entity in active_level.entities.get_children():
 		if entity.type == 'ally':
 			targets.append(entity)
 		else:
 			turns.append(str(entity))
+			
 	for entity in active_level.entities.get_children():
 		if entity.type != 'ally':
 			entity.targets = targets
 		connect('turn_start', entity._on_game_manager_turn_start)
 		entity.game_manager = self
 		entity.hud = hud
+		
 	get_tree().call_group("Campaign Map", "hide")
 	current_turn = 0
 	end.show()
@@ -81,6 +87,10 @@ func level_end():
 			if unit.has_method('_ready'):
 				if entity.attributes['name'] == unit.attributes['name']:
 					unit.attributes = entity.attributes
+				
+	for i in rewards.get_child_count() - 1:
+		rewards.get_children()[i].unit_name = active_level.random_rewards[i]
+		rewards.get_children()[i].update()
 	active_level.queue_free()
 
 

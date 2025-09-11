@@ -21,7 +21,7 @@ var type: String = 'ally'
 var thru_wall: bool = false
 var current_distance: float
 
-const projectile = preload("res://projectiles/projectile.tscn")
+const projectile = preload("res://entities/projectiles/projectile.tscn")
 @onready var hud: CanvasLayer
 @onready var game_manager: Node
 @onready var distance_label = $"Distance Label"

@@ -4,7 +4,7 @@ extends Area2D
 var targets:Array = []
 var damage: int = 1
 var type: String = 'enemy'
-const projectile = preload("res://projectiles/projectile.tscn")
+const projectile = preload("res://entities/projectiles/projectile.tscn")
 
 func _on_game_manager_turn_start():
 	if game_manager.turn == str(self):

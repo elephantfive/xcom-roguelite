@@ -3,7 +3,6 @@ extends CanvasLayer
 var selected_unit: Area2D
 @onready var move = %Move
 @onready var actions = %Actions
-@onready var label = $UnitInfo/Label
 
 
 func new_unit():
