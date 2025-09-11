@@ -9,11 +9,9 @@ var targets: Array = []
 var active_level
 @onready var hud = %HUD
 @onready var campaign_map = %"Campaign Map"
-@onready var unit_1 = $"../Campaign Unit Select/Unit Holder/Unit 1"
-@onready var unit_2 = $"../Campaign Unit Select/Unit Holder/Unit 2"
-@onready var unit_3 = $"../Campaign Unit Select/Unit Holder/Unit 3"
-@onready var unit_4 = $"../Campaign Unit Select/Unit Holder/Unit 4"
 @onready var end = %End
+@onready var unit_holder = %"Unit Holder"
+const UNIT = preload("res://entities/units/unit.tscn")
 
 func _ready():
 	#level_adv("res://scenes/levels/level_1.tscn")
@@ -62,5 +60,14 @@ func level_adv(level):
 		active_level.queue_free()
 	active_level = load(level).instantiate()
 	get_parent().add_child.call_deferred(active_level)
+	for unit in unit_holder.get_children():
+		var new_unit = UNIT.instantiate()
+		new_unit.attributes = unit.attributes
+		for child in active_level.get_children():
+			if child.name == 'Entities':
+				child.add_child(new_unit)
+			if 'PlayerSpawn' in child.name:
+				new_unit.position = child.position
+				child.queue_free()
 	campaign_map.hide()
 	reset()

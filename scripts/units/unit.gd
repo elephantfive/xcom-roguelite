@@ -1,12 +1,16 @@
 extends Area2D
 
-var attack_damage: int = 1
-var health: int = 10
-var max_move_distance: int = 20
-var current_move_points: float = max_move_distance
-var max_attack_distance: int = 20
 
-var unit_actions = ["Attack"]
+var attributes = {
+	'attack_damage': 0,
+	'health':  0,
+	'max_move_distance':  0,
+	'max_attack_distance': 0,
+	'unit_actions': [],
+	'texture': '',
+}
+
+var current_move_points: float
 
 var init_pos: Vector2
 var too_far: bool = false
@@ -27,6 +31,7 @@ const projectile = preload("res://projectiles/projectile.tscn")
 
 
 func _ready():
+	current_move_points  = attributes['max_move_distance']
 	health_update()
 
 
@@ -35,7 +40,7 @@ func _process(_delta):
 		position = get_viewport().get_mouse_position()
 		distance_check(current_move_points)
 	elif attacking:
-		distance_check(max_attack_distance)
+		distance_check(attributes['max_attack_distance'])
 
 
 func _input(event):
@@ -71,7 +76,7 @@ func _on_input_event(_viewport, event, _shape_idx):
 
 
 func health_update():
-	health_label.text = 'Current Health: ' + str(health)
+	health_label.text = 'Current Health: ' + str(attributes['health'])
 
 
 func distance_check(max_distance):
@@ -122,7 +127,7 @@ func attack():
 
 
 func take_damage(damage):
-	health -= damage
+	attributes['health'] -= damage
 	health_update()
 
 
@@ -137,4 +142,4 @@ func _on_distance_line_collision_area_exited(area):
 
 
 func _on_game_manager_turn_start():
-	current_move_points = max_move_distance
+	current_move_points = attributes['max_move_distance']

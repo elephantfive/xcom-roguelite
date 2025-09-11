@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ygb05qawriwh"]
+[gd_scene load_steps=7 format=3 uid="uid://ygb05qawriwh"]
 
 [ext_resource type="Script" uid="uid://c1o8tsdvtkydf" path="res://scripts/game_manager.gd" id="1_4msxo"]
 [ext_resource type="Script" uid="uid://vwqdce8l4gp0" path="res://scripts/hud.gd" id="2_5fb3c"]
 [ext_resource type="PackedScene" uid="uid://ccj00txght02n" path="res://scenes/campaign map/location.tscn" id="3_4msxo"]
 [ext_resource type="Script" uid="uid://dokd1icoe8c62" path="res://scripts/campaign map/player_marker.gd" id="3_5fb3c"]
+[ext_resource type="Script" uid="uid://d3110uqv04vma" path="res://scripts/characters/amigol.gd" id="5_gjmho"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4msxo"]
 size = Vector2(40, 40)
@@ -109,6 +110,7 @@ visible = false
 [node name="Campaign Unit Select" type="CanvasLayer" parent="."]
 
 [node name="Unit Holder" type="VBoxContainer" parent="Campaign Unit Select"]
+unique_name_in_owner = true
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -122,15 +124,7 @@ grow_vertical = 2
 
 [node name="Unit 1" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
 layout_mode = 2
-
-[node name="Unit 2" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
-layout_mode = 2
-
-[node name="Unit 3" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
-layout_mode = 2
-
-[node name="Unit 4" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
-layout_mode = 2
+script = ExtResource("5_gjmho")
 
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="new_unit" from="HUD" to="HUD" method="_on_new_unit"]
