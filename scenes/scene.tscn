@@ -1,35 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://ygb05qawriwh"]
+[gd_scene load_steps=6 format=3 uid="uid://ygb05qawriwh"]
 
 [ext_resource type="Script" uid="uid://c1o8tsdvtkydf" path="res://scripts/game_manager.gd" id="1_4msxo"]
 [ext_resource type="Script" uid="uid://vwqdce8l4gp0" path="res://scripts/hud.gd" id="2_5fb3c"]
 [ext_resource type="PackedScene" uid="uid://ccj00txght02n" path="res://scenes/campaign map/location.tscn" id="3_4msxo"]
-[ext_resource type="Script" uid="uid://dokd1icoe8c62" path="res://scripts/player_marker.gd" id="3_5fb3c"]
-[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="5_gjmho"]
+[ext_resource type="Script" uid="uid://dokd1icoe8c62" path="res://scripts/campaign map/player_marker.gd" id="3_5fb3c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4msxo"]
 size = Vector2(40, 40)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t7and"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ruw3y"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7182s"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tpwpp"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ftgl"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dqloj"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5yiy0"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0f71q"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1id6j"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dv0eb"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gjmho"]
 
 [node name="Game" type="Node2D"]
 
@@ -45,10 +22,9 @@ one_shot = true
 unique_name_in_owner = true
 script = ExtResource("2_5fb3c")
 
-[node name="ActionBox" type="GridContainer" parent="HUD"]
+[node name="ActionBox" type="VBoxContainer" parent="HUD"]
 offset_right = 1152.0
 offset_bottom = 648.0
-columns = 5
 
 [node name="Actions" type="HBoxContainer" parent="HUD/ActionBox"]
 layout_mode = 2
@@ -62,6 +38,7 @@ visible = false
 layout_mode = 2
 
 [node name="End" type="Button" parent="HUD/ActionBox/Actions"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "End Turn"
@@ -143,20 +120,17 @@ offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Unit" type="Button" parent="Campaign Unit Select/Unit Holder"]
+[node name="Unit 1" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_t7and")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ruw3y")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_7182s")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_tpwpp")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_7ftgl")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_dqloj")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_5yiy0")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_0f71q")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_1id6j")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_dv0eb")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_gjmho")
-icon = ExtResource("5_gjmho")
+
+[node name="Unit 2" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
+layout_mode = 2
+
+[node name="Unit 3" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
+layout_mode = 2
+
+[node name="Unit 4" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
+layout_mode = 2
 
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="new_unit" from="HUD" to="HUD" method="_on_new_unit"]

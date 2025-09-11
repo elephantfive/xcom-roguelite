@@ -9,10 +9,11 @@ signal new_unit
 func _on_new_unit():
 	selected_unit = game_manager.selected_unit
 	for button in actions.get_children():
+		if button.name == 'Move':
+				button.text = 'Move up to ' + str(selected_unit.max_move_distance) + ' units.'
+				button.show()
 		if button.name in selected_unit.unit_actions:
 			button.show()
-			if button.name == 'Move':
-				button.text = 'Move up to ' + str(selected_unit.max_move_distance) + ' units.'
 			if button.name == 'Attack':
 				button.text = 'Attack an enemy for ' + str(selected_unit.attack_damage) + ' damage.'
 

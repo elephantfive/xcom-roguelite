@@ -10,7 +10,7 @@ func _ready():
 	targets = game_manager.targets
 
 func _on_game_manager_turn_start():
-	if game_manager.turn == name:
+	if game_manager.turn == str(self):
 		var target = targets[randi_range(0, targets.size()-1)]
 		var new_proj = projectile.instantiate()
 		new_proj.target = target.global_position

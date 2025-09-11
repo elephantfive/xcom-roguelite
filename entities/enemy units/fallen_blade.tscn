@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwnho3dck57gp"]
+
+[ext_resource type="Script" uid="uid://dyvkvelj3l2fi" path="res://scripts/enemy units/fallen_blade.gd" id="1_p7g5j"]
+[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="2_5tgfx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pqhw6"]
+size = Vector2(40, 40)
+
+[node name="Fallen Blade" type="Area2D"]
+script = ExtResource("1_p7g5j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pqhw6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.315078, 0.315078)
+texture = ExtResource("2_5tgfx")

@@ -3,12 +3,17 @@ var turn: String
 signal turn_start
 var selected_unit: Area2D
 var current_turn: int = 0
-var turns: Array = []
+var ally_roster: Array = []
+var turns: Array = ['player']
 var targets: Array = []
 var active_level
 @onready var hud = %HUD
 @onready var campaign_map = %"Campaign Map"
-
+@onready var unit_1 = $"../Campaign Unit Select/Unit Holder/Unit 1"
+@onready var unit_2 = $"../Campaign Unit Select/Unit Holder/Unit 2"
+@onready var unit_3 = $"../Campaign Unit Select/Unit Holder/Unit 3"
+@onready var unit_4 = $"../Campaign Unit Select/Unit Holder/Unit 4"
+@onready var end = %End
 
 func _ready():
 	#level_adv("res://scenes/levels/level_1.tscn")
@@ -23,17 +28,17 @@ func turn_end():
 	$TurnTimer.start()
 
 func _on_turn_timer_timeout():
-	if 'Enemy' in turns:
+	if turns.size() > 0:
 		emit_signal("turn_start")
-	else:
-		level_adv("res://scenes/levels/level_2.tscn")
 
 func turn_adv():
 	if current_turn + 1 <= len(turns) - 1:
 		current_turn += 1
 	else:
 		current_turn = 0
+		end.show()
 	turn = turns[current_turn]
+	
 
 func reset():
 	targets = []
@@ -42,11 +47,13 @@ func reset():
 			for entity in child.get_children():
 				if entity.type == 'ally':
 					targets.append(entity)
+				else:
+					turns.append(str(entity))
 				connect('turn_start', entity._on_game_manager_turn_start)
 				entity.game_manager = self
 				entity.hud = hud
-				turns.append(entity.name)
 	current_turn = 0
+	end.show()
 	turn = turns[current_turn]
 
 

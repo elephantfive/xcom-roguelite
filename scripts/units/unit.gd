@@ -6,7 +6,7 @@ var max_move_distance: int = 20
 var current_move_points: float = max_move_distance
 var max_attack_distance: int = 20
 
-var unit_actions = ["Move", "Attack", "End"]
+var unit_actions = ["Attack"]
 
 var init_pos: Vector2
 var too_far: bool = false
@@ -23,6 +23,7 @@ const projectile = preload("res://projectiles/projectile.tscn")
 @onready var warning_label = $"Warning Label"
 @onready var distance_line = $"Distance Line"
 @onready var health_label = $"Health Label"
+@onready var sprite = $Sprite
 
 
 func _ready():
@@ -38,7 +39,7 @@ func _process(_delta):
 
 
 func _input(event):
-	if game_manager.turn == name:
+	if game_manager.turn == 'player':
 		if game_manager.selected_unit == self:
 			if event.is_action_pressed("right_click"):
 				if moving or attacking:
@@ -49,7 +50,8 @@ func _input(event):
 				else:
 					game_manager.selected_unit = null
 					for button in hud.actions.get_children():
-						button.hide()
+						if button.name != 'End':
+							button.hide()
 			elif event.is_action_pressed("left_click"):
 				if not too_far:
 					if moving:
@@ -60,7 +62,7 @@ func _input(event):
 
 
 func _on_input_event(_viewport, event, _shape_idx):
-	if game_manager.turn == name:
+	if game_manager.turn == 'player':
 		if game_manager.selected_unit != self:
 			if event.is_action_pressed("left_click"):
 				game_manager.selected_unit = self
