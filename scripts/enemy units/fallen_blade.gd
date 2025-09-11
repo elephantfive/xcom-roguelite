@@ -19,7 +19,7 @@ func _on_game_manager_turn_start():
 
 
 func take_damage():
-	game_manager.turns.erase(name)
-	if game_manager.turn == name:
+	game_manager.turns.erase(str(self))
+	if game_manager.turn == str(self):
 		game_manager.turn_adv()
 	queue_free()

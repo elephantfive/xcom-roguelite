@@ -12,6 +12,7 @@ var active_level
 @onready var end = %End
 @onready var unit_holder = %"Unit Holder"
 const UNIT = preload("res://entities/units/unit.tscn")
+@onready var level_end_timer = $LevelEndTimer
 
 func _ready():
 	#level_adv("res://scenes/levels/level_1.tscn")
@@ -26,8 +27,11 @@ func turn_end():
 	$TurnTimer.start()
 
 func _on_turn_timer_timeout():
-	if turns.size() > 0:
+	if turns.size() > 1:
 		emit_signal("turn_start")
+	else:
+		end.hide()
+		level_end_timer.start()
 
 func turn_adv():
 	if current_turn + 1 <= len(turns) - 1:
@@ -39,8 +43,6 @@ func turn_adv():
 
 
 func level_adv(level):
-	if active_level != null:
-		active_level.queue_free()
 	active_level = load(level).instantiate()
 	get_parent().add_child(active_level)
 	targets = []
@@ -68,7 +70,15 @@ func level_adv(level):
 		connect('turn_start', entity._on_game_manager_turn_start)
 		entity.game_manager = self
 		entity.hud = hud
-	campaign_map.hide()
+	get_tree().call_group("Campaign Map", "hide")
 	current_turn = 0
 	end.show()
 	turn = turns[current_turn]
+
+func level_end():
+	active_level.queue_free()
+
+
+func _on_level_end_timer_timeout():
+	level_end()
+	get_tree().call_group("Campaign Map", "show")

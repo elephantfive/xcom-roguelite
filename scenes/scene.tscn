@@ -19,6 +19,9 @@ script = ExtResource("1_4msxo")
 wait_time = 0.25
 one_shot = true
 
+[node name="LevelEndTimer" type="Timer" parent="Game Manager"]
+one_shot = true
+
 [node name="HUD" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_5fb3c")
@@ -45,7 +48,7 @@ visible = false
 layout_mode = 2
 text = "End Turn"
 
-[node name="Campaign Map" type="Node2D" parent="."]
+[node name="Campaign Map" type="Node2D" parent="." groups=["Campaign Map"]]
 unique_name_in_owner = true
 
 [node name="Player Marker" type="Area2D" parent="Campaign Map"]
@@ -108,7 +111,7 @@ visible = false
 [node name="Loadout" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="Campaign Unit Select" type="CanvasLayer" parent="."]
+[node name="Campaign Unit Select" type="CanvasLayer" parent="." groups=["Campaign Map"]]
 
 [node name="Unit Holder" type="VBoxContainer" parent="Campaign Unit Select"]
 unique_name_in_owner = true
@@ -137,6 +140,7 @@ layout_mode = 2
 layout_mode = 2
 
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
+[connection signal="timeout" from="Game Manager/LevelEndTimer" to="Game Manager" method="_on_level_end_timer_timeout"]
 [connection signal="new_unit" from="HUD" to="HUD" method="_on_new_unit"]
 [connection signal="pressed" from="HUD/ActionBox/Actions/Move" to="HUD" method="_on_move_pressed"]
 [connection signal="pressed" from="HUD/ActionBox/Actions/Attack" to="HUD" method="_on_attack_pressed"]
