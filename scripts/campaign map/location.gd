@@ -20,7 +20,8 @@ func _on_input_event(_viewport, event, _shape_idx):
 				desc.hide()
 				popup.show()
 			else:
-				print("too far")
+				#TO-DO: Implement highlighting/something to indicate that players are too far
+				pass
 				
 
 

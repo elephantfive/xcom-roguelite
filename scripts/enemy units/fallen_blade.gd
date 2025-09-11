@@ -4,8 +4,9 @@ extends Area2D
 var targets:Array = []
 var damage: int = 1
 var type: String = 'enemy'
-const projectile = preload("res://entities/projectiles/projectile.tscn")
+const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 
+# Reading nodes to differentiate units with same names
 func _on_game_manager_turn_start():
 	if game_manager.turn == str(self):
 		var target = targets[randi_range(0, targets.size()-1)]

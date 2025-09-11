@@ -11,10 +11,12 @@ var current_distance: float
 @onready var warning_label = $"Warning Label"
 @onready var cooldown = $Cooldown
 
+
 func _process(_delta):
 	if moving:
 		map_movement_line.points[1] = get_viewport().get_mouse_position()
 		distance_check(current_move_points)
+
 
 func _on_input_event(_viewport, event, _shape_idx):
 	if event.is_action_pressed('left_click'):
@@ -30,10 +32,12 @@ func _input(event):
 			moving = false
 			get_tree().call_group("Unit Distance Info", "hide")
 			cooldown.start()
+			
 	if event.is_action_pressed('right_click'):
 		if moving:
 			moving = false
 			get_tree().call_group("Unit Distance Info", "hide")
+
 
 func distance_check(max_distance):
 	get_tree().call_group("Unit Distance Info", "show")

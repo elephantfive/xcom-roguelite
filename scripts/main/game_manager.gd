@@ -11,9 +11,10 @@ var active_level
 @onready var campaign_map = %"Campaign Map"
 @onready var end = %End
 @onready var unit_holder = %"Unit Holder"
-const UNIT = preload("res://entities/units/unit.tscn")
+const UNIT = preload("res://scenes/entities/units/unit.tscn")
 @onready var level_end_timer = $LevelEndTimer
 @onready var rewards = %Rewards
+@onready var reward_screen = $"../Reward Screen"
 
 func _ready():
 	#level_adv("res://scenes/levels/level_1.tscn")
@@ -87,11 +88,11 @@ func level_end():
 			if unit.has_method('_ready'):
 				if entity.attributes['name'] == unit.attributes['name']:
 					unit.attributes = entity.attributes
-				
-	for i in rewards.get_child_count() - 1:
+	for i in range(0, 3):
 		rewards.get_children()[i].unit_name = active_level.random_rewards[i]
 		rewards.get_children()[i].update()
 	active_level.queue_free()
+	reward_screen.show()
 
 
 func _on_level_end_timer_timeout():

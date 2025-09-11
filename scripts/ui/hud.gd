@@ -5,6 +5,7 @@ var selected_unit: Area2D
 @onready var actions = %Actions
 
 
+# Unit action buttons have to change on unit select
 func new_unit():
 	selected_unit = game_manager.selected_unit
 	move.show()

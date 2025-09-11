@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://ygb05qawriwh"]
 
-[ext_resource type="Script" uid="uid://c1o8tsdvtkydf" path="res://scripts/game_manager.gd" id="1_4msxo"]
-[ext_resource type="Script" uid="uid://e0nun6mx1aou" path="res://unit_info.gd" id="1_ruw3y"]
-[ext_resource type="Script" uid="uid://vwqdce8l4gp0" path="res://scripts/ui/hud.gd" id="2_5fb3c"]
-[ext_resource type="PackedScene" uid="uid://ccj00txght02n" path="res://scenes/campaign map/location.tscn" id="3_4msxo"]
-[ext_resource type="Script" uid="uid://dokd1icoe8c62" path="res://scripts/campaign map/player_marker.gd" id="3_5fb3c"]
-[ext_resource type="Script" uid="uid://d3110uqv04vma" path="res://scripts/units/amigol.gd" id="5_gjmho"]
-[ext_resource type="PackedScene" uid="uid://b6kq0ugyjc2mj" path="res://ui/reward.tscn" id="5_t7and"]
+[ext_resource type="Script" uid="uid://e0nun6mx1aou" path="res://scripts/main/unit_info.gd" id="1_j6bet"]
+[ext_resource type="Script" uid="uid://c1o8tsdvtkydf" path="res://scripts/main/game_manager.gd" id="2_57akw"]
+[ext_resource type="Script" uid="uid://vwqdce8l4gp0" path="res://scripts/ui/hud.gd" id="3_vbg7o"]
+[ext_resource type="Script" uid="uid://dokd1icoe8c62" path="res://scripts/campaign map/player_marker.gd" id="4_osw1o"]
+[ext_resource type="PackedScene" uid="uid://ccj00txght02n" path="res://scenes/campaign map/location.tscn" id="5_xsca3"]
+[ext_resource type="PackedScene" uid="uid://b6kq0ugyjc2mj" path="res://scenes/ui/reward.tscn" id="6_y2ajb"]
+[ext_resource type="Script" uid="uid://d3110uqv04vma" path="res://scripts/units/amigol.gd" id="7_qa38x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4msxo"]
 size = Vector2(40, 40)
@@ -15,11 +15,11 @@ size = Vector2(40, 40)
 
 [node name="UnitInfo" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("1_ruw3y")
+script = ExtResource("1_j6bet")
 
 [node name="Game Manager" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("1_4msxo")
+script = ExtResource("2_57akw")
 
 [node name="TurnTimer" type="Timer" parent="Game Manager"]
 wait_time = 0.25
@@ -30,7 +30,7 @@ one_shot = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
-script = ExtResource("2_5fb3c")
+script = ExtResource("3_vbg7o")
 
 [node name="ActionBox" type="VBoxContainer" parent="HUD"]
 offset_right = 1152.0
@@ -61,7 +61,7 @@ unique_name_in_owner = true
 [node name="Player Marker" type="Area2D" parent="Campaign Map"]
 unique_name_in_owner = true
 position = Vector2(702, 577)
-script = ExtResource("3_5fb3c")
+script = ExtResource("4_osw1o")
 
 [node name="ColorRect" type="ColorRect" parent="Campaign Map/Player Marker"]
 offset_left = -20.0
@@ -94,30 +94,51 @@ one_shot = true
 visible = false
 points = PackedVector2Array(0, 0, 0, 0)
 
-[node name="Location" parent="Campaign Map" instance=ExtResource("3_4msxo")]
+[node name="Location" parent="Campaign Map" instance=ExtResource("5_xsca3")]
 position = Vector2(644, 570)
 level = "res://scenes/levels/level_1.tscn"
 
-[node name="Location2" parent="Campaign Map" instance=ExtResource("3_4msxo")]
+[node name="Location2" parent="Campaign Map" instance=ExtResource("5_xsca3")]
 position = Vector2(639, 448)
 level = "res://scenes/levels/level_1.tscn"
 
-[node name="Location3" parent="Campaign Map" instance=ExtResource("3_4msxo")]
+[node name="Location3" parent="Campaign Map" instance=ExtResource("5_xsca3")]
 position = Vector2(519, 386)
 level = "res://scenes/levels/level_1.tscn"
 
 [node name="Shop" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="Rewards" type="CanvasLayer" parent="."]
-unique_name_in_owner = true
+[node name="Reward Screen" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="Reward" parent="Rewards" instance=ExtResource("5_t7and")]
+[node name="Panel" type="Panel" parent="Reward Screen"]
+z_index = -1
+offset_right = 1152.0
+offset_bottom = 648.0
 
-[node name="Reward2" parent="Rewards" instance=ExtResource("5_t7and")]
+[node name="Rewards" type="HBoxContainer" parent="Reward Screen"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Reward3" parent="Rewards" instance=ExtResource("5_t7and")]
+[node name="Reward" parent="Reward Screen/Rewards" instance=ExtResource("6_y2ajb")]
+layout_mode = 2
+
+[node name="Reward2" parent="Reward Screen/Rewards" instance=ExtResource("6_y2ajb")]
+layout_mode = 2
+
+[node name="Reward3" parent="Reward Screen/Rewards" instance=ExtResource("6_y2ajb")]
+layout_mode = 2
 
 [node name="Level Up" type="CanvasLayer" parent="."]
 visible = false
@@ -142,7 +163,7 @@ grow_vertical = 2
 
 [node name="Unit 1" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
 layout_mode = 2
-script = ExtResource("5_gjmho")
+script = ExtResource("7_qa38x")
 unit_name = "Amigol"
 
 [node name="Unit 2" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
