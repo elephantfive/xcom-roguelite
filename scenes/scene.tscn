@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://ygb05qawriwh"]
 
 [ext_resource type="Script" uid="uid://c1o8tsdvtkydf" path="res://scripts/game_manager.gd" id="1_4msxo"]
-[ext_resource type="Script" uid="uid://vwqdce8l4gp0" path="res://scripts/hud.gd" id="2_5fb3c"]
+[ext_resource type="Script" uid="uid://vwqdce8l4gp0" path="res://scripts/ui/hud.gd" id="2_5fb3c"]
 [ext_resource type="PackedScene" uid="uid://ccj00txght02n" path="res://scenes/campaign map/location.tscn" id="3_4msxo"]
 [ext_resource type="Script" uid="uid://dokd1icoe8c62" path="res://scripts/campaign map/player_marker.gd" id="3_5fb3c"]
-[ext_resource type="Script" uid="uid://d3110uqv04vma" path="res://scripts/characters/amigol.gd" id="5_gjmho"]
+[ext_resource type="Script" uid="uid://d3110uqv04vma" path="res://scripts/units/amigol.gd" id="5_gjmho"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4msxo"]
 size = Vector2(40, 40)
