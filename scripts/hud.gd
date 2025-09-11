@@ -1,13 +1,12 @@
 extends CanvasLayer
 @onready var game_manager = %"Game Manager"
 var selected_unit: Area2D
-@warning_ignore("unused_signal")
-signal new_unit
-@onready var actions = $ActionBox/Actions
 @onready var move = %Move
+@onready var actions = %Actions
+@onready var label = $UnitInfo/Label
 
 
-func _on_new_unit():
+func new_unit():
 	selected_unit = game_manager.selected_unit
 	move.show()
 	move.text = 'Move up to ' + str(selected_unit.attributes['max_move_distance']) + ' units.'

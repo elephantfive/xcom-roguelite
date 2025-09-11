@@ -2,6 +2,7 @@ extends Area2D
 
 
 var attributes = {
+	'name': '',
 	'attack_damage': 0,
 	'health':  0,
 	'max_move_distance':  0,
@@ -72,7 +73,7 @@ func _on_input_event(_viewport, event, _shape_idx):
 			if event.is_action_pressed("left_click"):
 				game_manager.selected_unit = self
 				init_pos = position
-				hud.emit_signal("new_unit")
+				hud.new_unit()
 
 
 func health_update():

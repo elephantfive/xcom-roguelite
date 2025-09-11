@@ -76,6 +76,11 @@ func level_adv(level):
 	turn = turns[current_turn]
 
 func level_end():
+	for entity in active_level.entities.get_children():
+		for unit in unit_holder.get_children():
+			if unit.has_method('_ready'):
+				if entity.attributes['name'] == unit.attributes['name']:
+					unit.attributes = entity.attributes
 	active_level.queue_free()
 
 

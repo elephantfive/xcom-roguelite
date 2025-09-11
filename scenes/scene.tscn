@@ -31,6 +31,7 @@ offset_right = 1152.0
 offset_bottom = 648.0
 
 [node name="Actions" type="HBoxContainer" parent="HUD/ActionBox"]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Move" type="Button" parent="HUD/ActionBox/Actions"]
@@ -47,6 +48,20 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "End Turn"
+
+[node name="UnitInfo" type="VBoxContainer" parent="HUD"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="HUD/UnitInfo"]
+layout_mode = 2
 
 [node name="Campaign Map" type="Node2D" parent="." groups=["Campaign Map"]]
 unique_name_in_owner = true
@@ -141,8 +156,11 @@ layout_mode = 2
 
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="timeout" from="Game Manager/LevelEndTimer" to="Game Manager" method="_on_level_end_timer_timeout"]
-[connection signal="new_unit" from="HUD" to="HUD" method="_on_new_unit"]
 [connection signal="pressed" from="HUD/ActionBox/Actions/Move" to="HUD" method="_on_move_pressed"]
 [connection signal="pressed" from="HUD/ActionBox/Actions/Attack" to="HUD" method="_on_attack_pressed"]
 [connection signal="pressed" from="HUD/ActionBox/Actions/End" to="HUD" method="_on_end_pressed"]
 [connection signal="input_event" from="Campaign Map/Player Marker" to="Campaign Map/Player Marker" method="_on_input_event"]
+[connection signal="pressed" from="Campaign Unit Select/Unit Holder/Unit 1" to="Campaign Unit Select/Unit Holder/Unit 1" method="_on_pressed"]
+[connection signal="pressed" from="Campaign Unit Select/Unit Holder/Unit 2" to="Campaign Unit Select/Unit Holder/Unit 2" method="_on_pressed"]
+[connection signal="pressed" from="Campaign Unit Select/Unit Holder/Unit 3" to="Campaign Unit Select/Unit Holder/Unit 3" method="_on_pressed"]
+[connection signal="pressed" from="Campaign Unit Select/Unit Holder/Unit 4" to="Campaign Unit Select/Unit Holder/Unit 4" method="_on_pressed"]
