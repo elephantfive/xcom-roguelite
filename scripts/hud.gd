@@ -4,14 +4,14 @@ var selected_unit: Area2D
 @warning_ignore("unused_signal")
 signal new_unit
 @onready var actions = $ActionBox/Actions
+@onready var move = %Move
 
 
 func _on_new_unit():
 	selected_unit = game_manager.selected_unit
+	move.show()
+	move.text = 'Move up to ' + str(selected_unit.attributes['max_move_distance']) + ' units.'
 	for button in actions.get_children():
-		if button.name == 'Move':
-				button.text = 'Move up to ' + str(selected_unit.attributes['max_move_distance']) + ' units.'
-				button.show()
 		if button.name in selected_unit.attributes['unit_actions']:
 			button.show()
 			if button.name == 'Attack':

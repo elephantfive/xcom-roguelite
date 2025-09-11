@@ -36,38 +36,39 @@ func turn_adv():
 		current_turn = 0
 		end.show()
 	turn = turns[current_turn]
-	
-
-func reset():
-	targets = []
-	for child in active_level.get_children():
-		if child.name == 'Entities':
-			for entity in child.get_children():
-				if entity.type == 'ally':
-					targets.append(entity)
-				else:
-					turns.append(str(entity))
-				connect('turn_start', entity._on_game_manager_turn_start)
-				entity.game_manager = self
-				entity.hud = hud
-	current_turn = 0
-	end.show()
-	turn = turns[current_turn]
 
 
 func level_adv(level):
 	if active_level != null:
 		active_level.queue_free()
 	active_level = load(level).instantiate()
-	get_parent().add_child.call_deferred(active_level)
+	get_parent().add_child(active_level)
+	targets = []
 	for unit in unit_holder.get_children():
-		var new_unit = UNIT.instantiate()
-		new_unit.attributes = unit.attributes
-		for child in active_level.get_children():
-			if child.name == 'Entities':
-				child.add_child(new_unit)
-			if 'PlayerSpawn' in child.name:
-				new_unit.position = child.position
-				child.queue_free()
+		if unit.has_method("_ready"):
+			var new_unit = UNIT.instantiate()
+			new_unit.attributes = unit.attributes
+			new_unit.game_manager = self
+			new_unit.hud = hud
+			active_level.entities.add_child(new_unit)
+			var spawn = randi_range(0, active_level.player_spawns.get_child_count() - 1)
+			for child in active_level.player_spawns.get_children():
+				if str(spawn) in child.name:
+					new_unit.position = child.position
+					child.queue_free()
+					break
+	for entity in active_level.entities.get_children():
+		if entity.type == 'ally':
+			targets.append(entity)
+		else:
+			turns.append(str(entity))
+	for entity in active_level.entities.get_children():
+		if entity.type != 'ally':
+			entity.targets = targets
+		connect('turn_start', entity._on_game_manager_turn_start)
+		entity.game_manager = self
+		entity.hud = hud
 	campaign_map.hide()
-	reset()
+	current_turn = 0
+	end.show()
+	turn = turns[current_turn]

@@ -6,9 +6,6 @@ var damage: int = 1
 var type: String = 'enemy'
 const projectile = preload("res://projectiles/projectile.tscn")
 
-func _ready():
-	targets = game_manager.targets
-
 func _on_game_manager_turn_start():
 	if game_manager.turn == str(self):
 		var target = targets[randi_range(0, targets.size()-1)]

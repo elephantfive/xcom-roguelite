@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cklvl5jkm42wo"]
+[gd_scene load_steps=4 format=3 uid="uid://cklvl5jkm42wo"]
 
 [ext_resource type="PackedScene" uid="uid://d3m2brvwxikfc" path="res://environment/wall.tscn" id="1_hn12h"]
+[ext_resource type="Script" uid="uid://3lgedd16ubha" path="res://scripts/level.gd" id="1_nsrm0"]
 [ext_resource type="PackedScene" uid="uid://dwnho3dck57gp" path="res://entities/enemy units/fallen_blade.tscn" id="3_rka8t"]
 
 [node name="Level 1" type="Node2D"]
+script = ExtResource("1_nsrm0")
 
 [node name="Environment" type="Node" parent="."]
 unique_name_in_owner = true
@@ -19,10 +21,14 @@ rotation = 1.57079
 scale = Vector2(2.2, 1)
 
 [node name="Entities" type="Node" parent="."]
-unique_name_in_owner = true
 
 [node name="Fallen Blade" parent="Entities" instance=ExtResource("3_rka8t")]
 position = Vector2(764, 389)
 
-[node name="PlayerSpawn" type="Node2D" parent="."]
+[node name="PlayerSpawns" type="Node" parent="."]
+
+[node name="PlayerSpawn 0" type="Node2D" parent="PlayerSpawns"]
+position = Vector2(147, 196)
+
+[node name="PlayerSpawn 1" type="Node2D" parent="PlayerSpawns"]
 position = Vector2(147, 196)

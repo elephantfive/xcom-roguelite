@@ -31,6 +31,7 @@ offset_bottom = 648.0
 layout_mode = 2
 
 [node name="Move" type="Button" parent="HUD/ActionBox/Actions"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
@@ -125,6 +126,15 @@ grow_vertical = 2
 [node name="Unit 1" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
 layout_mode = 2
 script = ExtResource("5_gjmho")
+
+[node name="Unit 2" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
+layout_mode = 2
+
+[node name="Unit 3" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
+layout_mode = 2
+
+[node name="Unit 4" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
+layout_mode = 2
 
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="new_unit" from="HUD" to="HUD" method="_on_new_unit"]
