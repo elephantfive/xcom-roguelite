@@ -3,18 +3,16 @@ extends CanvasLayer
 var selected_unit: Area2D
 @onready var move = %Move
 @onready var actions = %Actions
+@onready var unit_info = %UnitInfo
 
 
 # Unit action buttons have to change on unit select
 func new_unit():
 	selected_unit = game_manager.selected_unit
-	move.show()
-	move.text = 'Move up to ' + str(selected_unit.attributes['max_move_distance']) + ' units.'
 	for button in actions.get_children():
 		if button.name in selected_unit.attributes['unit_actions']:
 			button.show()
-			if button.name == 'Attack':
-				button.text = 'Attack an enemy for ' + str(selected_unit.attributes['attack_damage']) + ' damage.'
+			button.text = unit_info.button_text(selected_unit.attributes['name'], button.name)
 
 
 func _on_move_pressed():

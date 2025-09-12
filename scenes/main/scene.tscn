@@ -51,6 +51,10 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="Heal" type="Button" parent="HUD/ActionBox/Actions"]
+visible = false
+layout_mode = 2
+
 [node name="End" type="Button" parent="HUD/ActionBox/Actions"]
 unique_name_in_owner = true
 visible = false
@@ -194,7 +198,7 @@ unit_name = "Amigol"
 
 [node name="RosterUnit2" parent="Campaign Unit Select/Unit Roster" instance=ExtResource("8_57akw")]
 layout_mode = 2
-unit_name = "Placeholder"
+unit_name = "Nidys"
 
 [node name="RosterUnit3" parent="Campaign Unit Select/Unit Roster" instance=ExtResource("8_57akw")]
 layout_mode = 2

@@ -30,12 +30,13 @@ func _on_texture_button_pressed():
 		if unit.unit_name != unit_name:
 			unit.label.text = ''
 			unit.add_to_squad.hide()
+			
 	if on_squad:
 		add_to_squad.hide()
 	else:
 		add_to_squad.show()
+		
 	if label.text == '':
-		label.text = ''
 		for key in attributes:
 			if key != 'unit_actions' and key != 'texture':
 				label.text += key.replace('_', ' ').to_upper() + ': ' + str(attributes[key]) + '\n'
