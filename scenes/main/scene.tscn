@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ygb05qawriwh"]
+[gd_scene load_steps=10 format=3 uid="uid://ygb05qawriwh"]
 
 [ext_resource type="Script" uid="uid://e0nun6mx1aou" path="res://scripts/main/unit_info.gd" id="1_j6bet"]
 [ext_resource type="Script" uid="uid://c1o8tsdvtkydf" path="res://scripts/main/game_manager.gd" id="2_57akw"]
@@ -6,7 +6,8 @@
 [ext_resource type="Script" uid="uid://dokd1icoe8c62" path="res://scripts/campaign map/player_marker.gd" id="4_osw1o"]
 [ext_resource type="PackedScene" uid="uid://ccj00txght02n" path="res://scenes/campaign map/location.tscn" id="5_xsca3"]
 [ext_resource type="PackedScene" uid="uid://b6kq0ugyjc2mj" path="res://scenes/ui/reward.tscn" id="6_y2ajb"]
-[ext_resource type="Script" uid="uid://d3110uqv04vma" path="res://scripts/units/amigol.gd" id="7_qa38x"]
+[ext_resource type="Script" uid="uid://d3110uqv04vma" path="res://scripts/ui/unit_button.gd" id="7_qa38x"]
+[ext_resource type="PackedScene" uid="uid://c4ncj5ewtvx0p" path="res://scenes/ui/roster_unit.tscn" id="8_57akw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4msxo"]
 size = Vector2(40, 40)
@@ -168,11 +169,32 @@ unit_name = "Amigol"
 
 [node name="Unit 2" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
 layout_mode = 2
+script = ExtResource("7_qa38x")
 
 [node name="Unit 3" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
 layout_mode = 2
+script = ExtResource("7_qa38x")
 
 [node name="Unit 4" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
+layout_mode = 2
+script = ExtResource("7_qa38x")
+
+[node name="Unit Roster" type="HBoxContainer" parent="Campaign Unit Select"]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RosterUnit" parent="Campaign Unit Select/Unit Roster" instance=ExtResource("8_57akw")]
+layout_mode = 2
+unit_name = "Amigol"
+
+[node name="RosterUnit2" parent="Campaign Unit Select/Unit Roster" instance=ExtResource("8_57akw")]
+layout_mode = 2
+
+[node name="RosterUnit3" parent="Campaign Unit Select/Unit Roster" instance=ExtResource("8_57akw")]
+layout_mode = 2
+
+[node name="RosterUnit4" parent="Campaign Unit Select/Unit Roster" instance=ExtResource("8_57akw")]
 layout_mode = 2
 
 [node name="UnitDesc" type="VBoxContainer" parent="Campaign Unit Select"]

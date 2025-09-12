@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4ncj5ewtvx0p"]
+
+[ext_resource type="Script" uid="uid://qcr17ogirgbl" path="res://scripts/ui/roster_unit.gd" id="1_fdhbt"]
+
+[node name="RosterUnit" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fdhbt")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

@@ -15,6 +15,7 @@ const UNIT = preload("res://scenes/entities/units/unit.tscn")
 @onready var level_end_timer = $LevelEndTimer
 @onready var rewards = %Rewards
 @onready var reward_screen = $"../Reward Screen"
+@onready var unit_roster = %"Unit Roster"
 
 func _ready():
 	#level_adv("res://scenes/levels/level_1.tscn")
@@ -51,7 +52,7 @@ func level_adv(level):
 	targets = []
 	
 	for unit in unit_holder.get_children():
-		if unit.has_method("_ready"):
+		if unit.unit_name != '':
 			var new_unit = UNIT.instantiate()
 			new_unit.attributes = unit.attributes
 			new_unit.game_manager = self
@@ -85,7 +86,11 @@ func level_adv(level):
 func level_end():
 	for entity in active_level.entities.get_children():
 		for unit in unit_holder.get_children():
-			if unit.has_method('_ready'):
+			if unit.unit_name != '':
+				if entity.attributes['name'] == unit.attributes['name']:
+					unit.attributes = entity.attributes
+		for unit in unit_roster.get_children():
+			if unit.unit_name != '':
 				if entity.attributes['name'] == unit.attributes['name']:
 					unit.attributes = entity.attributes
 	for i in range(0, 3):
