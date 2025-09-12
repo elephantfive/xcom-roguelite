@@ -7,11 +7,13 @@ var current_move_points: float
 
 var init_pos: Vector2
 var too_far: bool = false
-var moving: bool = false
-var attacking: bool = false
 var type: String = 'ally'
 var thru_wall: bool = false
 var current_distance: float
+
+var moving: bool = false
+var attacking: bool = false
+var healing: bool = false
 
 const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 @onready var hud: CanvasLayer
@@ -34,15 +36,18 @@ func _process(_delta):
 		distance_check(current_move_points)
 	elif attacking:
 		distance_check(attributes['max_attack_distance'])
+	elif healing:
+		distance_check(attributes['max_heal_distance'])
 
 
 func _input(event):
 	if game_manager.turn == 'player':
 		if game_manager.selected_unit == self:
 			if event.is_action_pressed("right_click"):
-				if moving or attacking:
+				if moving or attacking or healing:
 					moving = false
 					attacking = false
+					healing = false
 					position = init_pos
 					get_tree().call_group("Unit Distance Info", "hide")
 				else:
@@ -57,6 +62,8 @@ func _input(event):
 							move()
 					elif attacking:
 						attack()
+					elif healing:
+						heal()
 
 
 func _on_input_event(_viewport, event, _shape_idx):
@@ -118,6 +125,10 @@ func attack():
 	game_manager.turn_end()
 	get_tree().call_group("Unit Distance Info", "hide")
 
+
+func heal():
+	pass
+	
 
 func take_damage(damage):
 	attributes['health'] -= damage

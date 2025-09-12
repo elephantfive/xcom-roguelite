@@ -44,11 +44,24 @@ func _on_texture_button_pressed():
 		add_to_squad.hide()
 		label.text = ''
 
+func _input(event):
+	if game_manager.changing_squad:
+		if event.is_action_pressed("right_click"):
+			game_manager.squad_unit_selected = null
+			game_manager.roster_unit_selected = null
+			game_manager.changing_squad = false
+
 
 func _on_add_to_squad_pressed():
+	for unit in unit_holder.get_children():
+		unit.label.text = ''
+		unit.remove_from_squad.hide()
+		
 	for unit in unit_roster.get_children():
 		unit.label.text = ''
 		unit.add_to_squad.hide()
+		
 	game_manager.squad_unit_selected = null
 	game_manager.roster_unit_selected = self
 	game_manager.changing_squad = true
+	
