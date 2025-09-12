@@ -225,6 +225,11 @@ offset_top = -40.0
 grow_horizontal = 0
 grow_vertical = 0
 
+[node name="RemoveFromSquad" type="Button" parent="Campaign Unit Select/UnitDesc"]
+visible = false
+layout_mode = 2
+text = "Remove Unit From Squad"
+
 [node name="Label" type="Label" parent="Campaign Unit Select/UnitDesc"]
 layout_mode = 2
 
@@ -238,3 +243,7 @@ layout_mode = 2
 [connection signal="pressed" from="Campaign Unit Select/Unit Holder/Unit 2" to="Campaign Unit Select/Unit Holder/Unit 2" method="_on_pressed"]
 [connection signal="pressed" from="Campaign Unit Select/Unit Holder/Unit 3" to="Campaign Unit Select/Unit Holder/Unit 3" method="_on_pressed"]
 [connection signal="pressed" from="Campaign Unit Select/Unit Holder/Unit 4" to="Campaign Unit Select/Unit Holder/Unit 4" method="_on_pressed"]
+[connection signal="pressed" from="Campaign Unit Select/UnitDesc/RemoveFromSquad" to="Campaign Unit Select/Unit Holder/Unit 1" method="_on_remove_from_squad_pressed"]
+[connection signal="pressed" from="Campaign Unit Select/UnitDesc/RemoveFromSquad" to="Campaign Unit Select/Unit Holder/Unit 2" method="_on_remove_from_squad_pressed"]
+[connection signal="pressed" from="Campaign Unit Select/UnitDesc/RemoveFromSquad" to="Campaign Unit Select/Unit Holder/Unit 3" method="_on_remove_from_squad_pressed"]
+[connection signal="pressed" from="Campaign Unit Select/UnitDesc/RemoveFromSquad" to="Campaign Unit Select/Unit Holder/Unit 4" method="_on_remove_from_squad_pressed"]

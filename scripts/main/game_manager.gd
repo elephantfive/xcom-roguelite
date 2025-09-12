@@ -19,6 +19,7 @@ const UNIT = preload("res://scenes/entities/units/unit.tscn")
 @onready var unit_info = %UnitInfo
 var changing_squad: bool = false
 var roster_unit_selected
+var squad_unit_selected
 
 func _ready():
 	#level_adv("res://scenes/levels/level_1.tscn")

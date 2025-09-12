@@ -8,6 +8,7 @@ var on_squad: bool = false
 @onready var unit_holder = %"Unit Holder"
 @onready var game_manager = %"Game Manager"
 @onready var add_to_squad = $AddToSquad
+@onready var unit_roster = %"Unit Roster"
 
 
 func _ready():
@@ -25,6 +26,10 @@ func update():
 
 
 func _on_texture_button_pressed():
+	for unit in unit_roster.get_children():
+		if unit.unit_name != unit_name:
+			unit.label.text = ''
+			unit.add_to_squad.hide()
 	if on_squad:
 		add_to_squad.hide()
 	else:
@@ -40,5 +45,9 @@ func _on_texture_button_pressed():
 
 
 func _on_add_to_squad_pressed():
+	for unit in unit_roster.get_children():
+		unit.label.text = ''
+		unit.add_to_squad.hide()
+	game_manager.squad_unit_selected = null
 	game_manager.roster_unit_selected = self
 	game_manager.changing_squad = true
