@@ -5,6 +5,7 @@ var attributes: Dictionary
 @onready var unit_info = %UnitInfo
 @onready var label = $Label
 @onready var texture_button = $TextureButton
+@onready var unit_roster = %"Unit Roster"
 
 func update():
 	attributes = unit_info.character_attributes[unit_name]
@@ -15,4 +16,9 @@ func update():
 
 
 func _on_texture_button_pressed():
+	for unit in unit_roster.get_children():
+		if unit.unit_name == '':
+			unit.unit_name = unit_name
+			unit.update()
+			break
 	get_parent().get_parent().hide()

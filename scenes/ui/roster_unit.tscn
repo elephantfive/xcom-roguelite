@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4ncj5ewtvx0p"]
+[gd_scene load_steps=3 format=3 uid="uid://c4ncj5ewtvx0p"]
 
 [ext_resource type="Script" uid="uid://qcr17ogirgbl" path="res://scripts/ui/roster_unit.gd" id="1_fdhbt"]
+[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="2_yjy8h"]
 
 [node name="RosterUnit" type="VBoxContainer"]
 anchors_preset = 15
@@ -11,7 +12,9 @@ grow_vertical = 2
 script = ExtResource("1_fdhbt")
 
 [node name="TextureButton" type="TextureButton" parent="."]
+self_modulate = Color(0.262932, 0.262932, 0.262932, 1)
 layout_mode = 2
+texture_normal = ExtResource("2_yjy8h")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2

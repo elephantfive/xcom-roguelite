@@ -1,15 +1,7 @@
 extends Area2D
 
 
-var attributes = {
-	'name': '',
-	'attack_damage': 0,
-	'health':  0,
-	'max_move_distance':  0,
-	'max_attack_distance': 0,
-	'unit_actions': [],
-	'texture': '',
-}
+var attributes: Dictionary
 
 var current_move_points: float
 
