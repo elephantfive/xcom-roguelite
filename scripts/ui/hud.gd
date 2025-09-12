@@ -4,6 +4,7 @@ var selected_unit: Area2D
 @onready var move = %Move
 @onready var actions = %Actions
 @onready var unit_info = %UnitInfo
+@onready var unit_roster = %"Unit Roster"
 
 
 # Unit action buttons have to change on unit select

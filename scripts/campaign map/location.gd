@@ -4,7 +4,7 @@ var type: String = 'location'
 @export var level: String
 @export var desc_text: String
 @onready var popup = $Popup
-@onready var desc = $Popup/Desc
+@onready var desc = %Desc
 @onready var game_manager = %"Game Manager"
 @onready var player_marker = %"Player Marker"
 @export var min_distance: int = 100
@@ -27,13 +27,6 @@ func _on_input_event(_viewport, event, _shape_idx):
 
 func _on_exit_pressed():
 	popup.hide()
-
-
-func _on_info_pressed():
-	if desc.visible == false:
-		desc.show()
-	else:
-		desc.hide()
 
 
 func _on_begin_level_pressed():

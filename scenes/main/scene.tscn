@@ -34,28 +34,29 @@ one_shot = true
 unique_name_in_owner = true
 script = ExtResource("3_vbg7o")
 
-[node name="ActionBox" type="VBoxContainer" parent="HUD"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Actions" type="HBoxContainer" parent="HUD"]
+unique_name_in_owner = true
 offset_right = 1152.0
-offset_bottom = 648.0
 
-[node name="Actions" type="HBoxContainer" parent="HUD/ActionBox"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="Move" type="Button" parent="HUD/ActionBox/Actions"]
+[node name="Move" type="Button" parent="HUD/Actions"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="Attack" type="Button" parent="HUD/ActionBox/Actions"]
+[node name="Attack" type="Button" parent="HUD/Actions"]
 visible = false
 layout_mode = 2
 
-[node name="Heal" type="Button" parent="HUD/ActionBox/Actions"]
+[node name="Heal" type="Button" parent="HUD/Actions"]
 visible = false
 layout_mode = 2
 
-[node name="End" type="Button" parent="HUD/ActionBox/Actions"]
+[node name="End" type="Button" parent="HUD/Actions"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -120,8 +121,11 @@ visible = false
 
 [node name="Panel" type="Panel" parent="Reward Screen"]
 z_index = -1
-offset_right = 1152.0
-offset_bottom = 648.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Rewards" type="HBoxContainer" parent="Reward Screen"]
 unique_name_in_owner = true
@@ -238,9 +242,9 @@ layout_mode = 2
 
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="timeout" from="Game Manager/LevelEndTimer" to="Game Manager" method="_on_level_end_timer_timeout"]
-[connection signal="pressed" from="HUD/ActionBox/Actions/Move" to="HUD" method="_on_move_pressed"]
-[connection signal="pressed" from="HUD/ActionBox/Actions/Attack" to="HUD" method="_on_attack_pressed"]
-[connection signal="pressed" from="HUD/ActionBox/Actions/End" to="HUD" method="_on_end_pressed"]
+[connection signal="pressed" from="HUD/Actions/Move" to="HUD" method="_on_move_pressed"]
+[connection signal="pressed" from="HUD/Actions/Attack" to="HUD" method="_on_attack_pressed"]
+[connection signal="pressed" from="HUD/Actions/End" to="HUD" method="_on_end_pressed"]
 [connection signal="input_event" from="Campaign Map/Player Marker" to="Campaign Map/Player Marker" method="_on_input_event"]
 [connection signal="pressed" from="Campaign Unit Select/Unit Holder/Unit 1" to="Campaign Unit Select/Unit Holder/Unit 1" method="_on_pressed"]
 [connection signal="pressed" from="Campaign Unit Select/Unit Holder/Unit 2" to="Campaign Unit Select/Unit Holder/Unit 2" method="_on_pressed"]
