@@ -7,19 +7,23 @@ var ally_roster: Array = []
 var turns: Array = ['player']
 var targets: Array = []
 var active_level
+var roster_unit_selected
+var squad_unit_selected
+
+const UNIT = preload("res://scenes/entities/units/unit.tscn")
+
 @onready var hud = %HUD
 @onready var campaign_map = %"Campaign Map"
 @onready var end = %End
 @onready var unit_holder = %"Unit Holder"
-const UNIT = preload("res://scenes/entities/units/unit.tscn")
 @onready var level_end_timer = $LevelEndTimer
 @onready var rewards = %Rewards
 @onready var reward_screen = $"../Reward Screen"
 @onready var unit_roster = %"Unit Roster"
 @onready var unit_info = %UnitInfo
+
 var changing_squad: bool = false
-var roster_unit_selected
-var squad_unit_selected
+
 
 func _ready():
 	#level_adv("res://scenes/levels/level_1.tscn")
@@ -90,12 +94,12 @@ func level_adv(level):
 func level_end():
 	for entity in active_level.entities.get_children():
 		if entity.type == 'ally':
-			unit_info.update(entity.unit_name, entity)
+			unit_info.update(entity.attributes['name'], entity)
 	for unit in unit_holder.get_children():
 		unit.update()
 	for unit in unit_roster.get_children():
 		unit.update()
-	for i in range(0, 3):
+	for i in range(0, active_level.random_rewards.size()):
 		rewards.get_children()[i].unit_name = active_level.random_rewards[i]
 		rewards.get_children()[i].update()
 	active_level.queue_free()

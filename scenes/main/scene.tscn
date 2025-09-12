@@ -198,7 +198,6 @@ unit_name = "Amigol"
 
 [node name="RosterUnit2" parent="Campaign Unit Select/Unit Roster" instance=ExtResource("8_57akw")]
 layout_mode = 2
-unit_name = "Nidys"
 
 [node name="RosterUnit3" parent="Campaign Unit Select/Unit Roster" instance=ExtResource("8_57akw")]
 layout_mode = 2
