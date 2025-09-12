@@ -16,7 +16,13 @@ self_modulate = Color(0.262932, 0.262932, 0.262932, 1)
 layout_mode = 2
 texture_normal = ExtResource("2_yjy8h")
 
+[node name="AddToSquad" type="Button" parent="."]
+visible = false
+layout_mode = 2
+text = "Add Unit to Squad"
+
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
 
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="AddToSquad" to="." method="_on_add_to_squad_pressed"]

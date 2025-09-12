@@ -16,6 +16,9 @@ const UNIT = preload("res://scenes/entities/units/unit.tscn")
 @onready var rewards = %Rewards
 @onready var reward_screen = $"../Reward Screen"
 @onready var unit_roster = %"Unit Roster"
+@onready var unit_info = %UnitInfo
+var changing_squad: bool = false
+var roster_unit_selected
 
 func _ready():
 	#level_adv("res://scenes/levels/level_1.tscn")
@@ -85,14 +88,12 @@ func level_adv(level):
 
 func level_end():
 	for entity in active_level.entities.get_children():
-		for unit in unit_holder.get_children():
-			if unit.unit_name != '':
-				if entity.attributes['name'] == unit.attributes['name']:
-					unit.attributes = entity.attributes
-		for unit in unit_roster.get_children():
-			if unit.unit_name != '':
-				if entity.attributes['name'] == unit.attributes['name']:
-					unit.attributes = entity.attributes
+		if entity.type == 'ally':
+			unit_info.update(entity.unit_name, entity)
+	for unit in unit_holder.get_children():
+		unit.update()
+	for unit in unit_roster.get_children():
+		unit.update()
 	for i in range(0, 3):
 		rewards.get_children()[i].unit_name = active_level.random_rewards[i]
 		rewards.get_children()[i].update()
