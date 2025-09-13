@@ -2,7 +2,7 @@ extends HBoxContainer
 const ROSTER_UNIT = preload("res://scenes/ui/roster_unit.tscn")
 
 func _ready():
-	add_unit('Nidys')
+	add_unit('Amigol')
 
 func add_unit(unit_name):
 	var new_unit = ROSTER_UNIT.instantiate()

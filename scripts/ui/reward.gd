@@ -11,6 +11,7 @@ const ROSTER_UNIT = preload("res://scenes/ui/roster_unit.tscn")
 
 func update():
 	if unit_name != null:
+		label.text = ''
 		attributes = unit_info.character_attributes[unit_name]
 		texture_button.texture_normal = load(attributes['texture'])
 		for key in attributes:

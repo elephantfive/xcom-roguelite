@@ -160,6 +160,7 @@ grow_vertical = 2
 
 [node name="SquadUnit" parent="Campaign Map Hud/Unit Holder" instance=ExtResource("10_y2ajb")]
 layout_mode = 2
+unit_name = "Amigol"
 
 [node name="SquadUnit2" parent="Campaign Map Hud/Unit Holder" instance=ExtResource("10_y2ajb")]
 layout_mode = 2
