@@ -11,6 +11,7 @@ func _ready():
 			'health':  20,
 			'max_move_distance':  20,
 			'max_attack_distance': 20,
+			'action_points': 1,
 			'unit_actions': ['Attack', 'Move'],
 			'texture': "res://icon.svg",
 		}
@@ -22,6 +23,7 @@ func _ready():
 		'max_attack_distance': 15,
 		'heal': 3,
 		'max_heal_distance': 10,
+		'action_points': 1,
 		'unit_actions': ["Attack", 'Move', "Heal"],
 		'texture': "res://icon.svg",
 		}

@@ -11,9 +11,6 @@ var type: String = 'ally'
 var thru_wall: bool = false
 var current_distance: float
 
-var moving: bool = false
-var attacking: bool = false
-var healing: bool = false
 
 const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 @onready var hud: CanvasLayer
@@ -23,47 +20,20 @@ const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 @onready var distance_line = $"Distance Line"
 @onready var health_label = $"Health Label"
 @onready var sprite = $Sprite
+@onready var state_chart = $StateChart
 
 
 func _ready():
 	current_move_points  = attributes['max_move_distance']
 	health_update()
 
-
-func _process(_delta):
-	if moving:
-		position = get_viewport().get_mouse_position()
-		distance_check(current_move_points)
-	elif attacking:
-		distance_check(attributes['max_attack_distance'])
-	elif healing:
-		distance_check(attributes['max_heal_distance'])
-
-
 func _input(event):
 	if game_manager.turn == 'player':
 		if game_manager.selected_unit == self:
 			if event.is_action_pressed("right_click"):
-				if moving or attacking or healing:
-					moving = false
-					attacking = false
-					healing = false
-					position = init_pos
-					get_tree().call_group("Unit Distance Info", "hide")
-				else:
-					game_manager.selected_unit = null
-					for button in hud.actions.get_children():
-						if button.name != 'End':
-							button.hide()
-			elif event.is_action_pressed("left_click"):
-				if not too_far:
-					if moving:
-						if not thru_wall:
-							move()
-					elif attacking:
-						attack()
-					elif healing:
-						heal()
+				state_chart.send_event('to_idle')
+				position = init_pos
+				get_tree().call_group("Unit Distance Info", "hide")
 
 
 func _on_input_event(_viewport, event, _shape_idx):
@@ -110,7 +80,7 @@ func distance_check(max_distance):
 func move():
 	position = get_viewport().get_mouse_position()
 	init_pos = position
-	moving = false
+	state_chart.send_event('to_idle')
 	current_move_points -= current_distance
 	get_tree().call_group("Unit Distance Info", "hide")
 
@@ -121,13 +91,13 @@ func attack():
 	new_proj.alignment = 'ally'
 	new_proj.game_manager = game_manager
 	add_child(new_proj)
-	attacking = false
+	state_chart.send_event('to_idle')
 	game_manager.turn_end()
 	get_tree().call_group("Unit Distance Info", "hide")
 
 
 func heal():
-	pass
+	state_chart.send_event('to_idle')
 	
 
 func take_damage(damage):
@@ -147,3 +117,40 @@ func _on_distance_line_collision_area_exited(area):
 
 func _on_game_manager_turn_start():
 	current_move_points = attributes['max_move_distance']
+
+
+func _on_moving_state_processing(_delta):
+	position = get_viewport().get_mouse_position()
+	distance_check(current_move_points)
+
+
+func _on_attacking_state_processing(_delta):
+	distance_check(attributes['max_attack_distance'])
+
+
+func _on_healing_state_processing(_delta):
+	distance_check(attributes['max_heal_distance'])
+
+
+func _on_moving_state_input(event):
+	if event.is_action_pressed("left_click"):
+		if not thru_wall:
+			move()
+
+
+func _on_attacking_state_input(event):
+	if event.is_action_pressed("left_click"):
+		attack()
+
+
+func _on_healing_state_input(event):
+	if event.is_action_pressed("left_click"):
+		heal()
+
+
+func _on_idle_state_input(event):
+	if event.is_action_pressed('right_click'):
+		game_manager.selected_unit = null
+		for button in hud.actions.get_children():
+			if button.name != 'End':
+				button.hide()

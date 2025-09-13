@@ -17,11 +17,11 @@ func new_unit():
 
 
 func _on_move_pressed():
-	selected_unit.moving = true
+	selected_unit.state_chart.send_event('moving')
 
 
 func _on_attack_pressed():
-	selected_unit.attacking = true
+	selected_unit.state_chart.send_event('attacking')
 
 
 func _on_end_pressed():
