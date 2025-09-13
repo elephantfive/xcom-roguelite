@@ -12,7 +12,6 @@ grow_vertical = 2
 script = ExtResource("1_fdhbt")
 
 [node name="TextureButton" type="TextureButton" parent="."]
-self_modulate = Color(0.262932, 0.262932, 0.262932, 1)
 layout_mode = 2
 texture_normal = ExtResource("2_yjy8h")
 

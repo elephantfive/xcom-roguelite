@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://51wu7b4j01rm"]
+
+[ext_resource type="Script" uid="uid://d3110uqv04vma" path="res://scripts/ui/unit_button.gd" id="1_7y1g7"]
+[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="1_emt3u"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="2_emt3u"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="3_aodr5"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="4_73iat"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="5_ybac5"]
+
+[node name="SquadUnit" type="TextureButton"]
+texture_normal = ExtResource("1_emt3u")
+script = ExtResource("1_7y1g7")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("2_emt3u")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="CompoundState" type="Node" parent="StateChart"]
+script = ExtResource("3_aodr5")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("4_73iat")
+
+[node name="Transition" type="Node" parent="StateChart/CompoundState/Idle"]
+script = ExtResource("5_ybac5")
+to = NodePath("../../ChangingSquad")
+event = &"squad_change"
+delay_in_seconds = "0.0"
+
+[node name="ChangingSquad" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("4_73iat")
+
+[node name="Transition" type="Node" parent="StateChart/CompoundState/ChangingSquad"]
+script = ExtResource("5_ybac5")
+to = NodePath("../../Idle")
+event = &"squad_changed"
+delay_in_seconds = "0.0"
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="event_received" from="StateChart/CompoundState/Idle" to="." method="_on_idle_event_received"]
+[connection signal="event_received" from="StateChart/CompoundState/ChangingSquad" to="." method="_on_changing_squad_event_received"]
