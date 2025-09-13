@@ -6,6 +6,8 @@ var attributes: Dictionary
 @onready var label = $Label
 @onready var texture_button = $TextureButton
 @onready var unit_roster = %"Unit Roster"
+@onready var campaign_map_hud = %"Campaign Map Hud"
+const ROSTER_UNIT = preload("res://scenes/ui/roster_unit.tscn")
 
 func update():
 	if unit_name != null:
@@ -17,9 +19,12 @@ func update():
 
 
 func _on_texture_button_pressed():
-	for unit in unit_roster.get_children():
-		if unit.unit_name == '':
-			unit.unit_name = unit_name
-			unit.update()
-			break
+	var new_unit = ROSTER_UNIT.instantiate()
+	unit_roster.add_child(new_unit)
+	new_unit.game_manager = %"Game Manager"
+	new_unit.unit_roster = unit_roster
+	new_unit.unit_holder = %"Unit Holder"
+	new_unit.unit_info = %UnitInfo
+	new_unit.unit_name = unit_name
+	new_unit.update()
 	get_parent().get_parent().hide()

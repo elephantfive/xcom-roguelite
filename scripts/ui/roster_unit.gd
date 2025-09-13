@@ -1,18 +1,18 @@
 extends VBoxContainer
+
 @onready var texture_button = $TextureButton
 @onready var label = $Label
-@onready var unit_info = %UnitInfo
 @export var unit_name: String = ''
+
 var attributes: Dictionary
+
 var on_squad: bool = false
-@onready var unit_holder = %"Unit Holder"
-@onready var game_manager = %"Game Manager"
+
 @onready var add_to_squad = $AddToSquad
-@onready var unit_roster = %"Unit Roster"
-
-
-func _ready():
-	update()
+var unit_info
+var unit_holder
+var game_manager
+var unit_roster
 
 
 func update():

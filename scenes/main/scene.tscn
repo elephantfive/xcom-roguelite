@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ccj00txght02n" path="res://scenes/campaign map/location.tscn" id="5_xsca3"]
 [ext_resource type="PackedScene" uid="uid://b6kq0ugyjc2mj" path="res://scenes/ui/reward.tscn" id="6_y2ajb"]
 [ext_resource type="Script" uid="uid://d3110uqv04vma" path="res://scripts/ui/unit_button.gd" id="7_qa38x"]
-[ext_resource type="PackedScene" uid="uid://c4ncj5ewtvx0p" path="res://scenes/ui/roster_unit.tscn" id="8_57akw"]
+[ext_resource type="Script" uid="uid://csjw6m7rnqkaa" path="res://scripts/ui/unit_roster.gd" id="8_osw1o"]
 [ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="8_vbg7o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4msxo"]
@@ -113,6 +113,70 @@ level = "res://scenes/levels/level_1.tscn"
 position = Vector2(519, 386)
 level = "res://scenes/levels/level_1.tscn"
 
+[node name="Campaign Map Hud" type="CanvasLayer" parent="." groups=["Campaign Map"]]
+unique_name_in_owner = true
+
+[node name="Unit Holder" type="VBoxContainer" parent="Campaign Map Hud"]
+unique_name_in_owner = true
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Unit 1" type="TextureButton" parent="Campaign Map Hud/Unit Holder"]
+layout_mode = 2
+script = ExtResource("7_qa38x")
+unit_name = "Amigol"
+
+[node name="Unit 2" type="TextureButton" parent="Campaign Map Hud/Unit Holder"]
+layout_mode = 2
+texture_normal = ExtResource("8_vbg7o")
+script = ExtResource("7_qa38x")
+
+[node name="Unit 3" type="TextureButton" parent="Campaign Map Hud/Unit Holder"]
+layout_mode = 2
+texture_normal = ExtResource("8_vbg7o")
+script = ExtResource("7_qa38x")
+
+[node name="Unit 4" type="TextureButton" parent="Campaign Map Hud/Unit Holder"]
+layout_mode = 2
+texture_normal = ExtResource("8_vbg7o")
+script = ExtResource("7_qa38x")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Campaign Map Hud"]
+offset_right = 1501.0
+offset_bottom = 389.0
+
+[node name="Unit Roster" type="HBoxContainer" parent="Campaign Map Hud/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("8_osw1o")
+
+[node name="UnitDesc" type="VBoxContainer" parent="Campaign Map Hud"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="RemoveFromSquad" type="Button" parent="Campaign Map Hud/UnitDesc"]
+visible = false
+layout_mode = 2
+text = "Remove Unit From Squad"
+
+[node name="Label" type="Label" parent="Campaign Map Hud/UnitDesc"]
+layout_mode = 2
+
 [node name="Shop" type="CanvasLayer" parent="."]
 visible = false
 
@@ -156,101 +220,17 @@ visible = false
 [node name="Loadout" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="Campaign Unit Select" type="CanvasLayer" parent="." groups=["Campaign Map"]]
-
-[node name="Unit Holder" type="VBoxContainer" parent="Campaign Unit Select"]
-unique_name_in_owner = true
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -20.0
-offset_bottom = 20.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="Unit 1" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
-layout_mode = 2
-script = ExtResource("7_qa38x")
-unit_name = "Amigol"
-
-[node name="Unit 2" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
-layout_mode = 2
-texture_normal = ExtResource("8_vbg7o")
-script = ExtResource("7_qa38x")
-
-[node name="Unit 3" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
-layout_mode = 2
-texture_normal = ExtResource("8_vbg7o")
-script = ExtResource("7_qa38x")
-
-[node name="Unit 4" type="TextureButton" parent="Campaign Unit Select/Unit Holder"]
-layout_mode = 2
-texture_normal = ExtResource("8_vbg7o")
-script = ExtResource("7_qa38x")
-
-[node name="Unit Roster" type="HBoxContainer" parent="Campaign Unit Select"]
-unique_name_in_owner = true
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="RosterUnit" parent="Campaign Unit Select/Unit Roster" instance=ExtResource("8_57akw")]
-layout_mode = 2
-unit_name = "Amigol"
-
-[node name="RosterUnit2" parent="Campaign Unit Select/Unit Roster" instance=ExtResource("8_57akw")]
-layout_mode = 2
-
-[node name="RosterUnit3" parent="Campaign Unit Select/Unit Roster" instance=ExtResource("8_57akw")]
-layout_mode = 2
-
-[node name="RosterUnit4" parent="Campaign Unit Select/Unit Roster" instance=ExtResource("8_57akw")]
-layout_mode = 2
-
-[node name="RosterUnit5" parent="Campaign Unit Select/Unit Roster" instance=ExtResource("8_57akw")]
-layout_mode = 2
-
-[node name="RosterUnit6" parent="Campaign Unit Select/Unit Roster" instance=ExtResource("8_57akw")]
-layout_mode = 2
-
-[node name="RosterUnit7" parent="Campaign Unit Select/Unit Roster" instance=ExtResource("8_57akw")]
-layout_mode = 2
-
-[node name="RosterUnit8" parent="Campaign Unit Select/Unit Roster" instance=ExtResource("8_57akw")]
-layout_mode = 2
-
-[node name="UnitDesc" type="VBoxContainer" parent="Campaign Unit Select"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="RemoveFromSquad" type="Button" parent="Campaign Unit Select/UnitDesc"]
-visible = false
-layout_mode = 2
-text = "Remove Unit From Squad"
-
-[node name="Label" type="Label" parent="Campaign Unit Select/UnitDesc"]
-layout_mode = 2
-
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="timeout" from="Game Manager/LevelEndTimer" to="Game Manager" method="_on_level_end_timer_timeout"]
 [connection signal="pressed" from="HUD/Actions/Move" to="HUD" method="_on_move_pressed"]
 [connection signal="pressed" from="HUD/Actions/Attack" to="HUD" method="_on_attack_pressed"]
 [connection signal="pressed" from="HUD/Actions/End" to="HUD" method="_on_end_pressed"]
 [connection signal="input_event" from="Campaign Map/Player Marker" to="Campaign Map/Player Marker" method="_on_input_event"]
-[connection signal="pressed" from="Campaign Unit Select/Unit Holder/Unit 1" to="Campaign Unit Select/Unit Holder/Unit 1" method="_on_pressed"]
-[connection signal="pressed" from="Campaign Unit Select/Unit Holder/Unit 2" to="Campaign Unit Select/Unit Holder/Unit 2" method="_on_pressed"]
-[connection signal="pressed" from="Campaign Unit Select/Unit Holder/Unit 3" to="Campaign Unit Select/Unit Holder/Unit 3" method="_on_pressed"]
-[connection signal="pressed" from="Campaign Unit Select/Unit Holder/Unit 4" to="Campaign Unit Select/Unit Holder/Unit 4" method="_on_pressed"]
-[connection signal="pressed" from="Campaign Unit Select/UnitDesc/RemoveFromSquad" to="Campaign Unit Select/Unit Holder/Unit 1" method="_on_remove_from_squad_pressed"]
-[connection signal="pressed" from="Campaign Unit Select/UnitDesc/RemoveFromSquad" to="Campaign Unit Select/Unit Holder/Unit 2" method="_on_remove_from_squad_pressed"]
-[connection signal="pressed" from="Campaign Unit Select/UnitDesc/RemoveFromSquad" to="Campaign Unit Select/Unit Holder/Unit 3" method="_on_remove_from_squad_pressed"]
-[connection signal="pressed" from="Campaign Unit Select/UnitDesc/RemoveFromSquad" to="Campaign Unit Select/Unit Holder/Unit 4" method="_on_remove_from_squad_pressed"]
+[connection signal="pressed" from="Campaign Map Hud/Unit Holder/Unit 1" to="Campaign Map Hud/Unit Holder/Unit 1" method="_on_pressed"]
+[connection signal="pressed" from="Campaign Map Hud/Unit Holder/Unit 2" to="Campaign Map Hud/Unit Holder/Unit 2" method="_on_pressed"]
+[connection signal="pressed" from="Campaign Map Hud/Unit Holder/Unit 3" to="Campaign Map Hud/Unit Holder/Unit 3" method="_on_pressed"]
+[connection signal="pressed" from="Campaign Map Hud/Unit Holder/Unit 4" to="Campaign Map Hud/Unit Holder/Unit 4" method="_on_pressed"]
+[connection signal="pressed" from="Campaign Map Hud/UnitDesc/RemoveFromSquad" to="Campaign Map Hud/Unit Holder/Unit 1" method="_on_remove_from_squad_pressed"]
+[connection signal="pressed" from="Campaign Map Hud/UnitDesc/RemoveFromSquad" to="Campaign Map Hud/Unit Holder/Unit 2" method="_on_remove_from_squad_pressed"]
+[connection signal="pressed" from="Campaign Map Hud/UnitDesc/RemoveFromSquad" to="Campaign Map Hud/Unit Holder/Unit 3" method="_on_remove_from_squad_pressed"]
+[connection signal="pressed" from="Campaign Map Hud/UnitDesc/RemoveFromSquad" to="Campaign Map Hud/Unit Holder/Unit 4" method="_on_remove_from_squad_pressed"]

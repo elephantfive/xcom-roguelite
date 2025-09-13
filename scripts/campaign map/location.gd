@@ -8,6 +8,7 @@ var type: String = 'location'
 @onready var game_manager = %"Game Manager"
 @onready var player_marker = %"Player Marker"
 @export var min_distance: int = 100
+@onready var campaign_map_hud = %"Campaign Map Hud"
 
 func _ready():
 	desc.text = desc_text
@@ -15,6 +16,7 @@ func _ready():
 
 func _on_input_event(_viewport, event, _shape_idx):
 	if event.is_action_pressed('left_click'):
+		campaign_map_hud.hide()
 		if player_marker.moving == false:
 			if  player_marker.position.distance_to(self.position) <= min_distance:
 				desc.hide()
@@ -26,6 +28,7 @@ func _on_input_event(_viewport, event, _shape_idx):
 
 
 func _on_exit_pressed():
+	campaign_map_hud.show()
 	popup.hide()
 
 
