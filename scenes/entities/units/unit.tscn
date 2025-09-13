@@ -18,6 +18,7 @@ b = Vector2(0, 0)
 script = ExtResource("1_btf8p")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 self_modulate = Color(0.352941, 1, 0, 1)
 scale = Vector2(0.308594, 0.308594)
 texture = ExtResource("2_hwtar")
@@ -25,20 +26,34 @@ texture = ExtResource("2_hwtar")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_btf8p")
 
-[node name="Distance Label" type="Label" parent="." groups=["Unit Distance Info"]]
+[node name="Container Container" type="VBoxContainer" parent="."]
 offset_left = -20.0
-offset_top = 20.0
+offset_top = 21.0
 offset_right = 20.0
-offset_bottom = 43.0
-horizontal_alignment = 1
+offset_bottom = 125.0
 
-[node name="Warning Label" type="Label" parent="." groups=["Unit Distance Info"]]
+[node name="Label Container" type="VBoxContainer" parent="Container Container"]
+layout_mode = 2
+
+[node name="Health Label" type="Label" parent="Container Container/Label Container"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Action Points Label" type="Label" parent="Container Container/Label Container"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Distance Label Container" type="VBoxContainer" parent="Container Container"]
+layout_mode = 2
+
+[node name="Warning Label" type="Label" parent="Container Container/Distance Label Container" groups=["Unit Distance Info"]]
+unique_name_in_owner = true
 self_modulate = Color(1, 0, 0, 1)
-offset_left = -20.0
-offset_top = 38.0
-offset_right = 20.0
-offset_bottom = 61.0
-horizontal_alignment = 1
+layout_mode = 2
+
+[node name="Distance Label" type="Label" parent="Container Container/Distance Label Container" groups=["Unit Distance Info"]]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="Distance Line" type="Line2D" parent="." groups=["Unit Distance Info"]]
 visible = false
@@ -51,13 +66,6 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Distance Line/Distance Line Collision"]
 shape = SubResource("SegmentShape2D_b3y04")
-
-[node name="Health Label" type="Label" parent="."]
-offset_left = -20.0
-offset_top = -43.0
-offset_right = 20.0
-offset_bottom = -20.0
-horizontal_alignment = 1
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("4_f2ita")

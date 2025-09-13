@@ -8,22 +8,25 @@ func _ready():
 	character_attributes['Amigol'] = {
 			'name': 'Amigol',
 			'attack_damage': 2,
+			'attack_ap_cost': 1,
 			'health':  20,
 			'max_move_distance':  20,
 			'max_attack_distance': 20,
-			'action_points': 1,
+			'max_action_points': 1,
 			'unit_actions': ['Attack', 'Move'],
 			'texture': "res://icon.svg",
 		}
 	character_attributes['Nidys'] = {
 		'name': 'Nidys',
 		'attack_damage': 1,
+		'attack_ap_cost': 1,
 		'health':  10,
 		'max_move_distance':  20,
 		'max_attack_distance': 15,
 		'heal': 3,
+		'heal_ap_cost': 1,
 		'max_heal_distance': 10,
-		'action_points': 1,
+		'max_action_points': 1,
 		'unit_actions': ["Attack", 'Move', "Heal"],
 		'texture': "res://icon.svg",
 		}

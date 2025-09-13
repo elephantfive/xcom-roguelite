@@ -4,6 +4,7 @@ extends Area2D
 var attributes: Dictionary
 
 var current_move_points: float
+var current_action_points: int
 
 var init_pos: Vector2
 var too_far: bool = false
@@ -15,16 +16,20 @@ var current_distance: float
 const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 @onready var hud: CanvasLayer
 @onready var game_manager: Node
-@onready var distance_label = $"Distance Label"
-@onready var warning_label = $"Warning Label"
+
 @onready var distance_line = $"Distance Line"
-@onready var health_label = $"Health Label"
-@onready var sprite = $Sprite
+@onready var distance_label = %"Distance Label"
+@onready var warning_label = %"Warning Label"
+@onready var health_label = %"Health Label"
+@onready var action_points_label = %"Action Points Label"
+@onready var sprite = %Sprite
 @onready var state_chart = $StateChart
 
 
 func _ready():
 	current_move_points  = attributes['max_move_distance']
+	current_action_points  = attributes['max_action_points']
+	ap_update()
 	health_update()
 
 func _input(event):
@@ -47,6 +52,10 @@ func _on_input_event(_viewport, event, _shape_idx):
 
 func health_update():
 	health_label.text = 'Current Health: ' + str(attributes['health'])
+	
+
+func ap_update():
+	action_points_label.text = 'Current Action Points: ' + str(current_action_points)
 
 
 func distance_check(max_distance):
@@ -86,17 +95,21 @@ func move():
 
 
 func attack():
-	var new_proj = projectile.instantiate()
-	new_proj.target = to_global(distance_line.points[1])
-	new_proj.alignment = 'ally'
-	new_proj.game_manager = game_manager
-	add_child(new_proj)
+	if current_action_points - attributes['attack_ap_cost'] >= 0 and not too_far:
+		current_action_points -= attributes['attack_ap_cost']
+		var new_proj = projectile.instantiate()
+		new_proj.target = to_global(distance_line.points[1])
+		new_proj.alignment = 'ally'
+		new_proj.game_manager = game_manager
+		add_child(new_proj)
+		ap_update()
 	state_chart.send_event('to_idle')
-	game_manager.turn_end()
 	get_tree().call_group("Unit Distance Info", "hide")
 
 
 func heal():
+	if current_action_points - attributes['heal_ap_cost'] >= 0 and not too_far:
+		pass
 	state_chart.send_event('to_idle')
 	
 
