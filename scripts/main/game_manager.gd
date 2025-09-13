@@ -12,6 +12,7 @@ var squad_unit_selected
 
 const UNIT = preload("res://scenes/entities/units/unit.tscn")
 
+@onready var state_chart = $StateChart
 @onready var hud = %HUD
 @onready var campaign_map = %"Campaign Map"
 @onready var end = %End
@@ -21,8 +22,6 @@ const UNIT = preload("res://scenes/entities/units/unit.tscn")
 @onready var reward_screen = $"../Reward Screen"
 @onready var unit_roster = %"Unit Roster"
 @onready var unit_info = %UnitInfo
-
-var changing_squad: bool = false
 
 
 func _ready():
@@ -109,3 +108,20 @@ func level_end():
 func _on_level_end_timer_timeout():
 	level_end()
 	get_tree().call_group("Campaign Map", "show")
+
+
+func _on_changing_squad_state_input(event):
+	if event.is_action_pressed("right_click"):
+		squad_unit_selected = null
+		roster_unit_selected = null
+		state_chart.send_event('squad_changed')
+
+
+func _on_idle_state_entered():
+	for unit in unit_holder.get_children():
+		unit.state_chart.send_event('squad_changed')
+
+
+func _on_changing_squad_state_entered():
+	for unit in unit_holder.get_children():
+		unit.state_chart.send_event('squad_change')

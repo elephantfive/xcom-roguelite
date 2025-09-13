@@ -7,46 +7,16 @@ var attributes: Dictionary
 @onready var game_manager = %"Game Manager"
 @onready var unit_holder = %"Unit Holder"
 @onready var remove_from_squad = $"../../UnitDesc/RemoveFromSquad"
+@onready var state_chart = $StateChart
 
 
 func _ready():
 	update()
 
-
 func _on_pressed():
-	var valid = true
-	if game_manager.changing_squad:
-		for unit in unit_holder.get_children():
-			if unit.unit_name == game_manager.roster_unit_selected.unit_name:
-				game_manager.roster_unit_selected = null
-				game_manager.changing_squad = false
-				valid = false
-				break
-		if valid:
-			for unit in unit_roster.get_children():
-				if unit.unit_name == unit_name:
-					unit.on_squad = false
-			unit_name = game_manager.roster_unit_selected.unit_name
-			game_manager.roster_unit_selected.add_to_squad.hide()
-			game_manager.roster_unit_selected.update()
-			game_manager.roster_unit_selected = null
-			game_manager.squad_unit_selected = null
-			game_manager.changing_squad = false
-			update()
-			
-	else:
-		if unit_name != '':
-			remove_from_squad.show()
-		label.text = ''
-		if game_manager.squad_unit_selected != self:
-			game_manager.squad_unit_selected = self
-			for key in attributes:
-				if key != 'unit_actions' and key != 'texture':
-					label.text += key.replace('_', ' ').to_upper() + ': ' + str(attributes[key]) + '\n'
-		else:
-			remove_from_squad.hide()
-			game_manager.squad_unit_selected = null
-			
+	state_chart.send_event('pressed')
+
+
 func update():
 	if unit_name != '':
 		self_modulate = Color(1, 1, 1)
@@ -59,6 +29,7 @@ func update():
 
 
 func _on_remove_from_squad_pressed():
+	print("Success!")
 	if game_manager.squad_unit_selected == self:
 		for unit in unit_roster.get_children():
 			if unit.unit_name == unit_name:
@@ -67,3 +38,42 @@ func _on_remove_from_squad_pressed():
 		unit_name = ''
 		label.text = ''
 		update()
+
+
+func _on_idle_event_received(event):
+	if event == 'pressed':
+		print('Idle Test Success')
+		if unit_name != '':
+			remove_from_squad.show()
+		label.text = ''
+		if game_manager.squad_unit_selected != self:
+			game_manager.squad_unit_selected = self
+			for key in attributes:
+				if key != 'unit_actions' and key != 'texture':
+					label.text += key.replace('_', ' ').to_upper() + ': ' + str(attributes[key]) + '\n'
+		else:
+			remove_from_squad.hide()
+			game_manager.squad_unit_selected = null
+
+
+func _on_changing_squad_event_received(event):
+	if event == 'pressed':
+		print('Change Test Success')
+		var valid = true
+		for unit in unit_holder.get_children():
+			if unit.unit_name == game_manager.roster_unit_selected.unit_name:
+				game_manager.roster_unit_selected = null
+				game_manager.state_chart.send_event('squad_changed')
+				valid = false
+				break
+		if valid:
+			for unit in unit_roster.get_children():
+				if unit.unit_name == unit_name:
+					unit.on_squad = false
+			unit_name = game_manager.roster_unit_selected.unit_name
+			game_manager.roster_unit_selected.add_to_squad.hide()
+			game_manager.roster_unit_selected.update()
+			game_manager.roster_unit_selected = null
+			game_manager.squad_unit_selected = null
+			game_manager.state_chart.send_event('squad_changed')
+			update()
