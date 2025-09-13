@@ -110,6 +110,7 @@ func attack():
 
 func heal():
 	if current_action_points - attributes['heal_ap_cost'] >= 0 and not too_far:
+		#TO-DO: Implement targeting and, of course, healing
 		pass
 	state_chart.send_event('to_idle')
 	
