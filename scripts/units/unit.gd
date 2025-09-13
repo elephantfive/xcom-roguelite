@@ -82,9 +82,9 @@ func distance_check(max_distance):
 
 
 func distance_group_modulate(color):
-	warning_label.self_modulate = color
-	distance_line.self_modulate = color
-	distance_label.self_modulate = color
+	var distance_components = get_tree().get_nodes_in_group('Unit Distance Info')
+	for component in distance_components:
+		component.self_modulate = color
 
 func move():
 	position = get_viewport().get_mouse_position()

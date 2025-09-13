@@ -86,6 +86,9 @@ func level_adv(level):
 		entity.hud = hud
 		
 	get_tree().call_group("Campaign Map", "hide")
+	var campaign_components = get_tree().get_nodes_in_group("Campaign Map")
+	for child in campaign_components:
+		child.process_mode = PROCESS_MODE_DISABLED
 	current_turn = 0
 	end.show()
 	turn = turns[current_turn]
@@ -103,6 +106,9 @@ func level_end():
 		rewards.get_children()[i].update()
 	active_level.queue_free()
 	reward_screen.show()
+	var campaign_components = get_tree().get_nodes_in_group("Campaign Map")
+	for child in campaign_components:
+		child.process_mode = PROCESS_MODE_INHERIT
 
 
 func _on_level_end_timer_timeout():

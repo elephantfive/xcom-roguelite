@@ -24,12 +24,9 @@ scale = Vector2(2.2, 1)
 [node name="Entities" type="Node" parent="."]
 
 [node name="Fallen Blade" parent="Entities" instance=ExtResource("3_rka8t")]
-position = Vector2(261, 196)
+position = Vector2(1214, 734)
 
 [node name="PlayerSpawns" type="Node" parent="."]
 
 [node name="PlayerSpawn 0" type="Node2D" parent="PlayerSpawns"]
-position = Vector2(147, 196)
-
-[node name="PlayerSpawn 1" type="Node2D" parent="PlayerSpawns"]
 position = Vector2(147, 196)

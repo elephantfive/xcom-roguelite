@@ -16,7 +16,6 @@ func _on_game_manager_turn_start():
 		new_proj.damage = damage
 		new_proj.game_manager = game_manager
 		add_child(new_proj)
-		game_manager.turn_end()
 
 
 func take_damage():

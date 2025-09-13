@@ -242,6 +242,8 @@ visible = false
 [node name="Loadout" type="CanvasLayer" parent="."]
 visible = false
 
+[node name="Node" type="Node" parent="."]
+
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="timeout" from="Game Manager/LevelEndTimer" to="Game Manager" method="_on_level_end_timer_timeout"]
 [connection signal="state_entered" from="Game Manager/StateChart/CompoundState/Idle" to="Game Manager" method="_on_idle_state_entered"]
