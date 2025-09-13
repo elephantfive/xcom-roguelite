@@ -29,11 +29,10 @@ func update():
 
 
 func _on_remove_from_squad_pressed():
-	print("Success!")
 	if game_manager.squad_unit_selected == self:
 		for unit in unit_roster.get_children():
 			if unit.unit_name == unit_name:
-				unit.on_squad = false
+				unit.state_chart.send_event('off_squad')
 		game_manager.squad_unit_selected = null
 		unit_name = ''
 		label.text = ''
@@ -42,7 +41,6 @@ func _on_remove_from_squad_pressed():
 
 func _on_idle_event_received(event):
 	if event == 'pressed':
-		print('Idle Test Success')
 		if unit_name != '':
 			remove_from_squad.show()
 		label.text = ''
@@ -58,7 +56,6 @@ func _on_idle_event_received(event):
 
 func _on_changing_squad_event_received(event):
 	if event == 'pressed':
-		print('Change Test Success')
 		var valid = true
 		for unit in unit_holder.get_children():
 			if unit.unit_name == game_manager.roster_unit_selected.unit_name:
@@ -69,10 +66,11 @@ func _on_changing_squad_event_received(event):
 		if valid:
 			for unit in unit_roster.get_children():
 				if unit.unit_name == unit_name:
-					unit.on_squad = false
+					unit.state_chart.send_event('off_squad')
 			unit_name = game_manager.roster_unit_selected.unit_name
 			game_manager.roster_unit_selected.add_to_squad.hide()
 			game_manager.roster_unit_selected.update()
+			game_manager.roster_unit_selected.state_chart.send_event('on_squad')
 			game_manager.roster_unit_selected = null
 			game_manager.squad_unit_selected = null
 			game_manager.state_chart.send_event('squad_changed')

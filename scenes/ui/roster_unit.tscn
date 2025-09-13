@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4ncj5ewtvx0p"]
+[gd_scene load_steps=7 format=3 uid="uid://c4ncj5ewtvx0p"]
 
 [ext_resource type="Script" uid="uid://qcr17ogirgbl" path="res://scripts/ui/roster_unit.gd" id="1_fdhbt"]
 [ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="2_yjy8h"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_31fo0"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_g1cgj"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_bky4t"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_5s63g"]
 
 [node name="RosterUnit" type="VBoxContainer"]
 anchors_preset = 15
@@ -23,5 +27,35 @@ text = "Add Unit to Squad"
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
 
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("3_31fo0")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="CompoundState" type="Node" parent="StateChart"]
+script = ExtResource("4_g1cgj")
+initial_state = NodePath("OffSquad")
+
+[node name="OnSquad" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("5_bky4t")
+
+[node name="Transition" type="Node" parent="StateChart/CompoundState/OnSquad"]
+script = ExtResource("6_5s63g")
+to = NodePath("../../OffSquad")
+event = &"off_squad"
+delay_in_seconds = "0.0"
+
+[node name="OffSquad" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("5_bky4t")
+
+[node name="Transition" type="Node" parent="StateChart/CompoundState/OffSquad"]
+script = ExtResource("6_5s63g")
+to = NodePath("../../OnSquad")
+event = &"on_squad"
+delay_in_seconds = "0.0"
+
+[node name="Node" type="Node" parent="."]
+
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="AddToSquad" to="." method="_on_add_to_squad_pressed"]
+[connection signal="event_received" from="StateChart/CompoundState/OnSquad" to="." method="_on_on_squad_event_received"]
+[connection signal="event_received" from="StateChart/CompoundState/OffSquad" to="." method="_on_off_squad_event_received"]
