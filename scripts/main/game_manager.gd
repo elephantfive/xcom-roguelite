@@ -14,7 +14,6 @@ const UNIT = preload("res://scenes/entities/units/unit.tscn")
 
 @onready var state_chart = $StateChart
 @onready var hud = %HUD
-@onready var campaign_map = %"Campaign Map"
 @onready var end = %End
 @onready var unit_holder = %"Unit Holder"
 @onready var level_end_timer = $LevelEndTimer
@@ -85,10 +84,7 @@ func level_adv(level):
 		entity.game_manager = self
 		entity.hud = hud
 		
-	get_tree().call_group("Campaign Map", "hide")
-	var campaign_components = get_tree().get_nodes_in_group("Campaign Map")
-	for child in campaign_components:
-		child.process_mode = PROCESS_MODE_DISABLED
+	toggle_map(PROCESS_MODE_DISABLED, false)
 	current_turn = 0
 	end.show()
 	turn = turns[current_turn]
@@ -97,18 +93,25 @@ func level_end():
 	for entity in active_level.entities.get_children():
 		if entity.type == 'ally':
 			unit_info.update(entity.attributes['name'], entity)
+
 	for unit in unit_holder.get_children():
 		unit.update()
 	for unit in unit_roster.get_children():
 		unit.update()
+		
 	for i in range(0, active_level.random_rewards.size()):
 		rewards.get_children()[i].unit_name = active_level.random_rewards[i]
 		rewards.get_children()[i].update()
+		
 	active_level.queue_free()
 	reward_screen.show()
+	toggle_map(PROCESS_MODE_INHERIT, true)
+
+func toggle_map(process:ProcessMode, vis:bool):
 	var campaign_components = get_tree().get_nodes_in_group("Campaign Map")
 	for child in campaign_components:
-		child.process_mode = PROCESS_MODE_INHERIT
+		child.visible = vis
+		child.process_mode = process
 
 
 func _on_level_end_timer_timeout():
