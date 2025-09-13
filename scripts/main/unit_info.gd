@@ -1,6 +1,7 @@
 extends Node
 
 var character_attributes = {}
+var class_attributes = {}
 var action_list = {}
 var attribute_list = {}
 
@@ -212,6 +213,116 @@ func _ready():
 		'unit_actions': ["Attack", 'Move', "Heal"],
 		'texture': "res://icon.svg",
 		}
+	
+	
+	class_attributes['Archer'] = {
+		'name': '',
+		'specialization': '',
+		'attack_damage': 1,
+		'attack_ap_cost': 1,
+		'health':  10,
+		'max_move_distance':  20,
+		'max_attack_distance': 15,
+		'max_action_points': 1,
+		'unit_actions': ["Attack", 'Move', "Heal"],
+		'texture': "res://icon.svg",
+	}
+	class_attributes['Blade'] = {
+		'name': '',
+		'specialization': '',
+		'attack_damage': 1,
+		'attack_ap_cost': 1,
+		'health':  10,
+		'max_move_distance':  20,
+		'max_attack_distance': 15,
+		'max_action_points': 1,
+		'unit_actions': ["Attack", 'Move', "Heal"],
+		'texture': "res://icon.svg",
+	}
+	class_attributes['Wizard'] = {
+		'name': '',
+		'specialization': '',
+		'attack_damage': 1,
+		'attack_ap_cost': 1,
+		'health':  10,
+		'max_move_distance':  20,
+		'max_attack_distance': 15,
+		'max_action_points': 1,
+		'unit_actions': ["Attack", 'Move', "Heal"],
+		'texture': "res://icon.svg",
+	}
+	class_attributes['Priest'] = {
+		'name': '',
+		'specialization': '',
+		'attack_damage': 1,
+		'attack_ap_cost': 1,
+		'health':  10,
+		'max_move_distance':  20,
+		'max_attack_distance': 15,
+		'max_action_points': 1,
+		'unit_actions': ["Attack", 'Move', "Heal"],
+		'texture': "res://icon.svg",
+	}
+	class_attributes['Rogue'] = {
+		'name': '',
+		'specialization': '',
+		'attack_damage': 1,
+		'attack_ap_cost': 1,
+		'health':  10,
+		'max_move_distance':  20,
+		'max_attack_distance': 15,
+		'max_action_points': 1,
+		'unit_actions': ["Attack", 'Move', "Heal"],
+		'texture': "res://icon.svg",
+	}
+	class_attributes['Knight'] = {
+		'name': '',
+		'specialization': '',
+		'attack_damage': 1,
+		'attack_ap_cost': 1,
+		'health':  10,
+		'max_move_distance':  20,
+		'max_attack_distance': 15,
+		'max_action_points': 1,
+		'unit_actions': ["Attack", 'Move', "Heal"],
+		'texture': "res://icon.svg",
+}
+	class_attributes['Enginesmith'] = {
+		'name': '',
+		'specialization': '',
+		'attack_damage': 1,
+		'attack_ap_cost': 1,
+		'health':  10,
+		'max_move_distance':  20,
+		'max_attack_distance': 15,
+		'max_action_points': 1,
+		'unit_actions': ["Attack", 'Move', "Heal"],
+		'texture': "res://icon.svg",
+	}
+	class_attributes['Dark Prophet'] = {
+		'name': '',
+		'specialization': '',
+		'attack_damage': 1,
+		'attack_ap_cost': 1,
+		'health':  10,
+		'max_move_distance':  20,
+		'max_attack_distance': 15,
+		'max_action_points': 1,
+		'unit_actions': ["Attack", 'Move', "Heal"],
+		'texture': "res://icon.svg",
+	}
+	class_attributes['Spellblade'] = {
+		'name': '',
+		'specialization': '',
+		'attack_damage': 1,
+		'attack_ap_cost': 1,
+		'health':  10,
+		'max_move_distance':  20,
+		'max_attack_distance': 15,
+		'max_action_points': 1,
+		'unit_actions': ["Attack", 'Move', "Heal"],
+		'texture': "res://icon.svg",
+	}
 	
 	action_list['Attack'] = 'Attack an enemy up to %s units away.'
 	action_list['Move'] = 'Move up to %s units away.'
