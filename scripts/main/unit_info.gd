@@ -4,6 +4,11 @@ var character_attributes = {}
 var class_attributes = {}
 var action_list = {}
 var attribute_list = {}
+var base_attributes = {
+	'xp': 0,
+	'xp_needed': 100,
+	'level': 1,
+}
 
 func _ready():
 	character_attributes['Amigol'] = {
@@ -177,40 +182,39 @@ func _ready():
 		}
 	
 	
+	
 	class_attributes['Archer'] = {
-		'name': '',
-		'specialization': '',
-		'attack_damage': 1,
+		'attack_damage': 2,
 		'attack_ap_cost': 1,
-		'base_health':  10,
+		'base_health':  15,
 		'max_move_distance':  20,
-		'max_attack_distance': 15,
+		'max_attack_distance': 20,
 		'max_action_points': 1,
-		'unit_actions': ["Attack", 'Move', "Heal"],
+		'unit_actions': ["Attack", 'Move', "Poison Arrow"],
 		'texture': "res://icon.svg",
 	}
 	class_attributes['Blade'] = {
 		'name': '',
 		'specialization': '',
-		'attack_damage': 1,
+		'attack_damage': 3,
 		'attack_ap_cost': 1,
-		'base_health':  10,
+		'base_health':  25,
 		'max_move_distance':  20,
-		'max_attack_distance': 15,
+		'max_attack_distance': 5,
 		'max_action_points': 1,
-		'unit_actions': ["Attack", 'Move', "Heal"],
+		'unit_actions': ["Attack", 'Move', "Cleave"],
 		'texture': "res://icon.svg",
 	}
 	class_attributes['Wizard'] = {
 		'name': '',
 		'specialization': '',
-		'attack_damage': 1,
+		'attack_damage': 3,
 		'attack_ap_cost': 1,
 		'base_health':  10,
 		'max_move_distance':  20,
 		'max_attack_distance': 15,
 		'max_action_points': 1,
-		'unit_actions': ["Attack", 'Move', "Heal"],
+		'unit_actions': ["Attack", 'Move', "Summon Familiar"],
 		'texture': "res://icon.svg",
 	}
 	class_attributes['Priest'] = {
@@ -219,8 +223,11 @@ func _ready():
 		'attack_damage': 1,
 		'attack_ap_cost': 1,
 		'base_health':  10,
+		'max_overheal': 5,
+		'heal': 3,
+		'max_heal_distance': 10,
 		'max_move_distance':  20,
-		'max_attack_distance': 15,
+		'max_attack_distance': 10,
 		'max_action_points': 1,
 		'unit_actions': ["Attack", 'Move', "Heal"],
 		'texture': "res://icon.svg",
@@ -228,13 +235,13 @@ func _ready():
 	class_attributes['Rogue'] = {
 		'name': '',
 		'specialization': '',
-		'attack_damage': 1,
+		'attack_damage': 4,
 		'attack_ap_cost': 1,
 		'base_health':  10,
-		'max_move_distance':  20,
-		'max_attack_distance': 15,
+		'max_move_distance':  25,
+		'max_attack_distance': 5,
 		'max_action_points': 1,
-		'unit_actions': ["Attack", 'Move', "Heal"],
+		'unit_actions': ["Attack", 'Move', "Stealth"],
 		'texture': "res://icon.svg",
 	}
 	class_attributes['Knight'] = {
@@ -246,7 +253,7 @@ func _ready():
 		'max_move_distance':  20,
 		'max_attack_distance': 15,
 		'max_action_points': 1,
-		'unit_actions': ["Attack", 'Move', "Heal"],
+		'unit_actions': ["Attack", 'Move', "Charge",],
 		'texture': "res://icon.svg",
 }
 	class_attributes['Enginesmith'] = {
@@ -258,7 +265,7 @@ func _ready():
 		'max_move_distance':  20,
 		'max_attack_distance': 15,
 		'max_action_points': 1,
-		'unit_actions': ["Attack", 'Move', "Heal"],
+		'unit_actions': ["Attack", 'Move'],
 		'texture': "res://icon.svg",
 	}
 	class_attributes['Dark Prophet'] = {
@@ -270,7 +277,7 @@ func _ready():
 		'max_move_distance':  20,
 		'max_attack_distance': 15,
 		'max_action_points': 1,
-		'unit_actions': ["Attack", 'Move', "Heal"],
+		'unit_actions': ["Attack", 'Move'],
 		'texture': "res://icon.svg",
 	}
 	class_attributes['Spellblade'] = {
@@ -282,7 +289,7 @@ func _ready():
 		'max_move_distance':  20,
 		'max_attack_distance': 15,
 		'max_action_points': 1,
-		'unit_actions': ["Attack", 'Move', "Heal"],
+		'unit_actions': ["Attack", 'Move'],
 		'texture': "res://icon.svg",
 	}
 	

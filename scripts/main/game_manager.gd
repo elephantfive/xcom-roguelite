@@ -62,7 +62,9 @@ func level_adv(level):
 	for unit in unit_holder.get_children():
 		if unit.unit_name != '':
 			var new_unit = UNIT.instantiate()
-			new_unit.attributes = unit.attributes
+			new_unit.attributes = unit_info.base_attributes
+			new_unit.attributes.merge(unit.attributes, true)
+			new_unit.name = new_unit.attributes['name']
 			new_unit.game_manager = self
 			new_unit.active_cursor = active_cursor
 			new_unit.hud = hud

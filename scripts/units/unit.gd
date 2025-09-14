@@ -183,16 +183,6 @@ func _on_valid_event_received(event):
 		call(event)
 
 
-func _on_white_state_entered():
-	warning_update('', Color(1, 1, 1), false)
-
-
-func _on_yellow_state_entered():
-	warning_update('Blocked!', Color(1, 1, 0), true)
-
-
-func _on_red_state_entered():
-	warning_update('Too far!', Color(1, 0, 0), true)
 #endregion
 
 #region Targeting
