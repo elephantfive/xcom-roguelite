@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://nutwb7ivdl7e"]
+[gd_scene load_steps=46 format=3 uid="uid://nutwb7ivdl7e"]
 
 [ext_resource type="Script" uid="uid://bu6iddnt2t3hk" path="res://scripts/units/unit.gd" id="1_btf8p"]
 [ext_resource type="Script" uid="uid://d11jmh7flvcad" path="res://scripts/units/distance_line.gd" id="2_bork7"]
@@ -22,32 +22,7 @@ b = Vector2(0, 0)
 
 [sub_resource type="Resource" id="Resource_bf4h8"]
 script = ExtResource("10_bf4h8")
-state = NodePath("../../../Action/Moving")
-metadata/_custom_type_script = "uid://bambbrd2wupx0"
-
-[sub_resource type="Resource" id="Resource_cqmfj"]
-script = ExtResource("10_bf4h8")
-state = NodePath("../../../Action/Moving")
-metadata/_custom_type_script = "uid://bambbrd2wupx0"
-
-[sub_resource type="Resource" id="Resource_tw306"]
-script = ExtResource("10_otsl3")
-guard = SubResource("Resource_cqmfj")
-metadata/_custom_type_script = "uid://dgd4i8hrrxfvm"
-
-[sub_resource type="Resource" id="Resource_ssoiy"]
-script = ExtResource("10_bf4h8")
-state = NodePath("../../../TooFar/NotTooFar")
-metadata/_custom_type_script = "uid://bambbrd2wupx0"
-
-[sub_resource type="Resource" id="Resource_hn0ag"]
-script = ExtResource("10_bf4h8")
-state = NodePath("../../../ThruWall/NotThruWall")
-metadata/_custom_type_script = "uid://bambbrd2wupx0"
-
-[sub_resource type="Resource" id="Resource_qll4n"]
-script = ExtResource("10_bf4h8")
-state = NodePath("../../../ThruAlly/NotThruAlly")
+state = NodePath("../../../TooFar/TooFar")
 metadata/_custom_type_script = "uid://bambbrd2wupx0"
 
 [sub_resource type="Resource" id="Resource_otsl3"]
@@ -55,10 +30,85 @@ script = ExtResource("10_bf4h8")
 state = NodePath("../../../Action/Moving")
 metadata/_custom_type_script = "uid://bambbrd2wupx0"
 
+[sub_resource type="Resource" id="Resource_ssoiy"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../ThruWall/ThruWall")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_hn0ag"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../ThruAlly/ThruAlly")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_qll4n"]
+script = ExtResource("13_otsl3")
+guards = Array[ExtResource("9_oj84s")]([SubResource("Resource_ssoiy"), SubResource("Resource_hn0ag")])
+metadata/_custom_type_script = "uid://duv2yyvlunsi8"
+
 [sub_resource type="Resource" id="Resource_amjqr"]
 script = ExtResource("11_otsl3")
-guards = Array[ExtResource("9_oj84s")]([SubResource("Resource_ssoiy"), SubResource("Resource_hn0ag"), SubResource("Resource_qll4n"), SubResource("Resource_otsl3")])
+guards = Array[ExtResource("9_oj84s")]([SubResource("Resource_otsl3"), SubResource("Resource_qll4n")])
 metadata/_custom_type_script = "uid://bxprlw40wl0c3"
+
+[sub_resource type="Resource" id="Resource_cqmfj"]
+script = ExtResource("13_otsl3")
+guards = Array[ExtResource("9_oj84s")]([SubResource("Resource_bf4h8"), SubResource("Resource_amjqr")])
+metadata/_custom_type_script = "uid://duv2yyvlunsi8"
+
+[sub_resource type="Resource" id="Resource_tw306"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../TooFar/NotTooFar")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_125gu"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../Action/Moving")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_xbcc1"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../ThruWall/NotThruWall")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_h56r2"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../ThruAlly/NotThruAlly")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_w2mg5"]
+script = ExtResource("11_otsl3")
+guards = Array[ExtResource("9_oj84s")]([SubResource("Resource_125gu"), SubResource("Resource_xbcc1"), SubResource("Resource_h56r2")])
+metadata/_custom_type_script = "uid://bxprlw40wl0c3"
+
+[sub_resource type="Resource" id="Resource_uip47"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../Action/Moving")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_hhu15"]
+script = ExtResource("10_otsl3")
+guard = SubResource("Resource_uip47")
+metadata/_custom_type_script = "uid://dgd4i8hrrxfvm"
+
+[sub_resource type="Resource" id="Resource_1qanp"]
+script = ExtResource("11_otsl3")
+guards = Array[ExtResource("9_oj84s")]([SubResource("Resource_hhu15")])
+metadata/_custom_type_script = "uid://bxprlw40wl0c3"
+
+[sub_resource type="Resource" id="Resource_u6h7x"]
+script = ExtResource("13_otsl3")
+guards = Array[ExtResource("9_oj84s")]([SubResource("Resource_w2mg5"), SubResource("Resource_1qanp")])
+metadata/_custom_type_script = "uid://duv2yyvlunsi8"
+
+[sub_resource type="Resource" id="Resource_d3tlt"]
+script = ExtResource("11_otsl3")
+guards = Array[ExtResource("9_oj84s")]([SubResource("Resource_tw306"), SubResource("Resource_u6h7x")])
+metadata/_custom_type_script = "uid://bxprlw40wl0c3"
+
+[sub_resource type="Resource" id="Resource_6lt6l"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../Action/Moving")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
 
 [sub_resource type="Resource" id="Resource_a4h1k"]
 script = ExtResource("10_bf4h8")
@@ -114,6 +164,9 @@ metadata/_custom_type_script = "uid://bambbrd2wupx0"
 script = ExtResource("11_otsl3")
 guards = Array[ExtResource("9_oj84s")]([SubResource("Resource_67bw7"), SubResource("Resource_cmmd0"), SubResource("Resource_c23k4")])
 metadata/_custom_type_script = "uid://bxprlw40wl0c3"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bf4h8"]
+size = Vector2(4, 4)
 
 [node name="Unit" type="Area2D"]
 script = ExtResource("1_btf8p")
@@ -186,34 +239,21 @@ initial_state = NodePath("Valid")
 [node name="Valid" type="Node" parent="StateChart/Root/ActionValidity"]
 script = ExtResource("6_fh57n")
 
-[node name="NonThruCheck" type="Node" parent="StateChart/Root/ActionValidity/Valid"]
+[node name="Invalid" type="Node" parent="StateChart/Root/ActionValidity/Valid"]
 script = ExtResource("7_hix5a")
 to = NodePath("../../Invalid")
-event = &"invalid"
-delay_in_seconds = "0.0"
-
-[node name="ThruCheck" type="Node" parent="StateChart/Root/ActionValidity/Valid"]
-script = ExtResource("7_hix5a")
-to = NodePath("../../Invalid")
-event = &"thru_invalid"
-guard = SubResource("Resource_bf4h8")
+event = &"distance_check_event"
+guard = SubResource("Resource_cqmfj")
 delay_in_seconds = "0.0"
 
 [node name="Invalid" type="Node" parent="StateChart/Root/ActionValidity"]
 script = ExtResource("6_fh57n")
 
-[node name="NonThruReturn" type="Node" parent="StateChart/Root/ActionValidity/Invalid"]
+[node name="Valid" type="Node" parent="StateChart/Root/ActionValidity/Invalid"]
 script = ExtResource("7_hix5a")
 to = NodePath("../../Valid")
-event = &"valid"
-guard = SubResource("Resource_tw306")
-delay_in_seconds = "0.0"
-
-[node name="ThruReturn" type="Node" parent="StateChart/Root/ActionValidity/Invalid"]
-script = ExtResource("7_hix5a")
-to = NodePath("../../Valid")
-event = &"thru_valid"
-guard = SubResource("Resource_amjqr")
+event = &"distance_check_event"
+guard = SubResource("Resource_d3tlt")
 delay_in_seconds = "0.0"
 
 [node name="Action" type="Node" parent="StateChart/Root"]
@@ -323,6 +363,7 @@ script = ExtResource("6_fh57n")
 script = ExtResource("7_hix5a")
 to = NodePath("../../ThruAlly")
 event = &"thru_ally"
+guard = SubResource("Resource_6lt6l")
 delay_in_seconds = "0.0"
 
 [node name="ThruAlly" type="Node" parent="StateChart/Root/ThruAlly"]
@@ -344,14 +385,14 @@ script = ExtResource("6_fh57n")
 [node name="ToRed" type="Node" parent="StateChart/Root/DistanceColor/White"]
 script = ExtResource("7_hix5a")
 to = NodePath("../../Red")
-event = &"color_check"
+event = &"distance_check_event"
 guard = SubResource("Resource_a4h1k")
 delay_in_seconds = "0.0"
 
 [node name="ToYellow" type="Node" parent="StateChart/Root/DistanceColor/White"]
 script = ExtResource("7_hix5a")
 to = NodePath("../../Yellow")
-event = &"color_check"
+event = &"distance_check_event"
 guard = SubResource("Resource_3aovj")
 delay_in_seconds = "0.0"
 
@@ -361,14 +402,14 @@ script = ExtResource("6_fh57n")
 [node name="ToRed" type="Node" parent="StateChart/Root/DistanceColor/Yellow"]
 script = ExtResource("7_hix5a")
 to = NodePath("../../Red")
-event = &"color_check"
+event = &"distance_check_event"
 guard = SubResource("Resource_yh8mh")
 delay_in_seconds = "0.0"
 
 [node name="ToWhite" type="Node" parent="StateChart/Root/DistanceColor/Yellow"]
 script = ExtResource("7_hix5a")
 to = NodePath("../../White")
-event = &"color_check"
+event = &"distance_check_event"
 guard = SubResource("Resource_lohvn")
 delay_in_seconds = "0.0"
 
@@ -378,22 +419,33 @@ script = ExtResource("6_fh57n")
 [node name="ToWhite" type="Node" parent="StateChart/Root/DistanceColor/Red"]
 script = ExtResource("7_hix5a")
 to = NodePath("../../White")
-event = &"color_check"
+event = &"distance_check_event"
 guard = SubResource("Resource_lohvn")
 delay_in_seconds = "0.0"
 
 [node name="ToYellow" type="Node" parent="StateChart/Root/DistanceColor/Red"]
 script = ExtResource("7_hix5a")
 to = NodePath("../../Yellow")
-event = &"color_check"
+event = &"distance_check_event"
 guard = SubResource("Resource_3aovj")
 delay_in_seconds = "0.0"
 
+[node name="ActiveCursor" type="Area2D" parent="."]
+unique_name_in_owner = true
+process_mode = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActiveCursor"]
+shape = SubResource("RectangleShape2D_bf4h8")
+
+[node name="Label" type="Label" parent="ActiveCursor"]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [connection signal="input_event" from="." to="." method="_on_input_event"]
-[connection signal="area_entered" from="Distance Line/Distance Line Collision" to="." method="_on_distance_line_collision_area_entered"]
-[connection signal="area_exited" from="Distance Line/Distance Line Collision" to="." method="_on_distance_line_collision_area_exited"]
+[connection signal="area_entered" from="Distance Line/Distance Line Collision" to="Distance Line" method="_on_distance_line_collision_area_entered"]
+[connection signal="area_exited" from="Distance Line/Distance Line Collision" to="Distance Line" method="_on_distance_line_collision_area_exited"]
 [connection signal="event_received" from="StateChart/Root/ActionValidity/Valid" to="." method="_on_valid_event_received"]
-[connection signal="state_entered" from="StateChart/Root/Action/Idle" to="." method="_on_idle_state_entered"]
 [connection signal="state_input" from="StateChart/Root/Action/Idle" to="." method="_on_idle_state_input"]
 [connection signal="state_input" from="StateChart/Root/Action/Moving" to="." method="_on_moving_state_input"]
 [connection signal="state_processing" from="StateChart/Root/Action/Moving" to="." method="_on_moving_state_processing"]
@@ -401,12 +453,8 @@ delay_in_seconds = "0.0"
 [connection signal="state_processing" from="StateChart/Root/Action/Attacking" to="." method="_on_attacking_state_processing"]
 [connection signal="state_input" from="StateChart/Root/Action/Healing" to="." method="_on_healing_state_input"]
 [connection signal="state_processing" from="StateChart/Root/Action/Healing" to="." method="_on_healing_state_processing"]
-[connection signal="state_entered" from="StateChart/Root/TooFar/TooFar" to="." method="_on_too_far_state_entered"]
-[connection signal="state_exited" from="StateChart/Root/TooFar/TooFar" to="." method="_on_too_far_state_exited"]
-[connection signal="state_entered" from="StateChart/Root/ThruWall/ThruWall" to="." method="_on_thru_wall_state_entered"]
-[connection signal="state_exited" from="StateChart/Root/ThruWall/ThruWall" to="." method="_on_thru_wall_state_exited"]
-[connection signal="state_entered" from="StateChart/Root/ThruAlly/ThruAlly" to="." method="_on_thru_ally_state_entered"]
-[connection signal="state_exited" from="StateChart/Root/ThruAlly/ThruAlly" to="." method="_on_thru_ally_state_exited"]
 [connection signal="state_entered" from="StateChart/Root/DistanceColor/White" to="." method="_on_white_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/DistanceColor/Yellow" to="." method="_on_yellow_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/DistanceColor/Red" to="." method="_on_red_state_entered"]
+[connection signal="area_entered" from="ActiveCursor" to="." method="_on_active_cursor_area_entered"]
+[connection signal="area_exited" from="ActiveCursor" to="." method="_on_active_cursor_area_exited"]

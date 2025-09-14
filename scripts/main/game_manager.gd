@@ -31,7 +31,8 @@ func _ready():
 func turn_end():
 	for button in hud.actions.get_children():
 		button.hide()
-		
+	if selected_unit != null:
+		selected_unit.active_cursor.process_mode = PROCESS_MODE_DISABLED
 	selected_unit = null
 	turn_adv()
 	$TurnTimer.start()

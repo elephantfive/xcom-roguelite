@@ -1,5 +1,5 @@
 extends Area2D
-
+#region Startup vars
 
 var attributes: Dictionary
 
@@ -10,12 +10,14 @@ var init_pos: Vector2
 var action_chart: Array = []
 var type: String = 'ally'
 var current_distance: float
+var target: Area2D
 
 
 const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 @onready var hud: CanvasLayer
 @onready var game_manager: Node
 
+@onready var active_cursor = %ActiveCursor
 @onready var distance_line = $"Distance Line"
 @onready var distance_label = %"Distance Label"
 @onready var warning_label = %"Warning Label"
@@ -24,11 +26,26 @@ const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 @onready var action_points_label = %"Action Points Label"
 @onready var sprite = %Sprite
 @onready var state_chart = $StateChart
+#endregion
 
-
+#region Startup and resetting
 func _ready():
 	points_reset()
 	points_update()
+
+
+func _process(_delta):
+	active_cursor.position = get_viewport().get_mouse_position() - global_position
+	if target != null:
+		$ActiveCursor/Label.text = 'Target: ' + target.name
+	else:
+		$ActiveCursor/Label.text = 'No target.'
+
+
+func _on_game_manager_turn_start():
+	points_reset()
+	points_update()
+
 
 func _input(event):
 	if game_manager.turn == 'player':
@@ -46,6 +63,7 @@ func _on_input_event(_viewport, event, _shape_idx):
 				game_manager.selected_unit = self
 				init_pos = position
 				hud.new_unit()
+				active_cursor.process_mode = PROCESS_MODE_INHERIT
 
 
 func points_reset():
@@ -57,34 +75,13 @@ func points_update():
 	health_label.text = 'Current Health: ' + str(attributes['health'])
 	move_points_label.text = 'Current Move Points: ' + str(snapped(current_move_points, 0.01))
 	action_points_label.text = 'Current Action Points: ' + str(current_action_points)
+#endregion
 
-
-func distance_check(max_distance):
-	get_tree().call_group("Unit Distance Info", "show")
-	distance_line.points = PackedVector2Array([init_pos - global_position, get_viewport().get_mouse_position() - global_position])
-	current_distance = distance_line.points[0].distance_to(distance_line.points[1]) / 10
-	distance_label.text = str(snapped(current_distance, 0.01))
+#region Actions
+func take_damage(damage):
+	attributes['health'] -= damage
+	points_update()
 	
-	if current_distance >= max_distance:
-		state_chart.send_event('too_far')
-	else:
-		state_chart.send_event('not_too_far')
-		
-	state_chart.send_event('color_check')
-
-
-func warning_update(text: String, color: Color, vis: bool):
-		warning_label.text = text
-		distance_group_modulate(color)
-		warning_label.visible = vis
-
-
-func distance_group_modulate(color):
-	var distance_components = get_tree().get_nodes_in_group('Unit Distance Info')
-	for component in distance_components:
-		component.self_modulate = color
-
-
 func move():
 	position = get_viewport().get_mouse_position()
 	init_pos = position
@@ -109,33 +106,37 @@ func attack():
 
 func heal():
 	if current_action_points - attributes['heal_ap_cost'] >= 0:
-		#TO-DO: Implement targeting and, of course, healing
-		pass
+		#TODO: Implement targeting and, of course, healing
+		current_action_points -= attributes['heal_ap_cost']
+		points_update()
 	state_chart.send_event('to_idle')
+#endregion
+
+#region StateChart functionality
+func distance_check(max_distance):
+	get_tree().call_group("Unit Distance Info", "show")
+	distance_line.points = PackedVector2Array([init_pos - global_position, get_viewport().get_mouse_position() - global_position])
+	current_distance = distance_line.points[0].distance_to(distance_line.points[1]) / 10
+	distance_label.text = str(snapped(current_distance, 0.01))
+	
+	if current_distance >= max_distance:
+		state_chart.send_event('too_far')
+	else:
+		state_chart.send_event('not_too_far')
+		
+	state_chart.send_event('distance_check_event')
 
 
-func take_damage(damage):
-	attributes['health'] -= damage
-	points_update()
+func warning_update(text: String, color: Color, vis: bool):
+		warning_label.text = text
+		distance_group_modulate(color)
+		warning_label.visible = vis
 
 
-func _on_distance_line_collision_area_entered(area):
-	if area.type == 'wall':
-		state_chart.send_event('thru_wall')
-	elif area.type == 'ally' and area != self:
-		state_chart.send_event('thru_ally')
-
-
-func _on_distance_line_collision_area_exited(area):
-	if area.type == 'wall':
-		state_chart.send_event('not_thru_wall')
-	elif area.type == 'ally' and area != self:
-		state_chart.send_event('not_thru_ally')
-
-
-func _on_game_manager_turn_start():
-	points_reset()
-	points_update()
+func distance_group_modulate(color):
+	var distance_components = get_tree().get_nodes_in_group('Unit Distance Info')
+	for component in distance_components:
+		component.self_modulate = color
 
 
 func _on_moving_state_processing(_delta):
@@ -147,10 +148,8 @@ func _on_attacking_state_processing(_delta):
 	distance_check(attributes['max_attack_distance'])
 
 
-
 func _on_healing_state_processing(_delta):
 	distance_check(attributes['max_heal_distance'])
-
 
 
 func _on_moving_state_input(event):
@@ -171,6 +170,7 @@ func _on_healing_state_input(event):
 func _on_idle_state_input(event):
 	if event.is_action_pressed('right_click'):
 		game_manager.selected_unit = null
+		active_cursor.process_mode = PROCESS_MODE_DISABLED
 		for button in hud.actions.get_children():
 			if button.name != 'End':
 				button.hide()
@@ -179,35 +179,6 @@ func _on_idle_state_input(event):
 func _on_valid_event_received(event):
 	if has_method(event):
 		call(event)
-
-
-func _on_idle_state_entered():
-	state_chart.send_event('valid')
-
-
-func _on_too_far_state_entered():
-	state_chart.send_event('invalid')
-
-
-func _on_too_far_state_exited():
-	state_chart.send_event('valid')
-	state_chart.send_event('thru_valid')
-
-
-func _on_thru_wall_state_entered():
-	state_chart.send_event('thru_invalid')
-
-
-func _on_thru_wall_state_exited():
-	state_chart.send_event('thru_valid')
-
-
-func _on_thru_ally_state_entered():
-	state_chart.send_event('thru_invalid')
-
-
-func _on_thru_ally_state_exited():
-	state_chart.send_event('thru_valid')
 
 
 func _on_white_state_entered():
@@ -220,5 +191,13 @@ func _on_yellow_state_entered():
 
 func _on_red_state_entered():
 	warning_update('Too far!', Color(1, 0, 0), true)
+#endregion
 
-	
+#region Targeting
+func _on_active_cursor_area_entered(area):
+	target = area
+
+
+func _on_active_cursor_area_exited(_area):
+	target = null
+#endregion
