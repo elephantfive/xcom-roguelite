@@ -7,9 +7,8 @@ var current_move_points: float
 var current_action_points: int
 
 var init_pos: Vector2
-var too_far: bool = false
+var action_chart: Array = []
 var type: String = 'ally'
-var thru_wall: bool = false
 var current_distance: float
 
 
@@ -48,9 +47,11 @@ func _on_input_event(_viewport, event, _shape_idx):
 				init_pos = position
 				hud.new_unit()
 
+
 func points_reset():
 	current_move_points  = attributes['max_move_distance']
 	current_action_points  = attributes['max_action_points']
+
 
 func points_update():
 	health_label.text = 'Current Health: ' + str(attributes['health'])
@@ -65,26 +66,24 @@ func distance_check(max_distance):
 	distance_label.text = str(snapped(current_distance, 0.01))
 	
 	if current_distance >= max_distance:
-		too_far = true
-		warning_label.show()
-		warning_label.text = 'Too far!'
-		distance_group_modulate(Color(1, 0, 0))
+		state_chart.send_event('too_far')
 	else:
-		too_far = false
-		if thru_wall:
-			warning_label.show()
-			warning_label.text = 'Blocked!'
-			distance_group_modulate(Color(1, 1, 0))
+		state_chart.send_event('not_too_far')
+		
+	state_chart.send_event('color_check')
 
-		else:
-			warning_label.hide()
-			distance_group_modulate(Color(1, 1, 1))
+
+func warning_update(text: String, color: Color, vis: bool):
+		warning_label.text = text
+		distance_group_modulate(color)
+		warning_label.visible = vis
 
 
 func distance_group_modulate(color):
 	var distance_components = get_tree().get_nodes_in_group('Unit Distance Info')
 	for component in distance_components:
 		component.self_modulate = color
+
 
 func move():
 	position = get_viewport().get_mouse_position()
@@ -96,7 +95,7 @@ func move():
 
 
 func attack():
-	if current_action_points - attributes['attack_ap_cost'] >= 0 and not too_far:
+	if current_action_points - attributes['attack_ap_cost'] >= 0:
 		current_action_points -= attributes['attack_ap_cost']
 		var new_proj = projectile.instantiate()
 		new_proj.target = to_global(distance_line.points[1])
@@ -109,11 +108,11 @@ func attack():
 
 
 func heal():
-	if current_action_points - attributes['heal_ap_cost'] >= 0 and not too_far:
+	if current_action_points - attributes['heal_ap_cost'] >= 0:
 		#TO-DO: Implement targeting and, of course, healing
 		pass
 	state_chart.send_event('to_idle')
-	
+
 
 func take_damage(damage):
 	attributes['health'] -= damage
@@ -122,12 +121,16 @@ func take_damage(damage):
 
 func _on_distance_line_collision_area_entered(area):
 	if area.type == 'wall':
-		thru_wall = true
+		state_chart.send_event('thru_wall')
+	elif area.type == 'ally' and area != self:
+		state_chart.send_event('thru_ally')
 
 
 func _on_distance_line_collision_area_exited(area):
 	if area.type == 'wall':
-		thru_wall = false
+		state_chart.send_event('not_thru_wall')
+	elif area.type == 'ally' and area != self:
+		state_chart.send_event('not_thru_ally')
 
 
 func _on_game_manager_turn_start():
@@ -144,24 +147,25 @@ func _on_attacking_state_processing(_delta):
 	distance_check(attributes['max_attack_distance'])
 
 
+
 func _on_healing_state_processing(_delta):
 	distance_check(attributes['max_heal_distance'])
 
 
+
 func _on_moving_state_input(event):
 	if event.is_action_pressed("left_click"):
-		if not thru_wall and not too_far:
-			move()
+		state_chart.send_event('move')
 
 
 func _on_attacking_state_input(event):
 	if event.is_action_pressed("left_click"):
-		attack()
+		state_chart.send_event('attack')
 
 
 func _on_healing_state_input(event):
 	if event.is_action_pressed("left_click"):
-		heal()
+		state_chart.send_event('heal')
 
 
 func _on_idle_state_input(event):
@@ -170,3 +174,51 @@ func _on_idle_state_input(event):
 		for button in hud.actions.get_children():
 			if button.name != 'End':
 				button.hide()
+
+
+func _on_valid_event_received(event):
+	if has_method(event):
+		call(event)
+
+
+func _on_idle_state_entered():
+	state_chart.send_event('valid')
+
+
+func _on_too_far_state_entered():
+	state_chart.send_event('invalid')
+
+
+func _on_too_far_state_exited():
+	state_chart.send_event('valid')
+	state_chart.send_event('thru_valid')
+
+
+func _on_thru_wall_state_entered():
+	state_chart.send_event('thru_invalid')
+
+
+func _on_thru_wall_state_exited():
+	state_chart.send_event('thru_valid')
+
+
+func _on_thru_ally_state_entered():
+	state_chart.send_event('thru_invalid')
+
+
+func _on_thru_ally_state_exited():
+	state_chart.send_event('thru_valid')
+
+
+func _on_white_state_entered():
+	warning_update('', Color(1, 1, 1), false)
+
+
+func _on_yellow_state_entered():
+	warning_update('Blocked!', Color(1, 1, 0), true)
+
+
+func _on_red_state_entered():
+	warning_update('Too far!', Color(1, 0, 0), true)
+
+	

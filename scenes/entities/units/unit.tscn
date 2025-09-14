@@ -1,18 +1,119 @@
-[gd_scene load_steps=10 format=3 uid="uid://nutwb7ivdl7e"]
+[gd_scene load_steps=35 format=3 uid="uid://nutwb7ivdl7e"]
 
 [ext_resource type="Script" uid="uid://bu6iddnt2t3hk" path="res://scripts/units/unit.gd" id="1_btf8p"]
 [ext_resource type="Script" uid="uid://d11jmh7flvcad" path="res://scripts/units/distance_line.gd" id="2_bork7"]
 [ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="2_hwtar"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_f2ita"]
+[ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="5_fh57n"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_hix5a"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_fh57n"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_hix5a"]
+[ext_resource type="Script" uid="uid://c6l0181f4ytps" path="res://addons/godot_state_charts/guard.gd" id="9_oj84s"]
+[ext_resource type="Script" uid="uid://bambbrd2wupx0" path="res://addons/godot_state_charts/state_is_active_guard.gd" id="10_bf4h8"]
+[ext_resource type="Script" uid="uid://dgd4i8hrrxfvm" path="res://addons/godot_state_charts/not_guard.gd" id="10_otsl3"]
+[ext_resource type="Script" uid="uid://bxprlw40wl0c3" path="res://addons/godot_state_charts/all_of_guard.gd" id="11_otsl3"]
+[ext_resource type="Script" uid="uid://duv2yyvlunsi8" path="res://addons/godot_state_charts/any_of_guard.gd" id="13_otsl3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_btf8p"]
 size = Vector2(40, 40)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_b3y04"]
 b = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_bf4h8"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../Action/Moving")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_cqmfj"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../Action/Moving")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_tw306"]
+script = ExtResource("10_otsl3")
+guard = SubResource("Resource_cqmfj")
+metadata/_custom_type_script = "uid://dgd4i8hrrxfvm"
+
+[sub_resource type="Resource" id="Resource_ssoiy"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../TooFar/NotTooFar")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_hn0ag"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../ThruWall/NotThruWall")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_qll4n"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../ThruAlly/NotThruAlly")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_otsl3"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../Action/Moving")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_amjqr"]
+script = ExtResource("11_otsl3")
+guards = Array[ExtResource("9_oj84s")]([SubResource("Resource_ssoiy"), SubResource("Resource_hn0ag"), SubResource("Resource_qll4n"), SubResource("Resource_otsl3")])
+metadata/_custom_type_script = "uid://bxprlw40wl0c3"
+
+[sub_resource type="Resource" id="Resource_a4h1k"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../TooFar/TooFar")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_13oim"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../TooFar/NotTooFar")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_tgwtv"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../ThruWall/ThruWall")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_ivsgi"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../ThruAlly/ThruAlly")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_dc34y"]
+script = ExtResource("13_otsl3")
+guards = Array[ExtResource("9_oj84s")]([SubResource("Resource_tgwtv"), SubResource("Resource_ivsgi")])
+metadata/_custom_type_script = "uid://duv2yyvlunsi8"
+
+[sub_resource type="Resource" id="Resource_3aovj"]
+script = ExtResource("11_otsl3")
+guards = Array[ExtResource("9_oj84s")]([SubResource("Resource_13oim"), SubResource("Resource_dc34y")])
+metadata/_custom_type_script = "uid://bxprlw40wl0c3"
+
+[sub_resource type="Resource" id="Resource_yh8mh"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../TooFar/TooFar")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_67bw7"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../TooFar/NotTooFar")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_cmmd0"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../ThruWall/NotThruWall")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_c23k4"]
+script = ExtResource("10_bf4h8")
+state = NodePath("../../../ThruAlly/NotThruAlly")
+metadata/_custom_type_script = "uid://bambbrd2wupx0"
+
+[sub_resource type="Resource" id="Resource_lohvn"]
+script = ExtResource("11_otsl3")
+guards = Array[ExtResource("9_oj84s")]([SubResource("Resource_67bw7"), SubResource("Resource_cmmd0"), SubResource("Resource_c23k4")])
+metadata/_custom_type_script = "uid://bxprlw40wl0c3"
 
 [node name="Unit" type="Area2D"]
 script = ExtResource("1_btf8p")
@@ -50,13 +151,13 @@ layout_mode = 2
 [node name="Distance Label Container" type="VBoxContainer" parent="Container Container"]
 layout_mode = 2
 
+[node name="Distance Label" type="Label" parent="Container Container/Distance Label Container" groups=["Unit Distance Info"]]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="Warning Label" type="Label" parent="Container Container/Distance Label Container" groups=["Unit Distance Info"]]
 unique_name_in_owner = true
 self_modulate = Color(1, 0, 0, 1)
-layout_mode = 2
-
-[node name="Distance Label" type="Label" parent="Container Container/Distance Label Container" groups=["Unit Distance Info"]]
-unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Distance Line" type="Line2D" parent="." groups=["Unit Distance Info"]]
@@ -75,65 +176,237 @@ shape = SubResource("SegmentShape2D_b3y04")
 script = ExtResource("4_f2ita")
 metadata/_custom_type_script = "uid://couw105c3bde4"
 
-[node name="CompoundState" type="Node" parent="StateChart"]
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("5_fh57n")
+
+[node name="ActionValidity" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_hix5a")
+initial_state = NodePath("Valid")
+
+[node name="Valid" type="Node" parent="StateChart/Root/ActionValidity"]
+script = ExtResource("6_fh57n")
+
+[node name="NonThruCheck" type="Node" parent="StateChart/Root/ActionValidity/Valid"]
+script = ExtResource("7_hix5a")
+to = NodePath("../../Invalid")
+event = &"invalid"
+delay_in_seconds = "0.0"
+
+[node name="ThruCheck" type="Node" parent="StateChart/Root/ActionValidity/Valid"]
+script = ExtResource("7_hix5a")
+to = NodePath("../../Invalid")
+event = &"thru_invalid"
+guard = SubResource("Resource_bf4h8")
+delay_in_seconds = "0.0"
+
+[node name="Invalid" type="Node" parent="StateChart/Root/ActionValidity"]
+script = ExtResource("6_fh57n")
+
+[node name="NonThruReturn" type="Node" parent="StateChart/Root/ActionValidity/Invalid"]
+script = ExtResource("7_hix5a")
+to = NodePath("../../Valid")
+event = &"valid"
+guard = SubResource("Resource_tw306")
+delay_in_seconds = "0.0"
+
+[node name="ThruReturn" type="Node" parent="StateChart/Root/ActionValidity/Invalid"]
+script = ExtResource("7_hix5a")
+to = NodePath("../../Valid")
+event = &"thru_valid"
+guard = SubResource("Resource_amjqr")
+delay_in_seconds = "0.0"
+
+[node name="Action" type="Node" parent="StateChart/Root"]
 script = ExtResource("5_hix5a")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateChart/CompoundState"]
+[node name="Idle" type="Node" parent="StateChart/Root/Action"]
 script = ExtResource("6_fh57n")
 
-[node name="Moving" type="Node" parent="StateChart/CompoundState/Idle"]
+[node name="Moving" type="Node" parent="StateChart/Root/Action/Idle"]
 script = ExtResource("7_hix5a")
 to = NodePath("../../Moving")
 event = &"moving"
 delay_in_seconds = "0.0"
 
-[node name="Attacking" type="Node" parent="StateChart/CompoundState/Idle"]
+[node name="Attacking" type="Node" parent="StateChart/Root/Action/Idle"]
 script = ExtResource("7_hix5a")
 to = NodePath("../../Attacking")
 event = &"attacking"
 delay_in_seconds = "0.0"
 
-[node name="Healing" type="Node" parent="StateChart/CompoundState/Idle"]
+[node name="Healing" type="Node" parent="StateChart/Root/Action/Idle"]
 script = ExtResource("7_hix5a")
 to = NodePath("../../Healing")
 event = &"healing"
 delay_in_seconds = "0.0"
 
-[node name="Moving" type="Node" parent="StateChart/CompoundState"]
+[node name="Moving" type="Node" parent="StateChart/Root/Action"]
 script = ExtResource("6_fh57n")
 
-[node name="Idle" type="Node" parent="StateChart/CompoundState/Moving"]
+[node name="Idle" type="Node" parent="StateChart/Root/Action/Moving"]
 script = ExtResource("7_hix5a")
 to = NodePath("../../Idle")
 event = &"to_idle"
 delay_in_seconds = "0.0"
 
-[node name="Attacking" type="Node" parent="StateChart/CompoundState"]
+[node name="Attacking" type="Node" parent="StateChart/Root/Action"]
 script = ExtResource("6_fh57n")
 
-[node name="Idle" type="Node" parent="StateChart/CompoundState/Attacking"]
+[node name="Idle" type="Node" parent="StateChart/Root/Action/Attacking"]
 script = ExtResource("7_hix5a")
 to = NodePath("../../Idle")
 event = &"to_idle"
 delay_in_seconds = "0.0"
 
-[node name="Healing" type="Node" parent="StateChart/CompoundState"]
+[node name="Healing" type="Node" parent="StateChart/Root/Action"]
 script = ExtResource("6_fh57n")
 
-[node name="Idle" type="Node" parent="StateChart/CompoundState/Healing"]
+[node name="Idle" type="Node" parent="StateChart/Root/Action/Healing"]
 script = ExtResource("7_hix5a")
 to = NodePath("../../Idle")
 event = &"to_idle"
+delay_in_seconds = "0.0"
+
+[node name="TooFar" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_hix5a")
+initial_state = NodePath("NotTooFar")
+
+[node name="NotTooFar" type="Node" parent="StateChart/Root/TooFar"]
+script = ExtResource("6_fh57n")
+
+[node name="Transition" type="Node" parent="StateChart/Root/TooFar/NotTooFar"]
+script = ExtResource("7_hix5a")
+to = NodePath("../../TooFar")
+event = &"too_far"
+delay_in_seconds = "0.0"
+
+[node name="TooFar" type="Node" parent="StateChart/Root/TooFar"]
+script = ExtResource("6_fh57n")
+
+[node name="Transition" type="Node" parent="StateChart/Root/TooFar/TooFar"]
+script = ExtResource("7_hix5a")
+to = NodePath("../../NotTooFar")
+event = &"not_too_far"
+delay_in_seconds = "0.0"
+
+[node name="ThruWall" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_hix5a")
+initial_state = NodePath("NotThruWall")
+
+[node name="NotThruWall" type="Node" parent="StateChart/Root/ThruWall"]
+script = ExtResource("6_fh57n")
+
+[node name="Transition" type="Node" parent="StateChart/Root/ThruWall/NotThruWall"]
+script = ExtResource("7_hix5a")
+to = NodePath("../../ThruWall")
+event = &"thru_wall"
+delay_in_seconds = "0.0"
+
+[node name="ThruWall" type="Node" parent="StateChart/Root/ThruWall"]
+script = ExtResource("6_fh57n")
+
+[node name="Transition" type="Node" parent="StateChart/Root/ThruWall/ThruWall"]
+script = ExtResource("7_hix5a")
+to = NodePath("../../NotThruWall")
+event = &"not_thru_wall"
+delay_in_seconds = "0.0"
+
+[node name="ThruAlly" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_hix5a")
+initial_state = NodePath("NotThruAlly")
+
+[node name="NotThruAlly" type="Node" parent="StateChart/Root/ThruAlly"]
+script = ExtResource("6_fh57n")
+
+[node name="Transition" type="Node" parent="StateChart/Root/ThruAlly/NotThruAlly"]
+script = ExtResource("7_hix5a")
+to = NodePath("../../ThruAlly")
+event = &"thru_ally"
+delay_in_seconds = "0.0"
+
+[node name="ThruAlly" type="Node" parent="StateChart/Root/ThruAlly"]
+script = ExtResource("6_fh57n")
+
+[node name="Transition" type="Node" parent="StateChart/Root/ThruAlly/ThruAlly"]
+script = ExtResource("7_hix5a")
+to = NodePath("../../NotThruAlly")
+event = &"not_thru_ally"
+delay_in_seconds = "0.0"
+
+[node name="DistanceColor" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_hix5a")
+initial_state = NodePath("White")
+
+[node name="White" type="Node" parent="StateChart/Root/DistanceColor"]
+script = ExtResource("6_fh57n")
+
+[node name="ToRed" type="Node" parent="StateChart/Root/DistanceColor/White"]
+script = ExtResource("7_hix5a")
+to = NodePath("../../Red")
+event = &"color_check"
+guard = SubResource("Resource_a4h1k")
+delay_in_seconds = "0.0"
+
+[node name="ToYellow" type="Node" parent="StateChart/Root/DistanceColor/White"]
+script = ExtResource("7_hix5a")
+to = NodePath("../../Yellow")
+event = &"color_check"
+guard = SubResource("Resource_3aovj")
+delay_in_seconds = "0.0"
+
+[node name="Yellow" type="Node" parent="StateChart/Root/DistanceColor"]
+script = ExtResource("6_fh57n")
+
+[node name="ToRed" type="Node" parent="StateChart/Root/DistanceColor/Yellow"]
+script = ExtResource("7_hix5a")
+to = NodePath("../../Red")
+event = &"color_check"
+guard = SubResource("Resource_yh8mh")
+delay_in_seconds = "0.0"
+
+[node name="ToWhite" type="Node" parent="StateChart/Root/DistanceColor/Yellow"]
+script = ExtResource("7_hix5a")
+to = NodePath("../../White")
+event = &"color_check"
+guard = SubResource("Resource_lohvn")
+delay_in_seconds = "0.0"
+
+[node name="Red" type="Node" parent="StateChart/Root/DistanceColor"]
+script = ExtResource("6_fh57n")
+
+[node name="ToWhite" type="Node" parent="StateChart/Root/DistanceColor/Red"]
+script = ExtResource("7_hix5a")
+to = NodePath("../../White")
+event = &"color_check"
+guard = SubResource("Resource_lohvn")
+delay_in_seconds = "0.0"
+
+[node name="ToYellow" type="Node" parent="StateChart/Root/DistanceColor/Red"]
+script = ExtResource("7_hix5a")
+to = NodePath("../../Yellow")
+event = &"color_check"
+guard = SubResource("Resource_3aovj")
 delay_in_seconds = "0.0"
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="area_entered" from="Distance Line/Distance Line Collision" to="." method="_on_distance_line_collision_area_entered"]
 [connection signal="area_exited" from="Distance Line/Distance Line Collision" to="." method="_on_distance_line_collision_area_exited"]
-[connection signal="state_input" from="StateChart/CompoundState/Idle" to="." method="_on_idle_state_input"]
-[connection signal="state_input" from="StateChart/CompoundState/Moving" to="." method="_on_moving_state_input"]
-[connection signal="state_processing" from="StateChart/CompoundState/Moving" to="." method="_on_moving_state_processing"]
-[connection signal="state_input" from="StateChart/CompoundState/Attacking" to="." method="_on_attacking_state_input"]
-[connection signal="state_processing" from="StateChart/CompoundState/Attacking" to="." method="_on_attacking_state_processing"]
-[connection signal="state_input" from="StateChart/CompoundState/Healing" to="." method="_on_healing_state_input"]
-[connection signal="state_processing" from="StateChart/CompoundState/Healing" to="." method="_on_healing_state_processing"]
+[connection signal="event_received" from="StateChart/Root/ActionValidity/Valid" to="." method="_on_valid_event_received"]
+[connection signal="state_entered" from="StateChart/Root/Action/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_input" from="StateChart/Root/Action/Idle" to="." method="_on_idle_state_input"]
+[connection signal="state_input" from="StateChart/Root/Action/Moving" to="." method="_on_moving_state_input"]
+[connection signal="state_processing" from="StateChart/Root/Action/Moving" to="." method="_on_moving_state_processing"]
+[connection signal="state_input" from="StateChart/Root/Action/Attacking" to="." method="_on_attacking_state_input"]
+[connection signal="state_processing" from="StateChart/Root/Action/Attacking" to="." method="_on_attacking_state_processing"]
+[connection signal="state_input" from="StateChart/Root/Action/Healing" to="." method="_on_healing_state_input"]
+[connection signal="state_processing" from="StateChart/Root/Action/Healing" to="." method="_on_healing_state_processing"]
+[connection signal="state_entered" from="StateChart/Root/TooFar/TooFar" to="." method="_on_too_far_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/TooFar/TooFar" to="." method="_on_too_far_state_exited"]
+[connection signal="state_entered" from="StateChart/Root/ThruWall/ThruWall" to="." method="_on_thru_wall_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/ThruWall/ThruWall" to="." method="_on_thru_wall_state_exited"]
+[connection signal="state_entered" from="StateChart/Root/ThruAlly/ThruAlly" to="." method="_on_thru_ally_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/ThruAlly/ThruAlly" to="." method="_on_thru_ally_state_exited"]
+[connection signal="state_entered" from="StateChart/Root/DistanceColor/White" to="." method="_on_white_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/DistanceColor/Yellow" to="." method="_on_yellow_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/DistanceColor/Red" to="." method="_on_red_state_entered"]

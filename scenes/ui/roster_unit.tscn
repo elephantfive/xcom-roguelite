@@ -29,6 +29,7 @@ layout_mode = 2
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("3_31fo0")
+warn_on_sending_unknown_events = false
 metadata/_custom_type_script = "uid://couw105c3bde4"
 
 [node name="CompoundState" type="Node" parent="StateChart"]

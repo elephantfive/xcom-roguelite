@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ygb05qawriwh"]
+[gd_scene load_steps=15 format=3 uid="uid://ygb05qawriwh"]
 
 [ext_resource type="Script" uid="uid://e0nun6mx1aou" path="res://scripts/main/unit_info.gd" id="1_j6bet"]
 [ext_resource type="Script" uid="uid://c1o8tsdvtkydf" path="res://scripts/main/game_manager.gd" id="2_57akw"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://vwqdce8l4gp0" path="res://scripts/ui/hud.gd" id="3_vbg7o"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_1cexc"]
 [ext_resource type="Script" uid="uid://dokd1icoe8c62" path="res://scripts/campaign map/player_marker.gd" id="4_osw1o"]
+[ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="4_qa38x"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_8dywm"]
 [ext_resource type="PackedScene" uid="uid://ccj00txght02n" path="res://scenes/campaign map/location.tscn" id="5_xsca3"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_0yifu"]
@@ -37,23 +38,26 @@ one_shot = true
 script = ExtResource("3_qa38x")
 metadata/_custom_type_script = "uid://couw105c3bde4"
 
-[node name="CompoundState" type="Node" parent="Game Manager/StateChart"]
+[node name="Root" type="Node" parent="Game Manager/StateChart"]
+script = ExtResource("4_qa38x")
+
+[node name="SquadChange" type="Node" parent="Game Manager/StateChart/Root"]
 script = ExtResource("4_1cexc")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="Game Manager/StateChart/CompoundState"]
+[node name="Idle" type="Node" parent="Game Manager/StateChart/Root/SquadChange"]
 script = ExtResource("5_8dywm")
 
-[node name="Transition" type="Node" parent="Game Manager/StateChart/CompoundState/Idle"]
+[node name="Transition" type="Node" parent="Game Manager/StateChart/Root/SquadChange/Idle"]
 script = ExtResource("6_0yifu")
 to = NodePath("../../ChangingSquad")
 event = &"squad_change"
 delay_in_seconds = "0.0"
 
-[node name="ChangingSquad" type="Node" parent="Game Manager/StateChart/CompoundState"]
+[node name="ChangingSquad" type="Node" parent="Game Manager/StateChart/Root/SquadChange"]
 script = ExtResource("5_8dywm")
 
-[node name="Transition" type="Node" parent="Game Manager/StateChart/CompoundState/ChangingSquad"]
+[node name="Transition" type="Node" parent="Game Manager/StateChart/Root/SquadChange/ChangingSquad"]
 script = ExtResource("6_0yifu")
 to = NodePath("../../Idle")
 event = &"squad_changed"
@@ -246,9 +250,9 @@ visible = false
 
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="timeout" from="Game Manager/LevelEndTimer" to="Game Manager" method="_on_level_end_timer_timeout"]
-[connection signal="state_entered" from="Game Manager/StateChart/CompoundState/Idle" to="Game Manager" method="_on_idle_state_entered"]
-[connection signal="state_entered" from="Game Manager/StateChart/CompoundState/ChangingSquad" to="Game Manager" method="_on_changing_squad_state_entered"]
-[connection signal="state_input" from="Game Manager/StateChart/CompoundState/ChangingSquad" to="Game Manager" method="_on_changing_squad_state_input"]
+[connection signal="state_entered" from="Game Manager/StateChart/Root/SquadChange/Idle" to="Game Manager" method="_on_idle_state_entered"]
+[connection signal="state_entered" from="Game Manager/StateChart/Root/SquadChange/ChangingSquad" to="Game Manager" method="_on_changing_squad_state_entered"]
+[connection signal="state_input" from="Game Manager/StateChart/Root/SquadChange/ChangingSquad" to="Game Manager" method="_on_changing_squad_state_input"]
 [connection signal="pressed" from="HUD/Actions/Move" to="HUD" method="_on_move_pressed"]
 [connection signal="pressed" from="HUD/Actions/Attack" to="HUD" method="_on_attack_pressed"]
 [connection signal="pressed" from="HUD/Actions/End" to="HUD" method="_on_end_pressed"]

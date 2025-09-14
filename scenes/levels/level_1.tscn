@@ -30,3 +30,6 @@ position = Vector2(339, 185)
 
 [node name="PlayerSpawn 0" type="Node2D" parent="PlayerSpawns"]
 position = Vector2(147, 196)
+
+[node name="PlayerSpawn 1" type="Node2D" parent="PlayerSpawns"]
+position = Vector2(160, 325)
