@@ -7,15 +7,15 @@ var attribute_list = {}
 
 func _ready():
 	character_attributes['Amigol'] = {
-			'name': 'Amigol',
-			'attack_damage': 2,
-			'attack_ap_cost': 1,
-			'health':  20,
-			'max_move_distance':  20,
-			'max_attack_distance': 20,
-			'max_action_points': 1,
-			'unit_actions': ['Attack', 'Move'],
-			'texture': "res://icon.svg",
+		'name': 'Amigol',
+		'attack_damage': 2,
+		'attack_ap_cost': 1,
+		'health':  20,
+		'max_move_distance':  20,
+		'max_attack_distance': 20,
+		'max_action_points': 1,
+		'unit_actions': ['Attack', 'Move'],
+		'texture': "res://icon.svg",
 		}
 	character_attributes['Nidys'] = {
 		'name': 'Nidys',

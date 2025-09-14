@@ -14,6 +14,8 @@ func new_unit():
 		if button.name in selected_unit.attributes['unit_actions']:
 			button.show()
 			button.text = unit_info.button_text(selected_unit.attributes['name'], button.name)
+		elif button.name != 'End':
+			button.hide()
 
 
 func _on_move_pressed():
@@ -26,3 +28,7 @@ func _on_attack_pressed():
 
 func _on_end_pressed():
 	game_manager.turn_end()
+
+
+func _on_heal_pressed():
+	selected_unit.state_chart.send_event('healing')

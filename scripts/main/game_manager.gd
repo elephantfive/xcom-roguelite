@@ -21,6 +21,7 @@ const UNIT = preload("res://scenes/entities/units/unit.tscn")
 @onready var reward_screen = $"../Reward Screen"
 @onready var unit_roster = %"Unit Roster"
 @onready var unit_info = %UnitInfo
+@onready var active_cursor = %ActiveCursor
 
 
 func _ready():
@@ -31,8 +32,6 @@ func _ready():
 func turn_end():
 	for button in hud.actions.get_children():
 		button.hide()
-	if selected_unit != null:
-		selected_unit.active_cursor.process_mode = PROCESS_MODE_DISABLED
 	selected_unit = null
 	turn_adv()
 	$TurnTimer.start()
@@ -54,6 +53,8 @@ func turn_adv():
 
 
 func level_adv(level):
+	active_cursor.process_mode = PROCESS_MODE_INHERIT
+	active_cursor.show()
 	active_level = load(level).instantiate()
 	get_parent().add_child(active_level)
 	targets = []
@@ -63,14 +64,14 @@ func level_adv(level):
 			var new_unit = UNIT.instantiate()
 			new_unit.attributes = unit.attributes
 			new_unit.game_manager = self
+			new_unit.active_cursor = active_cursor
 			new_unit.hud = hud
 			active_level.entities.add_child(new_unit)
-			var spawn = randi_range(0, active_level.player_spawns.get_child_count() - 1)
 			for child in active_level.player_spawns.get_children():
-				if str(spawn) in child.name:
-					new_unit.position = child.position
-					child.queue_free()
-					break
+				new_unit.position = child.position
+				new_unit.init_pos = child.position
+				child.free()
+				break
 					
 	for entity in active_level.entities.get_children():
 		if entity.type == 'ally':
@@ -91,6 +92,8 @@ func level_adv(level):
 	turn = turns[current_turn]
 
 func level_end():
+	active_cursor.hide()
+	active_cursor.process_mode = PROCESS_MODE_DISABLED
 	for entity in active_level.entities.get_children():
 		if entity.type == 'ally':
 			unit_info.update(entity.attributes['name'], entity)

@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://ygb05qawriwh"]
+[gd_scene load_steps=17 format=3 uid="uid://ygb05qawriwh"]
 
+[ext_resource type="Script" uid="uid://jb8g77b0p2hp" path="res://scripts/main/active_cursor.gd" id="1_1cexc"]
 [ext_resource type="Script" uid="uid://e0nun6mx1aou" path="res://scripts/main/unit_info.gd" id="1_j6bet"]
 [ext_resource type="Script" uid="uid://c1o8tsdvtkydf" path="res://scripts/main/game_manager.gd" id="2_57akw"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_qa38x"]
@@ -14,10 +15,27 @@
 [ext_resource type="Script" uid="uid://csjw6m7rnqkaa" path="res://scripts/ui/unit_roster.gd" id="8_osw1o"]
 [ext_resource type="PackedScene" uid="uid://31q5hdaeariq" path="res://scenes/ui/squad_unit.tscn" id="10_y2ajb"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8dywm"]
+size = Vector2(4, 4)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4msxo"]
 size = Vector2(40, 40)
 
 [node name="Game" type="Node2D"]
+
+[node name="ActiveCursor" type="Area2D" parent="."]
+unique_name_in_owner = true
+process_mode = 4
+visible = false
+monitorable = false
+script = ExtResource("1_1cexc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActiveCursor"]
+shape = SubResource("RectangleShape2D_8dywm")
+
+[node name="Label" type="Label" parent="ActiveCursor"]
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="UnitInfo" type="Node" parent="."]
 unique_name_in_owner = true
@@ -248,6 +266,8 @@ visible = false
 
 [node name="Node" type="Node" parent="."]
 
+[connection signal="area_entered" from="ActiveCursor" to="ActiveCursor" method="_on_area_entered"]
+[connection signal="area_exited" from="ActiveCursor" to="ActiveCursor" method="_on_area_exited"]
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="timeout" from="Game Manager/LevelEndTimer" to="Game Manager" method="_on_level_end_timer_timeout"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/SquadChange/Idle" to="Game Manager" method="_on_idle_state_entered"]
@@ -255,6 +275,7 @@ visible = false
 [connection signal="state_input" from="Game Manager/StateChart/Root/SquadChange/ChangingSquad" to="Game Manager" method="_on_changing_squad_state_input"]
 [connection signal="pressed" from="HUD/Actions/Move" to="HUD" method="_on_move_pressed"]
 [connection signal="pressed" from="HUD/Actions/Attack" to="HUD" method="_on_attack_pressed"]
+[connection signal="pressed" from="HUD/Actions/Heal" to="HUD" method="_on_heal_pressed"]
 [connection signal="pressed" from="HUD/Actions/End" to="HUD" method="_on_end_pressed"]
 [connection signal="input_event" from="Campaign Map/Player Marker" to="Campaign Map/Player Marker" method="_on_input_event"]
 [connection signal="pressed" from="Campaign Map Hud/UnitDesc/RemoveFromSquad" to="Campaign Map Hud/Unit Holder/SquadUnit" method="_on_remove_from_squad_pressed"]

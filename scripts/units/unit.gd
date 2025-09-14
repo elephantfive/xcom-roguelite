@@ -11,13 +11,13 @@ var action_chart: Array = []
 var type: String = 'ally'
 var current_distance: float
 var target: Area2D
+var active_cursor: Area2D
 
 
 const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 @onready var hud: CanvasLayer
 @onready var game_manager: Node
 
-@onready var active_cursor = %ActiveCursor
 @onready var distance_line = $"Distance Line"
 @onready var distance_label = %"Distance Label"
 @onready var warning_label = %"Warning Label"
@@ -35,12 +35,8 @@ func _ready():
 
 
 func _process(_delta):
-	active_cursor.position = get_viewport().get_mouse_position() - global_position
-	if target != null:
-		$ActiveCursor/Label.text = 'Target: ' + target.name
-	else:
-		$ActiveCursor/Label.text = 'No target.'
-
+	target = active_cursor.target
+	
 
 func _on_game_manager_turn_start():
 	points_reset()
@@ -49,21 +45,19 @@ func _on_game_manager_turn_start():
 
 func _input(event):
 	if game_manager.turn == 'player':
-		if game_manager.selected_unit == self:
-			if event.is_action_pressed("right_click"):
-				state_chart.send_event('to_idle')
-				position = init_pos
-				get_tree().call_group("Unit Distance Info", "hide")
+		if event.is_action_pressed("right_click"):
+			state_chart.send_event('to_idle')
+			position = init_pos
+			distance_toggle(false)
 
 
 func _on_input_event(_viewport, event, _shape_idx):
 	if game_manager.turn == 'player':
-		if game_manager.selected_unit != self:
+		if game_manager.selected_unit == null:
 			if event.is_action_pressed("left_click"):
 				game_manager.selected_unit = self
 				init_pos = position
 				hud.new_unit()
-				active_cursor.process_mode = PROCESS_MODE_INHERIT
 
 
 func points_reset():
@@ -75,6 +69,11 @@ func points_update():
 	health_label.text = 'Current Health: ' + str(attributes['health'])
 	move_points_label.text = 'Current Move Points: ' + str(snapped(current_move_points, 0.01))
 	action_points_label.text = 'Current Action Points: ' + str(current_action_points)
+
+func distance_toggle(vis):
+	distance_label.visible = vis
+	warning_label.visible = vis
+	distance_line.visible = vis
 #endregion
 
 #region Actions
@@ -87,8 +86,6 @@ func move():
 	init_pos = position
 	state_chart.send_event('to_idle')
 	current_move_points -= current_distance
-	points_update()
-	get_tree().call_group("Unit Distance Info", "hide")
 
 
 func attack():
@@ -99,22 +96,21 @@ func attack():
 		new_proj.alignment = 'ally'
 		new_proj.game_manager = game_manager
 		add_child(new_proj)
-		points_update()
 	state_chart.send_event('to_idle')
-	get_tree().call_group("Unit Distance Info", "hide")
 
 
 func heal():
 	if current_action_points - attributes['heal_ap_cost'] >= 0:
-		#TODO: Implement targeting and, of course, healing
 		current_action_points -= attributes['heal_ap_cost']
-		points_update()
+		if target.get('attributes["health"]') != null:
+			target.health += attributes['heal']
+			target.points_update()
 	state_chart.send_event('to_idle')
 #endregion
 
 #region StateChart functionality
 func distance_check(max_distance):
-	get_tree().call_group("Unit Distance Info", "show")
+	distance_toggle(true)
 	distance_line.points = PackedVector2Array([init_pos - global_position, get_viewport().get_mouse_position() - global_position])
 	current_distance = distance_line.points[0].distance_to(distance_line.points[1]) / 10
 	distance_label.text = str(snapped(current_distance, 0.01))
@@ -138,6 +134,9 @@ func distance_group_modulate(color):
 	for component in distance_components:
 		component.self_modulate = color
 
+func _on_idle_state_entered():
+	distance_toggle(false)
+	points_update()
 
 func _on_moving_state_processing(_delta):
 	position = get_viewport().get_mouse_position()
@@ -170,7 +169,6 @@ func _on_healing_state_input(event):
 func _on_idle_state_input(event):
 	if event.is_action_pressed('right_click'):
 		game_manager.selected_unit = null
-		active_cursor.process_mode = PROCESS_MODE_DISABLED
 		for button in hud.actions.get_children():
 			if button.name != 'End':
 				button.hide()
