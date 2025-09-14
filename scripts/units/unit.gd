@@ -30,6 +30,7 @@ const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 
 #region Startup and resetting
 func _ready():
+	attributes['health'] = attributes['base_health']
 	points_reset()
 	points_update()
 
@@ -102,8 +103,11 @@ func attack():
 func heal():
 	if current_action_points - attributes['heal_ap_cost'] >= 0:
 		current_action_points -= attributes['heal_ap_cost']
-		if target.get('attributes["health"]') != null:
-			target.health += attributes['heal']
+		if target.type == 'ally' or target.type == 'enemy':
+			if target.attributes['health'] + attributes['heal'] <= target.attributes['base_health'] + attributes['max_overheal']:
+				target.attributes['health'] += attributes['heal']
+			else:
+				target.attributes['health'] = target.attributes['base_health'] + attributes['max_overheal']
 			target.points_update()
 	state_chart.send_event('to_idle')
 #endregion

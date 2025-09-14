@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://nutwb7ivdl7e"]
+[gd_scene load_steps=45 format=3 uid="uid://nutwb7ivdl7e"]
 
 [ext_resource type="Script" uid="uid://bu6iddnt2t3hk" path="res://scripts/units/unit.gd" id="1_btf8p"]
 [ext_resource type="Script" uid="uid://d11jmh7flvcad" path="res://scripts/units/distance_line.gd" id="2_bork7"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_hix5a"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_fh57n"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_hix5a"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="9_kaxgi"]
 [ext_resource type="Script" uid="uid://c6l0181f4ytps" path="res://addons/godot_state_charts/guard.gd" id="9_oj84s"]
 [ext_resource type="Script" uid="uid://bambbrd2wupx0" path="res://addons/godot_state_charts/state_is_active_guard.gd" id="10_bf4h8"]
 [ext_resource type="Script" uid="uid://dgd4i8hrrxfvm" path="res://addons/godot_state_charts/not_guard.gd" id="10_otsl3"]
@@ -168,13 +167,6 @@ metadata/_custom_type_script = "uid://bxprlw40wl0c3"
 
 [node name="Unit" type="Area2D"]
 script = ExtResource("1_btf8p")
-
-[node name="StateChartDebugger" parent="." instance=ExtResource("9_kaxgi")]
-offset_left = 216.0
-offset_top = 109.0
-offset_right = 932.0
-offset_bottom = 572.0
-initial_node_to_watch = NodePath("../StateChart")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true

@@ -3,6 +3,7 @@ const ROSTER_UNIT = preload("res://scenes/ui/roster_unit.tscn")
 
 func _ready():
 	add_unit('Amigol')
+	add_unit('Nidys')
 
 func add_unit(unit_name):
 	var new_unit = ROSTER_UNIT.instantiate()
