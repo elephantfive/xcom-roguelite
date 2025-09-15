@@ -30,7 +30,9 @@ const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 
 #region Startup and resetting
 func _ready():
-	attributes['health'] = attributes['base_health']
+	attributes = game_manager.unit_info.character_attributes[name]
+	if not attributes.has('health'):
+		attributes['health'] = attributes['base_health']
 	points_reset()
 	points_update()
 
@@ -45,6 +47,8 @@ func _on_game_manager_turn_start():
 
 
 func _input(event):
+	if event.is_action_pressed('test_key'):
+		print(str(attributes))
 	if game_manager.turn == 'player':
 		if event.is_action_pressed("right_click"):
 			state_chart.send_event('to_idle')

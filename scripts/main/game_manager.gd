@@ -23,7 +23,6 @@ const UNIT = preload("res://scenes/entities/units/unit.tscn")
 @onready var unit_info = %UnitInfo
 @onready var active_cursor = %ActiveCursor
 
-
 func _ready():
 	#level_adv("res://scenes/levels/level_1.tscn")
 	pass
@@ -96,9 +95,12 @@ func level_adv(level):
 func level_end():
 	active_cursor.hide()
 	active_cursor.process_mode = PROCESS_MODE_DISABLED
+	
 	for entity in active_level.entities.get_children():
-		if entity.type == 'ally':
-			unit_info.update(entity.attributes['name'], entity)
+		for unit in unit_info.character_attributes:
+			if entity.type == 'ally':
+				if entity.attributes['name'] == unit_info.character_attributes[unit]['name']:
+					unit_info.update(entity.attributes['name'], entity)
 
 	for unit in unit_holder.get_children():
 		unit.update()
