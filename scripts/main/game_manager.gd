@@ -164,8 +164,10 @@ func _on_in_level_state_entered():
 
 
 func _on_reward_state_entered():
+	toggle("Campaign Menus", PROCESS_MODE_INHERIT, false)
 	toggle(reward_screen, PROCESS_MODE_INHERIT, true)
 
 
 func _on_level_up_state_entered():
+	toggle("Campaign Menus", PROCESS_MODE_INHERIT, false)
 	toggle(level_up, PROCESS_MODE_INHERIT, true)

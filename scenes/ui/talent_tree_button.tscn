@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvddh111yx7eb"]
+
+[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="1_gv6g5"]
+[ext_resource type="Script" uid="uid://btpd3wbdrt5pg" path="res://scripts/ui/talent_tree_button.gd" id="2_4l0jb"]
+
+[node name="TalentTreeButton" type="TextureButton"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_gv6g5")
+script = ExtResource("2_4l0jb")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

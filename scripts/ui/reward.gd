@@ -30,4 +30,8 @@ func _on_texture_button_pressed():
 	new_unit.unit_info = %UnitInfo
 	new_unit.unit_name = unit_name
 	new_unit.update()
-	game_manager.state_chart.send_event('idle')
+	for unit in unit_info.character_attributes:
+		game_manager.state_chart.set_expression_property("xp", unit_info.character_attributes[unit]['xp'])
+		game_manager.state_chart.set_expression_property("xp_needed", unit_info.character_attributes[unit]['xp_needed'])
+		game_manager.state_chart.send_event('idle')
+		break

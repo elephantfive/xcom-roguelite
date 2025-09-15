@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ygb05qawriwh"]
+[gd_scene load_steps=20 format=3 uid="uid://ygb05qawriwh"]
 
 [ext_resource type="Script" uid="uid://jb8g77b0p2hp" path="res://scripts/main/active_cursor.gd" id="1_1cexc"]
 [ext_resource type="Script" uid="uid://e0nun6mx1aou" path="res://scripts/main/unit_info.gd" id="1_j6bet"]
@@ -11,8 +11,20 @@
 [ext_resource type="PackedScene" uid="uid://ccj00txght02n" path="res://scenes/campaign map/location.tscn" id="5_xsca3"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_0yifu"]
 [ext_resource type="PackedScene" uid="uid://b6kq0ugyjc2mj" path="res://scenes/ui/reward.tscn" id="6_y2ajb"]
+[ext_resource type="Script" uid="uid://le5w1cm0ul8p" path="res://addons/godot_state_charts/expression_guard.gd" id="7_1cexc"]
 [ext_resource type="Script" uid="uid://csjw6m7rnqkaa" path="res://scripts/ui/unit_roster.gd" id="8_osw1o"]
 [ext_resource type="PackedScene" uid="uid://31q5hdaeariq" path="res://scenes/ui/squad_unit.tscn" id="10_y2ajb"]
+[ext_resource type="PackedScene" uid="uid://dlx6r86vgqwrp" path="res://scenes/ui/talent_tree.tscn" id="15_8dywm"]
+
+[sub_resource type="Resource" id="Resource_1cexc"]
+script = ExtResource("7_1cexc")
+expression = "xp < xp_needed"
+metadata/_custom_type_script = "uid://le5w1cm0ul8p"
+
+[sub_resource type="Resource" id="Resource_8dywm"]
+script = ExtResource("7_1cexc")
+expression = "xp >= xp_needed"
+metadata/_custom_type_script = "uid://le5w1cm0ul8p"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8dywm"]
 size = Vector2(4, 4)
@@ -142,6 +154,14 @@ script = ExtResource("5_8dywm")
 script = ExtResource("6_0yifu")
 to = NodePath("../../Idle")
 event = &"idle"
+guard = SubResource("Resource_1cexc")
+delay_in_seconds = "0.0"
+
+[node name="Transition" type="Node" parent="Game Manager/StateChart/Root/Reward"]
+script = ExtResource("6_0yifu")
+to = NodePath("../../LevelUp")
+event = &"idle"
+guard = SubResource("Resource_8dywm")
 delay_in_seconds = "0.0"
 
 [node name="LevelSelect" type="Node" parent="Game Manager/StateChart/Root"]
@@ -349,6 +369,8 @@ layout_mode = 2
 [node name="Level Up" type="CanvasLayer" parent="." groups=["Campaign Menus"]]
 unique_name_in_owner = true
 visible = false
+
+[node name="TalentTree" parent="Level Up" instance=ExtResource("15_8dywm")]
 
 [node name="Loadout" type="CanvasLayer" parent="." groups=["Campaign Menus"]]
 unique_name_in_owner = true
