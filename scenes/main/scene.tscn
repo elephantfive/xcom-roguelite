@@ -387,6 +387,7 @@ visible = false
 [connection signal="state_entered" from="Game Manager/StateChart/Root/ChangingSquad" to="Game Manager" method="_on_changing_squad_state_entered"]
 [connection signal="state_input" from="Game Manager/StateChart/Root/ChangingSquad" to="Game Manager" method="_on_changing_squad_state_input"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/LevelUp" to="Game Manager" method="_on_level_up_state_entered"]
+[connection signal="state_entered" from="Game Manager/StateChart/Root/LevelUp" to="Level Up/TalentTree" method="_on_level_up_state_entered"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/Reward" to="Game Manager" method="_on_reward_state_entered"]
 [connection signal="area_entered" from="ActiveCursor" to="ActiveCursor" method="_on_area_entered"]
 [connection signal="area_exited" from="ActiveCursor" to="ActiveCursor" method="_on_area_exited"]

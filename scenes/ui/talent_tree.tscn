@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlx6r86vgqwrp"]
+[gd_scene load_steps=4 format=3 uid="uid://dlx6r86vgqwrp"]
 
 [ext_resource type="Script" uid="uid://cosm4pa1c0qdm" path="res://scripts/ui/talent_tree.gd" id="1_pprm8"]
 [ext_resource type="PackedScene" uid="uid://cvddh111yx7eb" path="res://scenes/ui/talent_tree_button.tscn" id="1_ywfdb"]
+[ext_resource type="Script" uid="uid://b3xs4oyu6lnph" path="res://scripts/ui/talent_info.gd" id="2_eavx0"]
 
 [node name="TalentTree" type="Control"]
 layout_mode = 3
@@ -15,72 +16,78 @@ grow_horizontal = 2
 script = ExtResource("1_pprm8")
 
 [node name="TalentInfo" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_eavx0")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="TreeContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
 offset_right = 392.0
 offset_bottom = 788.0
 theme_override_constants/separation = 75
 
-[node name="Specialization3" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Specialization1" type="VBoxContainer" parent="TreeContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TalentTreeButton" parent="HBoxContainer/Specialization3" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton" parent="TreeContainer/Specialization1" instance=ExtResource("1_ywfdb")]
 layout_mode = 2
 
-[node name="TalentTreeButton2" parent="HBoxContainer/Specialization3" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton2" parent="TreeContainer/Specialization1" instance=ExtResource("1_ywfdb")]
 layout_mode = 2
 
-[node name="TalentTreeButton3" parent="HBoxContainer/Specialization3" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton3" parent="TreeContainer/Specialization1" instance=ExtResource("1_ywfdb")]
 layout_mode = 2
 
-[node name="TalentTreeButton4" parent="HBoxContainer/Specialization3" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton4" parent="TreeContainer/Specialization1" instance=ExtResource("1_ywfdb")]
 layout_mode = 2
 
-[node name="TalentTreeButton5" parent="HBoxContainer/Specialization3" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton5" parent="TreeContainer/Specialization1" instance=ExtResource("1_ywfdb")]
 layout_mode = 2
 
-[node name="TalentTreeButton6" parent="HBoxContainer/Specialization3" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton6" parent="TreeContainer/Specialization1" instance=ExtResource("1_ywfdb")]
 layout_mode = 2
 
-[node name="Specialization2" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Specialization2" type="VBoxContainer" parent="TreeContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TalentTreeButton" parent="HBoxContainer/Specialization2" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton" parent="TreeContainer/Specialization2" instance=ExtResource("1_ywfdb")]
 layout_mode = 2
 
-[node name="TalentTreeButton2" parent="HBoxContainer/Specialization2" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton2" parent="TreeContainer/Specialization2" instance=ExtResource("1_ywfdb")]
 layout_mode = 2
 
-[node name="TalentTreeButton3" parent="HBoxContainer/Specialization2" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton3" parent="TreeContainer/Specialization2" instance=ExtResource("1_ywfdb")]
 layout_mode = 2
 
-[node name="TalentTreeButton4" parent="HBoxContainer/Specialization2" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton4" parent="TreeContainer/Specialization2" instance=ExtResource("1_ywfdb")]
 layout_mode = 2
 
-[node name="TalentTreeButton5" parent="HBoxContainer/Specialization2" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton5" parent="TreeContainer/Specialization2" instance=ExtResource("1_ywfdb")]
 layout_mode = 2
 
-[node name="TalentTreeButton6" parent="HBoxContainer/Specialization2" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton6" parent="TreeContainer/Specialization2" instance=ExtResource("1_ywfdb")]
 layout_mode = 2
 
-[node name="Specialization4" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Specialization3" type="VBoxContainer" parent="TreeContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TalentTreeButton" parent="HBoxContainer/Specialization4" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton" parent="TreeContainer/Specialization3" instance=ExtResource("1_ywfdb")]
 layout_mode = 2
 
-[node name="TalentTreeButton2" parent="HBoxContainer/Specialization4" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton2" parent="TreeContainer/Specialization3" instance=ExtResource("1_ywfdb")]
 layout_mode = 2
 
-[node name="TalentTreeButton3" parent="HBoxContainer/Specialization4" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton3" parent="TreeContainer/Specialization3" instance=ExtResource("1_ywfdb")]
 layout_mode = 2
 
-[node name="TalentTreeButton4" parent="HBoxContainer/Specialization4" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton4" parent="TreeContainer/Specialization3" instance=ExtResource("1_ywfdb")]
 layout_mode = 2
 
-[node name="TalentTreeButton5" parent="HBoxContainer/Specialization4" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton5" parent="TreeContainer/Specialization3" instance=ExtResource("1_ywfdb")]
 layout_mode = 2
 
-[node name="TalentTreeButton6" parent="HBoxContainer/Specialization4" instance=ExtResource("1_ywfdb")]
+[node name="TalentTreeButton6" parent="TreeContainer/Specialization3" instance=ExtResource("1_ywfdb")]
 layout_mode = 2

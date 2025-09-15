@@ -1,5 +1,5 @@
 extends TextureButton
-
+var talent: String
 
 func _on_pressed():
-	pass # Replace with function body.
+	print(talent)
