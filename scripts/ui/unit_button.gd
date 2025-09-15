@@ -60,7 +60,7 @@ func _on_changing_squad_event_received(event):
 		for unit in unit_holder.get_children():
 			if unit.unit_name == game_manager.roster_unit_selected.unit_name:
 				game_manager.roster_unit_selected = null
-				game_manager.state_chart.send_event('squad_changed')
+				game_manager.state_chart.send_event('idle')
 				valid = false
 				break
 		if valid:
@@ -73,5 +73,5 @@ func _on_changing_squad_event_received(event):
 			game_manager.roster_unit_selected.state_chart.send_event('on_squad')
 			game_manager.roster_unit_selected = null
 			game_manager.squad_unit_selected = null
-			game_manager.state_chart.send_event('squad_changed')
+			game_manager.state_chart.send_event('idle')
 			update()

@@ -1,9 +1,10 @@
 extends Area2D
-@onready var game_manager: Node
-@onready var hud: CanvasLayer
+var game_manager: Node
+var hud: CanvasLayer
 var targets:Array = []
 var damage: int = 1
 var type: String = 'enemy'
+var xp: int = 100
 const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 
 # Reading nodes to differentiate units with same names
@@ -22,4 +23,7 @@ func take_damage():
 	game_manager.turns.erase(str(self))
 	if game_manager.turn == str(self):
 		game_manager.turn_adv()
+	for entity in get_parent().get_children():
+		if entity.type == 'ally':
+			entity.attributes['xp'] += xp
 	queue_free()

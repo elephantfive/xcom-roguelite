@@ -47,8 +47,6 @@ func _on_game_manager_turn_start():
 
 
 func _input(event):
-	if event.is_action_pressed('test_key'):
-		print(str(attributes))
 	if game_manager.turn == 'player':
 		if event.is_action_pressed("right_click"):
 			state_chart.send_event('to_idle')

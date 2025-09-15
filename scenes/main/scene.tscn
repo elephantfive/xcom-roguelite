@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ygb05qawriwh"]
+[gd_scene load_steps=16 format=3 uid="uid://ygb05qawriwh"]
 
 [ext_resource type="Script" uid="uid://jb8g77b0p2hp" path="res://scripts/main/active_cursor.gd" id="1_1cexc"]
 [ext_resource type="Script" uid="uid://e0nun6mx1aou" path="res://scripts/main/unit_info.gd" id="1_j6bet"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://vwqdce8l4gp0" path="res://scripts/ui/hud.gd" id="3_vbg7o"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_1cexc"]
 [ext_resource type="Script" uid="uid://dokd1icoe8c62" path="res://scripts/campaign map/player_marker.gd" id="4_osw1o"]
-[ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="4_qa38x"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_8dywm"]
 [ext_resource type="PackedScene" uid="uid://ccj00txght02n" path="res://scenes/campaign map/location.tscn" id="5_xsca3"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_0yifu"]
@@ -22,20 +21,6 @@ size = Vector2(4, 4)
 size = Vector2(40, 40)
 
 [node name="Game" type="Node2D"]
-
-[node name="ActiveCursor" type="Area2D" parent="."]
-unique_name_in_owner = true
-process_mode = 4
-visible = false
-monitorable = false
-script = ExtResource("1_1cexc")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ActiveCursor"]
-shape = SubResource("RectangleShape2D_8dywm")
-
-[node name="Label" type="Label" parent="ActiveCursor"]
-offset_right = 40.0
-offset_bottom = 23.0
 
 [node name="UnitInfo" type="Node" parent="."]
 unique_name_in_owner = true
@@ -57,29 +42,130 @@ script = ExtResource("3_qa38x")
 metadata/_custom_type_script = "uid://couw105c3bde4"
 
 [node name="Root" type="Node" parent="Game Manager/StateChart"]
-script = ExtResource("4_qa38x")
-
-[node name="SquadChange" type="Node" parent="Game Manager/StateChart/Root"]
 script = ExtResource("4_1cexc")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="Game Manager/StateChart/Root/SquadChange"]
+[node name="Idle" type="Node" parent="Game Manager/StateChart/Root"]
 script = ExtResource("5_8dywm")
 
-[node name="Transition" type="Node" parent="Game Manager/StateChart/Root/SquadChange/Idle"]
+[node name="Change" type="Node" parent="Game Manager/StateChart/Root/Idle"]
 script = ExtResource("6_0yifu")
 to = NodePath("../../ChangingSquad")
 event = &"squad_change"
 delay_in_seconds = "0.0"
 
-[node name="ChangingSquad" type="Node" parent="Game Manager/StateChart/Root/SquadChange"]
+[node name="LevelUp" type="Node" parent="Game Manager/StateChart/Root/Idle"]
+script = ExtResource("6_0yifu")
+to = NodePath("../../LevelUp")
+event = &"level_up"
+delay_in_seconds = "0.0"
+
+[node name="Shop" type="Node" parent="Game Manager/StateChart/Root/Idle"]
+script = ExtResource("6_0yifu")
+to = NodePath("../../Shop")
+event = &"level_up"
+delay_in_seconds = "0.0"
+
+[node name="Loadout" type="Node" parent="Game Manager/StateChart/Root/Idle"]
+script = ExtResource("6_0yifu")
+to = NodePath("../../Loadout")
+event = &"loadout"
+delay_in_seconds = "0.0"
+
+[node name="Reward" type="Node" parent="Game Manager/StateChart/Root/Idle"]
+script = ExtResource("6_0yifu")
+to = NodePath("../../Reward")
+event = &"reward"
+delay_in_seconds = "0.0"
+
+[node name="LevelSelect" type="Node" parent="Game Manager/StateChart/Root/Idle"]
+script = ExtResource("6_0yifu")
+to = NodePath("../../LevelSelect")
+event = &"level_select"
+delay_in_seconds = "0.0"
+
+[node name="LevelStart" type="Node" parent="Game Manager/StateChart/Root/Idle"]
+script = ExtResource("6_0yifu")
+to = NodePath("../../InLevel")
+event = &"level_start"
+delay_in_seconds = "0.0"
+
+[node name="InLevel" type="Node" parent="Game Manager/StateChart/Root"]
 script = ExtResource("5_8dywm")
 
-[node name="Transition" type="Node" parent="Game Manager/StateChart/Root/SquadChange/ChangingSquad"]
+[node name="LevelEnd" type="Node" parent="Game Manager/StateChart/Root/InLevel"]
 script = ExtResource("6_0yifu")
 to = NodePath("../../Idle")
-event = &"squad_changed"
+event = &"level_end"
 delay_in_seconds = "0.0"
+
+[node name="ChangingSquad" type="Node" parent="Game Manager/StateChart/Root"]
+script = ExtResource("5_8dywm")
+
+[node name="Idle" type="Node" parent="Game Manager/StateChart/Root/ChangingSquad"]
+script = ExtResource("6_0yifu")
+to = NodePath("../../Idle")
+event = &"idle"
+delay_in_seconds = "0.0"
+
+[node name="LevelUp" type="Node" parent="Game Manager/StateChart/Root"]
+script = ExtResource("5_8dywm")
+
+[node name="Idle" type="Node" parent="Game Manager/StateChart/Root/LevelUp"]
+script = ExtResource("6_0yifu")
+to = NodePath("../../Idle")
+event = &"idle"
+delay_in_seconds = "0.0"
+
+[node name="Shop" type="Node" parent="Game Manager/StateChart/Root"]
+script = ExtResource("5_8dywm")
+
+[node name="Idle" type="Node" parent="Game Manager/StateChart/Root/Shop"]
+script = ExtResource("6_0yifu")
+to = NodePath("../../Idle")
+event = &"idle"
+delay_in_seconds = "0.0"
+
+[node name="Loadout" type="Node" parent="Game Manager/StateChart/Root"]
+script = ExtResource("5_8dywm")
+
+[node name="Idle" type="Node" parent="Game Manager/StateChart/Root/Loadout"]
+script = ExtResource("6_0yifu")
+to = NodePath("../../Idle")
+event = &"idle"
+delay_in_seconds = "0.0"
+
+[node name="Reward" type="Node" parent="Game Manager/StateChart/Root"]
+script = ExtResource("5_8dywm")
+
+[node name="Idle" type="Node" parent="Game Manager/StateChart/Root/Reward"]
+script = ExtResource("6_0yifu")
+to = NodePath("../../Idle")
+event = &"idle"
+delay_in_seconds = "0.0"
+
+[node name="LevelSelect" type="Node" parent="Game Manager/StateChart/Root"]
+script = ExtResource("5_8dywm")
+
+[node name="Idle" type="Node" parent="Game Manager/StateChart/Root/LevelSelect"]
+script = ExtResource("6_0yifu")
+to = NodePath("../../Idle")
+event = &"idle"
+delay_in_seconds = "0.0"
+
+[node name="ActiveCursor" type="Area2D" parent="."]
+unique_name_in_owner = true
+process_mode = 4
+visible = false
+monitorable = false
+script = ExtResource("1_1cexc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActiveCursor"]
+shape = SubResource("RectangleShape2D_8dywm")
+
+[node name="Label" type="Label" parent="ActiveCursor"]
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="HUD" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -94,6 +180,12 @@ offset_bottom = 40.0
 unique_name_in_owner = true
 offset_right = 1152.0
 
+[node name="End" type="Button" parent="HUD/Actions"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "End Turn"
+
 [node name="Move" type="Button" parent="HUD/Actions"]
 unique_name_in_owner = true
 visible = false
@@ -106,12 +198,6 @@ layout_mode = 2
 [node name="Heal" type="Button" parent="HUD/Actions"]
 visible = false
 layout_mode = 2
-
-[node name="End" type="Button" parent="HUD/Actions"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-text = "End Turn"
 
 [node name="Campaign Map" type="Node2D" parent="." groups=["Campaign Map"]]
 unique_name_in_owner = true
@@ -221,10 +307,12 @@ text = "Remove Unit From Squad"
 [node name="Label" type="Label" parent="Campaign Map Hud/UnitDesc"]
 layout_mode = 2
 
-[node name="Shop" type="CanvasLayer" parent="."]
+[node name="Shop" type="CanvasLayer" parent="." groups=["Campaign Menus"]]
+unique_name_in_owner = true
 visible = false
 
-[node name="Reward Screen" type="CanvasLayer" parent="."]
+[node name="Reward Screen" type="CanvasLayer" parent="." groups=["Campaign Menus"]]
+unique_name_in_owner = true
 visible = false
 
 [node name="Panel" type="Panel" parent="Reward Screen"]
@@ -258,25 +346,32 @@ layout_mode = 2
 [node name="Reward3" parent="Reward Screen/Rewards" instance=ExtResource("6_y2ajb")]
 layout_mode = 2
 
-[node name="Level Up" type="CanvasLayer" parent="."]
+[node name="Level Up" type="CanvasLayer" parent="." groups=["Campaign Menus"]]
+unique_name_in_owner = true
 visible = false
 
-[node name="Loadout" type="CanvasLayer" parent="."]
+[node name="Loadout" type="CanvasLayer" parent="." groups=["Campaign Menus"]]
+unique_name_in_owner = true
 visible = false
 
 [node name="Node" type="Node" parent="."]
 
-[connection signal="area_entered" from="ActiveCursor" to="ActiveCursor" method="_on_area_entered"]
-[connection signal="area_exited" from="ActiveCursor" to="ActiveCursor" method="_on_area_exited"]
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="timeout" from="Game Manager/LevelEndTimer" to="Game Manager" method="_on_level_end_timer_timeout"]
-[connection signal="state_entered" from="Game Manager/StateChart/Root/SquadChange/Idle" to="Game Manager" method="_on_idle_state_entered"]
-[connection signal="state_entered" from="Game Manager/StateChart/Root/SquadChange/ChangingSquad" to="Game Manager" method="_on_changing_squad_state_entered"]
-[connection signal="state_input" from="Game Manager/StateChart/Root/SquadChange/ChangingSquad" to="Game Manager" method="_on_changing_squad_state_input"]
+[connection signal="state_entered" from="Game Manager/StateChart/Root/Idle" to="Game Manager" method="_on_idle_state_entered"]
+[connection signal="state_exited" from="Game Manager/StateChart/Root/Idle" to="Game Manager" method="_on_idle_state_exited"]
+[connection signal="state_entered" from="Game Manager/StateChart/Root/InLevel" to="Game Manager" method="_on_in_level_state_entered"]
+[connection signal="taken" from="Game Manager/StateChart/Root/InLevel/LevelEnd" to="Game Manager" method="_on_level_end_taken"]
+[connection signal="state_entered" from="Game Manager/StateChart/Root/ChangingSquad" to="Game Manager" method="_on_changing_squad_state_entered"]
+[connection signal="state_input" from="Game Manager/StateChart/Root/ChangingSquad" to="Game Manager" method="_on_changing_squad_state_input"]
+[connection signal="state_entered" from="Game Manager/StateChart/Root/LevelUp" to="Game Manager" method="_on_level_up_state_entered"]
+[connection signal="state_entered" from="Game Manager/StateChart/Root/Reward" to="Game Manager" method="_on_reward_state_entered"]
+[connection signal="area_entered" from="ActiveCursor" to="ActiveCursor" method="_on_area_entered"]
+[connection signal="area_exited" from="ActiveCursor" to="ActiveCursor" method="_on_area_exited"]
+[connection signal="pressed" from="HUD/Actions/End" to="HUD" method="_on_end_pressed"]
 [connection signal="pressed" from="HUD/Actions/Move" to="HUD" method="_on_move_pressed"]
 [connection signal="pressed" from="HUD/Actions/Attack" to="HUD" method="_on_attack_pressed"]
 [connection signal="pressed" from="HUD/Actions/Heal" to="HUD" method="_on_heal_pressed"]
-[connection signal="pressed" from="HUD/Actions/End" to="HUD" method="_on_end_pressed"]
 [connection signal="input_event" from="Campaign Map/Player Marker" to="Campaign Map/Player Marker" method="_on_input_event"]
 [connection signal="pressed" from="Campaign Map Hud/UnitDesc/RemoveFromSquad" to="Campaign Map Hud/Unit Holder/SquadUnit" method="_on_remove_from_squad_pressed"]
 [connection signal="pressed" from="Campaign Map Hud/UnitDesc/RemoveFromSquad" to="Campaign Map Hud/Unit Holder/SquadUnit2" method="_on_remove_from_squad_pressed"]

@@ -34,4 +34,6 @@ func _on_exit_pressed():
 
 func _on_begin_level_pressed():
 	popup.hide()
-	game_manager.level_adv(level)
+	game_manager.level_path = level
+	game_manager.state_chart.send_event('level_start')
+	

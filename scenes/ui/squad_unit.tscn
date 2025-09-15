@@ -35,7 +35,7 @@ script = ExtResource("4_73iat")
 [node name="Transition" type="Node" parent="StateChart/CompoundState/ChangingSquad"]
 script = ExtResource("5_ybac5")
 to = NodePath("../../Idle")
-event = &"squad_changed"
+event = &"idle"
 delay_in_seconds = "0.0"
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]
