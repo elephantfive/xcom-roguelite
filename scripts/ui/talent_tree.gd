@@ -24,7 +24,8 @@ func _on_level_up_state_entered():
 								spec.get_children()[i].tooltip_text = spec.get_children()[i].talent
 								spec.get_children()[i].selected_unit = unit
 								spec.get_children()[i].unit_info = unit_info
+								if i == 0:
+									if spec.get_children()[i].talent
 								if spec.get_children()[i].talent in unit_info.character_attributes[unit]['talents']:
-									spec.get_children()[i].self_modulate = Color(.25, .25, .25)
-								else:
-									spec.get_children()[i].self_modulate = Color(1, 1, 1)
+									spec.get_children()[i].state_chart.send_event('not_clickable')
+									spec.get_children()[i+1].state_chart.send_event('clickable')

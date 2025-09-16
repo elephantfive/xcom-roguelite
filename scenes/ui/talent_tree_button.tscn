@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvddh111yx7eb"]
+[gd_scene load_steps=7 format=3 uid="uid://cvddh111yx7eb"]
 
 [ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="1_gv6g5"]
 [ext_resource type="Script" uid="uid://btpd3wbdrt5pg" path="res://scripts/ui/talent_tree_button.gd" id="2_4l0jb"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_wg6jp"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_0c3wn"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_f775u"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_26fk1"]
 
 [node name="TalentTreeButton" type="TextureButton"]
 anchors_preset = 15
@@ -12,4 +16,33 @@ grow_vertical = 2
 texture_normal = ExtResource("1_gv6g5")
 script = ExtResource("2_4l0jb")
 
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("3_wg6jp")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("4_0c3wn")
+initial_state = NodePath("NotClickable")
+
+[node name="NotClickable" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_f775u")
+
+[node name="Transition" type="Node" parent="StateChart/Root/NotClickable"]
+script = ExtResource("6_26fk1")
+to = NodePath("../../Clickable")
+event = &"clickable"
+delay_in_seconds = "0.0"
+
+[node name="Clickable" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_f775u")
+
+[node name="Transition" type="Node" parent="StateChart/Root/Clickable"]
+script = ExtResource("6_26fk1")
+to = NodePath("../../NotClickable")
+event = &"clickable"
+delay_in_seconds = "0.0"
+
 [connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="state_entered" from="StateChart/Root/NotClickable" to="." method="_on_not_clickable_state_entered"]
+[connection signal="event_received" from="StateChart/Root/Clickable" to="." method="_on_clickable_event_received"]
+[connection signal="state_entered" from="StateChart/Root/Clickable" to="." method="_on_clickable_state_entered"]

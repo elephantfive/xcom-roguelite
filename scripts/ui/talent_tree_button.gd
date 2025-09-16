@@ -2,13 +2,23 @@ extends TextureButton
 var talent: String
 var selected_unit
 var unit_info: Node
+@onready var state_chart = $StateChart
 
 func _on_pressed():
-	if unit_info.character_attributes[selected_unit]['talent_points'] > 0 and talent not in unit_info.character_attributes[selected_unit]['talents']:
-		unit_info.character_attributes[selected_unit]['talents'].append(talent)
-		unit_info.character_attributes[selected_unit]['talent_points'] -= 1
-		self_modulate = Color(.25, .25, .25)
-	print(str(unit_info.character_attributes[selected_unit]['talents']))
-	print(str(unit_info.character_attributes[selected_unit]['talent_points']))
-	
-	
+	state_chart.send_event('clicked')
+
+
+func _on_clickable_event_received(event):
+	if event == 'clicked':
+		if unit_info.character_attributes[selected_unit]['talent_points'] > 0 and talent not in unit_info.character_attributes[selected_unit]['talents']:
+			unit_info.character_attributes[selected_unit]['talents'].append(talent)
+			unit_info.character_attributes[selected_unit]['talent_points'] -= 1
+			state_chart.send_event('not_clickable')
+
+
+func _on_not_clickable_state_entered():
+	self_modulate = Color(.25, .25, .25)
+
+
+func _on_clickable_state_entered():
+	self_modulate = Color(1, 1, 1)
