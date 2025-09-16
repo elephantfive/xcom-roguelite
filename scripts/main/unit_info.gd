@@ -9,6 +9,7 @@ var base_attributes = {
 	'xp_needed': 100,
 	'level': 1,
 	'talents': [],
+	'talent_points': 0,
 }
 
 func _ready():

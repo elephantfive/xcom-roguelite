@@ -157,7 +157,7 @@ event = &"idle"
 guard = SubResource("Resource_1cexc")
 delay_in_seconds = "0.0"
 
-[node name="Transition" type="Node" parent="Game Manager/StateChart/Root/Reward"]
+[node name="LevelUp" type="Node" parent="Game Manager/StateChart/Root/Reward"]
 script = ExtResource("6_0yifu")
 to = NodePath("../../LevelUp")
 event = &"idle"

@@ -14,6 +14,7 @@ func _on_level_up_state_entered():
 		if unit_info.character_attributes[unit].has('xp'):
 			if unit_info.character_attributes[unit]['xp'] >= unit_info.character_attributes[unit]['xp_needed']:
 				unit_info.character_attributes[unit]['xp'] -= unit_info.character_attributes[unit]['xp_needed']
+				unit_info.character_attributes[unit]['talent_points'] += 1
 				unit_info.character_attributes[unit]['xp_needed'] *= 2
 				for spec in tree_container.get_children():
 					for talent_tree in talent_info.talent_trees[unit]:
@@ -23,3 +24,7 @@ func _on_level_up_state_entered():
 								spec.get_children()[i].tooltip_text = spec.get_children()[i].talent
 								spec.get_children()[i].selected_unit = unit
 								spec.get_children()[i].unit_info = unit_info
+								if spec.get_children()[i].talent in unit_info.character_attributes[unit]['talents']:
+									spec.get_children()[i].self_modulate = Color(.25, .25, .25)
+								else:
+									spec.get_children()[i].self_modulate = Color(1, 1, 1)
