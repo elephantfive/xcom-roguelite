@@ -13,35 +13,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pprm8")
 
-[node name="Exit" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -15.5
-offset_right = 43.0
-offset_bottom = 15.5
-grow_vertical = 2
-text = "Exit"
-
-[node name="TalentInfo" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("2_eavx0")
-
-[node name="TalentCharacterChanges" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("3_4ptvx")
-
 [node name="TreeContainer" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -267.0
-offset_right = 267.0
-offset_bottom = 788.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 268.0
+offset_right = -344.0
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 75
 
 [node name="Specialization1" type="VBoxContainer" parent="TreeContainer"]
@@ -124,5 +105,24 @@ layout_mode = 2
 
 [node name="Tier7" type="HBoxContainer" parent="TreeContainer/Specialization3"]
 layout_mode = 2
+
+[node name="TalentInfo" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_eavx0")
+
+[node name="TalentCharacterChanges" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_4ptvx")
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_right = 37.0
+offset_bottom = 15.5
+grow_vertical = 2
+text = "Exit"
 
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

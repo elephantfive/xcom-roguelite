@@ -38,11 +38,12 @@ func _on_level_up_state_entered():
 						new_talent_button.unit_info = unit_info
 						new_talent_button.talent_character_changes = talent_character_changes
 						spec.get_children()[new_talent_button.tier].add_child(new_talent_button)
-						#print('Tier ' + str(new_talent_button.tier) + ' Talent: ' + new_talent_button.talent)
 						if new_talent_button.tier == 0 and new_talent_button.talent not in unit_info.character_attributes[selected_unit]['talents']:
 							new_talent_button.state_chart.send_event.call_deferred('clickable')
 						elif talent in unit_info.character_attributes[selected_unit]['talents']:
 							new_talent_button.state_chart.send_event.call_deferred('in_talents')
+	for child in tree_container.get_children():
+		print(str(child.position))
 
 
 func _on_exit_pressed():
