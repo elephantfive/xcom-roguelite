@@ -5,7 +5,7 @@ var talent_trees: Dictionary = {}
 func _ready():
 	talent_trees['Amigol'] = {
 		'Specialization1': [
-			'heal',
+			'Heal',
 			'12',
 			'13',
 			'14',
@@ -13,7 +13,7 @@ func _ready():
 			'16',
 		],
 		'Specialization2': [
-			'cleave',
+			'Cleave',
 			'22',
 			'23',
 			'24',

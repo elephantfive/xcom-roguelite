@@ -7,17 +7,20 @@ extends Control
 @onready var talent_info = %TalentInfo
 @onready var unit_info = %UnitInfo
 @onready var game_manager = %"Game Manager"
+@onready var talent_character_changes = %TalentCharacterChanges
 
 var current_unit
 
 
 func _on_level_up_state_entered():
+	talent_character_changes.unit_info = unit_info
 	for unit in unit_info.character_attributes:
 		if unit_info.character_attributes[unit].has('xp'):
 			if unit_info.character_attributes[unit]['xp'] >= unit_info.character_attributes[unit]['xp_needed']:
 				while unit_info.character_attributes[unit]['xp'] >= unit_info.character_attributes[unit]['xp_needed']:
 					unit_info.character_attributes[unit]['xp'] -= unit_info.character_attributes[unit]['xp_needed']
 					unit_info.character_attributes[unit]['talent_points'] += 1
+					unit_info.character_attributes[unit]['level'] += 1
 					unit_info.character_attributes[unit]['xp_needed'] *= 2
 				for spec in tree_container.get_children():
 					for talent_tree in talent_info.talent_trees[unit]:

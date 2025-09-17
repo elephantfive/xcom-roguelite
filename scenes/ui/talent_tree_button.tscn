@@ -18,6 +18,7 @@ script = ExtResource("2_4l0jb")
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("3_wg6jp")
+warn_on_sending_unknown_events = false
 metadata/_custom_type_script = "uid://couw105c3bde4"
 
 [node name="Root" type="Node" parent="StateChart"]
