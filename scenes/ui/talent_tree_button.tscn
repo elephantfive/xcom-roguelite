@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cvddh111yx7eb"]
+[gd_scene load_steps=8 format=3 uid="uid://cvddh111yx7eb"]
 
 [ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="1_gv6g5"]
 [ext_resource type="Script" uid="uid://btpd3wbdrt5pg" path="res://scripts/ui/talent_tree_button.gd" id="2_4l0jb"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_wg6jp"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_0c3wn"]
+[ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="4_f775u"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_f775u"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_26fk1"]
 
@@ -22,28 +23,48 @@ warn_on_sending_unknown_events = false
 metadata/_custom_type_script = "uid://couw105c3bde4"
 
 [node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("4_f775u")
+
+[node name="Clickability" type="Node" parent="StateChart/Root"]
 script = ExtResource("4_0c3wn")
 initial_state = NodePath("NotClickable")
 
-[node name="NotClickable" type="Node" parent="StateChart/Root"]
+[node name="NotClickable" type="Node" parent="StateChart/Root/Clickability"]
 script = ExtResource("5_f775u")
 
-[node name="Transition" type="Node" parent="StateChart/Root/NotClickable"]
+[node name="ToClickable" type="Node" parent="StateChart/Root/Clickability/NotClickable"]
 script = ExtResource("6_26fk1")
 to = NodePath("../../Clickable")
 event = &"clickable"
 delay_in_seconds = "0.0"
 
-[node name="Clickable" type="Node" parent="StateChart/Root"]
+[node name="Clickable" type="Node" parent="StateChart/Root/Clickability"]
 script = ExtResource("5_f775u")
 
-[node name="Transition" type="Node" parent="StateChart/Root/Clickable"]
+[node name="ToNotClickable" type="Node" parent="StateChart/Root/Clickability/Clickable"]
 script = ExtResource("6_26fk1")
 to = NodePath("../../NotClickable")
 event = &"not_clickable"
 delay_in_seconds = "0.0"
 
+[node name="InTalents" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_0c3wn")
+initial_state = NodePath("NotIn")
+
+[node name="NotIn" type="Node" parent="StateChart/Root/InTalents"]
+script = ExtResource("5_f775u")
+
+[node name="InTalents" type="Node" parent="StateChart/Root/InTalents/NotIn"]
+script = ExtResource("6_26fk1")
+to = NodePath("../../In")
+event = &"in_talents"
+delay_in_seconds = "0.0"
+
+[node name="In" type="Node" parent="StateChart/Root/InTalents"]
+script = ExtResource("5_f775u")
+
 [connection signal="pressed" from="." to="." method="_on_pressed"]
-[connection signal="state_entered" from="StateChart/Root/NotClickable" to="." method="_on_not_clickable_state_entered"]
-[connection signal="event_received" from="StateChart/Root/Clickable" to="." method="_on_clickable_event_received"]
-[connection signal="state_entered" from="StateChart/Root/Clickable" to="." method="_on_clickable_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Clickability/NotClickable" to="." method="_on_not_clickable_state_entered"]
+[connection signal="event_received" from="StateChart/Root/Clickability/Clickable" to="." method="_on_clickable_event_received"]
+[connection signal="state_entered" from="StateChart/Root/Clickability/Clickable" to="." method="_on_clickable_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/InTalents/In" to="." method="_on_in_state_entered"]
