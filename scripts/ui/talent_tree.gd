@@ -1,13 +1,11 @@
 extends Control
 
 @onready var tree_container = %TreeContainer
-@onready var specialization_1 = %Specialization1
-@onready var specialization_2 = %Specialization2
-@onready var specialization_3 = %Specialization3
 @onready var talent_info = %TalentInfo
 @onready var unit_info = %UnitInfo
 @onready var game_manager = %"Game Manager"
 @onready var talent_character_changes = %TalentCharacterChanges
+const TALENT_TREE_BUTTON = preload("res://scenes/ui/talent_tree_button.tscn")
 
 var current_unit
 
@@ -25,16 +23,30 @@ func _on_level_up_state_entered():
 				for spec in tree_container.get_children():
 					for talent_tree in talent_info.talent_trees[unit]:
 						if spec.name == talent_tree:
-							for i in range(spec.get_child_count()):
-								spec.get_children()[i].talent = talent_info.talent_trees[unit][talent_tree][i]
-								spec.get_children()[i].tooltip_text = spec.get_children()[i].talent
-								spec.get_children()[i].selected_unit = unit
-								spec.get_children()[i].unit_info = unit_info
-								if i == 0 and spec.get_children()[i].talent not in unit_info.character_attributes[unit]['talents']:
-									spec.get_children()[i].state_chart.send_event('clickable')
-								elif spec.get_children()[i].talent in unit_info.character_attributes[unit]['talents']:
-									spec.get_children()[i].state_chart.send_event('not_clickable')
-									spec.get_children()[i+1].state_chart.send_event('clickable')
+							for tier in talent_info.talent_trees[unit][talent_tree]:
+								for talent in tier:
+									var new_talent_button = TALENT_TREE_BUTTON.instantiate()
+									new_talent_button.talent = talent
+									new_talent_button.tooltip_text = talent
+									new_talent_button.selected_unit = unit
+									new_talent_button.unit_info = unit_info
+									spec.get_children()[talent_info.talent_trees[unit][talent_tree].find(tier)].add_child(new_talent_button)
+									print('tier ' + str(talent_info.talent_trees[unit][talent_tree].find(tier)))
+							
+							
+							
+							
+							
+							#for i in range(spec.get_child_count()):
+								#spec.get_children()[i].talent = talent_info.talent_trees[unit][talent_tree][i]
+								#spec.get_children()[i].tooltip_text = spec.get_children()[i].talent
+								#spec.get_children()[i].selected_unit = unit
+								#spec.get_children()[i].unit_info = unit_info
+								#if i == 0 and spec.get_children()[i].talent not in unit_info.character_attributes[unit]['talents']:
+									#spec.get_children()[i].state_chart.send_event('clickable')
+								#elif spec.get_children()[i].talent in unit_info.character_attributes[unit]['talents']:
+									#spec.get_children()[i].state_chart.send_event('not_clickable')
+									#spec.get_children()[i+1].state_chart.send_event('clickable')
 
 
 func _on_exit_pressed():

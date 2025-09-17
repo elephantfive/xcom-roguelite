@@ -2,7 +2,7 @@ extends TextureButton
 var talent: String
 var selected_unit
 var unit_info: Node
-@onready var talent_character_changes = %TalentCharacterChanges
+var talent_character_changes
 @onready var state_chart = $StateChart
 
 func _on_pressed():
