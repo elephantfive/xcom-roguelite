@@ -39,7 +39,7 @@ script = ExtResource("5_f775u")
 [node name="Transition" type="Node" parent="StateChart/Root/Clickable"]
 script = ExtResource("6_26fk1")
 to = NodePath("../../NotClickable")
-event = &"clickable"
+event = &"not_clickable"
 delay_in_seconds = "0.0"
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

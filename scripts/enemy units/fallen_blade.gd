@@ -4,7 +4,7 @@ var hud: CanvasLayer
 var targets:Array = []
 var damage: int = 1
 var type: String = 'enemy'
-var xp: int = 100
+var xp: int = 10000
 const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 
 # Reading nodes to differentiate units with same names

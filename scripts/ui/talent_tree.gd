@@ -6,6 +6,8 @@ extends Control
 @onready var specialization_3 = %Specialization3
 @onready var talent_info = %TalentInfo
 @onready var unit_info = %UnitInfo
+@onready var game_manager = %"Game Manager"
+
 var current_unit
 
 
@@ -13,9 +15,10 @@ func _on_level_up_state_entered():
 	for unit in unit_info.character_attributes:
 		if unit_info.character_attributes[unit].has('xp'):
 			if unit_info.character_attributes[unit]['xp'] >= unit_info.character_attributes[unit]['xp_needed']:
-				unit_info.character_attributes[unit]['xp'] -= unit_info.character_attributes[unit]['xp_needed']
-				unit_info.character_attributes[unit]['talent_points'] += 1
-				unit_info.character_attributes[unit]['xp_needed'] *= 2
+				while unit_info.character_attributes[unit]['xp'] >= unit_info.character_attributes[unit]['xp_needed']:
+					unit_info.character_attributes[unit]['xp'] -= unit_info.character_attributes[unit]['xp_needed']
+					unit_info.character_attributes[unit]['talent_points'] += 1
+					unit_info.character_attributes[unit]['xp_needed'] *= 2
 				for spec in tree_container.get_children():
 					for talent_tree in talent_info.talent_trees[unit]:
 						if spec.name == talent_tree:
@@ -24,8 +27,12 @@ func _on_level_up_state_entered():
 								spec.get_children()[i].tooltip_text = spec.get_children()[i].talent
 								spec.get_children()[i].selected_unit = unit
 								spec.get_children()[i].unit_info = unit_info
-								if i == 0:
-									if spec.get_children()[i].talent
-								if spec.get_children()[i].talent in unit_info.character_attributes[unit]['talents']:
+								if i == 0 and spec.get_children()[i].talent not in unit_info.character_attributes[unit]['talents']:
+									spec.get_children()[i].state_chart.send_event('clickable')
+								elif spec.get_children()[i].talent in unit_info.character_attributes[unit]['talents']:
 									spec.get_children()[i].state_chart.send_event('not_clickable')
 									spec.get_children()[i+1].state_chart.send_event('clickable')
+
+
+func _on_exit_pressed():
+	game_manager.state_chart.send_event('idle')

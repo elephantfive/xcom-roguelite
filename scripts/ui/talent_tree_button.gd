@@ -14,6 +14,9 @@ func _on_clickable_event_received(event):
 			unit_info.character_attributes[selected_unit]['talents'].append(talent)
 			unit_info.character_attributes[selected_unit]['talent_points'] -= 1
 			state_chart.send_event('not_clickable')
+			for i in get_parent().get_child_count():
+				if get_parent().get_children()[i] == self:
+					get_parent().get_children()[i + 1].state_chart.send_event('clickable')
 
 
 func _on_not_clickable_state_entered():
