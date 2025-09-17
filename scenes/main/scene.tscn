@@ -75,7 +75,7 @@ delay_in_seconds = "0.0"
 [node name="Shop" type="Node" parent="Game Manager/StateChart/Root/Idle"]
 script = ExtResource("6_0yifu")
 to = NodePath("../../Shop")
-event = &"level_up"
+event = &"shop"
 delay_in_seconds = "0.0"
 
 [node name="Loadout" type="Node" parent="Game Manager/StateChart/Root/Idle"]
@@ -100,6 +100,12 @@ delay_in_seconds = "0.0"
 script = ExtResource("6_0yifu")
 to = NodePath("../../InLevel")
 event = &"level_start"
+delay_in_seconds = "0.0"
+
+[node name="TechTree" type="Node" parent="Game Manager/StateChart/Root/Idle"]
+script = ExtResource("6_0yifu")
+to = NodePath("../../TechTree")
+event = &"tech"
 delay_in_seconds = "0.0"
 
 [node name="InLevel" type="Node" parent="Game Manager/StateChart/Root"]
@@ -168,6 +174,15 @@ delay_in_seconds = "0.0"
 script = ExtResource("5_8dywm")
 
 [node name="Idle" type="Node" parent="Game Manager/StateChart/Root/LevelSelect"]
+script = ExtResource("6_0yifu")
+to = NodePath("../../Idle")
+event = &"idle"
+delay_in_seconds = "0.0"
+
+[node name="TechTree" type="Node" parent="Game Manager/StateChart/Root"]
+script = ExtResource("5_8dywm")
+
+[node name="Idle" type="Node" parent="Game Manager/StateChart/Root/TechTree"]
 script = ExtResource("6_0yifu")
 to = NodePath("../../Idle")
 event = &"idle"
@@ -327,6 +342,27 @@ text = "Remove Unit From Squad"
 [node name="Label" type="Label" parent="Campaign Map Hud/UnitDesc"]
 layout_mode = 2
 
+[node name="Buttons" type="HBoxContainer" parent="Campaign Map Hud"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Shop" type="Button" parent="Campaign Map Hud/Buttons"]
+layout_mode = 2
+text = "Shop
+"
+
+[node name="TechTree" type="Button" parent="Campaign Map Hud/Buttons"]
+layout_mode = 2
+text = "Research
+"
+
 [node name="Shop" type="CanvasLayer" parent="." groups=["Campaign Menus"]]
 unique_name_in_owner = true
 visible = false
@@ -376,7 +412,9 @@ visible = false
 unique_name_in_owner = true
 visible = false
 
-[node name="Node" type="Node" parent="."]
+[node name="TechTree" type="CanvasLayer" parent="." groups=["Campaign Menus"]]
+unique_name_in_owner = true
+visible = false
 
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="timeout" from="Game Manager/LevelEndTimer" to="Game Manager" method="_on_level_end_timer_timeout"]
@@ -388,7 +426,9 @@ visible = false
 [connection signal="state_input" from="Game Manager/StateChart/Root/ChangingSquad" to="Game Manager" method="_on_changing_squad_state_input"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/LevelUp" to="Game Manager" method="_on_level_up_state_entered"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/LevelUp" to="Level Up/TalentTree" method="_on_level_up_state_entered"]
+[connection signal="state_entered" from="Game Manager/StateChart/Root/Shop" to="Game Manager" method="_on_shop_state_entered"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/Reward" to="Game Manager" method="_on_reward_state_entered"]
+[connection signal="state_entered" from="Game Manager/StateChart/Root/TechTree" to="Game Manager" method="_on_tech_tree_state_entered"]
 [connection signal="area_entered" from="ActiveCursor" to="ActiveCursor" method="_on_area_entered"]
 [connection signal="area_exited" from="ActiveCursor" to="ActiveCursor" method="_on_area_exited"]
 [connection signal="pressed" from="HUD/Actions/End" to="HUD" method="_on_end_pressed"]
@@ -400,3 +440,5 @@ visible = false
 [connection signal="pressed" from="Campaign Map Hud/UnitDesc/RemoveFromSquad" to="Campaign Map Hud/Unit Holder/SquadUnit2" method="_on_remove_from_squad_pressed"]
 [connection signal="pressed" from="Campaign Map Hud/UnitDesc/RemoveFromSquad" to="Campaign Map Hud/Unit Holder/SquadUnit3" method="_on_remove_from_squad_pressed"]
 [connection signal="pressed" from="Campaign Map Hud/UnitDesc/RemoveFromSquad" to="Campaign Map Hud/Unit Holder/SquadUnit4" method="_on_remove_from_squad_pressed"]
+[connection signal="pressed" from="Campaign Map Hud/Buttons/Shop" to="Game Manager" method="_on_shop_pressed"]
+[connection signal="pressed" from="Campaign Map Hud/Buttons/TechTree" to="Game Manager" method="_on_tech_tree_pressed"]

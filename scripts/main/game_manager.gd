@@ -11,6 +11,7 @@ var level_path: String
 var active_level
 var roster_unit_selected
 var squad_unit_selected
+var money: int = 0
 
 const UNIT = preload("res://scenes/entities/units/unit.tscn")
 
@@ -27,6 +28,7 @@ const UNIT = preload("res://scenes/entities/units/unit.tscn")
 @onready var reward_screen = %"Reward Screen"
 @onready var loadout = %Loadout
 @onready var shop = %Shop
+@onready var tech_tree = %TechTree
 
 func _ready():
 	#level_adv("res://scenes/levels/level_1.tscn")
@@ -89,6 +91,7 @@ func _on_idle_state_entered():
 
 
 func _on_idle_state_exited():
+	toggle("Campaign Menus", PROCESS_MODE_DISABLED, false)
 	toggle("Campaign Map", PROCESS_MODE_DISABLED, false)
 
 
@@ -164,10 +167,25 @@ func _on_in_level_state_entered():
 
 
 func _on_reward_state_entered():
-	toggle("Campaign Menus", PROCESS_MODE_INHERIT, false)
 	toggle(reward_screen, PROCESS_MODE_INHERIT, true)
 
 
 func _on_level_up_state_entered():
-	toggle("Campaign Menus", PROCESS_MODE_INHERIT, false)
+	toggle("Campaign Menus", PROCESS_MODE_DISABLED, false)
 	toggle(level_up, PROCESS_MODE_INHERIT, true)
+
+
+func _on_shop_pressed():
+	state_chart.send_event('shop')
+
+
+func _on_shop_state_entered():
+	toggle(shop, PROCESS_MODE_INHERIT, true)
+
+
+func _on_tech_tree_pressed():
+	state_chart.send_event('tech')
+
+
+func _on_tech_tree_state_entered():
+	toggle(tech_tree, PROCESS_MODE_INHERIT, true)
