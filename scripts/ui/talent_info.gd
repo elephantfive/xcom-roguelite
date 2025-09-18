@@ -3,6 +3,10 @@ extends Node
 var talent_trees: Dictionary = {}
 
 func _ready():
+	for character_class in talent_trees:
+		for spec in character_class:
+			for talent in spec:
+				talent['current_points'] = 0
 	talent_trees['Amigol'] = {
 		'Specialization1': [
 			['Heal', 'Smite'],
