@@ -1,5 +1,4 @@
 extends TextureButton
-@onready var unit_info = %UnitInfo
 @onready var label = $"../../UnitDesc/Label"
 @export var attributes: CharacterAttributes:
 	set(value):

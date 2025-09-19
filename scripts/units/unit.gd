@@ -15,6 +15,8 @@ var active_cursor: Area2D
 
 
 const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
+
+
 @onready var hud: CanvasLayer
 @onready var game_manager: Node
 

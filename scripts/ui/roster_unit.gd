@@ -11,7 +11,6 @@ extends VBoxContainer
 @onready var state_chart = $StateChart
 @onready var add_to_squad = $AddToSquad
 
-var unit_info
 var unit_holder
 var game_manager
 var unit_roster

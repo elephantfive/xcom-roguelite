@@ -11,4 +11,3 @@ func add_unit(attributes: CharacterAttributes):
 	new_unit.game_manager = %"Game Manager"
 	new_unit.unit_roster = self
 	new_unit.unit_holder = %"Unit Holder"
-	new_unit.unit_info = %UnitInfo
