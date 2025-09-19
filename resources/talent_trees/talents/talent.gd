@@ -2,7 +2,8 @@ extends Resource
 class_name Talent
 
 @export var talent_name: String
-@export var max_points: int = 1
+@export var talent_text: String
+@export var max_points: int = 2
 @export var current_points: int = 0
 @export var tier: int = 0
 @export var texture: String

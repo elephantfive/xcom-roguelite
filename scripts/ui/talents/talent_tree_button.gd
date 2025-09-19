@@ -1,5 +1,5 @@
 extends TextureButton
-var talent: String
+var talent: Talent
 var tier: int
 var selected_unit
 var unit_info: Node
@@ -12,9 +12,14 @@ func _on_pressed():
 
 func _on_clickable_event_received(event):
 	if event == 'clicked':
-		if unit_info.character_attributes[selected_unit]['talent_points'] > 0 and talent not in unit_info.character_attributes[selected_unit]['talents']:
-			unit_info.character_attributes[selected_unit]['talents'].append(talent)
+		if unit_info.character_attributes[selected_unit]['talent_points'] > 0:
 			unit_info.character_attributes[selected_unit]['talent_points'] -= 1
+			if unit_info.character_attributes[selected_unit]['talents'].has(talent):
+				unit_info.character_attributes[selected_unit]['talents'][talent] += 1
+			else:
+				unit_info.character_attributes[selected_unit]['talents'][talent] = 1
+			if unit_info.character_attributes[selected_unit]['talents'][talent] == talent.max_points:
+				state_chart.send_event('maxed')
 			talent_character_changes.selected_unit = selected_unit
 			talent_character_changes.add_talent(talent)
 			state_chart.send_event('in_talents')
@@ -29,6 +34,9 @@ func _on_clickable_state_entered():
 
 
 func _on_in_state_entered():
-	state_chart.send_event.call_deferred('not_clickable')
 	for child in get_parent().get_parent().get_children()[tier + 1].get_children():
 		child.state_chart.send_event.call_deferred('clickable')
+
+
+func _on_maxed_state_entered():
+	state_chart.send_event.call_deferred('not_clickable')

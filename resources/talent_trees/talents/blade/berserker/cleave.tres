@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource("1_k4ecy")
 talent_name = "Cleave"
-max_points = 1
+talent_text = ""
+max_points = 2
 current_points = 0
 tier = 0
 texture = ""

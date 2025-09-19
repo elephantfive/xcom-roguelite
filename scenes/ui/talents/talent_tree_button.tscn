@@ -63,8 +63,25 @@ delay_in_seconds = "0.0"
 [node name="In" type="Node" parent="StateChart/Root/InTalents"]
 script = ExtResource("5_f775u")
 
+[node name="Maxed" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_0c3wn")
+initial_state = NodePath("NotMaxed")
+
+[node name="NotMaxed" type="Node" parent="StateChart/Root/Maxed"]
+script = ExtResource("5_f775u")
+
+[node name="ToMaxed" type="Node" parent="StateChart/Root/Maxed/NotMaxed"]
+script = ExtResource("6_26fk1")
+to = NodePath("../../Maxed")
+event = &"maxed"
+delay_in_seconds = "0.0"
+
+[node name="Maxed" type="Node" parent="StateChart/Root/Maxed"]
+script = ExtResource("5_f775u")
+
 [connection signal="pressed" from="." to="." method="_on_pressed"]
 [connection signal="state_entered" from="StateChart/Root/Clickability/NotClickable" to="." method="_on_not_clickable_state_entered"]
 [connection signal="event_received" from="StateChart/Root/Clickability/Clickable" to="." method="_on_clickable_event_received"]
 [connection signal="state_entered" from="StateChart/Root/Clickability/Clickable" to="." method="_on_clickable_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/InTalents/In" to="." method="_on_in_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Maxed/Maxed" to="." method="_on_maxed_state_entered"]
