@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ban4sjpxrncql"]
+[gd_scene load_steps=3 format=3 uid="uid://ban4sjpxrncql"]
 
 [ext_resource type="Script" uid="uid://cob331p786xwo" path="res://scripts/ui/shop/shop_button.gd" id="1_ofmg3"]
+[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="1_x0051"]
 
 [node name="ShopButton" type="TextureButton"]
 anchors_preset = 15
@@ -8,4 +9,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture_normal = ExtResource("1_x0051")
 script = ExtResource("1_ofmg3")

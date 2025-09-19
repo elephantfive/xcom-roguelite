@@ -22,7 +22,6 @@ const UNIT = preload("res://scenes/entities/units/unit.tscn")
 @onready var level_end_timer = $LevelEndTimer
 @onready var rewards = %Rewards
 @onready var unit_roster = %"Unit Roster"
-@onready var unit_info = %UnitInfo
 @onready var active_cursor = %ActiveCursor
 @onready var level_up = %"Level Up"
 @onready var reward_screen = %"Reward Screen"
@@ -101,17 +100,7 @@ func _on_level_end_taken():
 	active_cursor.hide()
 	active_cursor.process_mode = PROCESS_MODE_DISABLED
 	
-	#for entity in active_level.entities.get_children():
-		#for unit in unit_info.character_attributes:
-			#if entity.type == 'ally':
-				#if entity.attributes['name'] == unit_info.character_attributes[unit]['name']:
-					#unit_info.update(entity.attributes['name'], entity)
-
-	#for unit in unit_holder.get_children():
-		#unit.update()
-	#for unit in unit_roster.get_children():
-		#unit.update()
-		
+	
 	for i in range(0, active_level.random_rewards.size()):
 		rewards.get_children()[i].unit_name = active_level.random_rewards[i]
 		rewards.get_children()[i].update()
