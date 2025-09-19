@@ -1,4 +1,4 @@
 extends Resource
 class_name Specialization
 
-@export var Talents: Array[Talent]
+@export var talents: Array[Talent]

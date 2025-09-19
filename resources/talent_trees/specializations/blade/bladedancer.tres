@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="Specialization" load_steps=2 format=3 uid="uid://d2u2ihba6rhiu"]
+[gd_resource type="Resource" script_class="Specialization" load_steps=11 format=3 uid="uid://d2u2ihba6rhiu"]
 
 [ext_resource type="Script" uid="uid://xdw4eflra1o7" path="res://resources/talent_trees/specializations/specialization.gd" id="1_oceoi"]
+[ext_resource type="Script" uid="uid://btd4bsk04p3xa" path="res://resources/talent_trees/talents/talent.gd" id="1_pq1ks"]
+[ext_resource type="Resource" uid="uid://cne5a2bganor4" path="res://resources/talent_trees/talents/blade/bladedancer/alacrity.tres" id="2_12cu8"]
+[ext_resource type="Resource" uid="uid://c4qevg7gwud31" path="res://resources/talent_trees/talents/blade/bladedancer/blade_dance.tres" id="3_jei32"]
+[ext_resource type="Resource" uid="uid://dlbwe1a7n2tvf" path="res://resources/talent_trees/talents/blade/bladedancer/flexibility.tres" id="4_aoa7p"]
+[ext_resource type="Resource" uid="uid://dqae577tb4o20" path="res://resources/talent_trees/talents/blade/bladedancer/haste.tres" id="5_frtnq"]
+[ext_resource type="Resource" uid="uid://f16363wf6bah" path="res://resources/talent_trees/talents/blade/bladedancer/perfectionist.tres" id="6_5pq2w"]
+[ext_resource type="Resource" uid="uid://sqommc5v47l0" path="res://resources/talent_trees/talents/blade/bladedancer/sprint.tres" id="7_lss6m"]
+[ext_resource type="Resource" uid="uid://dd04la4ygjs0u" path="res://resources/talent_trees/talents/blade/bladedancer/swift_strike.tres" id="8_0oqwn"]
+[ext_resource type="Resource" uid="uid://dummbv50jdb1i" path="res://resources/talent_trees/talents/blade/bladedancer/whirlwind.tres" id="9_sqm0d"]
 
 [resource]
 script = ExtResource("1_oceoi")
-Tier1 = Dictionary[String, int]({})
-Tier2 = Dictionary[String, int]({})
-Tier3 = Dictionary[String, int]({})
-Tier4 = Dictionary[String, int]({})
-Tier5 = Dictionary[String, int]({})
-Tier6 = Dictionary[String, int]({})
-Tier7 = Dictionary[String, int]({})
-Tier8 = Dictionary[String, int]({})
+talents = Array[ExtResource("1_pq1ks")]([ExtResource("2_12cu8"), ExtResource("3_jei32"), ExtResource("4_aoa7p"), ExtResource("5_frtnq"), ExtResource("6_5pq2w"), ExtResource("7_lss6m"), ExtResource("8_0oqwn"), ExtResource("9_sqm0d")])
 metadata/_custom_type_script = "uid://xdw4eflra1o7"

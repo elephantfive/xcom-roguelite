@@ -1,9 +1,17 @@
-[gd_resource type="Resource" script_class="Specialization" load_steps=3 format=3 uid="uid://bjt1tnsivgq8n"]
+[gd_resource type="Resource" script_class="Specialization" load_steps=11 format=3 uid="uid://bjt1tnsivgq8n"]
 
 [ext_resource type="Script" uid="uid://btd4bsk04p3xa" path="res://resources/talent_trees/talents/talent.gd" id="1_acxh2"]
+[ext_resource type="Resource" uid="uid://ccyfgjbndlfyn" path="res://resources/talent_trees/talents/blade/berserker/annihilator.tres" id="2_gn21i"]
 [ext_resource type="Script" uid="uid://xdw4eflra1o7" path="res://resources/talent_trees/specializations/specialization.gd" id="2_qki2m"]
+[ext_resource type="Resource" uid="uid://csvc48hqx474y" path="res://resources/talent_trees/talents/blade/berserker/bloodfury.tres" id="3_h5h8u"]
+[ext_resource type="Resource" uid="uid://c8e5ftyuixhxh" path="res://resources/talent_trees/talents/blade/berserker/bloodthirst.tres" id="4_5u1bg"]
+[ext_resource type="Resource" uid="uid://dmgj3vcsv7rlu" path="res://resources/talent_trees/talents/blade/berserker/brutalize.tres" id="5_ikxa2"]
+[ext_resource type="Resource" uid="uid://bg37og8t557uj" path="res://resources/talent_trees/talents/blade/berserker/cleave.tres" id="6_pnfdp"]
+[ext_resource type="Resource" uid="uid://nfsrtakv82dg" path="res://resources/talent_trees/talents/blade/berserker/masochist.tres" id="7_443ud"]
+[ext_resource type="Resource" uid="uid://cq7kibnv6qyv2" path="res://resources/talent_trees/talents/blade/berserker/sadist.tres" id="8_l2xu3"]
+[ext_resource type="Resource" uid="uid://cheshmiv17sb" path="res://resources/talent_trees/talents/blade/berserker/thrash.tres" id="9_mxddj"]
 
 [resource]
 script = ExtResource("2_qki2m")
-Talents = Array[ExtResource("1_acxh2")]([null, null, null, null, null, null, null, null])
+talents = Array[ExtResource("1_acxh2")]([ExtResource("2_gn21i"), ExtResource("3_h5h8u"), ExtResource("4_5u1bg"), ExtResource("5_ikxa2"), ExtResource("6_pnfdp"), ExtResource("7_443ud"), ExtResource("8_l2xu3"), ExtResource("9_mxddj")])
 metadata/_custom_type_script = "uid://xdw4eflra1o7"

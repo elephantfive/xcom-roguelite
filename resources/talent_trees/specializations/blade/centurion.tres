@@ -1,13 +1,17 @@
-[gd_resource type="Resource" script_class="Specialization" load_steps=2 format=3 uid="uid://cupjfv78gf58c"]
+[gd_resource type="Resource" script_class="Specialization" load_steps=11 format=3 uid="uid://cupjfv78gf58c"]
 
 [ext_resource type="Script" uid="uid://xdw4eflra1o7" path="res://resources/talent_trees/specializations/specialization.gd" id="1_u6s82"]
+[ext_resource type="Script" uid="uid://btd4bsk04p3xa" path="res://resources/talent_trees/talents/talent.gd" id="1_wn0ng"]
+[ext_resource type="Resource" uid="uid://cr30sasy6lrtg" path="res://resources/talent_trees/talents/blade/centurion/blockade.tres" id="2_0yryr"]
+[ext_resource type="Resource" uid="uid://duo53phnwg40v" path="res://resources/talent_trees/talents/blade/centurion/fortify.tres" id="3_7aeon"]
+[ext_resource type="Resource" uid="uid://dpcjyc4twlypi" path="res://resources/talent_trees/talents/blade/centurion/guardian.tres" id="4_cu147"]
+[ext_resource type="Resource" uid="uid://ijbt3i01gli7" path="res://resources/talent_trees/talents/blade/centurion/heavy_armor.tres" id="5_nrr61"]
+[ext_resource type="Resource" uid="uid://bsu76msme5bnf" path="res://resources/talent_trees/talents/blade/centurion/sacrifice.tres" id="6_esvwk"]
+[ext_resource type="Resource" uid="uid://bpvc403pqsjrc" path="res://resources/talent_trees/talents/blade/centurion/taunt.tres" id="7_yd2bm"]
+[ext_resource type="Resource" uid="uid://dt753enbwxurf" path="res://resources/talent_trees/talents/blade/centurion/vengeance.tres" id="8_emo6s"]
+[ext_resource type="Resource" uid="uid://ckhltuw88o33j" path="res://resources/talent_trees/talents/blade/centurion/zone_of_control.tres" id="9_d2qg3"]
 
 [resource]
 script = ExtResource("1_u6s82")
-Tier1 = {
-"name": {
-"current_points": 0,
-"max_points": 1
-}
-}
+talents = Array[ExtResource("1_wn0ng")]([ExtResource("2_0yryr"), ExtResource("3_7aeon"), ExtResource("4_cu147"), ExtResource("5_nrr61"), ExtResource("6_esvwk"), ExtResource("7_yd2bm"), ExtResource("8_emo6s"), ExtResource("9_d2qg3")])
 metadata/_custom_type_script = "uid://xdw4eflra1o7"
