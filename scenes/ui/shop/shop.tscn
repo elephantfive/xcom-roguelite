@@ -49,3 +49,15 @@ layout_mode = 2
 
 [node name="ShopButton3" parent="RowContainer/Row2" instance=ExtResource("2_6ln8t")]
 layout_mode = 2
+
+[node name="Row3" type="HBoxContainer" parent="RowContainer"]
+layout_mode = 2
+
+[node name="ShopButton" parent="RowContainer/Row3" instance=ExtResource("2_6ln8t")]
+layout_mode = 2
+
+[node name="ShopButton2" parent="RowContainer/Row3" instance=ExtResource("2_6ln8t")]
+layout_mode = 2
+
+[node name="ShopButton3" parent="RowContainer/Row3" instance=ExtResource("2_6ln8t")]
+layout_mode = 2

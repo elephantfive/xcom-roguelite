@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="CharacterAttributes" load_steps=6 format=3 uid="uid://c766h0tdq8tyt"]
+[gd_resource type="Resource" script_class="CharacterAttributes" load_steps=7 format=3 uid="uid://c766h0tdq8tyt"]
 
 [ext_resource type="Script" uid="uid://cvdqkeeonkc2j" path="res://resources/ally_stats/character_attributes.gd" id="1_rxrl8"]
 [ext_resource type="Resource" uid="uid://bjt1tnsivgq8n" path="res://resources/talent_trees/specializations/blade/berserker.tres" id="2_6ybk1"]
+[ext_resource type="Script" uid="uid://xdw4eflra1o7" path="res://resources/talent_trees/specializations/specialization.gd" id="2_d85ap"]
 [ext_resource type="Resource" uid="uid://d2u2ihba6rhiu" path="res://resources/talent_trees/specializations/blade/bladedancer.tres" id="3_gt5vj"]
 [ext_resource type="Resource" uid="uid://cupjfv78gf58c" path="res://resources/talent_trees/specializations/blade/centurion.tres" id="4_d85ap"]
 [ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="5_gt5vj"]
@@ -12,6 +13,7 @@ character_name = "Amigol"
 attack_damage = 2
 attack_ap_cost = 1
 base_health = 20
+health = 20
 heal = 3
 max_overheal = 5
 heal_ap_cost = 1
@@ -19,7 +21,7 @@ max_heal_distance = 10
 max_move_distance = 20
 max_attack_distance = 20
 max_action_points = 1
-specializations = [ExtResource("2_6ybk1"), ExtResource("3_gt5vj"), ExtResource("4_d85ap")]
+specializations = Array[ExtResource("2_d85ap")]([ExtResource("2_6ybk1"), ExtResource("3_gt5vj"), ExtResource("4_d85ap")])
 xp = 0
 xp_needed = 100
 level = 1

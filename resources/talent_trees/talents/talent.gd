@@ -6,6 +6,6 @@ class_name Talent
 @export var max_points: int = 2
 @export var current_points: int = 0
 @export var tier: int = 0
-@export var texture: String
+@export var texture: Texture2D
 @export var add_ability: bool = false
 @export var modified_values: Dictionary[String, int]
