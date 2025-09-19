@@ -1,0 +1,105 @@
+[gd_scene load_steps=2 format=3 uid="uid://dampw2b4ujopv"]
+
+[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="1_7t8yc"]
+
+[node name="Loadout" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 661.0
+offset_bottom = 155.0
+
+[node name="Character" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Character" type="HBoxContainer" parent="HBoxContainer/Character"]
+layout_mode = 2
+
+[node name="CharacterLeft" type="VBoxContainer" parent="HBoxContainer/Character/Character"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Character/Character/CharacterLeft"]
+layout_mode = 2
+texture = ExtResource("1_7t8yc")
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/Character/Character/CharacterLeft"]
+layout_mode = 2
+texture = ExtResource("1_7t8yc")
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/Character/Character/CharacterLeft"]
+layout_mode = 2
+texture = ExtResource("1_7t8yc")
+
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer/Character/Character/CharacterLeft"]
+layout_mode = 2
+texture = ExtResource("1_7t8yc")
+
+[node name="TextureRect5" type="TextureRect" parent="HBoxContainer/Character/Character/CharacterLeft"]
+layout_mode = 2
+texture = ExtResource("1_7t8yc")
+
+[node name="CharacterPortrait" type="TextureRect" parent="HBoxContainer/Character/Character"]
+layout_mode = 2
+texture = ExtResource("1_7t8yc")
+expand_mode = 2
+
+[node name="CharacterRight" type="VBoxContainer" parent="HBoxContainer/Character/Character"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Character/Character/CharacterRight"]
+layout_mode = 2
+texture = ExtResource("1_7t8yc")
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/Character/Character/CharacterRight"]
+layout_mode = 2
+texture = ExtResource("1_7t8yc")
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/Character/Character/CharacterRight"]
+layout_mode = 2
+texture = ExtResource("1_7t8yc")
+
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer/Character/Character/CharacterRight"]
+layout_mode = 2
+texture = ExtResource("1_7t8yc")
+
+[node name="TextureRect5" type="TextureRect" parent="HBoxContainer/Character/Character/CharacterRight"]
+layout_mode = 2
+texture = ExtResource("1_7t8yc")
+
+[node name="CharacterLabel" type="Label" parent="HBoxContainer/Character"]
+layout_mode = 2
+
+[node name="Inventory" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Inventory" type="HFlowContainer" parent="HBoxContainer/Inventory"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Inventory/Inventory"]
+layout_mode = 2
+texture = ExtResource("1_7t8yc")
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/Inventory/Inventory"]
+layout_mode = 2
+texture = ExtResource("1_7t8yc")
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/Inventory/Inventory"]
+layout_mode = 2
+texture = ExtResource("1_7t8yc")
+
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer/Inventory/Inventory"]
+layout_mode = 2
+texture = ExtResource("1_7t8yc")
+
+[node name="TextureRect5" type="TextureRect" parent="HBoxContainer/Inventory/Inventory"]
+layout_mode = 2
+texture = ExtResource("1_7t8yc")
+
+[node name="ItemLabel" type="Label" parent="HBoxContainer/Inventory"]
+layout_mode = 2

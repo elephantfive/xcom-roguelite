@@ -6,12 +6,11 @@ var shop_artifacts: Array[Artifact]
 @onready var row_container = $RowContainer
 
 
-
 func _on_shop_state_entered():
 	var shops = [shop_characters, shop_items, shop_artifacts]
-	print("Shop state entered!")
 	for i in range(shops.size()):
 		load_items(shops[i], row_container.get_children()[i])
+
 
 func load_items(shop, row):
 	for i in range(shop.size()):

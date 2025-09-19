@@ -11,9 +11,7 @@ func _ready():
 	attribute_list['Attack'] = ['max_attack_distance']
 	attribute_list['Move'] = ['max_move_distance']
 	attribute_list['Heal'] = ['max_heal_distance', 'heal']
-
-#func update(old_unit, new_unit):
-	#character_attributes[old_unit] = new_unit.attributes
+	
 
 func button_text(unit, button_name):
 	var text_holder = []

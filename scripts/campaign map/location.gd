@@ -31,7 +31,6 @@ func _on_input_event(_viewport, event, _shape_idx):
 					desc.hide()
 					popup.show()
 				elif location_type == 'shop':
-					print("Shop event sent")
 					shop_screen.shop_characters = shop_characters
 					shop_screen.shop_items = shop_items
 					shop_screen.shop_artifacts = shop_artifacts
