@@ -11,6 +11,8 @@ extends TextureButton
 @onready var remove_from_squad = $"../../UnitDesc/RemoveFromSquad"
 @onready var state_chart = $StateChart
 
+func _ready():
+	update()
 
 func _on_pressed():
 	state_chart.send_event('pressed')
@@ -42,10 +44,9 @@ func _on_idle_event_received(event):
 		label.text = ''
 		if game_manager.squad_unit_selected != self:
 			game_manager.squad_unit_selected = self
-			print(str(get(attributes))
-			#for key in attributes:
-				#if key != 'unit_actions' and key != 'texture':
-					#label.text += key.replace('_', ' ').to_upper() + ': ' + str(attributes[key]) + '\n'
+			for property_info in attributes.get_script().get_script_property_list():
+				if typeof(attributes.get(property_info.name)) == 2 or typeof(attributes.get(property_info.name)) == 4:
+					label.text += property_info.name.replace('_', ' ').to_upper() + ': ' + str(attributes.get(property_info.name)) + '\n'
 		else:
 			remove_from_squad.hide()
 			game_manager.squad_unit_selected = null
@@ -66,7 +67,6 @@ func _on_changing_squad_event_received(event):
 					unit.state_chart.send_event('off_squad')
 			attributes = game_manager.roster_unit_selected.attributes
 			game_manager.roster_unit_selected.add_to_squad.hide()
-			game_manager.roster_unit_selected.update()
 			game_manager.roster_unit_selected.state_chart.send_event('on_squad')
 			game_manager.roster_unit_selected = null
 			game_manager.squad_unit_selected = null

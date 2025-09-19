@@ -14,9 +14,9 @@ func _ready():
 
 #func update(old_unit, new_unit):
 	#character_attributes[old_unit] = new_unit.attributes
-#
-#func button_text(unit_name, button_name):
-	#var text_holder = []
-	#for item in attribute_list[button_name]:
-		#text_holder.append(str(character_attributes[unit_name][item]))
-	#return action_list[button_name] % text_holder
+
+func button_text(unit, button_name):
+	var text_holder = []
+	for item in attribute_list[button_name]:
+		text_holder.append(str(unit.attributes.get(item)))
+	return action_list[button_name] % text_holder

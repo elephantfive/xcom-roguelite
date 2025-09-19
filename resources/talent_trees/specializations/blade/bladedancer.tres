@@ -13,5 +13,6 @@
 
 [resource]
 script = ExtResource("1_oceoi")
+spec_name = "Bladedancer"
 talents = Array[ExtResource("1_pq1ks")]([ExtResource("2_12cu8"), ExtResource("3_jei32"), ExtResource("4_aoa7p"), ExtResource("5_frtnq"), ExtResource("6_5pq2w"), ExtResource("7_lss6m"), ExtResource("8_0oqwn"), ExtResource("9_sqm0d")])
 metadata/_custom_type_script = "uid://xdw4eflra1o7"

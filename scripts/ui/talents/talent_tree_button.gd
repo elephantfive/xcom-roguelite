@@ -12,13 +12,13 @@ func _on_pressed():
 
 func _on_clickable_event_received(event):
 	if event == 'clicked':
-		if unit_info.character_attributes[selected_unit]['talent_points'] > 0:
-			unit_info.character_attributes[selected_unit]['talent_points'] -= 1
-			if unit_info.character_attributes[selected_unit]['talents'].has(talent):
-				unit_info.character_attributes[selected_unit]['talents'][talent] += 1
+		if selected_unit.attributes.talent_points > 0:
+			selected_unit.attributes.talent_points -= 1
+			if selected_unit.attributes.talents.has(talent):
+				selected_unit.attributes.talents[talent] += 1
 			else:
-				unit_info.character_attributes[selected_unit]['talents'][talent] = 1
-			if unit_info.character_attributes[selected_unit]['talents'][talent] == talent.max_points:
+				selected_unit.attributes.talents[talent] = 1
+			if selected_unit.attributes.talents[talent] == talent.max_points:
 				state_chart.send_event('maxed')
 			talent_character_changes.selected_unit = selected_unit
 			talent_character_changes.add_talent(talent)

@@ -27,9 +27,9 @@ func _on_texture_button_pressed():
 			unit.add_to_squad.hide()
 		
 	if label.text == '':
-		for key in attributes:
-			if key != 'unit_actions' and key != 'texture':
-				label.text += key.replace('_', ' ').to_upper() + ': ' + str(attributes[key]) + '\n'
+		for property_info in attributes.get_script().get_script_property_list():
+				if typeof(attributes.get(property_info.name)) == 2 or typeof(attributes.get(property_info.name)) == 4:
+					label.text += property_info.name.replace('_', ' ').to_upper() + ': ' + str(attributes.get(property_info.name)) + '\n'
 	else:
 		add_to_squad.hide()
 		label.text = ''

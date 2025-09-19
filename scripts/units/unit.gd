@@ -1,7 +1,7 @@
 extends Area2D
 #region Startup vars
 
-var attributes: Dictionary
+var attributes: CharacterAttributes
 
 var current_move_points: float
 var current_action_points: int
@@ -30,9 +30,6 @@ const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 
 #region Startup and resetting
 func _ready():
-	attributes = game_manager.unit_info.character_attributes[name]
-	if not attributes.has('health'):
-		attributes['health'] = attributes['base_health']
 	points_reset()
 	points_update()
 

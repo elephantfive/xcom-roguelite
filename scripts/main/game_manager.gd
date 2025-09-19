@@ -92,6 +92,7 @@ func _on_idle_state_exited():
 
 
 func _on_changing_squad_state_entered():
+	toggle("Campaign Map", PROCESS_MODE_INHERIT, true)
 	for unit in unit_holder.get_children():
 		unit.state_chart.send_event('squad_change')
 
@@ -100,16 +101,16 @@ func _on_level_end_taken():
 	active_cursor.hide()
 	active_cursor.process_mode = PROCESS_MODE_DISABLED
 	
-	for entity in active_level.entities.get_children():
-		for unit in unit_info.character_attributes:
-			if entity.type == 'ally':
-				if entity.attributes['name'] == unit_info.character_attributes[unit]['name']:
-					unit_info.update(entity.attributes['name'], entity)
+	#for entity in active_level.entities.get_children():
+		#for unit in unit_info.character_attributes:
+			#if entity.type == 'ally':
+				#if entity.attributes['name'] == unit_info.character_attributes[unit]['name']:
+					#unit_info.update(entity.attributes['name'], entity)
 
-	for unit in unit_holder.get_children():
-		unit.update()
-	for unit in unit_roster.get_children():
-		unit.update()
+	#for unit in unit_holder.get_children():
+		#unit.update()
+	#for unit in unit_roster.get_children():
+		#unit.update()
 		
 	for i in range(0, active_level.random_rewards.size()):
 		rewards.get_children()[i].unit_name = active_level.random_rewards[i]
@@ -129,11 +130,10 @@ func _on_in_level_state_entered():
 	targets = []
 	
 	for unit in unit_holder.get_children():
-		if unit.unit_name != '':
+		if unit.attributes != null:
 			var new_unit = UNIT.instantiate()
-			unit_info.character_attributes[unit.unit_name].merge(unit_info.base_attributes, false)
-			new_unit.attributes = unit_info.character_attributes[unit.unit_name]
-			new_unit.name = new_unit.attributes['name']
+			new_unit.attributes = unit.attributes
+			new_unit.name = new_unit.attributes.character_name
 			new_unit.game_manager = self
 			new_unit.active_cursor = active_cursor
 			new_unit.hud = hud

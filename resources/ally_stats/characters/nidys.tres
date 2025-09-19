@@ -13,6 +13,7 @@ character_name = "Nidys"
 attack_damage = 1
 attack_ap_cost = 1
 base_health = 10
+health = 10
 heal = 3
 max_overheal = 5
 heal_ap_cost = 1

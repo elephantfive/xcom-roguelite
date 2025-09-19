@@ -9,33 +9,28 @@ var selected_unit
 const TALENT_TREE_BUTTON = preload("res://scenes/ui/talents/talent_tree_button.tscn")
 var specs: Array = []
 var current_unit
+@onready var unit_roster = %"Unit Roster"
 
 
 func _on_level_up_state_entered():
 	talent_character_changes.unit_info = unit_info
-	for unit in unit_info.character_attributes:
-		if unit_info.character_attributes[unit].has('xp'):
-			if unit_info.character_attributes[unit]['xp'] >= unit_info.character_attributes[unit]['xp_needed']:
-				selected_unit = unit
-				break
-				
+	for unit in unit_roster.get_children():
+		if unit.attributes.xp >= unit.attributes.xp_needed:
+			selected_unit = unit
+			break
+
+
 	if selected_unit != null:
-		while unit_info.character_attributes[selected_unit]['xp'] >= unit_info.character_attributes[selected_unit]['xp_needed']:
-			unit_info.character_attributes[selected_unit]['xp'] -= unit_info.character_attributes[selected_unit]['xp_needed']
-			unit_info.character_attributes[selected_unit]['talent_points'] += 1
-			unit_info.character_attributes[selected_unit]['level'] += 1
-			unit_info.character_attributes[selected_unit]['xp_needed'] *= 2
-			specs = unit_info.character_attributes[selected_unit]['specializations']
+		while selected_unit.attributes.xp >= selected_unit.attributes.xp_needed:
+			selected_unit.attributes.xp -= selected_unit.attributes.xp_needed
+			selected_unit.attributes.talent_points += 1
+			selected_unit.attributes.level += 1
+			selected_unit.attributes.xp_needed *= 2
+			specs = selected_unit.attributes.specializations
 
 
-		#for i in range(selected_unit.character_attributes['specializations'].size()):
-			
-			
-			
-		#for spec in selected_unit.character_attributes['specializations']:
-		
 		for i in range(3):
-			specs[i] = load("res://resources/talent_trees/specializations/blade/" + specs[i] + ".tres")
+			#specs[i] = load("res://resources/talent_trees/specializations/blade/" + specs[i] + ".tres")
 			for talent in specs[i].talents:
 				for n in range(8):
 					if talent.tier == n:
@@ -47,9 +42,9 @@ func _on_level_up_state_entered():
 						new_talent_button.unit_info = unit_info
 						new_talent_button.talent_character_changes = talent_character_changes
 						tree_container.get_children()[i].get_children()[n].add_child(new_talent_button)
-						if new_talent_button.tier == 0 and new_talent_button.talent not in unit_info.character_attributes[selected_unit]['talents']:
+						if new_talent_button.tier == 0 and new_talent_button.talent not in selected_unit.attributes.talents:
 							new_talent_button.state_chart.send_event.call_deferred('clickable')
-						elif talent in unit_info.character_attributes[selected_unit]['talents']:
+						elif talent in selected_unit.attributes.talents:
 							new_talent_button.state_chart.send_event.call_deferred('in_talents')
 
 

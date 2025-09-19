@@ -13,7 +13,7 @@ func new_unit():
 	for button in actions.get_children():
 		if button.name in selected_unit.attributes['unit_actions']:
 			button.show()
-			button.text = unit_info.button_text(selected_unit.attributes['name'], button.name)
+			button.text = unit_info.button_text(selected_unit, button.name)
 		elif button.name != 'End':
 			button.hide()
 
