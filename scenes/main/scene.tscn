@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ygb05qawriwh"]
+[gd_scene load_steps=27 format=3 uid="uid://ygb05qawriwh"]
 
 [ext_resource type="Script" uid="uid://jb8g77b0p2hp" path="res://scripts/main/active_cursor.gd" id="1_1cexc"]
 [ext_resource type="Script" uid="uid://e0nun6mx1aou" path="res://scripts/main/unit_info.gd" id="1_j6bet"]
@@ -14,8 +14,14 @@
 [ext_resource type="Script" uid="uid://le5w1cm0ul8p" path="res://addons/godot_state_charts/expression_guard.gd" id="7_1cexc"]
 [ext_resource type="Script" uid="uid://csjw6m7rnqkaa" path="res://scripts/ui/unit_roster.gd" id="8_osw1o"]
 [ext_resource type="PackedScene" uid="uid://31q5hdaeariq" path="res://scenes/ui/squad_unit.tscn" id="10_y2ajb"]
+[ext_resource type="Script" uid="uid://1lwlp1igpvkd" path="res://resources/items/item.gd" id="12_mud6k"]
 [ext_resource type="Resource" uid="uid://c766h0tdq8tyt" path="res://resources/ally_stats/characters/amigol.tres" id="13_0yifu"]
+[ext_resource type="Resource" uid="uid://c65tvdanteuut" path="res://resources/items/armor/leather_chestplate.tres" id="13_ehxfi"]
+[ext_resource type="Resource" uid="uid://dlybtffsulbhv" path="res://resources/items/weapons/iron_sword.tres" id="14_gipxf"]
 [ext_resource type="PackedScene" uid="uid://dlx6r86vgqwrp" path="res://scenes/ui/talents/talent_tree.tscn" id="15_8dywm"]
+[ext_resource type="Script" uid="uid://b034crntytt31" path="res://resources/artifacts/artifact.gd" id="15_fs22m"]
+[ext_resource type="Resource" uid="uid://ckgldukbxq1oe" path="res://resources/artifacts/village_keepsake.tres" id="16_m1y6s"]
+[ext_resource type="PackedScene" uid="uid://cldgcd6hmigou" path="res://scenes/ui/shop/shop.tscn" id="20_ehxfi"]
 
 [sub_resource type="Resource" id="Resource_1cexc"]
 script = ExtResource("7_1cexc")
@@ -248,6 +254,7 @@ offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
+mouse_filter = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Campaign Map/Player Marker"]
 shape = SubResource("RectangleShape2D_4msxo")
@@ -285,6 +292,12 @@ level = "res://scenes/levels/level_1.tscn"
 [node name="Location3" parent="Campaign Map" instance=ExtResource("5_xsca3")]
 position = Vector2(519, 386)
 level = "res://scenes/levels/level_1.tscn"
+
+[node name="Location4" parent="Campaign Map" instance=ExtResource("5_xsca3")]
+position = Vector2(531, 528)
+location_type = "shop"
+shop_items = Array[ExtResource("12_mud6k")]([ExtResource("13_ehxfi"), ExtResource("14_gipxf")])
+shop_artifacts = Array[ExtResource("15_fs22m")]([ExtResource("16_m1y6s")])
 
 [node name="Campaign Map Hud" type="CanvasLayer" parent="." groups=["Campaign Map"]]
 unique_name_in_owner = true
@@ -368,6 +381,9 @@ text = "Research
 unique_name_in_owner = true
 visible = false
 
+[node name="ShopScreen" parent="Shop" instance=ExtResource("20_ehxfi")]
+unique_name_in_owner = true
+
 [node name="Reward Screen" type="CanvasLayer" parent="." groups=["Campaign Menus"]]
 unique_name_in_owner = true
 visible = false
@@ -428,6 +444,7 @@ visible = false
 [connection signal="state_entered" from="Game Manager/StateChart/Root/LevelUp" to="Game Manager" method="_on_level_up_state_entered"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/LevelUp" to="Level Up/TalentTree" method="_on_level_up_state_entered"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/Shop" to="Game Manager" method="_on_shop_state_entered"]
+[connection signal="state_entered" from="Game Manager/StateChart/Root/Shop" to="Shop/ShopScreen" method="_on_shop_state_entered"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/Reward" to="Game Manager" method="_on_reward_state_entered"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/TechTree" to="Game Manager" method="_on_tech_tree_state_entered"]
 [connection signal="area_entered" from="ActiveCursor" to="ActiveCursor" method="_on_area_entered"]

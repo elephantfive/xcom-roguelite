@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=3 format=3 uid="uid://ckgldukbxq1oe"]
+
+[ext_resource type="Script" uid="uid://b034crntytt31" path="res://resources/artifacts/artifact.gd" id="1_q7vw7"]
+[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="2_fai0y"]
+
+[resource]
+script = ExtResource("1_q7vw7")
+item_name = "Village Keepsake"
+texture = ExtResource("2_fai0y")
+metadata/_custom_type_script = "uid://b034crntytt31"
