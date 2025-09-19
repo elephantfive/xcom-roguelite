@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ban4sjpxrncql"]
 
-[ext_resource type="Script" uid="uid://cob331p786xwo" path="res://scripts/ui/shop_button.gd" id="1_ofmg3"]
+[ext_resource type="Script" uid="uid://cob331p786xwo" path="res://scripts/ui/shop/shop_button.gd" id="1_ofmg3"]
 
 [node name="ShopButton" type="TextureButton"]
 anchors_preset = 15

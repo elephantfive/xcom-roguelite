@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dlx6r86vgqwrp"]
 
-[ext_resource type="Script" uid="uid://cosm4pa1c0qdm" path="res://scripts/ui/talent_tree.gd" id="1_pprm8"]
-[ext_resource type="Script" uid="uid://b3xs4oyu6lnph" path="res://scripts/ui/talent_info.gd" id="2_eavx0"]
-[ext_resource type="Script" uid="uid://dky07g0w5skxh" path="res://scripts/ui/talent_character_changes.gd" id="3_4ptvx"]
+[ext_resource type="Script" uid="uid://cosm4pa1c0qdm" path="res://scripts/ui/talents/talent_tree.gd" id="1_pprm8"]
+[ext_resource type="Script" uid="uid://b3xs4oyu6lnph" path="res://scripts/ui/talents/talent_info.gd" id="2_eavx0"]
+[ext_resource type="Script" uid="uid://dky07g0w5skxh" path="res://scripts/ui/talents/talent_character_changes.gd" id="3_4ptvx"]
 
 [node name="TalentTree" type="Control"]
 layout_mode = 3

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Talent" load_steps=2 format=3 uid="uid://dd04la4ygjs0u"]
+
+[ext_resource type="Script" uid="uid://btd4bsk04p3xa" path="res://resources/talent_trees/talents/talent.gd" id="1_rgg1y"]
+
+[resource]
+script = ExtResource("1_rgg1y")
+talent_name = "Swift Strike"
+max_points = 1
+current_points = 0
+tier = 0
+texture = ""
+add_ability = false
+modified_values = Dictionary[String, int]({})
+metadata/_custom_type_script = "uid://btd4bsk04p3xa"

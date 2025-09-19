@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Talent" load_steps=2 format=3 uid="uid://dlbwe1a7n2tvf"]
+
+[ext_resource type="Script" uid="uid://btd4bsk04p3xa" path="res://resources/talent_trees/talents/talent.gd" id="1_6wlxf"]
+
+[resource]
+script = ExtResource("1_6wlxf")
+talent_name = "Flexibility"
+max_points = 1
+current_points = 0
+tier = 3
+texture = ""
+add_ability = false
+modified_values = Dictionary[String, int]({})
+metadata/_custom_type_script = "uid://btd4bsk04p3xa"

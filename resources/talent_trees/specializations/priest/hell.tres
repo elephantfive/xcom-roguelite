@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Specialization" load_steps=2 format=3 uid="uid://b8k7ntlv40qmo"]
+
+[ext_resource type="Script" uid="uid://xdw4eflra1o7" path="res://resources/talent_trees/specializations/specialization.gd" id="1_coyi7"]
+
+[resource]
+script = ExtResource("1_coyi7")
+Tier1 = Dictionary[String, int]({})
+Tier2 = Dictionary[String, int]({})
+Tier3 = Dictionary[String, int]({})
+Tier4 = Dictionary[String, int]({})
+Tier5 = Dictionary[String, int]({})
+Tier6 = Dictionary[String, int]({})
+Tier7 = Dictionary[String, int]({})
+Tier8 = Dictionary[String, int]({})
+metadata/_custom_type_script = "uid://xdw4eflra1o7"

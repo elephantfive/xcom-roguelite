@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://le5w1cm0ul8p" path="res://addons/godot_state_charts/expression_guard.gd" id="7_1cexc"]
 [ext_resource type="Script" uid="uid://csjw6m7rnqkaa" path="res://scripts/ui/unit_roster.gd" id="8_osw1o"]
 [ext_resource type="PackedScene" uid="uid://31q5hdaeariq" path="res://scenes/ui/squad_unit.tscn" id="10_y2ajb"]
-[ext_resource type="PackedScene" uid="uid://dlx6r86vgqwrp" path="res://scenes/ui/talent_tree.tscn" id="15_8dywm"]
+[ext_resource type="PackedScene" uid="uid://dlx6r86vgqwrp" path="res://scenes/ui/talents/talent_tree.tscn" id="15_8dywm"]
 
 [sub_resource type="Resource" id="Resource_1cexc"]
 script = ExtResource("7_1cexc")

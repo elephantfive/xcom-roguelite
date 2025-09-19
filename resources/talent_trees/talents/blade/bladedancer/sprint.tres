@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Talent" load_steps=2 format=3 uid="uid://sqommc5v47l0"]
+
+[ext_resource type="Script" uid="uid://btd4bsk04p3xa" path="res://resources/talent_trees/talents/talent.gd" id="1_8f6ty"]
+
+[resource]
+script = ExtResource("1_8f6ty")
+talent_name = "Sprint"
+max_points = 1
+current_points = 0
+tier = 2
+texture = ""
+add_ability = false
+modified_values = Dictionary[String, int]({})
+metadata/_custom_type_script = "uid://btd4bsk04p3xa"

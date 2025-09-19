@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cvddh111yx7eb"]
 
 [ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="1_gv6g5"]
-[ext_resource type="Script" uid="uid://btpd3wbdrt5pg" path="res://scripts/ui/talent_tree_button.gd" id="2_4l0jb"]
+[ext_resource type="Script" uid="uid://btpd3wbdrt5pg" path="res://scripts/ui/talents/talent_tree_button.gd" id="2_4l0jb"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_wg6jp"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_0c3wn"]
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="4_f775u"]

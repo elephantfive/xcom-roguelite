@@ -29,11 +29,9 @@ const UNIT = preload("res://scenes/entities/units/unit.tscn")
 @onready var loadout = %Loadout
 @onready var shop = %Shop
 @onready var tech_tree = %TechTree
-const CENTURION = preload("res://resources/talent_trees/specializations/centurion.tres")
 
 func _ready():
 	#level_adv("res://scenes/levels/level_1.tscn")
-	print(str(CENTURION.Tier1))
 	pass
 
 

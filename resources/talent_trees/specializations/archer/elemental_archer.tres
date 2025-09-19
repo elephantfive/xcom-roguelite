@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Specialization" load_steps=2 format=3 uid="uid://dyp0gcn1wu41r"]
+
+[ext_resource type="Script" uid="uid://xdw4eflra1o7" path="res://resources/talent_trees/specializations/specialization.gd" id="1_ch5pw"]
+
+[resource]
+script = ExtResource("1_ch5pw")
+metadata/_custom_type_script = "uid://xdw4eflra1o7"

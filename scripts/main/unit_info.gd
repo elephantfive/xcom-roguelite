@@ -8,7 +8,7 @@ var base_attributes = {
 	'xp': 0,
 	'xp_needed': 100,
 	'level': 1,
-	'talents': [],
+	'talents': {},
 	'talent_points': 0,
 }
 
@@ -25,6 +25,7 @@ func _ready():
 		'max_move_distance':  20,
 		'max_attack_distance': 20,
 		'max_action_points': 1,
+		'specializations': ['centurion', 'bladedancer', 'berserker'],
 		'unit_actions': ['Attack', 'Move'],
 		'texture': "res://icon.svg",
 		}

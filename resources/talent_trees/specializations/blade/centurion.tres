@@ -4,18 +4,10 @@
 
 [resource]
 script = ExtResource("1_u6s82")
-Tier1 = Dictionary[String, int]({
-"Fortify": 3
-})
-Tier2 = Dictionary[String, int]({
-"Impervious": 5
-})
-Tier3 = Dictionary[String, int]({
-"Taunt": 2
-})
-Tier4 = Dictionary[String, int]({})
-Tier5 = Dictionary[String, int]({})
-Tier6 = Dictionary[String, int]({})
-Tier7 = Dictionary[String, int]({})
-Tier8 = Dictionary[String, int]({})
+Tier1 = {
+"name": {
+"current_points": 0,
+"max_points": 1
+}
+}
 metadata/_custom_type_script = "uid://xdw4eflra1o7"
