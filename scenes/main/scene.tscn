@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ygb05qawriwh"]
+[gd_scene load_steps=21 format=3 uid="uid://ygb05qawriwh"]
 
 [ext_resource type="Script" uid="uid://jb8g77b0p2hp" path="res://scripts/main/active_cursor.gd" id="1_1cexc"]
 [ext_resource type="Script" uid="uid://e0nun6mx1aou" path="res://scripts/main/unit_info.gd" id="1_j6bet"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://le5w1cm0ul8p" path="res://addons/godot_state_charts/expression_guard.gd" id="7_1cexc"]
 [ext_resource type="Script" uid="uid://csjw6m7rnqkaa" path="res://scripts/ui/unit_roster.gd" id="8_osw1o"]
 [ext_resource type="PackedScene" uid="uid://31q5hdaeariq" path="res://scenes/ui/squad_unit.tscn" id="10_y2ajb"]
+[ext_resource type="Resource" uid="uid://c766h0tdq8tyt" path="res://resources/ally_stats/characters/amigol.tres" id="13_0yifu"]
 [ext_resource type="PackedScene" uid="uid://dlx6r86vgqwrp" path="res://scenes/ui/talents/talent_tree.tscn" id="15_8dywm"]
 
 [sub_resource type="Resource" id="Resource_1cexc"]
@@ -303,7 +304,7 @@ grow_vertical = 2
 
 [node name="SquadUnit" parent="Campaign Map Hud/Unit Holder" instance=ExtResource("10_y2ajb")]
 layout_mode = 2
-unit_name = "Amigol"
+attributes = ExtResource("13_0yifu")
 
 [node name="SquadUnit2" parent="Campaign Map Hud/Unit Holder" instance=ExtResource("10_y2ajb")]
 layout_mode = 2

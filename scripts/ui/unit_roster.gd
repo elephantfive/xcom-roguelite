@@ -2,14 +2,13 @@ extends HBoxContainer
 const ROSTER_UNIT = preload("res://scenes/ui/roster_unit.tscn")
 
 func _ready():
-	add_unit('Amigol')
+	add_unit(load("res://resources/ally_stats/characters/amigol.tres"))
 
-func add_unit(unit_name):
+func add_unit(attributes: CharacterAttributes):
 	var new_unit = ROSTER_UNIT.instantiate()
 	add_child(new_unit)
-	new_unit.unit_name = unit_name
+	new_unit.attributes = attributes
 	new_unit.game_manager = %"Game Manager"
 	new_unit.unit_roster = self
 	new_unit.unit_holder = %"Unit Holder"
 	new_unit.unit_info = %UnitInfo
-	new_unit.update()

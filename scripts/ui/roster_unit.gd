@@ -2,9 +2,11 @@ extends VBoxContainer
 
 @onready var texture_button = $TextureButton
 @onready var label = $Label
-@export var unit_name: String = ''
 
-var attributes: Dictionary
+@export var attributes: CharacterAttributes:
+	set(value):
+		attributes = value
+		texture_button.texture_normal = value.texture
 
 @onready var state_chart = $StateChart
 @onready var add_to_squad = $AddToSquad
@@ -15,18 +17,12 @@ var game_manager
 var unit_roster
 
 
-func update():
-	attributes = unit_info.character_attributes[unit_name]
-	texture_button.texture_normal = load(attributes['texture'])
-
-
-
 func _on_texture_button_pressed():
 	state_chart.send_event('pressed')
 	game_manager.state_chart.send_event('squad_changed')
 	
 	for unit in unit_roster.get_children():
-		if unit.unit_name != unit_name:
+		if unit.attributes != attributes:
 			unit.label.text = ''
 			unit.add_to_squad.hide()
 		
@@ -62,6 +58,6 @@ func _on_off_squad_event_received(event):
 	if event == 'pressed':
 		add_to_squad.show()
 		for unit in unit_holder.get_children():
-			if unit.unit_name == unit_name:
+			if unit.attributes == attributes:
 				state_chart.send_event('on_squad')
 				add_to_squad.hide()

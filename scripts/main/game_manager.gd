@@ -30,10 +30,6 @@ const UNIT = preload("res://scenes/entities/units/unit.tscn")
 @onready var shop = %Shop
 @onready var tech_tree = %TechTree
 
-func _ready():
-	#level_adv("res://scenes/levels/level_1.tscn")
-	pass
-
 
 func turn_end():
 	for button in hud.actions.get_children():

@@ -1,7 +1,7 @@
 extends Resource
 class_name CharacterAttributes
 
-@export var name: String
+@export var character_name: String
 @export var attack_damage: int =  2
 @export var attack_ap_cost: int =  1
 @export var base_health: int =   20
@@ -19,4 +19,4 @@ class_name CharacterAttributes
 @export var talents: Dictionary =  {}
 @export var talent_points: int =  0
 @export var unit_actions: Array =  ['Attack', 'Move']
-@export var texture: String =  "res: int = //icon.svg"
+@export var texture:Texture2D = load("res://icon.svg")
