@@ -1,5 +1,5 @@
 extends HBoxContainer
-const ROSTER_UNIT = preload("res://scenes/ui/roster_unit.tscn")
+const ROSTER_UNIT = preload("uid://c4ncj5ewtvx0p")
 
 func _ready():
 	add_unit(load("res://resources/ally_stats/characters/amigol.tres"))

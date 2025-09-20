@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dampw2b4ujopv"]
+[gd_scene load_steps=4 format=3 uid="uid://dampw2b4ujopv"]
 
 [ext_resource type="Script" uid="uid://y7qdfmehacfo" path="res://scripts/ui/loadout/loadout.gd" id="1_xfr3o"]
 [ext_resource type="PackedScene" uid="uid://dyx326xuw7q2w" path="res://scenes/ui/loadout/paper_doll_button.tscn" id="2_wdluc"]
 [ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="3_cpkbu"]
-[ext_resource type="PackedScene" uid="uid://bkkexc6sgwsb" path="res://scenes/ui/loadout/inventory_button.tscn" id="4_6gnea"]
 
 [node name="Loadout" type="Control"]
 layout_mode = 3
@@ -86,53 +85,9 @@ autowrap_mode = 3
 layout_mode = 2
 
 [node name="Inventory" type="GridContainer" parent="HBoxContainer/Inventory"]
+custom_minimum_size = Vector2(400, 656)
 layout_mode = 2
 columns = 3
-
-[node name="InventoryButton" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
-layout_mode = 2
-
-[node name="InventoryButton2" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
-layout_mode = 2
-
-[node name="InventoryButton3" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
-layout_mode = 2
-
-[node name="InventoryButton4" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
-layout_mode = 2
-
-[node name="InventoryButton5" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
-layout_mode = 2
-
-[node name="InventoryButton6" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
-layout_mode = 2
-
-[node name="InventoryButton7" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
-layout_mode = 2
-
-[node name="InventoryButton8" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
-layout_mode = 2
-
-[node name="InventoryButton9" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
-layout_mode = 2
-
-[node name="InventoryButton10" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
-layout_mode = 2
-
-[node name="InventoryButton11" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
-layout_mode = 2
-
-[node name="InventoryButton12" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
-layout_mode = 2
-
-[node name="InventoryButton13" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
-layout_mode = 2
-
-[node name="InventoryButton14" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
-layout_mode = 2
-
-[node name="InventoryButton15" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
-layout_mode = 2
 
 [node name="ItemLabel" type="Label" parent="HBoxContainer/Inventory"]
 custom_minimum_size = Vector2(0, 200)
