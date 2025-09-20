@@ -19,5 +19,6 @@ class_name CharacterAttributes
 @export var level: int =  1
 @export var talents: Dictionary =  {}
 @export var talent_points: int =  0
+@export var price: int = 10
 @export var unit_actions: Array =  ['Attack', 'Move']
 @export var texture:Texture2D = load("res://icon.svg")

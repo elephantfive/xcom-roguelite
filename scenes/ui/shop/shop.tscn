@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cldgcd6hmigou"]
+[gd_scene load_steps=2 format=3 uid="uid://cldgcd6hmigou"]
 
 [ext_resource type="Script" uid="uid://dsimyf8hg1uij" path="res://scripts/ui/shop/shop.gd" id="1_ahsc1"]
-[ext_resource type="PackedScene" uid="uid://ban4sjpxrncql" path="res://scenes/ui/shop/shop_button.tscn" id="2_6ln8t"]
 
 [node name="Shop" type="Control"]
 layout_mode = 3
@@ -25,39 +24,30 @@ offset_right = 196.0
 offset_bottom = 130.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 25
 
 [node name="Row1" type="HBoxContainer" parent="RowContainer"]
 layout_mode = 2
-
-[node name="ShopButton" parent="RowContainer/Row1" instance=ExtResource("2_6ln8t")]
-layout_mode = 2
-
-[node name="ShopButton2" parent="RowContainer/Row1" instance=ExtResource("2_6ln8t")]
-layout_mode = 2
-
-[node name="ShopButton3" parent="RowContainer/Row1" instance=ExtResource("2_6ln8t")]
-layout_mode = 2
+theme_override_constants/separation = 50
 
 [node name="Row2" type="HBoxContainer" parent="RowContainer"]
 layout_mode = 2
-
-[node name="ShopButton" parent="RowContainer/Row2" instance=ExtResource("2_6ln8t")]
-layout_mode = 2
-
-[node name="ShopButton2" parent="RowContainer/Row2" instance=ExtResource("2_6ln8t")]
-layout_mode = 2
-
-[node name="ShopButton3" parent="RowContainer/Row2" instance=ExtResource("2_6ln8t")]
-layout_mode = 2
+theme_override_constants/separation = 50
 
 [node name="Row3" type="HBoxContainer" parent="RowContainer"]
 layout_mode = 2
+theme_override_constants/separation = 50
 
-[node name="ShopButton" parent="RowContainer/Row3" instance=ExtResource("2_6ln8t")]
-layout_mode = 2
+[node name="Exit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_right = 37.0
+offset_bottom = 15.5
+grow_vertical = 2
+text = "Exit
+"
 
-[node name="ShopButton2" parent="RowContainer/Row3" instance=ExtResource("2_6ln8t")]
-layout_mode = 2
-
-[node name="ShopButton3" parent="RowContainer/Row3" instance=ExtResource("2_6ln8t")]
-layout_mode = 2
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

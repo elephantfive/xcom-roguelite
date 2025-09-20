@@ -4,7 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="2_fai0y"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_q7vw7")
 item_name = "Village Keepsake"
 texture = ExtResource("2_fai0y")
+price = 10
 metadata/_custom_type_script = "uid://b034crntytt31"

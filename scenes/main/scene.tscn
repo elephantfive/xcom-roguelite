@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ygb05qawriwh"]
+[gd_scene load_steps=34 format=3 uid="uid://ygb05qawriwh"]
 
 [ext_resource type="Script" uid="uid://jb8g77b0p2hp" path="res://scripts/main/active_cursor.gd" id="1_1cexc"]
 [ext_resource type="Script" uid="uid://e0nun6mx1aou" path="res://scripts/main/unit_info.gd" id="1_j6bet"]
@@ -14,14 +14,16 @@
 [ext_resource type="Script" uid="uid://le5w1cm0ul8p" path="res://addons/godot_state_charts/expression_guard.gd" id="7_1cexc"]
 [ext_resource type="Script" uid="uid://csjw6m7rnqkaa" path="res://scripts/ui/unit_roster.gd" id="8_osw1o"]
 [ext_resource type="PackedScene" uid="uid://31q5hdaeariq" path="res://scenes/ui/squad_unit.tscn" id="10_y2ajb"]
+[ext_resource type="Script" uid="uid://cvdqkeeonkc2j" path="res://resources/ally_stats/character_attributes.gd" id="12_m1y6s"]
 [ext_resource type="Script" uid="uid://1lwlp1igpvkd" path="res://resources/items/item.gd" id="12_mud6k"]
-[ext_resource type="Resource" uid="uid://c766h0tdq8tyt" path="res://resources/ally_stats/characters/amigol.tres" id="13_0yifu"]
-[ext_resource type="Resource" uid="uid://c65tvdanteuut" path="res://resources/items/armor/leather_chestplate.tres" id="13_ehxfi"]
-[ext_resource type="Resource" uid="uid://dlybtffsulbhv" path="res://resources/items/weapons/iron_sword.tres" id="14_gipxf"]
 [ext_resource type="PackedScene" uid="uid://dlx6r86vgqwrp" path="res://scenes/ui/talents/talent_tree.tscn" id="15_8dywm"]
 [ext_resource type="Script" uid="uid://b034crntytt31" path="res://resources/artifacts/artifact.gd" id="15_fs22m"]
-[ext_resource type="Resource" uid="uid://ckgldukbxq1oe" path="res://resources/artifacts/village_keepsake.tres" id="16_m1y6s"]
+[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="15_pq4t4"]
+[ext_resource type="Script" uid="uid://xdw4eflra1o7" path="res://resources/talent_trees/specializations/specialization.gd" id="18_3pnac"]
+[ext_resource type="Resource" uid="uid://bjt1tnsivgq8n" path="res://resources/talent_trees/specializations/blade/berserker.tres" id="19_0k8hq"]
 [ext_resource type="PackedScene" uid="uid://cldgcd6hmigou" path="res://scenes/ui/shop/shop.tscn" id="20_ehxfi"]
+[ext_resource type="Resource" uid="uid://d2u2ihba6rhiu" path="res://resources/talent_trees/specializations/blade/bladedancer.tres" id="20_y3r4h"]
+[ext_resource type="Resource" uid="uid://cupjfv78gf58c" path="res://resources/talent_trees/specializations/blade/centurion.tres" id="21_noqvs"]
 
 [sub_resource type="Resource" id="Resource_1cexc"]
 script = ExtResource("7_1cexc")
@@ -38,6 +40,52 @@ size = Vector2(4, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4msxo"]
 size = Vector2(40, 40)
+
+[sub_resource type="Resource" id="Resource_fs22m"]
+resource_local_to_scene = true
+script = ExtResource("12_m1y6s")
+character_name = "Nidys"
+attack_damage = 1
+base_health = 10
+health = 10
+max_attack_distance = 15
+specializations = Array[ExtResource("18_3pnac")]([ExtResource("19_0k8hq"), ExtResource("20_y3r4h"), ExtResource("21_noqvs")])
+texture = ExtResource("15_pq4t4")
+metadata/_custom_type_script = "uid://cvdqkeeonkc2j"
+
+[sub_resource type="Resource" id="Resource_m1y6s"]
+resource_local_to_scene = true
+script = ExtResource("12_mud6k")
+item_type = "chestplate"
+item_name = "Leather Chestplate"
+texture = ExtResource("15_pq4t4")
+price = 10
+metadata/_custom_type_script = "uid://1lwlp1igpvkd"
+
+[sub_resource type="Resource" id="Resource_4tyqx"]
+resource_local_to_scene = true
+script = ExtResource("12_mud6k")
+item_type = "sword"
+item_name = "Iron Sword"
+texture = ExtResource("15_pq4t4")
+price = 10
+metadata/_custom_type_script = "uid://1lwlp1igpvkd"
+
+[sub_resource type="Resource" id="Resource_pq4t4"]
+resource_local_to_scene = true
+script = ExtResource("15_fs22m")
+item_name = "Village Keepsake"
+texture = ExtResource("15_pq4t4")
+price = 10
+metadata/_custom_type_script = "uid://b034crntytt31"
+
+[sub_resource type="Resource" id="Resource_3pnac"]
+resource_local_to_scene = true
+script = ExtResource("12_m1y6s")
+character_name = "Amigol"
+specializations = Array[ExtResource("18_3pnac")]([ExtResource("19_0k8hq"), ExtResource("20_y3r4h"), ExtResource("21_noqvs")])
+texture = ExtResource("15_pq4t4")
+metadata/_custom_type_script = "uid://cvdqkeeonkc2j"
 
 [node name="Game" type="Node2D"]
 
@@ -296,8 +344,9 @@ level = "res://scenes/levels/level_1.tscn"
 [node name="Location4" parent="Campaign Map" instance=ExtResource("5_xsca3")]
 position = Vector2(531, 528)
 location_type = "shop"
-shop_items = Array[ExtResource("12_mud6k")]([ExtResource("13_ehxfi"), ExtResource("14_gipxf")])
-shop_artifacts = Array[ExtResource("15_fs22m")]([ExtResource("16_m1y6s")])
+shop_characters = Array[ExtResource("12_m1y6s")]([SubResource("Resource_fs22m")])
+shop_items = Array[ExtResource("12_mud6k")]([SubResource("Resource_m1y6s"), SubResource("Resource_4tyqx")])
+shop_artifacts = Array[ExtResource("15_fs22m")]([SubResource("Resource_pq4t4")])
 
 [node name="Campaign Map Hud" type="CanvasLayer" parent="." groups=["Campaign Map"]]
 unique_name_in_owner = true
@@ -317,7 +366,7 @@ grow_vertical = 2
 
 [node name="SquadUnit" parent="Campaign Map Hud/Unit Holder" instance=ExtResource("10_y2ajb")]
 layout_mode = 2
-attributes = ExtResource("13_0yifu")
+attributes = SubResource("Resource_3pnac")
 
 [node name="SquadUnit2" parent="Campaign Map Hud/Unit Holder" instance=ExtResource("10_y2ajb")]
 layout_mode = 2

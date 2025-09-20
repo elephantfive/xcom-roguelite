@@ -24,9 +24,9 @@ func _ready():
 
 func _on_input_event(_viewport, event, _shape_idx):
 	if event.is_action_pressed('left_click'):
-		campaign_map_hud.hide()
 		if player_marker.moving == false:
 			if player_marker.position.distance_to(self.position) <= min_distance:
+				campaign_map_hud.hide()
 				if location_type == 'level':
 					desc.hide()
 					popup.show()

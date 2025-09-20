@@ -3,7 +3,8 @@ extends TextureButton
 @export var attributes: CharacterAttributes:
 	set(value):
 		attributes = value
-		texture_normal = value.texture
+		if value != null:
+			texture_normal = value.texture
 @onready var unit_roster = %"Unit Roster"
 @onready var game_manager = %"Game Manager"
 @onready var unit_holder = %"Unit Holder"
@@ -28,7 +29,8 @@ func update():
 func _on_remove_from_squad_pressed():
 	if game_manager.squad_unit_selected == self:
 		for unit in unit_roster.get_children():
-			if unit.attributes == attributes:
+			if unit.attributes.character_name == attributes.character_name:
+				print("Match found.")
 				unit.state_chart.send_event('off_squad')
 		game_manager.squad_unit_selected = null
 		attributes = null

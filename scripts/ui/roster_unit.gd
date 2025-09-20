@@ -15,10 +15,16 @@ var unit_holder
 var game_manager
 var unit_roster
 
+func _ready():
+	update.call_deferred()
+	
+func update():
+	if attributes != null:
+		state_chart.send_event.call_deferred('on_squad')
 
 func _on_texture_button_pressed():
 	state_chart.send_event('pressed')
-	game_manager.state_chart.send_event('squad_changed')
+	game_manager.state_chart.send_event('idle')
 	
 	for unit in unit_roster.get_children():
 		if unit.attributes != attributes:

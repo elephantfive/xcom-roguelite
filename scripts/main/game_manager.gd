@@ -11,7 +11,8 @@ var level_path: String
 var active_level
 var roster_unit_selected
 var squad_unit_selected
-var money: int = 0
+var inventory: Array = []
+var money: int = 100
 
 const UNIT = preload("res://scenes/entities/units/unit.tscn")
 
@@ -104,6 +105,9 @@ func _on_level_end_taken():
 	for i in range(0, active_level.random_rewards.size()):
 		rewards.get_children()[i].unit_name = active_level.random_rewards[i]
 		rewards.get_children()[i].update()
+	
+	for value in active_level.rewards:
+		set(value, get(value) + active_level.rewards[value])
 		
 	
 	state_chart.send_event('reward')

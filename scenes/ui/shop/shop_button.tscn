@@ -15,3 +15,5 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

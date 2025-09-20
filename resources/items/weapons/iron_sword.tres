@@ -4,8 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="2_miq1x"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_mdto8")
 item_type = "sword"
 item_name = "Iron Sword"
 texture = ExtResource("2_miq1x")
+price = 10
 metadata/_custom_type_script = "uid://1lwlp1igpvkd"
