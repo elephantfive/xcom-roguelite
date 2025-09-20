@@ -10,7 +10,7 @@ var unit_name: String
 @onready var unit_roster = %"Unit Roster"
 @onready var game_manager = %"Game Manager"
 
-const ROSTER_UNIT = preload("res://scenes/ui/roster_unit.tscn")
+const ROSTER_UNIT = preload("uid://c4ncj5ewtvx0p")
 
 func update():
 	if unit_name != null:

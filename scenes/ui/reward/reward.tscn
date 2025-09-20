@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b6kq0ugyjc2mj"]
 
-[ext_resource type="Script" uid="uid://d0xexjpliyvu0" path="res://scripts/ui/reward.gd" id="1_g27oe"]
+[ext_resource type="Script" uid="uid://d0xexjpliyvu0" path="res://scripts/ui/reward/reward.gd" id="1_g27oe"]
 
 [node name="Reward" type="VBoxContainer"]
 anchors_preset = 15

@@ -14,7 +14,7 @@ var squad_unit_selected
 var inventory: Array = []
 var money: int = 100
 
-const UNIT = preload("res://scenes/entities/units/unit.tscn")
+const UNIT = preload("uid://nutwb7ivdl7e")
 
 @onready var state_chart = $StateChart
 @onready var hud = %HUD

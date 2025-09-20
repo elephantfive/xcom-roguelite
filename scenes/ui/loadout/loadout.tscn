@@ -1,0 +1,140 @@
+[gd_scene load_steps=5 format=3 uid="uid://dampw2b4ujopv"]
+
+[ext_resource type="Script" uid="uid://y7qdfmehacfo" path="res://scripts/ui/loadout/loadout.gd" id="1_xfr3o"]
+[ext_resource type="PackedScene" uid="uid://dyx326xuw7q2w" path="res://scenes/ui/loadout/paper_doll_button.tscn" id="2_wdluc"]
+[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="3_cpkbu"]
+[ext_resource type="PackedScene" uid="uid://bkkexc6sgwsb" path="res://scenes/ui/loadout/inventory_button.tscn" id="4_6gnea"]
+
+[node name="Loadout" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xfr3o")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 661.0
+offset_bottom = 155.0
+theme_override_constants/separation = 100
+
+[node name="Character" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Character" type="HBoxContainer" parent="HBoxContainer/Character"]
+layout_mode = 2
+
+[node name="CharacterLeft" type="VBoxContainer" parent="HBoxContainer/Character/Character"]
+layout_mode = 2
+
+[node name="PaperDollButton" parent="HBoxContainer/Character/Character/CharacterLeft" instance=ExtResource("2_wdluc")]
+layout_mode = 2
+slot = "Head"
+
+[node name="PaperDollButton2" parent="HBoxContainer/Character/Character/CharacterLeft" instance=ExtResource("2_wdluc")]
+layout_mode = 2
+slot = "Shoulders"
+
+[node name="PaperDollButton3" parent="HBoxContainer/Character/Character/CharacterLeft" instance=ExtResource("2_wdluc")]
+layout_mode = 2
+slot = "Chest"
+
+[node name="PaperDollButton4" parent="HBoxContainer/Character/Character/CharacterLeft" instance=ExtResource("2_wdluc")]
+layout_mode = 2
+slot = "Legs"
+
+[node name="PaperDollButton5" parent="HBoxContainer/Character/Character/CharacterLeft" instance=ExtResource("2_wdluc")]
+layout_mode = 2
+slot = "Feet"
+
+[node name="CharacterPortrait" type="TextureRect" parent="HBoxContainer/Character/Character"]
+layout_mode = 2
+texture = ExtResource("3_cpkbu")
+expand_mode = 2
+
+[node name="CharacterRight" type="VBoxContainer" parent="HBoxContainer/Character/Character"]
+layout_mode = 2
+
+[node name="PaperDollButton" parent="HBoxContainer/Character/Character/CharacterRight" instance=ExtResource("2_wdluc")]
+layout_mode = 2
+slot = "Necklace"
+
+[node name="PaperDollButton2" parent="HBoxContainer/Character/Character/CharacterRight" instance=ExtResource("2_wdluc")]
+layout_mode = 2
+slot = "Ring1"
+
+[node name="PaperDollButton3" parent="HBoxContainer/Character/Character/CharacterRight" instance=ExtResource("2_wdluc")]
+layout_mode = 2
+slot = "Ring2"
+
+[node name="PaperDollButton4" parent="HBoxContainer/Character/Character/CharacterRight" instance=ExtResource("2_wdluc")]
+layout_mode = 2
+slot = "Main Hand"
+
+[node name="PaperDollButton5" parent="HBoxContainer/Character/Character/CharacterRight" instance=ExtResource("2_wdluc")]
+layout_mode = 2
+slot = "Off Hand"
+
+[node name="CharacterLabel" type="Label" parent="HBoxContainer/Character"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="Inventory" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Inventory" type="GridContainer" parent="HBoxContainer/Inventory"]
+layout_mode = 2
+columns = 3
+
+[node name="InventoryButton" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
+layout_mode = 2
+
+[node name="InventoryButton2" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
+layout_mode = 2
+
+[node name="InventoryButton3" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
+layout_mode = 2
+
+[node name="InventoryButton4" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
+layout_mode = 2
+
+[node name="InventoryButton5" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
+layout_mode = 2
+
+[node name="InventoryButton6" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
+layout_mode = 2
+
+[node name="InventoryButton7" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
+layout_mode = 2
+
+[node name="InventoryButton8" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
+layout_mode = 2
+
+[node name="InventoryButton9" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
+layout_mode = 2
+
+[node name="InventoryButton10" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
+layout_mode = 2
+
+[node name="InventoryButton11" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
+layout_mode = 2
+
+[node name="InventoryButton12" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
+layout_mode = 2
+
+[node name="InventoryButton13" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
+layout_mode = 2
+
+[node name="InventoryButton14" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
+layout_mode = 2
+
+[node name="InventoryButton15" parent="HBoxContainer/Inventory/Inventory" instance=ExtResource("4_6gnea")]
+layout_mode = 2
+
+[node name="ItemLabel" type="Label" parent="HBoxContainer/Inventory"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+autowrap_mode = 3

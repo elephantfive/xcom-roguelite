@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyx326xuw7q2w"]
+
+[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="1_njaox"]
+[ext_resource type="Script" uid="uid://bhnm2t75r2scq" path="res://scripts/ui/loadout/paper_doll_button.gd" id="2_yg0u8"]
+
+[node name="PaperDollButton" type="TextureButton"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_njaox")
+script = ExtResource("2_yg0u8")

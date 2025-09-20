@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://31q5hdaeariq"]
 
-[ext_resource type="Script" uid="uid://d3110uqv04vma" path="res://scripts/ui/unit_button.gd" id="1_7y1g7"]
+[ext_resource type="Script" uid="uid://d3110uqv04vma" path="res://scripts/ui/squad/unit_button.gd" id="1_7y1g7"]
 [ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="1_emt3u"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="2_emt3u"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="3_aodr5"]

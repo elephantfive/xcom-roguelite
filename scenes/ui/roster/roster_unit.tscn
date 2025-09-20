@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c4ncj5ewtvx0p"]
 
-[ext_resource type="Script" uid="uid://qcr17ogirgbl" path="res://scripts/ui/roster_unit.gd" id="1_fdhbt"]
+[ext_resource type="Script" uid="uid://qcr17ogirgbl" path="res://scripts/ui/roster/roster_unit.gd" id="1_fdhbt"]
 [ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="2_yjy8h"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_31fo0"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_g1cgj"]
