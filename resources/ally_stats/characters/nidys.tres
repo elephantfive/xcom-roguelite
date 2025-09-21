@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="CharacterAttributes" load_steps=7 format=3 uid="uid://bna0v3xk7hdqe"]
+[gd_resource type="Resource" script_class="CharacterAttributes" load_steps=8 format=3 uid="uid://bna0v3xk7hdqe"]
 
 [ext_resource type="Script" uid="uid://cvdqkeeonkc2j" path="res://resources/ally_stats/character_attributes.gd" id="1_5o63e"]
+[ext_resource type="Script" uid="uid://1lwlp1igpvkd" path="res://resources/items/item.gd" id="1_cpl6q"]
 [ext_resource type="Resource" uid="uid://bjt1tnsivgq8n" path="res://resources/talent_trees/specializations/blade/berserker.tres" id="2_0o0be"]
 [ext_resource type="Script" uid="uid://xdw4eflra1o7" path="res://resources/talent_trees/specializations/specialization.gd" id="2_45jw6"]
 [ext_resource type="Resource" uid="uid://d2u2ihba6rhiu" path="res://resources/talent_trees/specializations/blade/bladedancer.tres" id="3_45jw6"]
 [ext_resource type="Resource" uid="uid://cupjfv78gf58c" path="res://resources/talent_trees/specializations/blade/centurion.tres" id="4_cpl6q"]
-[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="6_45jw6"]
+[ext_resource type="Texture2D" uid="uid://ddxka4pnqsk2p" path="res://assets/images/villagerhead3.png" id="7_5s0of"]
 
 [resource]
 script = ExtResource("1_5o63e")
@@ -15,5 +16,5 @@ base_health = 10
 health = 10
 max_attack_distance = 15
 specializations = Array[ExtResource("2_45jw6")]([ExtResource("2_0o0be"), ExtResource("3_45jw6"), ExtResource("4_cpl6q")])
-texture = ExtResource("6_45jw6")
+texture = ExtResource("7_5s0of")
 metadata/_custom_type_script = "uid://cvdqkeeonkc2j"

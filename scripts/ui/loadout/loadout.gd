@@ -87,10 +87,12 @@ func slot_check(unit: CharacterAttributes = null):
 			for slot_button in character_left.get_children():
 				if item.slot == slot_button.slot:
 					slot_button.obj = item
+					slot_button.texture_normal = item.texture
 					break
 			for slot_button in character_right.get_children():
 				if item.slot == slot_button.slot:
 					slot_button.obj = item
+					slot_button.texture_normal = item.texture
 					break
 
 
@@ -140,11 +142,13 @@ func _on_next_pressed():
 		slot_button.obj = null
 	for slot_button in character_right.get_children():
 		slot_button.obj = null
-	for i in range(unit_roster.get_child_count() - 1):
+	for i in range(unit_roster.get_child_count()):
 		if unit_roster.get_children()[i] != null:
-			if unit_roster.get_children()[i].attributes != selected_unit.attributes:
+			if unit_roster.get_children()[i].attributes != selected_unit:
 				selected_unit = unit_roster.get_children()[i].attributes
 				slot_check(selected_unit)
+				character_portrait.texture = selected_unit.texture
+				break
 
 
 
@@ -157,6 +161,8 @@ func _on_prev_pressed():
 		slot_button.obj = null
 	for i in range(unit_roster.get_child_count() - 1, -1, -1):
 		if unit_roster.get_children()[i] != null:
-			if unit_roster.get_children()[i].attributes != selected_unit.attributes:
+			if unit_roster.get_children()[i].attributes != selected_unit:
 				selected_unit = unit_roster.get_children()[i].attributes
 				slot_check(selected_unit)
+				character_portrait.texture = selected_unit.texture
+				break

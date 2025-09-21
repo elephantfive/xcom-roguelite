@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4ncj5ewtvx0p"]
+[gd_scene load_steps=6 format=3 uid="uid://c4ncj5ewtvx0p"]
 
 [ext_resource type="Script" uid="uid://qcr17ogirgbl" path="res://scripts/ui/roster/roster_unit.gd" id="1_fdhbt"]
-[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="2_yjy8h"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_31fo0"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_g1cgj"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_bky4t"]
@@ -17,7 +16,6 @@ script = ExtResource("1_fdhbt")
 
 [node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 2
-texture_normal = ExtResource("2_yjy8h")
 
 [node name="AddToSquad" type="Button" parent="."]
 visible = false

@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="CharacterAttributes" load_steps=7 format=3 uid="uid://c766h0tdq8tyt"]
+[gd_resource type="Resource" script_class="CharacterAttributes" load_steps=8 format=3 uid="uid://c766h0tdq8tyt"]
 
+[ext_resource type="Script" uid="uid://1lwlp1igpvkd" path="res://resources/items/item.gd" id="1_rwu7f"]
 [ext_resource type="Script" uid="uid://cvdqkeeonkc2j" path="res://resources/ally_stats/character_attributes.gd" id="1_rxrl8"]
 [ext_resource type="Resource" uid="uid://bjt1tnsivgq8n" path="res://resources/talent_trees/specializations/blade/berserker.tres" id="2_6ybk1"]
 [ext_resource type="Script" uid="uid://xdw4eflra1o7" path="res://resources/talent_trees/specializations/specialization.gd" id="2_d85ap"]
 [ext_resource type="Resource" uid="uid://d2u2ihba6rhiu" path="res://resources/talent_trees/specializations/blade/bladedancer.tres" id="3_gt5vj"]
 [ext_resource type="Resource" uid="uid://cupjfv78gf58c" path="res://resources/talent_trees/specializations/blade/centurion.tres" id="4_d85ap"]
-[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="5_gt5vj"]
+[ext_resource type="Texture2D" uid="uid://cahxygrjokxnp" path="res://assets/images/amigolhead.png" id="7_2pjkr"]
 
 [resource]
 script = ExtResource("1_rxrl8")
 character_name = "Amigol"
 specializations = Array[ExtResource("2_d85ap")]([ExtResource("2_6ybk1"), ExtResource("3_gt5vj"), ExtResource("4_d85ap")])
-texture = ExtResource("5_gt5vj")
+texture = ExtResource("7_2pjkr")
 metadata/_custom_type_script = "uid://cvdqkeeonkc2j"
