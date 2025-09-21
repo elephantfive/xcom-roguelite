@@ -11,8 +11,8 @@ func _ready():
 
 func _on_pressed():
 	loadout_screen.item_label.text = ''
-	if loadout_screen.selected_button != self:
-		loadout_screen.selected_button = self
+	if loadout_screen.selected_item != self:
+		loadout_screen.selected_item = self
 		loadout_screen.item_label.text += obj.item_name
 		loadout_screen.state_chart.send_event('item')
 	else:
