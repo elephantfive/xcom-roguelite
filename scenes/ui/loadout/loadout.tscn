@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://dampw2b4ujopv"]
+[gd_scene load_steps=9 format=3 uid="uid://dampw2b4ujopv"]
 
 [ext_resource type="Script" uid="uid://y7qdfmehacfo" path="res://scripts/ui/loadout/loadout.gd" id="1_xfr3o"]
 [ext_resource type="PackedScene" uid="uid://dyx326xuw7q2w" path="res://scenes/ui/loadout/paper_doll_button.tscn" id="2_wdluc"]
 [ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="3_cpkbu"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_6gnea"]
+[ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="5_8espb"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_j7a3d"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_8espb"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_hpr0j"]
 
-[node name="Loadout" type="Control"]
+[node name="LoadoutScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,83 +18,141 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xfr3o")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="CharacterAndInventory" type="HBoxContainer" parent="."]
 layout_mode = 0
 offset_right = 661.0
 offset_bottom = 155.0
 theme_override_constants/separation = 100
 
-[node name="Character" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Character" type="VBoxContainer" parent="CharacterAndInventory"]
 layout_mode = 2
 
-[node name="Character" type="HBoxContainer" parent="HBoxContainer/Character"]
+[node name="Character" type="HBoxContainer" parent="CharacterAndInventory/Character"]
 layout_mode = 2
 
-[node name="CharacterLeft" type="VBoxContainer" parent="HBoxContainer/Character/Character"]
+[node name="CharacterLeft" type="VBoxContainer" parent="CharacterAndInventory/Character/Character"]
 layout_mode = 2
 
-[node name="PaperDollButton" parent="HBoxContainer/Character/Character/CharacterLeft" instance=ExtResource("2_wdluc")]
+[node name="PaperDollButton" parent="CharacterAndInventory/Character/Character/CharacterLeft" instance=ExtResource("2_wdluc")]
 layout_mode = 2
 slot = "Head"
 
-[node name="PaperDollButton2" parent="HBoxContainer/Character/Character/CharacterLeft" instance=ExtResource("2_wdluc")]
+[node name="PaperDollButton2" parent="CharacterAndInventory/Character/Character/CharacterLeft" instance=ExtResource("2_wdluc")]
 layout_mode = 2
 slot = "Shoulders"
 
-[node name="PaperDollButton3" parent="HBoxContainer/Character/Character/CharacterLeft" instance=ExtResource("2_wdluc")]
+[node name="PaperDollButton3" parent="CharacterAndInventory/Character/Character/CharacterLeft" instance=ExtResource("2_wdluc")]
 layout_mode = 2
 slot = "Chest"
 
-[node name="PaperDollButton4" parent="HBoxContainer/Character/Character/CharacterLeft" instance=ExtResource("2_wdluc")]
+[node name="PaperDollButton4" parent="CharacterAndInventory/Character/Character/CharacterLeft" instance=ExtResource("2_wdluc")]
 layout_mode = 2
 slot = "Legs"
 
-[node name="PaperDollButton5" parent="HBoxContainer/Character/Character/CharacterLeft" instance=ExtResource("2_wdluc")]
+[node name="PaperDollButton5" parent="CharacterAndInventory/Character/Character/CharacterLeft" instance=ExtResource("2_wdluc")]
 layout_mode = 2
 slot = "Feet"
 
-[node name="CharacterPortrait" type="TextureRect" parent="HBoxContainer/Character/Character"]
+[node name="CharacterPortrait" type="TextureRect" parent="CharacterAndInventory/Character/Character"]
 layout_mode = 2
 texture = ExtResource("3_cpkbu")
 expand_mode = 2
 
-[node name="CharacterRight" type="VBoxContainer" parent="HBoxContainer/Character/Character"]
+[node name="CharacterRight" type="VBoxContainer" parent="CharacterAndInventory/Character/Character"]
 layout_mode = 2
 
-[node name="PaperDollButton" parent="HBoxContainer/Character/Character/CharacterRight" instance=ExtResource("2_wdluc")]
+[node name="PaperDollButton" parent="CharacterAndInventory/Character/Character/CharacterRight" instance=ExtResource("2_wdluc")]
 layout_mode = 2
 slot = "Necklace"
 
-[node name="PaperDollButton2" parent="HBoxContainer/Character/Character/CharacterRight" instance=ExtResource("2_wdluc")]
+[node name="PaperDollButton2" parent="CharacterAndInventory/Character/Character/CharacterRight" instance=ExtResource("2_wdluc")]
 layout_mode = 2
 slot = "Ring1"
 
-[node name="PaperDollButton3" parent="HBoxContainer/Character/Character/CharacterRight" instance=ExtResource("2_wdluc")]
+[node name="PaperDollButton3" parent="CharacterAndInventory/Character/Character/CharacterRight" instance=ExtResource("2_wdluc")]
 layout_mode = 2
 slot = "Ring2"
 
-[node name="PaperDollButton4" parent="HBoxContainer/Character/Character/CharacterRight" instance=ExtResource("2_wdluc")]
+[node name="PaperDollButton4" parent="CharacterAndInventory/Character/Character/CharacterRight" instance=ExtResource("2_wdluc")]
 layout_mode = 2
 slot = "Main Hand"
 
-[node name="PaperDollButton5" parent="HBoxContainer/Character/Character/CharacterRight" instance=ExtResource("2_wdluc")]
+[node name="PaperDollButton5" parent="CharacterAndInventory/Character/Character/CharacterRight" instance=ExtResource("2_wdluc")]
 layout_mode = 2
 slot = "Off Hand"
 
-[node name="CharacterLabel" type="Label" parent="HBoxContainer/Character"]
+[node name="CharacterLabel" type="Label" parent="CharacterAndInventory/Character"]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 autowrap_mode = 3
 
-[node name="Inventory" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Exit" type="Button" parent="CharacterAndInventory/Character"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Exit"
+
+[node name="Inventory" type="VBoxContainer" parent="CharacterAndInventory"]
 layout_mode = 2
 
-[node name="Inventory" type="GridContainer" parent="HBoxContainer/Inventory"]
+[node name="Inventory" type="GridContainer" parent="CharacterAndInventory/Inventory"]
 custom_minimum_size = Vector2(400, 656)
 layout_mode = 2
 columns = 3
 
-[node name="ItemLabel" type="Label" parent="HBoxContainer/Inventory"]
+[node name="ItemLabel" type="Label" parent="CharacterAndInventory/Inventory"]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 autowrap_mode = 3
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("4_6gnea")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("5_8espb")
+
+[node name="ChoosingItem" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_j7a3d")
+initial_state = NodePath("NoItem")
+
+[node name="NoItem" type="Node" parent="StateChart/Root/ChoosingItem"]
+script = ExtResource("6_8espb")
+
+[node name="Transition" type="Node" parent="StateChart/Root/ChoosingItem/NoItem"]
+script = ExtResource("7_hpr0j")
+to = NodePath("../../Item")
+event = &"item"
+delay_in_seconds = "0.0"
+
+[node name="Item" type="Node" parent="StateChart/Root/ChoosingItem"]
+script = ExtResource("6_8espb")
+
+[node name="Transition" type="Node" parent="StateChart/Root/ChoosingItem/Item"]
+script = ExtResource("7_hpr0j")
+to = NodePath("../../NoItem")
+event = &"noitem"
+delay_in_seconds = "0.0"
+
+[node name="ChoosingSlot" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_j7a3d")
+initial_state = NodePath("NoSlot")
+
+[node name="NoSlot" type="Node" parent="StateChart/Root/ChoosingSlot"]
+script = ExtResource("6_8espb")
+
+[node name="Transition" type="Node" parent="StateChart/Root/ChoosingSlot/NoSlot"]
+script = ExtResource("7_hpr0j")
+to = NodePath("../../Slot")
+event = &"slot"
+delay_in_seconds = "0.0"
+
+[node name="Slot" type="Node" parent="StateChart/Root/ChoosingSlot"]
+script = ExtResource("6_8espb")
+
+[node name="Transition" type="Node" parent="StateChart/Root/ChoosingSlot/Slot"]
+script = ExtResource("7_hpr0j")
+to = NodePath("../../NoSlot")
+event = &"noslot"
+delay_in_seconds = "0.0"
+
+[connection signal="pressed" from="CharacterAndInventory/Character/Exit" to="." method="_on_exit_pressed"]

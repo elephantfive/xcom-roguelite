@@ -178,3 +178,12 @@ func _on_tech_tree_pressed():
 
 func _on_tech_tree_state_entered():
 	toggle(tech_tree, PROCESS_MODE_INHERIT, true)
+
+
+func _on_loadout_pressed():
+	state_chart.send_event('loadout')
+
+
+func _on_loadout_state_entered():
+	toggle("Campaign Menus", PROCESS_MODE_DISABLED, false)
+	toggle(loadout, PROCESS_MODE_INHERIT, true)

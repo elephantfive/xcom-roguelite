@@ -11,3 +11,5 @@ grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("1_y7t8k")
 script = ExtResource("2_gtg1t")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
