@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dampw2b4ujopv"]
+[gd_scene load_steps=8 format=3 uid="uid://dampw2b4ujopv"]
 
 [ext_resource type="Script" uid="uid://y7qdfmehacfo" path="res://scripts/ui/loadout/loadout.gd" id="1_xfr3o"]
 [ext_resource type="PackedScene" uid="uid://dyx326xuw7q2w" path="res://scenes/ui/loadout/paper_doll_button.tscn" id="2_wdluc"]
-[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="3_cpkbu"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_6gnea"]
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="5_8espb"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_j7a3d"]
@@ -55,7 +54,6 @@ slot = "Feet"
 
 [node name="CharacterPortrait" type="TextureRect" parent="CharacterAndInventory/Character/Character"]
 layout_mode = 2
-texture = ExtResource("3_cpkbu")
 expand_mode = 2
 
 [node name="CharacterRight" type="VBoxContainer" parent="CharacterAndInventory/Character/Character"]
@@ -103,6 +101,14 @@ text = "Equip"
 visible = false
 layout_mode = 2
 text = "Unequip"
+
+[node name="Next" type="Button" parent="CharacterAndInventory/Character/Buttons"]
+layout_mode = 2
+text = "Next Unit"
+
+[node name="Prev" type="Button" parent="CharacterAndInventory/Character/Buttons"]
+layout_mode = 2
+text = "Previous Unit"
 
 [node name="Inventory" type="VBoxContainer" parent="CharacterAndInventory"]
 layout_mode = 2
@@ -171,6 +177,8 @@ delay_in_seconds = "0.0"
 [connection signal="pressed" from="CharacterAndInventory/Character/Buttons/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="CharacterAndInventory/Character/Buttons/Equip" to="." method="_on_equip_pressed"]
 [connection signal="pressed" from="CharacterAndInventory/Character/Buttons/Unequip" to="." method="_on_unequip_pressed"]
+[connection signal="pressed" from="CharacterAndInventory/Character/Buttons/Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="CharacterAndInventory/Character/Buttons/Prev" to="." method="_on_prev_pressed"]
 [connection signal="state_entered" from="StateChart/Root/ChoosingItem/NoItem" to="." method="_on_no_item_state_entered"]
 [connection signal="event_received" from="StateChart/Root/ChoosingItem/Item" to="." method="_on_item_event_received"]
 [connection signal="state_entered" from="StateChart/Root/ChoosingItem/Item" to="." method="_on_item_state_entered"]

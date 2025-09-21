@@ -21,8 +21,6 @@
 [ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="15_pq4t4"]
 [ext_resource type="Script" uid="uid://xdw4eflra1o7" path="res://resources/talent_trees/specializations/specialization.gd" id="18_3pnac"]
 [ext_resource type="Resource" uid="uid://bjt1tnsivgq8n" path="res://resources/talent_trees/specializations/blade/berserker.tres" id="19_0k8hq"]
-[ext_resource type="Resource" uid="uid://c65tvdanteuut" path="res://resources/items/armor/leather_chestplate.tres" id="19_pq4t4"]
-[ext_resource type="Resource" uid="uid://dlybtffsulbhv" path="res://resources/items/weapons/iron_sword.tres" id="20_3pnac"]
 [ext_resource type="PackedScene" uid="uid://cldgcd6hmigou" path="res://scenes/ui/shop/shop.tscn" id="20_ehxfi"]
 [ext_resource type="Resource" uid="uid://d2u2ihba6rhiu" path="res://resources/talent_trees/specializations/blade/bladedancer.tres" id="20_y3r4h"]
 [ext_resource type="Resource" uid="uid://cupjfv78gf58c" path="res://resources/talent_trees/specializations/blade/centurion.tres" id="21_noqvs"]
@@ -44,7 +42,7 @@ size = Vector2(4, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4msxo"]
 size = Vector2(40, 40)
 
-[sub_resource type="Resource" id="Resource_0k8hq"]
+[sub_resource type="Resource" id="Resource_m1y6s"]
 resource_local_to_scene = true
 script = ExtResource("12_m1y6s")
 character_name = "Nidys"
@@ -56,7 +54,27 @@ specializations = Array[ExtResource("18_3pnac")]([ExtResource("19_0k8hq"), ExtRe
 texture = ExtResource("15_pq4t4")
 metadata/_custom_type_script = "uid://cvdqkeeonkc2j"
 
-[sub_resource type="Resource" id="Resource_y3r4h"]
+[sub_resource type="Resource" id="Resource_4tyqx"]
+resource_local_to_scene = true
+script = ExtResource("12_mud6k")
+item_type = "chestplate"
+item_name = "Leather Chestplate"
+slot = "Chest"
+texture = ExtResource("15_pq4t4")
+price = 10
+metadata/_custom_type_script = "uid://1lwlp1igpvkd"
+
+[sub_resource type="Resource" id="Resource_pq4t4"]
+resource_local_to_scene = true
+script = ExtResource("12_mud6k")
+item_type = "sword"
+item_name = "Iron Sword"
+slot = "Main Hand"
+texture = ExtResource("15_pq4t4")
+price = 10
+metadata/_custom_type_script = "uid://1lwlp1igpvkd"
+
+[sub_resource type="Resource" id="Resource_3pnac"]
 resource_local_to_scene = true
 script = ExtResource("15_fs22m")
 item_name = "Village Keepsake"
@@ -64,7 +82,7 @@ texture = ExtResource("15_pq4t4")
 price = 10
 metadata/_custom_type_script = "uid://b034crntytt31"
 
-[sub_resource type="Resource" id="Resource_noqvs"]
+[sub_resource type="Resource" id="Resource_0k8hq"]
 resource_local_to_scene = true
 script = ExtResource("12_m1y6s")
 character_name = "Amigol"
@@ -329,9 +347,9 @@ level = "res://scenes/levels/level_1.tscn"
 [node name="Location4" parent="Campaign Map" instance=ExtResource("5_xsca3")]
 position = Vector2(531, 528)
 location_type = "shop"
-shop_characters = Array[ExtResource("12_m1y6s")]([SubResource("Resource_0k8hq")])
-shop_items = Array[ExtResource("12_mud6k")]([ExtResource("19_pq4t4"), ExtResource("20_3pnac")])
-shop_artifacts = Array[ExtResource("15_fs22m")]([SubResource("Resource_y3r4h")])
+shop_characters = Array[ExtResource("12_m1y6s")]([SubResource("Resource_m1y6s")])
+shop_items = Array[ExtResource("12_mud6k")]([SubResource("Resource_4tyqx"), SubResource("Resource_pq4t4")])
+shop_artifacts = Array[ExtResource("15_fs22m")]([SubResource("Resource_3pnac")])
 
 [node name="Campaign Map Hud" type="CanvasLayer" parent="." groups=["Campaign Map"]]
 unique_name_in_owner = true
@@ -351,7 +369,7 @@ grow_vertical = 2
 
 [node name="SquadUnit" parent="Campaign Map Hud/Unit Holder" instance=ExtResource("10_y2ajb")]
 layout_mode = 2
-attributes = SubResource("Resource_noqvs")
+attributes = SubResource("Resource_0k8hq")
 
 [node name="SquadUnit2" parent="Campaign Map Hud/Unit Holder" instance=ExtResource("10_y2ajb")]
 layout_mode = 2
