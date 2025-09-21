@@ -1,6 +1,9 @@
 extends TextureButton
+class_name InventoryButton
+
 var obj: Item
 var loadout_screen: Control
+
 
 func _ready():
 	loadout_screen = get_node('/root/Game/Loadout/LoadoutScreen')
@@ -11,5 +14,6 @@ func _on_pressed():
 	if loadout_screen.selected_button != self:
 		loadout_screen.selected_button = self
 		loadout_screen.item_label.text += obj.item_name
+		loadout_screen.state_chart.send_event('item')
 	else:
-		loadout_screen.selected_button = null
+		loadout_screen.state_chart.send_event('noitem')

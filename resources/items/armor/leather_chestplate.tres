@@ -8,6 +8,7 @@ resource_local_to_scene = true
 script = ExtResource("1_8pb4b")
 item_type = "chestplate"
 item_name = "Leather Chestplate"
+slot = "Chest"
 texture = ExtResource("2_4vacx")
 price = 10
 metadata/_custom_type_script = "uid://1lwlp1igpvkd"
