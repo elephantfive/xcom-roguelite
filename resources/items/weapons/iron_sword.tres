@@ -10,4 +10,7 @@ item_name = "Iron Sword"
 slot = "Main Hand"
 texture = ExtResource("2_miq1x")
 price = 10
+modified_values = Dictionary[String, int]({
+"attack_damage": 1
+})
 metadata/_custom_type_script = "uid://1lwlp1igpvkd"

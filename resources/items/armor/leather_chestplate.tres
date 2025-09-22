@@ -10,4 +10,7 @@ item_name = "Leather Chestplate"
 slot = "Chest"
 texture = ExtResource("2_4vacx")
 price = 10
+modified_values = Dictionary[String, int]({
+"base_health": 10
+})
 metadata/_custom_type_script = "uid://1lwlp1igpvkd"

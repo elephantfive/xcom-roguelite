@@ -76,7 +76,7 @@ func slot_check(unit: CharacterAttributes = null):
 				selected_slot.obj = selected_item.obj
 				selected_slot.texture_normal = selected_item.obj.texture
 				for value in selected_slot.obj.modified_values:
-					selected_unit.value += selected_slot.obj.modified_values[value]
+					selected_unit.set(value, selected_unit.get(value) + selected_slot.obj.modified_values[value])
 				selected_unit.items.append(selected_slot.obj)
 				game_manager.inventory.erase(selected_item.obj)
 				selected_item.queue_free()
@@ -126,11 +126,12 @@ func _on_unequip_pressed():
 
 func _unequip():
 	for value in selected_slot.obj.modified_values:
-		selected_unit.value -= selected_slot.obj.modified_values[value]
+		selected_unit.set(value, selected_unit.get(value) - selected_slot.obj.modified_values[value])
 	create_button(selected_slot.obj)
 	game_manager.inventory.append(selected_slot.obj)
 	selected_unit.items.erase(selected_slot.obj)
 	selected_slot.obj = null
+	selected_slot.texture_normal = ICON
 
 
 func slot_clear():
@@ -145,7 +146,6 @@ func _on_next_pressed():
 	for i in range(unit_roster.get_child_count()):
 		if unit_roster.get_children()[i] != null:
 			if unit_roster.get_children()[i].attributes != selected_unit:
-				print(str(selected_unit))
 				selected_unit = unit_roster.get_children()[i].attributes
 				slot_check(selected_unit)
 				character_portrait.texture = selected_unit.texture
