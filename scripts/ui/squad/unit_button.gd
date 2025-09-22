@@ -45,9 +45,10 @@ func _on_idle_event_received(event):
 		label.text = ''
 		if game_manager.squad_unit_selected != self:
 			game_manager.squad_unit_selected = self
-			for property_info in attributes.get_script().get_script_property_list():
-				if typeof(attributes.get(property_info.name)) == 2 or typeof(attributes.get(property_info.name)) == 4:
-					label.text += property_info.name.replace('_', ' ').to_upper() + ': ' + str(attributes.get(property_info.name)) + '\n'
+			if attributes != null:
+				for property_info in attributes.get_script().get_script_property_list():
+					if typeof(attributes.get(property_info.name)) == 2 or typeof(attributes.get(property_info.name)) == 4:
+						label.text += property_info.name.replace('_', ' ').to_upper() + ': ' + str(attributes.get(property_info.name)) + '\n'
 		else:
 			remove_from_squad.hide()
 			game_manager.squad_unit_selected = null

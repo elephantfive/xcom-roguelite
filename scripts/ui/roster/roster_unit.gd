@@ -15,12 +15,12 @@ var unit_holder
 var game_manager
 var unit_roster
 
-func _ready():
-	update.call_deferred()
-	
-func update():
-	if attributes != null:
-		state_chart.send_event.call_deferred('on_squad')
+#func _ready():
+	#update.call_deferred()
+	#
+#func update():
+	#if attributes != null:
+		#state_chart.send_event.call_deferred('on_squad')
 
 func _on_texture_button_pressed():
 	state_chart.send_event('pressed')

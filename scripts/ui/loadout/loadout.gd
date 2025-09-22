@@ -17,7 +17,7 @@ var selected_unit: CharacterAttributes
 @onready var unit_holder = %"Unit Holder"
 @onready var unit_roster = %"Unit Roster"
 
-
+const ICON = preload("uid://dtpa1tam2fmgh")
 const INVENTORY_BUTTON = preload("uid://bkkexc6sgwsb")
 
 
@@ -83,17 +83,21 @@ func slot_check(unit: CharacterAttributes = null):
 				state_chart.send_event('noitem')
 				state_chart.send_event('noslot')
 	else:
+		for slot_button in character_left.get_children():
+			slot_button.obj = null
+			slot_button.texture_normal = ICON
+		for slot_button in character_right.get_children():
+			slot_button.obj = null
+			slot_button.texture_normal = ICON
 		for item in unit.items:
 			for slot_button in character_left.get_children():
 				if item.slot == slot_button.slot:
 					slot_button.obj = item
 					slot_button.texture_normal = item.texture
-					break
 			for slot_button in character_right.get_children():
 				if item.slot == slot_button.slot:
 					slot_button.obj = item
 					slot_button.texture_normal = item.texture
-					break
 
 
 func _on_no_item_state_entered():
@@ -138,13 +142,10 @@ func slot_clear():
 func _on_next_pressed():
 	state_chart.send_event('noslot')
 	state_chart.send_event('noitem')
-	for slot_button in character_left.get_children():
-		slot_button.obj = null
-	for slot_button in character_right.get_children():
-		slot_button.obj = null
 	for i in range(unit_roster.get_child_count()):
 		if unit_roster.get_children()[i] != null:
 			if unit_roster.get_children()[i].attributes != selected_unit:
+				print(str(selected_unit))
 				selected_unit = unit_roster.get_children()[i].attributes
 				slot_check(selected_unit)
 				character_portrait.texture = selected_unit.texture
@@ -155,10 +156,6 @@ func _on_next_pressed():
 func _on_prev_pressed():
 	state_chart.send_event('noslot')
 	state_chart.send_event('noitem')
-	for slot_button in character_left.get_children():
-		slot_button.obj = null
-	for slot_button in character_right.get_children():
-		slot_button.obj = null
 	for i in range(unit_roster.get_child_count() - 1, -1, -1):
 		if unit_roster.get_children()[i] != null:
 			if unit_roster.get_children()[i].attributes != selected_unit:
@@ -166,3 +163,7 @@ func _on_prev_pressed():
 				slot_check(selected_unit)
 				character_portrait.texture = selected_unit.texture
 				break
+
+func _process(_delta):
+	if selected_unit != null:
+		$Label.text = str(selected_unit.items)
