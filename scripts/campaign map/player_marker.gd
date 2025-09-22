@@ -12,6 +12,9 @@ var current_distance: float
 @onready var cooldown = $Cooldown
 
 
+func points_reset():
+	current_move_points = max_move_distance
+
 func _process(_delta):
 	if moving:
 		map_movement_line.points[1] = get_viewport().get_mouse_position()

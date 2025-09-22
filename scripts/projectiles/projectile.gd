@@ -18,7 +18,7 @@ func _process(delta):
 func _on_area_entered(area):
 	if area.type == "enemy":
 		if alignment == 'ally':
-			area.take_damage()
+			area.take_damage(damage)
 			queue_free()
 	elif area.type == "ally":
 		if alignment == 'enemy':
@@ -36,5 +36,6 @@ func _on_area_entered(area):
 
 
 func _on_turn_timer_timeout():
-	game_manager.state_chart.send_event('turn_end')
+	if alignment == 'enemy':
+		game_manager.state_chart.send_event('turn_end')
 	queue_free()

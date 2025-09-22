@@ -96,6 +96,7 @@ func attack():
 		var new_proj = projectile.instantiate()
 		new_proj.target = to_global(distance_line.points[1])
 		new_proj.alignment = 'ally'
+		new_proj.damage = attributes.attack_damage
 		new_proj.game_manager = game_manager
 		add_child(new_proj)
 	state_chart.send_event('to_idle')

@@ -75,7 +75,6 @@ unique_name_in_owner = true
 script = ExtResource("2_57akw")
 
 [node name="TurnTimer" type="Timer" parent="Game Manager"]
-wait_time = 0.25
 one_shot = true
 
 [node name="LevelEndTimer" type="Timer" parent="Game Manager"]
@@ -83,6 +82,7 @@ one_shot = true
 
 [node name="StateChart" type="Node" parent="Game Manager"]
 script = ExtResource("3_qa38x")
+warn_on_sending_unknown_events = false
 metadata/_custom_type_script = "uid://couw105c3bde4"
 
 [node name="Root" type="Node" parent="Game Manager/StateChart"]
@@ -245,11 +245,15 @@ offset_bottom = 40.0
 
 [node name="Actions" type="HBoxContainer" parent="HUD"]
 unique_name_in_owner = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
 offset_right = 1152.0
+grow_vertical = 0
 
 [node name="End" type="Button" parent="HUD/Actions"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 text = "End Turn"
 
@@ -471,6 +475,7 @@ visible = false
 
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="timeout" from="Game Manager/LevelEndTimer" to="Game Manager" method="_on_level_end_timer_timeout"]
+[connection signal="event_received" from="Game Manager/StateChart/Root/Idle" to="Game Manager" method="_on_idle_event_received"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/Idle" to="Game Manager" method="_on_idle_state_entered"]
 [connection signal="state_exited" from="Game Manager/StateChart/Root/Idle" to="Game Manager" method="_on_idle_state_exited"]
 [connection signal="event_received" from="Game Manager/StateChart/Root/InLevel" to="Game Manager" method="_on_in_level_event_received"]

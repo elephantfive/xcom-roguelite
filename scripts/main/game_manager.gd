@@ -16,6 +16,8 @@ var money: int = 100
 
 const UNIT = preload("uid://nutwb7ivdl7e")
 
+
+@onready var player_marker = %"Player Marker"
 @onready var state_chart = $StateChart
 @onready var hud = %HUD
 @onready var end = %End
@@ -32,6 +34,7 @@ const UNIT = preload("uid://nutwb7ivdl7e")
 
 
 func _on_turn_timer_timeout():
+	turn_adv()
 	emit_signal("turn_start")
 
 func _on_level_end_timer_timeout():
@@ -184,8 +187,12 @@ func _on_in_level_event_received(event):
 			button.hide()
 		selected_unit = null
 		if turns.size() > 1:
-			turn_adv()
 			$TurnTimer.start()
 		else:
 			end.hide()
 			level_end_timer.start()
+
+
+func _on_idle_event_received(event):
+	if event == 'turn_end':
+		player_marker.points_reset()
