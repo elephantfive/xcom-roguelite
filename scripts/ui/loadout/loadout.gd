@@ -163,7 +163,3 @@ func _on_prev_pressed():
 				slot_check(selected_unit)
 				character_portrait.texture = selected_unit.texture
 				break
-
-func _process(_delta):
-	if selected_unit != null:
-		$Label.text = str(selected_unit.items)
