@@ -473,6 +473,7 @@ visible = false
 [connection signal="timeout" from="Game Manager/LevelEndTimer" to="Game Manager" method="_on_level_end_timer_timeout"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/Idle" to="Game Manager" method="_on_idle_state_entered"]
 [connection signal="state_exited" from="Game Manager/StateChart/Root/Idle" to="Game Manager" method="_on_idle_state_exited"]
+[connection signal="event_received" from="Game Manager/StateChart/Root/InLevel" to="Game Manager" method="_on_in_level_event_received"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/InLevel" to="Game Manager" method="_on_in_level_state_entered"]
 [connection signal="taken" from="Game Manager/StateChart/Root/InLevel/LevelEnd" to="Game Manager" method="_on_level_end_taken"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/ChangingSquad" to="Game Manager" method="_on_changing_squad_state_entered"]

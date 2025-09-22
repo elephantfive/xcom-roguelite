@@ -12,10 +12,9 @@ var selected_unit: CharacterAttributes
 @onready var equip = $CharacterAndInventory/Character/Buttons/Equip
 @onready var unequip = $CharacterAndInventory/Character/Buttons/Unequip
 @onready var character_portrait = $CharacterAndInventory/Character/Character/CharacterPortrait
-@onready var character_left = $CharacterAndInventory/Character/Character/CharacterLeft
-@onready var character_right = $CharacterAndInventory/Character/Character/CharacterRight
 @onready var unit_holder = %"Unit Holder"
 @onready var unit_roster = %"Unit Roster"
+@onready var character = $CharacterAndInventory/Character/Character
 
 const ICON = preload("uid://dtpa1tam2fmgh")
 const INVENTORY_BUTTON = preload("uid://bkkexc6sgwsb")
@@ -55,7 +54,6 @@ func _on_slot_state_entered():
 	character_label.text = ''
 	if selected_slot.obj != null:
 		unequip.show()
-		character_label.text += selected_slot.obj.item_name
 
 
 func _on_item_event_received(event):
@@ -83,21 +81,16 @@ func slot_check(unit: CharacterAttributes = null):
 				state_chart.send_event('noitem')
 				state_chart.send_event('noslot')
 	else:
-		for slot_button in character_left.get_children():
-			slot_button.obj = null
-			slot_button.texture_normal = ICON
-		for slot_button in character_right.get_children():
-			slot_button.obj = null
-			slot_button.texture_normal = ICON
-		for item in unit.items:
-			for slot_button in character_left.get_children():
-				if item.slot == slot_button.slot:
-					slot_button.obj = item
-					slot_button.texture_normal = item.texture
-			for slot_button in character_right.get_children():
-				if item.slot == slot_button.slot:
-					slot_button.obj = item
-					slot_button.texture_normal = item.texture
+		for child in character.get_children():
+			if child.is_class('VBoxContainer'):
+				for slot_button in child.get_children():
+					slot_button.obj = null
+					slot_button.texture_normal = ICON
+				for item in unit.items:
+					for slot_button in child.get_children():
+						if item.slot == slot_button.slot:
+							slot_button.obj = item
+							slot_button.texture_normal = item.texture
 
 
 func _on_no_item_state_entered():
@@ -108,15 +101,15 @@ func _on_no_item_state_entered():
 
 func _on_no_slot_state_entered():
 	slot_clear()
+	char_text_update()
 
 
 func _on_equip_pressed():
-	for slot_button in character_left.get_children():
-		selected_slot = slot_button
-		slot_check()
-	for slot_button in character_right.get_children():
-		selected_slot = slot_button
-		slot_check()
+	for child in character.get_children():
+		if child.is_class('VBoxContainer'):
+			for slot_button in child.get_children():
+				selected_slot = slot_button
+				slot_check()
 
 
 func _on_unequip_pressed():
@@ -150,6 +143,7 @@ func _on_next_pressed():
 				slot_check(selected_unit)
 				character_portrait.texture = selected_unit.texture
 				break
+	char_text_update()
 
 
 
@@ -163,3 +157,10 @@ func _on_prev_pressed():
 				slot_check(selected_unit)
 				character_portrait.texture = selected_unit.texture
 				break
+	char_text_update()
+
+func char_text_update():
+	character_label.text = ''
+	for property_info in selected_unit.get_script().get_script_property_list():
+		if typeof(selected_unit.get(property_info.name)) == 2 or typeof(selected_unit.get(property_info.name)) == 4:
+			character_label.text += property_info.name.replace('_', ' ').to_upper() + ': ' + str(selected_unit.get(property_info.name)) + '|'

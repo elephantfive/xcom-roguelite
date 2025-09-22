@@ -40,7 +40,7 @@ func _on_remove_from_squad_pressed():
 
 func _on_idle_event_received(event):
 	if event == 'pressed':
-		if attributes != null:
+		if attributes != null and attributes.character_name != 'Amigol':
 			remove_from_squad.show()
 		label.text = ''
 		if game_manager.squad_unit_selected != self:

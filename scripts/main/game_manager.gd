@@ -31,17 +31,6 @@ const UNIT = preload("uid://nutwb7ivdl7e")
 @onready var tech_tree = %TechTree
 
 
-func turn_end():
-	for button in hud.actions.get_children():
-		button.hide()
-	selected_unit = null
-	if turns.size() > 1:
-		turn_adv()
-		$TurnTimer.start()
-	else:
-		end.hide()
-		level_end_timer.start()
-
 func _on_turn_timer_timeout():
 	emit_signal("turn_start")
 
@@ -187,3 +176,16 @@ func _on_loadout_pressed():
 func _on_loadout_state_entered():
 	toggle("Campaign Menus", PROCESS_MODE_DISABLED, false)
 	toggle(loadout, PROCESS_MODE_INHERIT, true)
+
+
+func _on_in_level_event_received(event):
+	if event == 'turn_end':
+		for button in hud.actions.get_children():
+			button.hide()
+		selected_unit = null
+		if turns.size() > 1:
+			turn_adv()
+			$TurnTimer.start()
+		else:
+			end.hide()
+			level_end_timer.start()

@@ -27,7 +27,7 @@ func _on_attack_pressed():
 
 
 func _on_end_pressed():
-	game_manager.turn_end()
+	game_manager.state_chart.send_event('turn_end')
 
 
 func _on_heal_pressed():

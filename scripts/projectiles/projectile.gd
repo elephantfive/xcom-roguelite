@@ -36,5 +36,5 @@ func _on_area_entered(area):
 
 
 func _on_turn_timer_timeout():
-	game_manager.turn_end()
+	game_manager.state_chart.send_event('turn_end')
 	queue_free()
