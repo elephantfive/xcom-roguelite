@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://cklvl5jkm42wo"]
+[gd_scene load_steps=6 format=3 uid="uid://cklvl5jkm42wo"]
 
 [ext_resource type="PackedScene" uid="uid://d3m2brvwxikfc" path="res://scenes/environment/wall.tscn" id="1_hn12h"]
 [ext_resource type="Script" uid="uid://3lgedd16ubha" path="res://scripts/campaign map/level.gd" id="1_nsrm0"]
 [ext_resource type="PackedScene" uid="uid://dwnho3dck57gp" path="res://scenes/entities/enemy units/fallen_blade.tscn" id="3_rka8t"]
 [ext_resource type="PackedScene" uid="uid://df13eaafx0ke0" path="res://scenes/entities/enemy units/fallen_archer.tscn" id="4_x42e6"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_x42e6"]
+vertices = PackedVector2Array(1490, 890, 10, 890, 10, 10, 1490, 10)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, 0, 1500, 0, 1500, 900, 0, 900)])
 
 [node name="Level 1" type="Node2D"]
 script = ExtResource("1_nsrm0")
@@ -29,13 +34,13 @@ scale = Vector2(2.2, 1)
 [node name="Entities" type="Node" parent="."]
 
 [node name="Fallen Blade" parent="Entities" instance=ExtResource("3_rka8t")]
-position = Vector2(339, 185)
+position = Vector2(602, 92)
 
 [node name="Fallen Blade2" parent="Entities" instance=ExtResource("3_rka8t")]
-position = Vector2(757, 519)
+position = Vector2(741, 184)
 
 [node name="Fallen Archer" parent="Entities" instance=ExtResource("4_x42e6")]
-position = Vector2(1011, 674)
+position = Vector2(1421, 846)
 
 [node name="PlayerSpawns" type="Node" parent="."]
 
@@ -44,3 +49,6 @@ position = Vector2(147, 196)
 
 [node name="PlayerSpawn 1" type="Node2D" parent="PlayerSpawns"]
 position = Vector2(160, 325)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_x42e6")

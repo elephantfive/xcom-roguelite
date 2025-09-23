@@ -6,9 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pqhw6"]
 size = Vector2(40, 40)
 
-[node name="Fallen Archer" type="Area2D"]
+[node name="Fallen Archer" type="CharacterBody2D"]
 script = ExtResource("1_pkmc3")
-attack_distance = 2000
+attack_distance = 500
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_pqhw6")
@@ -17,3 +17,5 @@ shape = SubResource("RectangleShape2D_pqhw6")
 self_modulate = Color(1, 0, 0, 1)
 scale = Vector2(0.315078, 0.315078)
 texture = ExtResource("2_j15nv")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
