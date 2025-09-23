@@ -3,7 +3,7 @@ extends Node
 signal turn_start
 
 var turn: String
-var selected_unit: Area2D
+var selected_unit: CharacterBody2D
 var current_turn: int = 0
 var turns: Array = ['player']
 var targets: Array = []
@@ -35,7 +35,6 @@ const UNIT = preload("uid://nutwb7ivdl7e")
 
 func _on_turn_timer_timeout():
 	turn_adv()
-	emit_signal("turn_start")
 
 func _on_level_end_timer_timeout():
 	state_chart.send_event('level_end')
@@ -48,6 +47,7 @@ func turn_adv():
 		current_turn = 0
 		end.show()
 	turn = turns[current_turn]
+	emit_signal("turn_start")
 
 
 
@@ -186,7 +186,9 @@ func _on_in_level_event_received(event):
 		for button in hud.actions.get_children():
 			button.hide()
 		selected_unit = null
-		if turns.size() > 1:
+		if turn == 'player':
+			turn_adv()
+		elif turns.size() > 1:
 			$TurnTimer.start()
 		else:
 			end.hide()

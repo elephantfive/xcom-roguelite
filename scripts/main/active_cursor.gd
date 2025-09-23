@@ -1,6 +1,6 @@
 extends Area2D
 @onready var label = $Label
-var target: Area2D
+var target: CharacterBody2D
 
 func _process(_delta):
 	position = get_viewport().get_mouse_position()
@@ -10,9 +10,9 @@ func _process(_delta):
 		label.text = 'No target.'
 
 
-func _on_area_entered(area):
-	target = area
+func _on_body_entered(body):
+	target = body
 
 
-func _on_area_exited(_area):
+func _on_body_exited(_body):
 	target = null

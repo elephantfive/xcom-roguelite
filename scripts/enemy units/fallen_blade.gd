@@ -1,7 +1,4 @@
 extends Enemy
-
-func _process(_delta):
-	$Label.text = str(moving)
 	
 func attack():
 	current_closest_enemy.take_damage(damage)

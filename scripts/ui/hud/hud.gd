@@ -1,6 +1,6 @@
 extends CanvasLayer
 @onready var game_manager = %"Game Manager"
-var selected_unit: Area2D
+var selected_unit: CharacterBody2D
 @onready var move = %Move
 @onready var actions = %Actions
 @onready var unit_info = %UnitInfo

@@ -16,16 +16,7 @@ func _process(delta):
 
 
 func _on_area_entered(area):
-	if area.type == "enemy":
-		if alignment == 'ally':
-			area.take_damage(damage)
-			queue_free()
-	elif area.type == "ally":
-		if alignment == 'enemy':
-			area.take_damage(damage)
-			hide()
-			turn_timer.start()
-	elif area.type == "wall":
+	if area.type == "wall":
 		if alignment == 'enemy':
 			hide()
 			target = position
@@ -39,3 +30,15 @@ func _on_turn_timer_timeout():
 	if alignment == 'enemy':
 		game_manager.state_chart.send_event('turn_end')
 	queue_free()
+
+
+func _on_body_entered(body):
+	if body.type == "enemy":
+		if alignment == 'ally':
+			body.take_damage(damage)
+			queue_free()
+	elif body.type == "ally":
+		if alignment == 'enemy':
+			body.take_damage(damage)
+			hide()
+			turn_timer.start()

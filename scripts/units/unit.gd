@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 #region Startup vars
 
 var attributes: CharacterAttributes
@@ -10,8 +10,9 @@ var init_pos: Vector2
 var action_chart: Array = []
 var type: String = 'ally'
 var current_distance: float
-var target: Area2D
+var target: CharacterBody2D
 var active_cursor: Area2D
+var movement_speed: float = 200.0
 
 
 const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
@@ -20,6 +21,7 @@ const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 @onready var hud: CanvasLayer
 @onready var game_manager: Node
 
+@onready var navigation_agent = $NavigationAgent2D
 @onready var distance_line = $"Distance Line"
 @onready var distance_label = %"Distance Label"
 @onready var warning_label = %"Warning Label"
@@ -34,10 +36,14 @@ const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 func _ready():
 	points_reset()
 	points_update()
-
+	navigation_agent.path_desired_distance = 2.0
+	navigation_agent.target_desired_distance = 2.0
 
 func _process(_delta):
 	target = active_cursor.target
+
+func set_movement_target(movement_target: Vector2):
+	navigation_agent.target_position = movement_target
 	
 
 func _on_game_manager_turn_start():
@@ -57,12 +63,14 @@ func _on_input_event(_viewport, event, _shape_idx):
 	if game_manager.turn == 'player':
 		if game_manager.selected_unit == null:
 			if event.is_action_pressed("left_click"):
+				print("YEAH!")
 				game_manager.selected_unit = self
 				init_pos = position
 				hud.new_unit()
 
 
 func points_reset():
+	init_pos = position
 	current_move_points  = attributes['max_move_distance']
 	current_action_points  = attributes['max_action_points']
 
@@ -84,9 +92,9 @@ func take_damage(damage):
 	points_update()
 	
 func move():
-	position = get_viewport().get_mouse_position()
-	init_pos = position
+	set_movement_target(get_viewport().get_mouse_position())
 	state_chart.send_event('to_idle')
+	state_chart.send_event('movement_active')
 	current_move_points -= current_distance
 
 
@@ -145,7 +153,6 @@ func _on_idle_state_entered():
 	points_update()
 
 func _on_moving_state_processing(_delta):
-	position = get_viewport().get_mouse_position()
 	distance_check(current_move_points)
 
 
@@ -195,3 +202,16 @@ func _on_active_cursor_area_entered(area):
 func _on_active_cursor_area_exited(_area):
 	target = null
 #endregion
+
+
+func _on_movement_active_state_physics_processing(_delta):
+	if navigation_agent.is_navigation_finished():
+		init_pos = position
+		state_chart.send_event('movement_inactive')
+		return
+		
+	var current_agent_position: Vector2 = global_position
+	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
+	
+	velocity = current_agent_position.direction_to(next_path_position) * movement_speed
+	move_and_slide()

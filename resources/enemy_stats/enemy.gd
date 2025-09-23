@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Enemy
 
-var current_closest_enemy: Area2D
+var current_closest_enemy: CharacterBody2D
 var game_manager: Node
 var hud: CanvasLayer
 var targets:Array = []
@@ -24,7 +24,6 @@ const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 func _ready():
 	navigation_agent.path_desired_distance = 2.0
 	navigation_agent.target_desired_distance = 2.0
-	navigation_agent.debug_enabled = true
 
 func _on_game_manager_turn_start():
 	distance_moved = 0
@@ -49,15 +48,21 @@ func _physics_process(_delta):
 		if moving:
 			if position.distance_to(current_closest_enemy.position) > attack_distance and distance_moved < max_move_distance:
 				move()
+			elif position.distance_to(current_closest_enemy.position) <= attack_distance and distance_moved < max_move_distance:
+				attack()
+				moving = false
 			else:
-				print("Done moving?")
 				game_manager.state_chart.send_event('turn_end')
 				moving = false
 
 
 func move():
 	if navigation_agent.is_navigation_finished():
-		set_movement_target(current_closest_enemy.position)
+		if position.distance_to(current_closest_enemy.position) > attack_distance:
+			set_movement_target(current_closest_enemy.position)
+		else:
+			print("Done moving?")
+			attack()
 		
 	var current_agent_position: Vector2 = global_position
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
