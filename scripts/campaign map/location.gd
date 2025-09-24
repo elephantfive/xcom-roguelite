@@ -19,7 +19,7 @@ var type: String = 'location'
 func _ready():
 	desc.text = desc_text
 	if location_type == 'shop':
-		$ColorRect.color = Color(0, 1, 1)
+		$TextureRect.self_modulate = Color(0, 1, 1)
 
 
 func _on_input_event(_viewport, event, _shape_idx):

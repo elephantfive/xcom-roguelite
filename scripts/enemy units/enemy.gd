@@ -104,7 +104,6 @@ func _on_active_event_received(event):
 
 func _on_inactive_event_received(event):
 	if event == 'turn_start':
-		print("inactive start")
 		distance_moved = 0
 		last_position = global_position
 		if game_manager.turn == str(self):
