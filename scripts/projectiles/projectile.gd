@@ -16,11 +16,7 @@ func _process(delta):
 
 func _on_area_entered(area):
 	if area.type == "wall":
-		if alignment == 'enemy':
-			game_manager.state_chart.send_event('turn_end')
-			queue_free()
-		else:
-			queue_free()
+		queue_free()
 
 
 func _on_body_entered(body):

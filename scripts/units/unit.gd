@@ -63,7 +63,6 @@ func _on_input_event(_viewport, event, _shape_idx):
 	if game_manager.turn == 'player':
 		if game_manager.selected_unit == null:
 			if event.is_action_pressed("left_click"):
-				print("YEAH!")
 				game_manager.selected_unit = self
 				init_pos = position
 				hud.new_unit()

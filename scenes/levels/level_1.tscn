@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cklvl5jkm42wo"]
+[gd_scene load_steps=7 format=3 uid="uid://cklvl5jkm42wo"]
 
 [ext_resource type="PackedScene" uid="uid://d3m2brvwxikfc" path="res://scenes/environment/wall.tscn" id="1_hn12h"]
 [ext_resource type="Script" uid="uid://3lgedd16ubha" path="res://scripts/campaign map/level.gd" id="1_nsrm0"]
-[ext_resource type="PackedScene" uid="uid://wmh8aqhhn1n8" path="res://scenes/entities/enemy units/fallen_blade.tscn" id="3_rka8t"]
-[ext_resource type="PackedScene" uid="uid://df13eaafx0ke0" path="res://scenes/entities/enemy units/fallen_archer.tscn" id="4_x42e6"]
+[ext_resource type="PackedScene" uid="uid://btm7ebweprsqp" path="res://scenes/entities/enemy units/enemy.tscn" id="3_6761a"]
+[ext_resource type="Script" uid="uid://dyvkvelj3l2fi" path="res://scripts/enemy units/fallen_blade.gd" id="4_sk5k4"]
+[ext_resource type="Script" uid="uid://c7nojghq644q2" path="res://scripts/enemy units/fallen_archer.gd" id="5_oc4kc"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x42e6"]
 vertices = PackedVector2Array(1490, 890, 10, 890, 10, 10, 1490, 10)
@@ -38,14 +39,18 @@ scale = Vector2(4.282547, 1)
 
 [node name="Entities" type="Node" parent="."]
 
-[node name="Fallen Blade" parent="Entities" instance=ExtResource("3_rka8t")]
-position = Vector2(256, 226)
+[node name="Fallen Archer" parent="Entities" instance=ExtResource("3_6761a")]
+position = Vector2(415, 207)
+script = ExtResource("5_oc4kc")
+attack_distance = 500
 
-[node name="Fallen Blade2" parent="Entities" instance=ExtResource("3_rka8t")]
-position = Vector2(285, 551)
+[node name="Fallen Blade2" parent="Entities" instance=ExtResource("3_6761a")]
+position = Vector2(247, 265)
+script = ExtResource("4_sk5k4")
 
-[node name="Fallen Archer" parent="Entities" instance=ExtResource("4_x42e6")]
-position = Vector2(731, 507)
+[node name="Fallen Blade3" parent="Entities" instance=ExtResource("3_6761a")]
+position = Vector2(632, 491)
+script = ExtResource("4_sk5k4")
 
 [node name="PlayerSpawns" type="Node" parent="."]
 
