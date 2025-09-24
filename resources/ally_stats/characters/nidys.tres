@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://xdw4eflra1o7" path="res://resources/talent_trees/specializations/specialization.gd" id="2_45jw6"]
 [ext_resource type="Resource" uid="uid://d2u2ihba6rhiu" path="res://resources/talent_trees/specializations/blade/bladedancer.tres" id="3_45jw6"]
 [ext_resource type="Resource" uid="uid://cupjfv78gf58c" path="res://resources/talent_trees/specializations/blade/centurion.tres" id="4_cpl6q"]
-[ext_resource type="Texture2D" uid="uid://ddxka4pnqsk2p" path="res://assets/images/villagerhead3.png" id="7_5s0of"]
+[ext_resource type="Texture2D" uid="uid://ddxka4pnqsk2p" path="res://assets/visual/character_portraits/villagerhead3.png" id="7_5s0of"]
 
 [resource]
 script = ExtResource("1_5o63e")

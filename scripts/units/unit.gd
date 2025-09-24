@@ -190,20 +190,8 @@ func _on_idle_state_input(event):
 func _on_valid_event_received(event):
 	if has_method(event):
 		call(event)
-
-
-#endregion
-
-#region Targeting
-func _on_active_cursor_area_entered(area):
-	target = area
-
-
-func _on_active_cursor_area_exited(_area):
-	target = null
-#endregion
-
-
+		
+		
 func _on_movement_active_state_physics_processing(_delta):
 	if navigation_agent.is_navigation_finished():
 		init_pos = position
@@ -215,3 +203,14 @@ func _on_movement_active_state_physics_processing(_delta):
 	
 	velocity = current_agent_position.direction_to(next_path_position) * movement_speed
 	move_and_slide()
+
+#endregion
+
+#region Targeting
+func _on_active_cursor_area_entered(area):
+	target = area
+
+
+func _on_active_cursor_area_exited(_area):
+	target = null
+#endregion

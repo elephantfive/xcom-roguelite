@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CharacterAttributes" load_steps=4 format=3 uid="uid://cul1toc6ds0o5"]
+
+[ext_resource type="Script" uid="uid://1lwlp1igpvkd" path="res://resources/items/item.gd" id="1_n6vg7"]
+[ext_resource type="Script" uid="uid://cvdqkeeonkc2j" path="res://resources/ally_stats/character_attributes.gd" id="2_4142w"]
+[ext_resource type="Script" uid="uid://xdw4eflra1o7" path="res://resources/talent_trees/specializations/specialization.gd" id="3_vmplx"]
+
+[resource]
+script = ExtResource("2_4142w")
+metadata/_custom_type_script = "uid://cvdqkeeonkc2j"

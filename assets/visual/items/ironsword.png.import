@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddxka4pnqsk2p"
-path="res://.godot/imported/villagerhead3.png-2610ab43350712c9fee569151236602e.ctex"
+uid="uid://loueoa34f3w8"
+path="res://.godot/imported/ironsword.png-77e0739b9f1d51972f8f8792328f8fbc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/villagerhead3.png"
-dest_files=["res://.godot/imported/villagerhead3.png-2610ab43350712c9fee569151236602e.ctex"]
+source_file="res://assets/visual/items/ironsword.png"
+dest_files=["res://.godot/imported/ironsword.png-77e0739b9f1d51972f8f8792328f8fbc.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cahxygrjokxnp"
-path="res://.godot/imported/amigolhead.png-9cb6696e5bc9cfa6386b80c083e25d41.ctex"
+uid="uid://b15h5641gaedk"
+path="res://.godot/imported/leatherbreastplate.png-164883485f29d2a85e23fffe3248bf72.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/amigolhead.png"
-dest_files=["res://.godot/imported/amigolhead.png-9cb6696e5bc9cfa6386b80c083e25d41.ctex"]
+source_file="res://assets/visual/items/leatherbreastplate.png"
+dest_files=["res://.godot/imported/leatherbreastplate.png-164883485f29d2a85e23fffe3248bf72.ctex"]
 
 [params]
 

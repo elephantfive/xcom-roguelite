@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://loueoa34f3w8"
-path="res://.godot/imported/ironsword.png-30f4c3003c6e9e5ffe69665e7b08446e.ctex"
+uid="uid://cahxygrjokxnp"
+path="res://.godot/imported/amigolhead.png-459751e48b2e3a856e0412475dc82537.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/ironsword.png"
-dest_files=["res://.godot/imported/ironsword.png-30f4c3003c6e9e5ffe69665e7b08446e.ctex"]
+source_file="res://assets/visual/character_portraits/amigolhead.png"
+dest_files=["res://.godot/imported/amigolhead.png-459751e48b2e3a856e0412475dc82537.ctex"]
 
 [params]
 

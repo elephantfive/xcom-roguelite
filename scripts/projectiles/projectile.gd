@@ -33,12 +33,10 @@ func _on_turn_timer_timeout():
 
 
 func _on_body_entered(body):
-	if body.type == "enemy":
-		if alignment == 'ally':
-			body.take_damage(damage)
-			queue_free()
-	elif body.type == "ally":
-		if alignment == 'enemy':
-			body.take_damage(damage)
-			hide()
-			turn_timer.start()
+	if body.type == "enemy" and alignment == 'ally':
+		body.take_damage(damage)
+		queue_free()
+	elif body.type == "ally" and alignment == 'enemy':
+		body.take_damage(damage)
+		hide()
+		turn_timer.start()

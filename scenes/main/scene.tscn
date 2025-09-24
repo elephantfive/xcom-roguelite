@@ -20,7 +20,7 @@
 [ext_resource type="Script" uid="uid://b034crntytt31" path="res://resources/artifacts/artifact.gd" id="15_fs22m"]
 [ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="15_pq4t4"]
 [ext_resource type="Script" uid="uid://xdw4eflra1o7" path="res://resources/talent_trees/specializations/specialization.gd" id="18_3pnac"]
-[ext_resource type="Texture2D" uid="uid://ddxka4pnqsk2p" path="res://assets/images/villagerhead3.png" id="18_pq4t4"]
+[ext_resource type="Texture2D" uid="uid://ddxka4pnqsk2p" path="res://assets/visual/character_portraits/villagerhead3.png" id="18_pq4t4"]
 [ext_resource type="Resource" uid="uid://bjt1tnsivgq8n" path="res://resources/talent_trees/specializations/blade/berserker.tres" id="19_0k8hq"]
 [ext_resource type="Resource" uid="uid://c65tvdanteuut" path="res://resources/items/armor/leather_chestplate.tres" id="19_y3r4h"]
 [ext_resource type="PackedScene" uid="uid://cldgcd6hmigou" path="res://scenes/ui/shop/shop.tscn" id="20_ehxfi"]

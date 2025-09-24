@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b15h5641gaedk"
-path="res://.godot/imported/leatherbreastplate.png-1727924f7f276388552aa669e4cd3e1b.ctex"
+uid="uid://ddxka4pnqsk2p"
+path="res://.godot/imported/villagerhead3.png-02407e0ef04c7fdc20186709a2438dfa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/leatherbreastplate.png"
-dest_files=["res://.godot/imported/leatherbreastplate.png-1727924f7f276388552aa669e4cd3e1b.ctex"]
+source_file="res://assets/visual/character_portraits/villagerhead3.png"
+dest_files=["res://.godot/imported/villagerhead3.png-02407e0ef04c7fdc20186709a2438dfa.ctex"]
 
 [params]
 
