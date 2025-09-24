@@ -6,7 +6,6 @@ var type: String = 'proj'
 var alignment: String
 var damage: int
 var game_manager: Node
-@onready var turn_timer = $TurnTimer
 
 func _process(delta):
 	if alignment == 'ally' and global_position == target:
@@ -18,18 +17,10 @@ func _process(delta):
 func _on_area_entered(area):
 	if area.type == "wall":
 		if alignment == 'enemy':
-			hide()
-			target = position
-			turn_timer.start()
+			game_manager.state_chart.send_event('turn_end')
+			queue_free()
 		else:
 			queue_free()
-		
-
-
-func _on_turn_timer_timeout():
-	if alignment == 'enemy':
-		game_manager.state_chart.send_event('turn_end')
-	queue_free()
 
 
 func _on_body_entered(body):
@@ -38,5 +29,6 @@ func _on_body_entered(body):
 		queue_free()
 	elif body.type == "ally" and alignment == 'enemy':
 		body.take_damage(damage)
-		hide()
-		turn_timer.start()
+		game_manager.state_chart.send_event('turn_end')
+		queue_free()
+		

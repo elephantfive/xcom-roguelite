@@ -7,7 +7,6 @@ var hud: CanvasLayer
 var targets:Array = []
 var type: String = 'enemy'
 
-var moving: bool = true
 var distance_moved: float = 0
 var last_position: Vector2
 @export var max_move_distance: float = 200.0
@@ -17,6 +16,7 @@ var last_position: Vector2
 @export var attack_distance: int = 100
 @export var xp: int = 50
 @export var damage: int = 1
+@onready var state_chart = $StateChart
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
 const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
@@ -28,17 +28,15 @@ func _ready():
 func _on_game_manager_turn_start():
 	distance_moved = 0
 	last_position = global_position
-	moving = true
 	if game_manager.turn == str(self):
 		if current_closest_enemy == null:
 			current_closest_enemy = targets[randi_range(0, targets.size()-1)]
 		for target in targets:
 			if position.distance_to(target.position) <= attack_distance:
-				moving = false
-				attack()
+				state_chart.send_event('attack')
 				break
 			elif position.distance_to(target.position) < position.distance_to(current_closest_enemy.position):
-				moving = true
+				state_chart.send_event('moving')
 				current_closest_enemy = target
 				set_movement_target(current_closest_enemy.position)
 
@@ -56,12 +54,12 @@ func _physics_process(_delta):
 				moving = false
 
 
+
 func move():
 	if navigation_agent.is_navigation_finished():
 		if position.distance_to(current_closest_enemy.position) > attack_distance:
 			set_movement_target(current_closest_enemy.position)
 		else:
-			print("Done moving?")
 			attack()
 		
 	var current_agent_position: Vector2 = global_position
@@ -90,3 +88,7 @@ func take_damage(incoming_damage):
 
 func set_movement_target(movement_target: Vector2):
 	navigation_agent.target_position = movement_target
+
+
+func _on_moving_state_physics_processing(delta):
+	pass # Replace with function body.

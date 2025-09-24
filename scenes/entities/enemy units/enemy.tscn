@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://btm7ebweprsqp"]
+
+[ext_resource type="Script" uid="uid://bjs5mlvkjwxua" path="res://scripts/enemy units/enemy.gd" id="1_b1em3"]
+[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="2_owqnl"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_i38n8"]
+[ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="4_bnnqo"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_8wi5y"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_vg2hs"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_vic8n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r8kxx"]
+size = Vector2(40, 40)
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_b1em3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_r8kxx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.315078, 0.315078)
+texture = ExtResource("2_owqnl")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("3_i38n8")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("4_bnnqo")
+
+[node name="Moving" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_8wi5y")
+initial_state = NodePath("Moving")
+
+[node name="Moving" type="Node" parent="StateChart/Root/Moving"]
+script = ExtResource("6_vg2hs")
+
+[node name="Transition" type="Node" parent="StateChart/Root/Moving/Moving"]
+script = ExtResource("7_vic8n")
+to = NodePath("../../NotMoving")
+event = &"notmoving"
+delay_in_seconds = "0.0"
+
+[node name="NotMoving" type="Node" parent="StateChart/Root/Moving"]
+script = ExtResource("6_vg2hs")
+
+[node name="Transition" type="Node" parent="StateChart/Root/Moving/NotMoving"]
+script = ExtResource("7_vic8n")
+to = NodePath("../../Moving")
+event = &"moving"
+delay_in_seconds = "0.0"
+
+[node name="Active" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_8wi5y")
+initial_state = NodePath("Inactive")
+
+[node name="Active" type="Node" parent="StateChart/Root/Active"]
+script = ExtResource("6_vg2hs")
+
+[node name="Transition" type="Node" parent="StateChart/Root/Active/Active"]
+script = ExtResource("7_vic8n")
+to = NodePath("../../Inactive")
+event = &"inactive"
+delay_in_seconds = "0.0"
+
+[node name="Inactive" type="Node" parent="StateChart/Root/Active"]
+script = ExtResource("6_vg2hs")
+
+[node name="Transition" type="Node" parent="StateChart/Root/Active/Inactive"]
+script = ExtResource("7_vic8n")
+to = NodePath("../../Active")
+event = &"active"
+delay_in_seconds = "0.0"
+
+[connection signal="state_physics_processing" from="StateChart/Root/Moving" to="." method="_on_moving_state_physics_processing"]

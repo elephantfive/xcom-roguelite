@@ -16,7 +16,6 @@ var money: int = 100
 
 const UNIT = preload("uid://nutwb7ivdl7e")
 
-
 @onready var player_marker = %"Player Marker"
 @onready var state_chart = $StateChart
 @onready var hud = %HUD
@@ -33,8 +32,14 @@ const UNIT = preload("uid://nutwb7ivdl7e")
 @onready var tech_tree = %TechTree
 
 
+func _ready():
+	level_path = "res://scenes/levels/level_1.tscn"
+	state_chart.send_event.call_deferred('level_start')
+
+
 func _on_turn_timer_timeout():
 	turn_adv()
+
 
 func _on_level_end_timer_timeout():
 	state_chart.send_event('level_end')
@@ -48,7 +53,6 @@ func turn_adv():
 		end.show()
 	turn = turns[current_turn]
 	emit_signal("turn_start")
-
 
 
 func toggle(object, process:ProcessMode, vis:bool):
@@ -93,14 +97,12 @@ func _on_level_end_taken():
 	active_cursor.hide()
 	active_cursor.process_mode = PROCESS_MODE_DISABLED
 	
-	
 	for i in range(0, active_level.random_rewards.size()):
 		rewards.get_children()[i].unit_name = active_level.random_rewards[i]
 		rewards.get_children()[i].update()
 	
 	for value in active_level.rewards:
 		set(value, get(value) + active_level.rewards[value])
-		
 	
 	state_chart.send_event('reward')
 
@@ -186,9 +188,7 @@ func _on_in_level_event_received(event):
 		for button in hud.actions.get_children():
 			button.hide()
 		selected_unit = null
-		if turn == 'player':
-			turn_adv()
-		elif turns.size() > 1:
+		if turns.size() > 1:
 			$TurnTimer.start()
 		else:
 			end.hide()
