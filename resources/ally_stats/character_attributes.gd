@@ -22,4 +22,5 @@ class_name CharacterAttributes
 @export var price: int = 10
 @export var items: Array[Item] = []
 @export var unit_actions: Array =  ['Attack', 'Move']
-@export var texture:Texture2D = load("res://icon.svg")
+@export var texture: Texture2D = load("res://icon.svg")
+@export var combat_texture: Texture2D

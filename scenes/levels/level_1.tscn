@@ -1,11 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://cklvl5jkm42wo"]
+[gd_scene load_steps=15 format=3 uid="uid://cklvl5jkm42wo"]
 
 [ext_resource type="PackedScene" uid="uid://d3m2brvwxikfc" path="res://scenes/environment/wall.tscn" id="1_hn12h"]
 [ext_resource type="Script" uid="uid://3lgedd16ubha" path="res://scripts/campaign map/level.gd" id="1_nsrm0"]
 [ext_resource type="PackedScene" uid="uid://btm7ebweprsqp" path="res://scenes/entities/enemy units/enemy.tscn" id="3_6761a"]
 [ext_resource type="Script" uid="uid://dyvkvelj3l2fi" path="res://scripts/enemy units/fallen_blade.gd" id="4_sk5k4"]
+[ext_resource type="Texture2D" uid="uid://dlgrcjo8l1ny4" path="res://assets/visual/character_models/fallen_archer.png" id="5_iav0o"]
 [ext_resource type="Script" uid="uid://c7nojghq644q2" path="res://scripts/enemy units/fallen_archer.gd" id="5_oc4kc"]
 [ext_resource type="Script" uid="uid://dkenoychsh6iw" path="res://scripts/main/camera.gd" id="6_excbq"]
+[ext_resource type="Texture2D" uid="uid://dmnhb4tt8j5tm" path="res://assets/visual/character_models/fallen_blade.png" id="7_dnkej"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="7_iav0o"]
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="8_dnkej"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="9_mm8aj"]
@@ -46,17 +48,20 @@ scale = Vector2(4.282547, 1)
 [node name="Entities" type="Node" parent="."]
 
 [node name="Fallen Archer" parent="Entities" instance=ExtResource("3_6761a")]
-position = Vector2(415, 207)
+position = Vector2(523, 184)
 script = ExtResource("5_oc4kc")
+texture = ExtResource("5_iav0o")
 attack_distance = 500
 
 [node name="Fallen Blade2" parent="Entities" instance=ExtResource("3_6761a")]
-position = Vector2(247, 265)
+position = Vector2(142, 531)
 script = ExtResource("4_sk5k4")
+texture = ExtResource("7_dnkej")
 
 [node name="Fallen Blade3" parent="Entities" instance=ExtResource("3_6761a")]
 position = Vector2(506, 452)
 script = ExtResource("4_sk5k4")
+texture = ExtResource("7_dnkej")
 
 [node name="PlayerSpawns" type="Node" parent="."]
 

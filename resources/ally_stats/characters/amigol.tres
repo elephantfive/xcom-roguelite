@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="CharacterAttributes" load_steps=8 format=3 uid="uid://c766h0tdq8tyt"]
+[gd_resource type="Resource" script_class="CharacterAttributes" load_steps=9 format=3 uid="uid://c766h0tdq8tyt"]
 
+[ext_resource type="Texture2D" uid="uid://bycnc6v4e4joo" path="res://assets/visual/character_models/madman.png" id="1_2pjkr"]
 [ext_resource type="Script" uid="uid://1lwlp1igpvkd" path="res://resources/items/item.gd" id="1_rwu7f"]
 [ext_resource type="Script" uid="uid://cvdqkeeonkc2j" path="res://resources/ally_stats/character_attributes.gd" id="1_rxrl8"]
 [ext_resource type="Resource" uid="uid://bjt1tnsivgq8n" path="res://resources/talent_trees/specializations/blade/berserker.tres" id="2_6ybk1"]
@@ -13,4 +14,5 @@ script = ExtResource("1_rxrl8")
 character_name = "Amigol"
 specializations = Array[ExtResource("2_d85ap")]([ExtResource("2_6ybk1"), ExtResource("3_gt5vj"), ExtResource("4_d85ap")])
 texture = ExtResource("7_2pjkr")
+combat_texture = ExtResource("1_2pjkr")
 metadata/_custom_type_script = "uid://cvdqkeeonkc2j"

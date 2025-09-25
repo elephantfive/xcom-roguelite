@@ -35,7 +35,7 @@ const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 #region Startup and resetting
 func _ready():
 	name = attributes.character_name
-	sprite.texture = attributes.texture
+	sprite.texture = attributes.combat_texture
 	points_reset()
 	points_update()
 	navigation_agent.path_desired_distance = 2.0

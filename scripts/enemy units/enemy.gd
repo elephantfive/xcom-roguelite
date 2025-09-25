@@ -10,6 +10,8 @@ var type: String = 'enemy'
 var enemy_in_range: CharacterBody2D
 var distance_moved: float = 0
 var last_position: Vector2
+@onready var sprite = $Sprite2D
+@export var texture: Texture2D
 @export var max_move_distance: float = 200.0
 @export var movement_speed: float = 200.0
 @export var hp: int = 2
@@ -24,6 +26,7 @@ var last_position: Vector2
 const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 
 func _ready():
+	sprite.texture = texture
 	navigation_agent.path_desired_distance = 2.0
 	navigation_agent.target_desired_distance = 2.0
 
