@@ -1,10 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://cklvl5jkm42wo"]
+[gd_scene load_steps=13 format=3 uid="uid://cklvl5jkm42wo"]
 
 [ext_resource type="PackedScene" uid="uid://d3m2brvwxikfc" path="res://scenes/environment/wall.tscn" id="1_hn12h"]
 [ext_resource type="Script" uid="uid://3lgedd16ubha" path="res://scripts/campaign map/level.gd" id="1_nsrm0"]
 [ext_resource type="PackedScene" uid="uid://btm7ebweprsqp" path="res://scenes/entities/enemy units/enemy.tscn" id="3_6761a"]
 [ext_resource type="Script" uid="uid://dyvkvelj3l2fi" path="res://scripts/enemy units/fallen_blade.gd" id="4_sk5k4"]
 [ext_resource type="Script" uid="uid://c7nojghq644q2" path="res://scripts/enemy units/fallen_archer.gd" id="5_oc4kc"]
+[ext_resource type="Script" uid="uid://dkenoychsh6iw" path="res://scripts/main/camera.gd" id="6_excbq"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="7_iav0o"]
+[ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="8_dnkej"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="9_mm8aj"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="10_wtwp4"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="11_iwr0g"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x42e6"]
 vertices = PackedVector2Array(1490, 890, 10, 890, 10, 10, 1490, 10)
@@ -64,4 +70,37 @@ position = Vector2(160, 325)
 navigation_polygon = SubResource("NavigationPolygon_x42e6")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
 anchor_mode = 0
+script = ExtResource("6_excbq")
+
+[node name="StateChart" type="Node" parent="Camera2D"]
+script = ExtResource("7_iav0o")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="ParallelState" type="Node" parent="Camera2D/StateChart"]
+script = ExtResource("8_dnkej")
+
+[node name="Moving" type="Node" parent="Camera2D/StateChart/ParallelState"]
+script = ExtResource("9_mm8aj")
+initial_state = NodePath("NotMoving")
+
+[node name="NotMoving" type="Node" parent="Camera2D/StateChart/ParallelState/Moving"]
+script = ExtResource("10_wtwp4")
+
+[node name="Transition" type="Node" parent="Camera2D/StateChart/ParallelState/Moving/NotMoving"]
+script = ExtResource("11_iwr0g")
+to = NodePath("../../Moving")
+event = &"moving"
+delay_in_seconds = "0.0"
+
+[node name="Moving" type="Node" parent="Camera2D/StateChart/ParallelState/Moving"]
+script = ExtResource("10_wtwp4")
+
+[node name="Transition" type="Node" parent="Camera2D/StateChart/ParallelState/Moving/Moving"]
+script = ExtResource("11_iwr0g")
+to = NodePath("../../NotMoving")
+event = &"not_moving"
+delay_in_seconds = "0.0"
+
+[connection signal="state_physics_processing" from="Camera2D/StateChart/ParallelState/Moving/Moving" to="Camera2D" method="_on_moving_state_physics_processing"]

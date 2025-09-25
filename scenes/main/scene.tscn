@@ -1,8 +1,10 @@
-[gd_scene load_steps=36 format=3 uid="uid://ygb05qawriwh"]
+[gd_scene load_steps=38 format=3 uid="uid://ygb05qawriwh"]
 
 [ext_resource type="Script" uid="uid://jb8g77b0p2hp" path="res://scripts/main/active_cursor.gd" id="1_1cexc"]
 [ext_resource type="Script" uid="uid://e0nun6mx1aou" path="res://scripts/main/unit_info.gd" id="1_j6bet"]
+[ext_resource type="Script" uid="uid://dkenoychsh6iw" path="res://scripts/main/camera.gd" id="1_y3r4h"]
 [ext_resource type="Script" uid="uid://c1o8tsdvtkydf" path="res://scripts/main/game_manager.gd" id="2_57akw"]
+[ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="3_noqvs"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_qa38x"]
 [ext_resource type="Script" uid="uid://vwqdce8l4gp0" path="res://scripts/ui/hud/hud.gd" id="3_vbg7o"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_1cexc"]
@@ -46,7 +48,7 @@ size = Vector2(4, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4msxo"]
 size = Vector2(129, 128)
 
-[sub_resource type="Resource" id="Resource_y3r4h"]
+[sub_resource type="Resource" id="Resource_noqvs"]
 resource_local_to_scene = true
 script = ExtResource("12_m1y6s")
 character_name = "Nidys"
@@ -70,6 +72,36 @@ metadata/_custom_type_script = "uid://b034crntytt31"
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
 anchor_mode = 0
+script = ExtResource("1_y3r4h")
+
+[node name="StateChart" type="Node" parent="Camera2D"]
+script = ExtResource("3_qa38x")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="ParallelState" type="Node" parent="Camera2D/StateChart"]
+script = ExtResource("3_noqvs")
+
+[node name="Moving" type="Node" parent="Camera2D/StateChart/ParallelState"]
+script = ExtResource("4_1cexc")
+initial_state = NodePath("NotMoving")
+
+[node name="NotMoving" type="Node" parent="Camera2D/StateChart/ParallelState/Moving"]
+script = ExtResource("5_8dywm")
+
+[node name="Transition" type="Node" parent="Camera2D/StateChart/ParallelState/Moving/NotMoving"]
+script = ExtResource("6_0yifu")
+to = NodePath("../../Moving")
+event = &"moving"
+delay_in_seconds = "0.0"
+
+[node name="Moving" type="Node" parent="Camera2D/StateChart/ParallelState/Moving"]
+script = ExtResource("5_8dywm")
+
+[node name="Transition" type="Node" parent="Camera2D/StateChart/ParallelState/Moving/Moving"]
+script = ExtResource("6_0yifu")
+to = NodePath("../../NotMoving")
+event = &"not_moving"
+delay_in_seconds = "0.0"
 
 [node name="UnitInfo" type="Node" parent="."]
 unique_name_in_owner = true
@@ -333,7 +365,7 @@ level = "res://scenes/levels/level_1.tscn"
 [node name="Location4" parent="Campaign Map" instance=ExtResource("5_xsca3")]
 position = Vector2(382, 550)
 location_type = "shop"
-shop_characters = Array[ExtResource("12_m1y6s")]([SubResource("Resource_y3r4h")])
+shop_characters = Array[ExtResource("12_m1y6s")]([SubResource("Resource_noqvs")])
 shop_items = Array[ExtResource("12_mud6k")]([ExtResource("19_y3r4h"), ExtResource("20_noqvs")])
 shop_artifacts = Array[ExtResource("15_fs22m")]([SubResource("Resource_0k8hq")])
 
@@ -485,6 +517,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 visible = false
 
+[connection signal="state_physics_processing" from="Camera2D/StateChart/ParallelState/Moving/Moving" to="Camera2D" method="_on_moving_state_physics_processing"]
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="timeout" from="Game Manager/LevelEndTimer" to="Game Manager" method="_on_level_end_timer_timeout"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/Idle" to="Game Manager" method="_on_idle_state_entered"]
