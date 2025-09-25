@@ -16,6 +16,7 @@ var money: int = 100
 
 const UNIT = preload("uid://nutwb7ivdl7e")
 
+@onready var camera = %Camera2D
 @onready var player_marker = %"Player Marker"
 @onready var state_chart = $StateChart
 @onready var hud = %HUD
@@ -76,6 +77,7 @@ func _on_changing_squad_state_input(event):
 func _on_idle_state_entered():
 	if active_level != null:
 		active_level.queue_free()
+	camera.enabled = true
 	toggle("Campaign Menus", PROCESS_MODE_INHERIT, false)
 	toggle("Campaign Map", PROCESS_MODE_INHERIT, true)
 	for unit in unit_holder.get_children():
@@ -113,6 +115,8 @@ func _on_in_level_state_entered():
 	
 	active_level = load(level_path).instantiate()
 	get_parent().add_child(active_level)
+	camera.enabled = false
+	active_level.camera.enabled = true
 	
 	targets = []
 	

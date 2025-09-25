@@ -17,7 +17,7 @@ func points_reset():
 
 func _process(_delta):
 	if moving:
-		map_movement_line.points[1] = get_viewport().get_mouse_position()
+		map_movement_line.points[1] = get_global_mouse_position()
 		distance_check(current_move_points)
 
 
@@ -31,7 +31,7 @@ func _input(event):
 	if event.is_action_pressed('left_click'):
 		if moving and not too_far:
 			current_move_points -= current_distance
-			position = get_viewport().get_mouse_position()
+			position = get_global_mouse_position()
 			moving = false
 			get_tree().call_group("Unit Distance Info", "hide")
 			cooldown.start()

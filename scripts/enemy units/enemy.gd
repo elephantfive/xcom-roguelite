@@ -7,13 +7,14 @@ var hud: CanvasLayer
 var targets:Array = []
 var type: String = 'enemy'
 
+var enemy_in_range: CharacterBody2D
 var distance_moved: float = 0
 var last_position: Vector2
 @export var max_move_distance: float = 200.0
 @export var movement_speed: float = 200.0
 @export var hp: int = 2
 @export var speed: int = 100
-@export var attack_distance: int = 100
+@export var attack_distance: int = 200
 @export var xp: int = 50
 @export var damage: int = 1
 @onready var state_chart = $StateChart
@@ -85,6 +86,9 @@ func _on_transition_taken():
 func _on_detection_range_body_entered(body):
 	if body.type == 'ally':
 		state_chart.send_event('active')
+	elif body.type == 'enemy':
+		enemy_in_range = body
+		state_chart.send_event('enemy_in_range')
 
 
 func _on_active_event_received(event):
@@ -100,6 +104,9 @@ func _on_active_event_received(event):
 					state_chart.send_event('attack')
 			else:
 				state_chart.send_event('moving')
+	elif event == 'enemy_in_range':
+		enemy_in_range.state_chart.send_event('active')
+		
 
 
 func _on_inactive_event_received(event):
