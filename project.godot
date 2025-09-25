@@ -57,6 +57,11 @@ middle_mouse={
 ]
 }
 
+[layer_names]
+
+2d_navigation/layer_1="Navigable"
+2d_navigation/layer_2="Not Navigable"
+
 [rendering]
 
 rendering_device/driver.windows="d3d12"

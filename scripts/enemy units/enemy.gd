@@ -10,6 +10,7 @@ var type: String = 'enemy'
 var enemy_in_range: CharacterBody2D
 var distance_moved: float = 0
 var last_position: Vector2
+var safe_vel: Vector2
 @onready var sprite = $Sprite2D
 @export var texture: Texture2D
 @export var max_move_distance: float = 200.0
@@ -37,8 +38,13 @@ func _on_game_manager_turn_start():
 func move():
 	var current_agent_position: Vector2 = global_position
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
+	var new_velocity = current_agent_position.direction_to(next_path_position) * movement_speed
+
 	
-	velocity = current_agent_position.direction_to(next_path_position) * movement_speed
+	if navigation_agent.avoidance_enabled:
+		navigation_agent.set_velocity(new_velocity)
+	else:
+		velocity = new_velocity
 	move_and_slide()
 	distance_moved += global_position.distance_to(last_position)
 	last_position = global_position
@@ -117,16 +123,18 @@ func _on_inactive_event_received(event):
 		distance_moved = 0
 		last_position = global_position
 		if game_manager.turn == str(self):
-			@warning_ignore("narrowing_conversion")
-			set_movement_target(Vector2(randi_range(global_position.x - max_move_distance, global_position.x + max_move_distance), randi_range(global_position.y - max_move_distance, global_position.y + max_move_distance)))
+			set_movement_target(Vector2(randf_range(global_position.x - max_move_distance, global_position.x + max_move_distance), randf_range(global_position.y - max_move_distance, global_position.y + max_move_distance)))
 			state_chart.send_event('moving')
 
 
 func _on_active_state_physics_processing(_delta):
 	if current_closest_enemy == null:
 		current_closest_enemy = targets[randi_range(0, targets.size()-1)]
-	if navigation_agent.is_navigation_finished():
-		if position.distance_to(current_closest_enemy.position) > attack_distance:
+	if position.distance_to(current_closest_enemy.position) > attack_distance and navigation_agent.target_position != current_closest_enemy.position:
 			set_movement_target(current_closest_enemy.position)
-		else:
-			return
+	if navigation_agent.is_navigation_finished():
+		return
+
+
+func _on_navigation_agent_2d_velocity_computed(safe_velocity):
+	velocity = safe_velocity

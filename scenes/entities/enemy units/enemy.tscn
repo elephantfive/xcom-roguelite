@@ -16,6 +16,8 @@ size = Vector2(638, 498)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_mask = 0
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_b1em3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -26,6 +28,7 @@ position = Vector2(1.5, 0.5)
 shape = SubResource("RectangleShape2D_r8kxx")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
 
 [node name="DetectionRange" type="Area2D" parent="."]
 monitorable = false
@@ -106,6 +109,7 @@ to = NodePath("../../Active")
 event = &"active"
 delay_in_seconds = "0.0"
 
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Moving/Moving" to="." method="_on_moving_state_physics_processing"]
 [connection signal="taken" from="StateChart/Root/Moving/Moving/Transition" to="." method="_on_transition_taken"]
