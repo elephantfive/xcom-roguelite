@@ -60,3 +60,7 @@ func distance_check(max_distance):
 		warning_label.self_modulate = Color(1, 1, 1)
 		map_movement_line.self_modulate = Color(1, 1, 1)
 		distance_label.self_modulate = Color(1, 1, 1)
+
+
+func _on_map_end_pressed():
+	points_reset()

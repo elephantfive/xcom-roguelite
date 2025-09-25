@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://ygb05qawriwh"]
+[gd_scene load_steps=36 format=3 uid="uid://ygb05qawriwh"]
 
 [ext_resource type="Script" uid="uid://jb8g77b0p2hp" path="res://scripts/main/active_cursor.gd" id="1_1cexc"]
 [ext_resource type="Script" uid="uid://e0nun6mx1aou" path="res://scripts/main/unit_info.gd" id="1_j6bet"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://le5w1cm0ul8p" path="res://addons/godot_state_charts/expression_guard.gd" id="7_1cexc"]
 [ext_resource type="Script" uid="uid://csjw6m7rnqkaa" path="res://scripts/ui/roster/unit_roster.gd" id="8_osw1o"]
 [ext_resource type="PackedScene" uid="uid://31q5hdaeariq" path="res://scenes/ui/squad/squad_unit.tscn" id="10_y2ajb"]
+[ext_resource type="Texture2D" uid="uid://cahxygrjokxnp" path="res://assets/visual/character_portraits/amigolhead.png" id="11_0k8hq"]
 [ext_resource type="Script" uid="uid://cvdqkeeonkc2j" path="res://resources/ally_stats/character_attributes.gd" id="12_m1y6s"]
 [ext_resource type="Script" uid="uid://1lwlp1igpvkd" path="res://resources/items/item.gd" id="12_mud6k"]
 [ext_resource type="PackedScene" uid="uid://dlx6r86vgqwrp" path="res://scenes/ui/talents/talent_tree.tscn" id="15_8dywm"]
@@ -43,9 +44,9 @@ metadata/_custom_type_script = "uid://le5w1cm0ul8p"
 size = Vector2(4, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4msxo"]
-size = Vector2(40, 40)
+size = Vector2(129, 128)
 
-[sub_resource type="Resource" id="Resource_3pnac"]
+[sub_resource type="Resource" id="Resource_y3r4h"]
 resource_local_to_scene = true
 script = ExtResource("12_m1y6s")
 character_name = "Nidys"
@@ -220,20 +221,6 @@ to = NodePath("../../Idle")
 event = &"idle"
 delay_in_seconds = "0.0"
 
-[node name="ActiveCursor" type="Area2D" parent="."]
-unique_name_in_owner = true
-process_mode = 4
-visible = false
-monitorable = false
-script = ExtResource("1_1cexc")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ActiveCursor"]
-shape = SubResource("RectangleShape2D_8dywm")
-
-[node name="Label" type="Label" parent="ActiveCursor"]
-offset_right = 40.0
-offset_bottom = 23.0
-
 [node name="HUD" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_vbg7o")
@@ -254,6 +241,7 @@ grow_vertical = 0
 
 [node name="End" type="Button" parent="HUD/Actions"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "End Turn"
 
@@ -270,20 +258,36 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="ActiveCursor" type="Area2D" parent="."]
+unique_name_in_owner = true
+process_mode = 4
+visible = false
+monitorable = false
+script = ExtResource("1_1cexc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActiveCursor"]
+shape = SubResource("RectangleShape2D_8dywm")
+
+[node name="Label" type="Label" parent="ActiveCursor"]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="Campaign Map" type="Node2D" parent="." groups=["Campaign Map"]]
 unique_name_in_owner = true
 
 [node name="Player Marker" type="Area2D" parent="Campaign Map"]
 unique_name_in_owner = true
-position = Vector2(702, 577)
+position = Vector2(521, 698)
 script = ExtResource("4_osw1o")
 
-[node name="ColorRect" type="ColorRect" parent="Campaign Map/Player Marker"]
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+[node name="TextureRect" type="TextureRect" parent="Campaign Map/Player Marker"]
+custom_minimum_size = Vector2(128, 128)
+offset_left = -64.0
+offset_top = -65.0
+offset_right = 64.0
+offset_bottom = 63.0
 mouse_filter = 2
+texture = ExtResource("11_0k8hq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Campaign Map/Player Marker"]
 shape = SubResource("RectangleShape2D_4msxo")
@@ -311,21 +315,21 @@ visible = false
 points = PackedVector2Array(0, 0, 0, 0)
 
 [node name="Location" parent="Campaign Map" instance=ExtResource("5_xsca3")]
-position = Vector2(644, 570)
+position = Vector2(681, 568)
 level = "res://scenes/levels/level_1.tscn"
 
 [node name="Location2" parent="Campaign Map" instance=ExtResource("5_xsca3")]
-position = Vector2(639, 448)
+position = Vector2(652, 361)
 level = "res://scenes/levels/level_1.tscn"
 
 [node name="Location3" parent="Campaign Map" instance=ExtResource("5_xsca3")]
-position = Vector2(519, 386)
+position = Vector2(366, 294)
 level = "res://scenes/levels/level_1.tscn"
 
 [node name="Location4" parent="Campaign Map" instance=ExtResource("5_xsca3")]
-position = Vector2(531, 528)
+position = Vector2(382, 550)
 location_type = "shop"
-shop_characters = Array[ExtResource("12_m1y6s")]([SubResource("Resource_3pnac")])
+shop_characters = Array[ExtResource("12_m1y6s")]([SubResource("Resource_y3r4h")])
 shop_items = Array[ExtResource("12_mud6k")]([ExtResource("19_y3r4h"), ExtResource("20_noqvs")])
 shop_artifacts = Array[ExtResource("15_fs22m")]([SubResource("Resource_0k8hq")])
 
@@ -414,6 +418,10 @@ text = "Research
 layout_mode = 2
 text = "Loadout"
 
+[node name="MapEnd" type="Button" parent="Campaign Map Hud/Buttons"]
+layout_mode = 2
+text = "End Turn"
+
 [node name="Shop" type="CanvasLayer" parent="." groups=["Campaign Menus"]]
 unique_name_in_owner = true
 visible = false
@@ -475,7 +483,6 @@ visible = false
 
 [connection signal="timeout" from="Game Manager/TurnTimer" to="Game Manager" method="_on_turn_timer_timeout"]
 [connection signal="timeout" from="Game Manager/LevelEndTimer" to="Game Manager" method="_on_level_end_timer_timeout"]
-[connection signal="event_received" from="Game Manager/StateChart/Root/Idle" to="Game Manager" method="_on_idle_event_received"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/Idle" to="Game Manager" method="_on_idle_state_entered"]
 [connection signal="state_exited" from="Game Manager/StateChart/Root/Idle" to="Game Manager" method="_on_idle_state_exited"]
 [connection signal="event_received" from="Game Manager/StateChart/Root/InLevel" to="Game Manager" method="_on_in_level_event_received"]
@@ -491,12 +498,12 @@ visible = false
 [connection signal="state_entered" from="Game Manager/StateChart/Root/Loadout" to="Loadout/LoadoutScreen" method="_on_loadout_state_entered"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/Reward" to="Game Manager" method="_on_reward_state_entered"]
 [connection signal="state_entered" from="Game Manager/StateChart/Root/TechTree" to="Game Manager" method="_on_tech_tree_state_entered"]
-[connection signal="body_entered" from="ActiveCursor" to="ActiveCursor" method="_on_body_entered"]
-[connection signal="body_exited" from="ActiveCursor" to="ActiveCursor" method="_on_body_exited"]
 [connection signal="pressed" from="HUD/Actions/End" to="HUD" method="_on_end_pressed"]
 [connection signal="pressed" from="HUD/Actions/Move" to="HUD" method="_on_move_pressed"]
 [connection signal="pressed" from="HUD/Actions/Attack" to="HUD" method="_on_attack_pressed"]
 [connection signal="pressed" from="HUD/Actions/Heal" to="HUD" method="_on_heal_pressed"]
+[connection signal="body_entered" from="ActiveCursor" to="ActiveCursor" method="_on_body_entered"]
+[connection signal="body_exited" from="ActiveCursor" to="ActiveCursor" method="_on_body_exited"]
 [connection signal="input_event" from="Campaign Map/Player Marker" to="Campaign Map/Player Marker" method="_on_input_event"]
 [connection signal="pressed" from="Campaign Map Hud/UnitDesc/RemoveFromSquad" to="Campaign Map Hud/Unit Holder/SquadUnit" method="_on_remove_from_squad_pressed"]
 [connection signal="pressed" from="Campaign Map Hud/UnitDesc/RemoveFromSquad" to="Campaign Map Hud/Unit Holder/SquadUnit2" method="_on_remove_from_squad_pressed"]
@@ -505,3 +512,4 @@ visible = false
 [connection signal="pressed" from="Campaign Map Hud/Buttons/Shop" to="Game Manager" method="_on_shop_pressed"]
 [connection signal="pressed" from="Campaign Map Hud/Buttons/TechTree" to="Game Manager" method="_on_tech_tree_pressed"]
 [connection signal="pressed" from="Campaign Map Hud/Buttons/Loadout" to="Game Manager" method="_on_loadout_pressed"]
+[connection signal="pressed" from="Campaign Map Hud/Buttons/MapEnd" to="Campaign Map/Player Marker" method="_on_map_end_pressed"]

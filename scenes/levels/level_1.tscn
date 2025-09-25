@@ -48,10 +48,6 @@ attack_distance = 500
 position = Vector2(247, 265)
 script = ExtResource("4_sk5k4")
 
-[node name="Fallen Blade3" parent="Entities" instance=ExtResource("3_6761a")]
-position = Vector2(632, 491)
-script = ExtResource("4_sk5k4")
-
 [node name="PlayerSpawns" type="Node" parent="."]
 
 [node name="PlayerSpawn 0" type="Node2D" parent="PlayerSpawns"]

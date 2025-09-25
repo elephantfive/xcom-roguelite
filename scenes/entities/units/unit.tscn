@@ -1,8 +1,7 @@
-[gd_scene load_steps=45 format=3 uid="uid://nutwb7ivdl7e"]
+[gd_scene load_steps=44 format=3 uid="uid://nutwb7ivdl7e"]
 
 [ext_resource type="Script" uid="uid://bu6iddnt2t3hk" path="res://scripts/units/unit.gd" id="1_btf8p"]
 [ext_resource type="Script" uid="uid://d11jmh7flvcad" path="res://scripts/units/distance_line.gd" id="2_bork7"]
-[ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="2_hwtar"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_f2ita"]
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="5_fh57n"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_hix5a"]
@@ -15,7 +14,7 @@
 [ext_resource type="Script" uid="uid://duv2yyvlunsi8" path="res://addons/godot_state_charts/any_of_guard.gd" id="13_otsl3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_btf8p"]
-size = Vector2(40, 40)
+size = Vector2(106, 97)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_b3y04"]
 b = Vector2(0, 0)
@@ -170,12 +169,9 @@ input_pickable = true
 script = ExtResource("1_btf8p")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-self_modulate = Color(0.352941, 1, 0, 1)
-scale = Vector2(0.308594, 0.308594)
-texture = ExtResource("2_hwtar")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_btf8p")
 
 [node name="Container Container" type="VBoxContainer" parent="."]

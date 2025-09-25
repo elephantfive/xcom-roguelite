@@ -1,5 +1,5 @@
 extends Node
-
+#region startup vars
 signal turn_start
 
 var turn: String
@@ -32,11 +32,11 @@ const UNIT = preload("uid://nutwb7ivdl7e")
 @onready var tech_tree = %TechTree
 
 
-func _ready():
-	level_path = "res://scenes/levels/level_1.tscn"
-	state_chart.send_event.call_deferred('level_start')
-
-
+#func _ready():
+	#level_path = "res://scenes/levels/level_1.tscn"
+	#state_chart.send_event.call_deferred('level_start')
+#endregion
+#region functions & timers
 func _on_turn_timer_timeout():
 	turn_adv()
 
@@ -64,8 +64,8 @@ func toggle(object, process:ProcessMode, vis:bool):
 	else:
 		object.visible = vis
 		object.process_mode = process
-
-
+#endregion
+#region state chart functionality
 func _on_changing_squad_state_input(event):
 	if event.is_action_pressed("right_click"):
 		squad_unit_selected = null
@@ -120,7 +120,6 @@ func _on_in_level_state_entered():
 		if unit.attributes != null:
 			var new_unit = UNIT.instantiate()
 			new_unit.attributes = unit.attributes
-			new_unit.name = new_unit.attributes.character_name
 			new_unit.game_manager = self
 			new_unit.active_cursor = active_cursor
 			new_unit.hud = hud
@@ -193,8 +192,4 @@ func _on_in_level_event_received(event):
 		else:
 			end.hide()
 			level_end_timer.start()
-
-
-func _on_idle_event_received(event):
-	if event == 'turn_end':
-		player_marker.points_reset()
+#endregion

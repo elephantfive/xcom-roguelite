@@ -28,12 +28,14 @@ const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 @onready var health_label = %"Health Label"
 @onready var move_points_label = %"Move Points Label"
 @onready var action_points_label = %"Action Points Label"
-@onready var sprite = %Sprite
+@onready var sprite = $Sprite
 @onready var state_chart = $StateChart
 #endregion
 
 #region Startup and resetting
 func _ready():
+	name = attributes.character_name
+	sprite.texture = attributes.texture
 	points_reset()
 	points_update()
 	navigation_agent.path_desired_distance = 2.0
