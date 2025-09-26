@@ -112,6 +112,7 @@ unique_name_in_owner = true
 script = ExtResource("2_57akw")
 
 [node name="TurnTimer" type="Timer" parent="Game Manager"]
+wait_time = 0.25
 one_shot = true
 
 [node name="LevelEndTimer" type="Timer" parent="Game Manager"]

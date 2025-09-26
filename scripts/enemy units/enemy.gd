@@ -117,7 +117,6 @@ func _on_active_event_received(event):
 			state_chart.send_event('moving')
 	elif event == 'enemy_in_range':
 		enemy_in_range.state_chart.send_event('active')
-		
 
 
 func _on_inactive_event_received(event):
