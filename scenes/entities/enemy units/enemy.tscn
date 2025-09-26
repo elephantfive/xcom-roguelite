@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://btm7ebweprsqp"]
+[gd_scene load_steps=10 format=3 uid="uid://btm7ebweprsqp"]
 
 [ext_resource type="Script" uid="uid://bjs5mlvkjwxua" path="res://scripts/enemy units/enemy.gd" id="1_b1em3"]
 [ext_resource type="Texture2D" uid="uid://dtpa1tam2fmgh" path="res://icon.svg" id="2_owqnl"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_8wi5y"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_vg2hs"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_vic8n"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="9_i38n8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r8kxx"]
 size = Vector2(129, 127)
@@ -29,7 +28,6 @@ position = Vector2(1.5, 0.5)
 shape = SubResource("RectangleShape2D_r8kxx")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="DetectionRange" type="Area2D" parent="."]
 monitorable = false
@@ -114,13 +112,6 @@ delay_in_seconds = "0.0"
 target_position = Vector2(0, 0)
 collision_mask = 4
 hit_from_inside = true
-
-[node name="StateChartDebugger" parent="." instance=ExtResource("9_i38n8")]
-offset_left = 90.0
-offset_top = -59.0
-offset_right = 597.0
-offset_bottom = 340.0
-initial_node_to_watch = NodePath("../StateChart")
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]

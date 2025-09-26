@@ -32,3 +32,18 @@ func _on_distance_line_collision_area_exited(area):
 		get_parent().state_chart.send_event('not_thru_wall')
 	elif (area.type == 'ally' or area.type == 'enemy') and area != get_parent():
 		get_parent().state_chart.send_event('not_thru_ally')
+
+
+func _on_distance_line_collision_body_entered(body):
+	if body.get('type') == null:
+		get_parent().state_chart.send_event('thru_wall')
+	elif (body.type == 'ally' or body.type == 'enemy') and body != get_parent():
+		get_parent().state_chart.send_event('thru_ally')
+	
+
+
+func _on_distance_line_collision_body_exited(body):
+	if body.get('type') == null:
+		get_parent().state_chart.send_event('not_thru_wall')
+	elif (body.type == 'ally' or body.type == 'enemy') and body != get_parent():
+		get_parent().state_chart.send_event('not_thru_ally')

@@ -215,6 +215,7 @@ script = ExtResource("2_bork7")
 
 [node name="Distance Line Collision" type="Area2D" parent="Distance Line"]
 collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Distance Line/Distance Line Collision"]
 shape = SubResource("SegmentShape2D_b3y04")
@@ -450,8 +451,8 @@ delay_in_seconds = "0.0"
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
-[connection signal="area_entered" from="Distance Line/Distance Line Collision" to="Distance Line" method="_on_distance_line_collision_area_entered"]
-[connection signal="area_exited" from="Distance Line/Distance Line Collision" to="Distance Line" method="_on_distance_line_collision_area_exited"]
+[connection signal="body_entered" from="Distance Line/Distance Line Collision" to="Distance Line" method="_on_distance_line_collision_body_entered"]
+[connection signal="body_exited" from="Distance Line/Distance Line Collision" to="Distance Line" method="_on_distance_line_collision_body_exited"]
 [connection signal="event_received" from="StateChart/Root/ActionValidity/Valid" to="." method="_on_valid_event_received"]
 [connection signal="state_entered" from="StateChart/Root/Action/Idle" to="." method="_on_idle_state_entered"]
 [connection signal="state_input" from="StateChart/Root/Action/Idle" to="." method="_on_idle_state_input"]
