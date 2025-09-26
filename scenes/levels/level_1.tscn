@@ -79,9 +79,6 @@ rewards = Dictionary[String, int]({
 "money": 100
 })
 
-[node name="Environment" type="Node" parent="."]
-unique_name_in_owner = true
-
 [node name="Entities" type="Node" parent="."]
 
 [node name="Fallen Archer" parent="Entities" instance=ExtResource("3_6761a")]
@@ -166,5 +163,24 @@ tile_set = SubResource("TileSet_iwr0g")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="TileMapLayer"]
 navigation_polygon = SubResource("NavigationPolygon_iwr0g")
+
+[node name="Tutorial" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Tutorial"]
+visible = false
+custom_minimum_size = Vector2(400, 250)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "The Mage-Queen of Sigora has damned her people. Those still defending her have lost sight of all reason. They must be slain."
+fit_content = true
 
 [connection signal="state_physics_processing" from="Camera2D/StateChart/ParallelState/Moving/Moving" to="Camera2D" method="_on_moving_state_physics_processing"]

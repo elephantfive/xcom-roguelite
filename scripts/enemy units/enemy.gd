@@ -121,11 +121,10 @@ func _on_active_event_received(event):
 
 func _on_inactive_event_received(event):
 	if event == 'turn_start':
-		distance_moved = 0
 		last_position = global_position
 		if game_manager.turn == str(self):
-			set_movement_target(Vector2(randf_range(global_position.x - max_move_distance, global_position.x + max_move_distance), randf_range(global_position.y - max_move_distance, global_position.y + max_move_distance)))
-			state_chart.send_event('moving')
+			position = Vector2(randf_range(global_position.x - max_move_distance, global_position.x + max_move_distance), randf_range(global_position.y - max_move_distance, global_position.y + max_move_distance))
+			game_manager.state_chart.send_event('turn_end')
 
 
 func _on_active_state_physics_processing(_delta):

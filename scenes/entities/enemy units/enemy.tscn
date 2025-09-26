@@ -12,7 +12,7 @@
 size = Vector2(129, 127)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b1em3"]
-size = Vector2(638, 498)
+size = Vector2(934, 778)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_mask = 0
@@ -34,7 +34,6 @@ shape = SubResource("RectangleShape2D_r8kxx")
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange"]
-visible = false
 shape = SubResource("RectangleShape2D_b1em3")
 
 [node name="StateChart" type="Node" parent="."]
