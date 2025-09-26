@@ -115,19 +115,23 @@ func heal():
 #endregion
 
 #region StateChart functionality
-#Have to subtract global position to convert coords on global map
 func distance_check(max_distance):
 	current_distance = 0
 	distance_line.clear_points()
+	#Have to subtract global position to convert coords on global map (I can't remember why to_global() doesn't work
+	#Likely, I did something incorrect somewhere else
 	distance_line.add_point(init_pos - global_position)
 	distance_toggle(true)
-	
-	set_movement_target(get_global_mouse_position())
-	var _next_path_position: Vector2 = navigation_agent.get_next_path_position()
-	for point in navigation_agent.get_current_navigation_path():
-		distance_line.add_point(point - global_position)
-	for i in range(navigation_agent.get_current_navigation_path().size() - 1):
-		current_distance += (navigation_agent.get_current_navigation_path()[i].distance_to(navigation_agent.get_current_navigation_path()[i + 1])) / 10
+	if max_distance == current_move_points:
+		set_movement_target(get_global_mouse_position())
+		var _next_path_position: Vector2 = navigation_agent.get_next_path_position()
+		for point in navigation_agent.get_current_navigation_path():
+			distance_line.add_point(point - global_position)
+		for i in range(navigation_agent.get_current_navigation_path().size() - 1):
+			current_distance += (navigation_agent.get_current_navigation_path()[i].distance_to(navigation_agent.get_current_navigation_path()[i + 1])) / 10
+	else:
+		distance_line.points = PackedVector2Array([init_pos - global_position, get_global_mouse_position() - global_position])
+		current_distance = distance_line.points[0].distance_to(distance_line.points[1]) / 10
 	distance_label.text = str(snapped(current_distance, 0.01))
 	
 	if current_distance >= max_distance:
@@ -135,6 +139,8 @@ func distance_check(max_distance):
 	else:
 		state_chart.send_event('not_too_far')
 		
+	#Constantly determining validity of event
+	#Logic is rather complex for this (or at least very nested); avoid changing if possible
 	state_chart.send_event('distance_check_event')
 
 
@@ -205,18 +211,6 @@ func _on_movement_active_state_physics_processing(_delta):
 	velocity = current_agent_position.direction_to(next_path_position) * movement_speed
 	move_and_slide()
 
-#endregion
-
-#region Targeting
-func _on_active_cursor_area_entered(area):
-	target = area
-
-
-func _on_active_cursor_area_exited(_area):
-	target = null
-#endregion
-
-
 func _on_movement_inactive_state_entered():
 	state_chart.send_event('to_idle')
 
@@ -228,3 +222,13 @@ func _on_movement_inactive_state_input(event):
 			state_chart.send_event('to_idle')
 			position = init_pos
 			distance_toggle(false)
+#endregion
+
+#region Targeting
+func _on_active_cursor_area_entered(area):
+	target = area
+
+
+func _on_active_cursor_area_exited(_area):
+	target = null
+#endregion

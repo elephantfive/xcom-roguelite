@@ -20,11 +20,16 @@ func _on_area_entered(area):
 
 
 func _on_body_entered(body):
-	if body.type == "enemy" and alignment == 'ally':
-		body.take_damage(damage)
-		queue_free()
-	elif body.type == "ally" and alignment == 'enemy':
-		body.take_damage(damage)
-		game_manager.state_chart.send_event('turn_end')
-		queue_free()
+	if body.get('type') != null:
+		if body.type == "enemy" and alignment == 'ally':
+			body.take_damage(damage)
+			queue_free()
+		elif body.type == "ally" and alignment == 'enemy':
+			body.take_damage(damage)
+			game_manager.state_chart.send_event('turn_end')
+			queue_free()
+	else:
+		var collided_tile: TileData = body.get_cell_tile_data(body.local_to_map(global_position))
+		if collided_tile.get_custom_data('type') == 'wall':
+			queue_free()
 		
