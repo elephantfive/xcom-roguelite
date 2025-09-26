@@ -93,7 +93,6 @@ func take_damage(damage):
 	points_update()
 	
 func move():
-	set_movement_target(get_global_mouse_position())
 	state_chart.send_event('to_idle')
 	state_chart.send_event('movement_active')
 	current_move_points -= current_distance
@@ -126,8 +125,14 @@ func heal():
 #region StateChart functionality
 func distance_check(max_distance):
 	distance_toggle(true)
-	distance_line.points = PackedVector2Array([init_pos - global_position, get_global_mouse_position() - global_position])
-	current_distance = distance_line.points[0].distance_to(distance_line.points[1]) / 10
+	
+	set_movement_target(get_global_mouse_position())
+	@warning_ignore("unused_variable")
+	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
+	if not distance_line.points.has(next_path_position):
+		return distance_line.points.append(next_path_position)
+	#distance_line.points = PackedVector2Array([init_pos - global_position, get_global_mouse_position() - global_position])
+	#current_distance = distance_line.points[0].distance_to(distance_line.points[1]) / 10
 	distance_label.text = str(snapped(current_distance, 0.01))
 	
 	if current_distance >= max_distance:
