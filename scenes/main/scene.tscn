@@ -298,6 +298,8 @@ layout_mode = 2
 unique_name_in_owner = true
 process_mode = 4
 visible = false
+z_index = 1
+z_as_relative = false
 monitorable = false
 script = ExtResource("1_1cexc")
 

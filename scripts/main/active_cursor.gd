@@ -5,9 +5,9 @@ var target: CharacterBody2D
 func _process(_delta):
 	global_position = get_global_mouse_position()
 	if target != null:
-		label.text = 'Target: ' + target.name
+		label.text = 'Target: ' + target.name + '\n' + str(position)
 	else:
-		label.text = 'No target.'
+		label.text = 'No target.' + '\n' + str(position)
 
 
 func _on_body_entered(body):

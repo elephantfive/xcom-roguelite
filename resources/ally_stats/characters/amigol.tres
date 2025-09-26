@@ -12,6 +12,7 @@
 [resource]
 script = ExtResource("1_rxrl8")
 character_name = "Amigol"
+max_move_distance = 30
 specializations = Array[ExtResource("2_d85ap")]([ExtResource("2_6ybk1"), ExtResource("3_gt5vj"), ExtResource("4_d85ap")])
 texture = ExtResource("7_2pjkr")
 combat_texture = ExtResource("1_2pjkr")

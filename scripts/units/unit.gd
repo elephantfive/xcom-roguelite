@@ -53,14 +53,6 @@ func _on_game_manager_turn_start():
 	points_update()
 
 
-func _input(event):
-	if game_manager.turn == 'player':
-		if event.is_action_pressed("right_click"):
-			state_chart.send_event('to_idle')
-			position = init_pos
-			distance_toggle(false)
-
-
 func _on_input_event(_viewport, event, _shape_idx):
 	if game_manager.turn == 'player':
 		if game_manager.selected_unit == null:
@@ -123,16 +115,19 @@ func heal():
 #endregion
 
 #region StateChart functionality
+#Have to subtract global position to convert coords on global map
 func distance_check(max_distance):
+	current_distance = 0
+	distance_line.clear_points()
+	distance_line.add_point(init_pos - global_position)
 	distance_toggle(true)
 	
 	set_movement_target(get_global_mouse_position())
-	@warning_ignore("unused_variable")
-	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
-	if not distance_line.points.has(next_path_position):
-		return distance_line.points.append(next_path_position)
-	#distance_line.points = PackedVector2Array([init_pos - global_position, get_global_mouse_position() - global_position])
-	#current_distance = distance_line.points[0].distance_to(distance_line.points[1]) / 10
+	var _next_path_position: Vector2 = navigation_agent.get_next_path_position()
+	for point in navigation_agent.get_current_navigation_path():
+		distance_line.add_point(point - global_position)
+	for i in range(navigation_agent.get_current_navigation_path().size() - 1):
+		current_distance += (navigation_agent.get_current_navigation_path()[i].distance_to(navigation_agent.get_current_navigation_path()[i + 1])) / 10
 	distance_label.text = str(snapped(current_distance, 0.01))
 	
 	if current_distance >= max_distance:
@@ -220,3 +215,16 @@ func _on_active_cursor_area_entered(area):
 func _on_active_cursor_area_exited(_area):
 	target = null
 #endregion
+
+
+func _on_movement_inactive_state_entered():
+	state_chart.send_event('to_idle')
+
+
+func _on_movement_inactive_state_input(event):
+	if game_manager.turn == 'player':
+		if event.is_action_pressed("right_click"):
+			navigation_agent.target_position = Vector2(0, 0)
+			state_chart.send_event('to_idle')
+			position = init_pos
+			distance_toggle(false)

@@ -4,7 +4,7 @@ class_name CharacterAttributes
 @export var character_name: String
 @export var attack_damage: int =  2
 @export var attack_ap_cost: int =  1
-@export var base_health: int =   20
+@export var base_health: int =  30
 @export var health: int = 20
 @export var heal: int =  3
 @export var max_overheal: int =  5

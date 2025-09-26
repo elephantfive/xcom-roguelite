@@ -33,9 +33,9 @@ const UNIT = preload("uid://nutwb7ivdl7e")
 @onready var tech_tree = %TechTree
 
 
-#func _ready():
-	#level_path = "res://scenes/levels/level_1.tscn"
-	#state_chart.send_event.call_deferred('level_start')
+func _ready():
+	level_path = "res://scenes/levels/level_1.tscn"
+	state_chart.send_event.call_deferred('level_start')
 #endregion
 #region functions & timers
 func _on_turn_timer_timeout():

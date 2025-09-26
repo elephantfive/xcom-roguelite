@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://nutwb7ivdl7e"]
+[gd_scene load_steps=44 format=3 uid="uid://nutwb7ivdl7e"]
 
 [ext_resource type="Script" uid="uid://bu6iddnt2t3hk" path="res://scripts/units/unit.gd" id="1_btf8p"]
 [ext_resource type="Script" uid="uid://d11jmh7flvcad" path="res://scripts/units/distance_line.gd" id="2_bork7"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://bambbrd2wupx0" path="res://addons/godot_state_charts/state_is_active_guard.gd" id="10_bf4h8"]
 [ext_resource type="Script" uid="uid://dgd4i8hrrxfvm" path="res://addons/godot_state_charts/not_guard.gd" id="10_otsl3"]
 [ext_resource type="Script" uid="uid://bxprlw40wl0c3" path="res://addons/godot_state_charts/all_of_guard.gd" id="11_otsl3"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="13_bf4h8"]
 [ext_resource type="Script" uid="uid://duv2yyvlunsi8" path="res://addons/godot_state_charts/any_of_guard.gd" id="13_otsl3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_btf8p"]
@@ -449,14 +448,6 @@ guard = SubResource("Resource_3aovj")
 delay_in_seconds = "0.0"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
-
-[node name="StateChartDebugger" parent="." instance=ExtResource("13_bf4h8")]
-offset_left = 61.0
-offset_top = -20.0
-offset_right = 666.0
-offset_bottom = 487.0
-initial_node_to_watch = NodePath("../StateChart")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="area_entered" from="Distance Line/Distance Line Collision" to="Distance Line" method="_on_distance_line_collision_area_entered"]
@@ -470,6 +461,8 @@ initial_node_to_watch = NodePath("../StateChart")
 [connection signal="state_processing" from="StateChart/Root/Action/Attacking" to="." method="_on_attacking_state_processing"]
 [connection signal="state_input" from="StateChart/Root/Action/Healing" to="." method="_on_healing_state_input"]
 [connection signal="state_processing" from="StateChart/Root/Action/Healing" to="." method="_on_healing_state_processing"]
+[connection signal="state_entered" from="StateChart/Root/MovementActive/MovementInactive" to="." method="_on_movement_inactive_state_entered"]
+[connection signal="state_input" from="StateChart/Root/MovementActive/MovementInactive" to="." method="_on_movement_inactive_state_input"]
 [connection signal="state_physics_processing" from="StateChart/Root/MovementActive/MovementActive" to="." method="_on_movement_active_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/DistanceColor/White" to="Distance Line" method="_on_white_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/DistanceColor/Yellow" to="Distance Line" method="_on_yellow_state_entered"]
