@@ -102,7 +102,7 @@ texture = ExtResource("7_dnkej")
 [node name="PlayerSpawns" type="Node" parent="."]
 
 [node name="PlayerSpawn 0" type="Node2D" parent="PlayerSpawns"]
-position = Vector2(147, 196)
+position = Vector2(659, 22)
 
 [node name="PlayerSpawn 1" type="Node2D" parent="PlayerSpawns"]
 position = Vector2(160, 325)

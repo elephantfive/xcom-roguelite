@@ -10,7 +10,7 @@ var type: String = 'enemy'
 var enemy_in_range: CharacterBody2D
 var distance_moved: float = 0
 var last_position: Vector2
-var safe_vel: Vector2
+
 @onready var sprite = $Sprite2D
 @export var texture: Texture2D
 @export var max_move_distance: float = 200.0
@@ -20,9 +20,11 @@ var safe_vel: Vector2
 @export var attack_distance: int = 200
 @export var xp: int = 50
 @export var damage: int = 1
+@export var min_distance: int = 1000
 @onready var state_chart = $StateChart
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var detection_range = $DetectionRange
+@onready var raycast: RayCast2D = $RayCast2D
 
 const projectile = preload("res://scenes/entities/projectiles/projectile.tscn")
 
@@ -75,12 +77,13 @@ func _on_moving_state_physics_processing(_delta):
 			state_chart.send_event('notmoving')
 		else:
 			move()
-	elif position.distance_to(current_closest_enemy.position) > attack_distance and distance_moved < max_move_distance:
-		move()
-	elif position.distance_to(current_closest_enemy.position) <= attack_distance and distance_moved < max_move_distance:
-		state_chart.send_event('attack')
 	else:
-		state_chart.send_event('notmoving')
+		if (position.distance_to(current_closest_enemy.position) > attack_distance or raycast.is_colliding()) and distance_moved < max_move_distance:
+			move()
+		elif position.distance_to(current_closest_enemy.position) <= attack_distance and distance_moved < max_move_distance and not raycast.is_colliding():
+			state_chart.send_event('attack')
+		else:
+			state_chart.send_event('notmoving')
 
 
 func _on_attacking_state_entered():
@@ -108,11 +111,10 @@ func _on_active_event_received(event):
 			for target in targets:
 				if position.distance_to(target.position) < position.distance_to(current_closest_enemy.position):
 					current_closest_enemy = target
-					set_movement_target(current_closest_enemy.position)
-			if position.distance_to(current_closest_enemy.position) <= attack_distance:
-					state_chart.send_event('attack')
-			else:
-				state_chart.send_event('moving')
+			set_movement_target(current_closest_enemy.position)
+			raycast.target_position = current_closest_enemy.position - global_position
+			raycast.force_raycast_update()
+			state_chart.send_event('moving')
 	elif event == 'enemy_in_range':
 		enemy_in_range.state_chart.send_event('active')
 		
@@ -130,8 +132,7 @@ func _on_inactive_event_received(event):
 func _on_active_state_physics_processing(_delta):
 	if current_closest_enemy == null:
 		current_closest_enemy = targets[randi_range(0, targets.size()-1)]
-	if position.distance_to(current_closest_enemy.position) > attack_distance and navigation_agent.target_position != current_closest_enemy.position:
-			set_movement_target(current_closest_enemy.position)
+		set_movement_target(current_closest_enemy.position)
 	if navigation_agent.is_navigation_finished():
 		return
 
